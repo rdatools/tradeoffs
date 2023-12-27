@@ -23,40 +23,37 @@ import plotly.express as px
 scores_csv: str = "sample/sample_scores.csv"
 
 
-def read_scores(input: str) -> List[Dict[str, str]]:
-    """Read a scores CSV file without fixed columns and return a list of dictionaries."""
+def ratings_to_df(scores_csv: str, dimensions: List[str]) -> pd.DataFrame:
+    """Convert ratings in a scores CSV file into a Pandas dataframe."""
 
     scores: List[Dict[str, str]] = list()
-
-    with open(input, "r", encoding="utf-8-sig") as f:
+    with open(scores_csv, "r", encoding="utf-8-sig") as f:
         reader: DictReader[str] = DictReader(
             f, fieldnames=None, restkey=None, restval=None, dialect="excel"
         )
         fieldnames: List[str] = list(reader.fieldnames) if reader.fieldnames else []
         for row in reader:
-            # row_out: Dict = dict(zip(fieldnames, row))
             scores.append(row)
 
-    return scores
+    ratings: List[List[int]] = list()
+    for score in scores:
+        ratings.append([int(score[d.lower()]) for d in dimensions])
+
+    df: pd.DataFrame = pd.DataFrame(ratings, columns=dimensions)
+
+    return df
 
 
-scores: List[Dict[str, str]] = read_scores(scores_csv)
-
-xdata: List[str] = [
+columns: List[str] = [
     "Proportionality",
     "Competitiveness",
     "Minority",
     "Compactness",
     "Splitting",
 ]
-ydata: List[List[int]] = list()
-for score in scores:
-    ydata.append([int(score[d.lower()]) for d in xdata])
 
-df = pd.DataFrame(ydata, columns=xdata)
-
-fig = px.box(df, y=xdata)  # , points="all")
-
+df = ratings_to_df(scores_csv, columns)
+fig = px.box(df, y=columns, points="all")
 fig.show()
 
 pass
