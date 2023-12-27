@@ -12,6 +12,9 @@ from typing import List, Dict
 from csv import DictReader
 import pandas as pd
 
+# from plotly.subplots import make_subplots
+# import plotly.graph_objects as go
+
 import plotly.express as px
 
 # import chart_studio.plotly as py
@@ -52,17 +55,20 @@ for score in scores:
 
 df = pd.DataFrame(ydata, columns=xdata)
 
-# print(df)
+fig = px.box(df, y=xdata)  # , points="all")
 
-pass
-
-df = px.data.tips()
-fig = px.box(df, x="time", y="total_bill", points="all")
 fig.show()
 
 pass
 
 """
+https://stackoverflow.com/questions/62901783/how-to-plot-boxplots-of-multiple-columns-with-different-ranges
+
+fig = make_subplots(rows=1, cols=len(xdata))
+for i, dim in enumerate(xdata):
+    fig.add_trace(go.Box(y=df[dim], name=dim), row=1, col=i + 1)
+fig.update_traces(boxpoints="all", jitter=0.3)
+
 https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html
 https://plotly.com/python/static-image-export/
 
