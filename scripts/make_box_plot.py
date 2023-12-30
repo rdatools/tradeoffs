@@ -14,9 +14,9 @@ import plotly.graph_objects as go
 
 from tradeoffs import scores_to_df
 
-# Transform scores into a Pandas DataFrame
-
 scores_csv: str = "sample/sample_scores.csv"
+
+# Transform a score CSV into a Pandas DataFrame
 
 fieldnames: List[str] = [
     "map",
@@ -30,9 +30,7 @@ fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
 df = scores_to_df(scores_csv, fieldnames, fieldtypes)
 
-# Configure & show the box plot
-# https://plotly.com/python/box-plots/
-# https://plotly.com/python/reference/box/
+# Configure & show the box plot for the scores
 
 boxplot_traces: List[Dict] = []
 
@@ -74,60 +72,57 @@ boxplot_config = {
         "format": "png",  # one of png, svg, jpeg, webp
         "filename": "box-plot",
     },
-    "modebar": {
-        "remove": [  # TODO - Remove all the plotly hover commands, except download
-            "autoScale2d",
-            "autoscale",
-            "editInChartStudio",
-            "editinchartstudio",
-            "hoverCompareCartesian",
-            "hovercompare",
-            "lasso",
-            "lasso2d",
-            "orbitRotation",
-            "orbitrotation",
-            "pan",
-            "pan2d",
-            "pan3d",
-            "reset",
-            "resetCameraDefault3d",
-            "resetCameraLastSave3d",
-            "resetGeo",
-            "resetSankeyGroup",
-            "resetScale2d",
-            "resetViewMapbox",
-            "resetViews",
-            "resetcameradefault",
-            "resetcameralastsave",
-            "resetsankeygroup",
-            "resetscale",
-            "resetview",
-            "resetviews",
-            "select",
-            "select2d",
-            "sendDataToCloud",
-            "senddatatocloud",
-            "tableRotation",
-            "tablerotation",
-            "toImage",
-            "toggleHover",
-            "toggleSpikelines",
-            "togglehover",
-            "togglespikelines",
-            "toimage",
-            "zoom",
-            "zoom2d",
-            "zoom3d",
-            "zoomIn2d",
-            "zoomInGeo",
-            "zoomInMapbox",
-            "zoomOut2d",
-            "zoomOutGeo",
-            "zoomOutMapbox",
-            "zoomin",
-            "zoomout",
-        ]
-    },
+    "modeBarButtonsToRemove": [
+        "autoScale2d",
+        "autoscale",
+        "editInChartStudio",
+        "editinchartstudio",
+        "hoverCompareCartesian",
+        "hovercompare",
+        "lasso",
+        "lasso2d",
+        "orbitRotation",
+        "orbitrotation",
+        "pan",
+        "pan2d",
+        "pan3d",
+        "reset",
+        "resetCameraDefault3d",
+        "resetCameraLastSave3d",
+        "resetGeo",
+        "resetSankeyGroup",
+        "resetScale2d",
+        "resetViewMapbox",
+        "resetViews",
+        "resetcameradefault",
+        "resetcameralastsave",
+        "resetsankeygroup",
+        "resetscale",
+        "resetview",
+        "resetviews",
+        "select",
+        "select2d",
+        "sendDataToCloud",
+        "senddatatocloud",
+        "tableRotation",
+        "tablerotation",
+        # "toImage", # Keep download button
+        "toggleHover",
+        "toggleSpikelines",
+        "togglehover",
+        "togglespikelines",
+        "zoom",
+        "zoom2d",
+        "zoom3d",
+        "zoomIn2d",
+        "zoomInGeo",
+        "zoomInMapbox",
+        "zoomOut2d",
+        "zoomOutGeo",
+        "zoomOutMapbox",
+        "zoomin",
+        "zoomout",
+    ],
     "displayModeBar": True,
     "displaylogo": False,
     "responsive": True,
