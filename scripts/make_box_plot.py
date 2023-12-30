@@ -5,6 +5,13 @@ MAKE A BOX PLOT FOR SCORES
 
 $ scripts/make_box_plot.py
 
+TODO
+
+- Background color
+- Sample points
+- Add command-line parameters
+- Save to a file
+
 """
 
 from typing import List, Dict, Callable
