@@ -30,7 +30,9 @@ fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
 df = scores_to_df(scores_csv, fieldnames, fieldtypes)
 
-# Configure & show the box plot - https://plotly.com/python/reference/box/
+# Configure & show the box plot
+# https://plotly.com/python/box-plots/
+# https://plotly.com/python/reference/box/
 
 boxplot_traces: List[Dict] = []
 
@@ -49,11 +51,95 @@ for name in fieldnames[1:]:
     }
     boxplot_traces.append(trace)
 
+boxplot_layout = {
+    "width": 840,
+    "yaxis": {
+        "range": [0, 100],
+        "showgrid": True,
+        "zeroline": True,
+        "dtick": 5,
+        "gridcolor": "rgb(255, 255, 255)",
+        "gridwidth": 1,
+        "zerolinecolor": "rgb(255, 255, 255)",
+        "zerolinewidth": 2,
+    },
+    "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
+    "showlegend": False,
+    "paper_bgcolor": "#fafafa",
+    "plot_bgcolor": "#fafafa",
+}
+
+boxplot_config = {
+    "toImageButtonOptions": {
+        "format": "png",  # one of png, svg, jpeg, webp
+        "filename": "box-plot",
+    },
+    "modebar": {
+        "remove": [  # TODO - Remove all the plotly hover commands, except download
+            "autoScale2d",
+            "autoscale",
+            "editInChartStudio",
+            "editinchartstudio",
+            "hoverCompareCartesian",
+            "hovercompare",
+            "lasso",
+            "lasso2d",
+            "orbitRotation",
+            "orbitrotation",
+            "pan",
+            "pan2d",
+            "pan3d",
+            "reset",
+            "resetCameraDefault3d",
+            "resetCameraLastSave3d",
+            "resetGeo",
+            "resetSankeyGroup",
+            "resetScale2d",
+            "resetViewMapbox",
+            "resetViews",
+            "resetcameradefault",
+            "resetcameralastsave",
+            "resetsankeygroup",
+            "resetscale",
+            "resetview",
+            "resetviews",
+            "select",
+            "select2d",
+            "sendDataToCloud",
+            "senddatatocloud",
+            "tableRotation",
+            "tablerotation",
+            "toImage",
+            "toggleHover",
+            "toggleSpikelines",
+            "togglehover",
+            "togglespikelines",
+            "toimage",
+            "zoom",
+            "zoom2d",
+            "zoom3d",
+            "zoomIn2d",
+            "zoomInGeo",
+            "zoomInMapbox",
+            "zoomOut2d",
+            "zoomOutGeo",
+            "zoomOutMapbox",
+            "zoomin",
+            "zoomout",
+        ]
+    },
+    "displayModeBar": True,
+    "displaylogo": False,
+    "responsive": True,
+}
+
 fig = go.Figure()
 for t in boxplot_traces:
     fig.add_trace(go.Box(t))
 
-fig.show()
+fig.update_layout(boxplot_layout)
+
+fig.show(config=boxplot_config)
 
 pass
 
