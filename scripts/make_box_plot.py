@@ -6,7 +6,8 @@ MAKE A BOX PLOT FOR RATINGS
 For example:
 
 $ scripts/make_box_plot.py \
---scores ~/iCloud/fileout/ensembles/NC20C_RMfRST_1000_scores.csv \
+--scores testdata/synthetic_ratings.csv \
+--image output/test_boxplot.png \
 --no-debug
 
 For documentation, type:
@@ -21,6 +22,7 @@ from typing import Any, List, Dict, Callable
 
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 
 from rdabase import require_args
 
@@ -66,8 +68,11 @@ def main() -> None:
         boxplot_traces.append(trace)
 
     bgcolor: str = "#fafafa"
+    plot_width: int = 840
+    plot_height: int = round(plot_width * 0.75)
     boxplot_layout = {
-        "width": 840,
+        "width": plot_width,
+        "height": plot_height,
         "yaxis": {
             "range": [0, 100],
             "showgrid": True,
@@ -151,7 +156,16 @@ def main() -> None:
 
     fig.update_layout(boxplot_layout)
 
-    fig.show(config=boxplot_config)
+    if args.debug:  # Show the plot in a browser window
+        fig.show(config=boxplot_config)
+    else:  # Save the plot to a PNG file
+        pio.kaleido.scope.default_format = "png"
+        pio.kaleido.scope.default_width = plot_width
+        # pio.kaleido.scope.default_height
+        pio.kaleido.scope.default_scale = 1
+
+        fig.to_image(engine="kaleido")
+        fig.write_image(args.image)
 
     pass
 
@@ -165,6 +179,11 @@ def parse_args():
         "--scores",
         type=str,
         help="A CSV ensemble of scores including ratings to plot",
+    )
+    parser.add_argument(
+        "--image",
+        type=str,
+        help="The PNG file to download the box plot to",
     )
 
     parser.add_argument(
@@ -181,7 +200,8 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/synthetic_ratings.csv"  # Only has map name & ratings,
+        "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
+        "image": "output/test_boxplot.png",
     }
     args = require_args(args, args.debug, debug_defaults)
 
