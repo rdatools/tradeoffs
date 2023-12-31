@@ -172,7 +172,7 @@ def main() -> None:
 
 def parse_args():
     parser: ArgumentParser = argparse.ArgumentParser(
-        description="Generate a collection of random maps."
+        description="Make a box plot of the ratings for the plans in an ensemble."
     )
 
     parser.add_argument(
