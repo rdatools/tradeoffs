@@ -13,12 +13,6 @@ For documentation, type:
 
 $ scripts/make_box_plot.py
 
-TODO
-
-- Background color
-- Sample points
-- Save to a file
-
 """
 
 import argparse
@@ -61,7 +55,7 @@ def main() -> None:
             "type": "box",
             "y": df[name],
             "name": name.capitalize(),
-            "boxpoints": "all",  # Show individual points
+            "boxpoints": "all",  # "outliers",
             "jitter": 0.5,
             "whiskerwidth": 0.2,
             "marker": {"size": 2, "symbol": "circle"},
@@ -71,6 +65,7 @@ def main() -> None:
         }
         boxplot_traces.append(trace)
 
+    bgcolor: str = "#fafafa"
     boxplot_layout = {
         "width": 840,
         "yaxis": {
@@ -85,8 +80,8 @@ def main() -> None:
         },
         "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
         "showlegend": False,
-        "paper_bgcolor": "#fafafa",
-        "plot_bgcolor": "#fafafa",
+        "paper_bgcolor": bgcolor,
+        "plot_bgcolor": bgcolor,
     }
 
     boxplot_config = {
