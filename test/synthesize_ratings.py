@@ -32,7 +32,7 @@ def main() -> None:
     ]
 
     spread: List[int] = [10, 10, 10, 10, 10]
-    delta: List[int] = [0, 0, 0, 0, 0, 20]
+    delta: List[int] = [0, 0, 0, 0, 30]
 
     scores: List[Dict[str, str]] = list()
 
