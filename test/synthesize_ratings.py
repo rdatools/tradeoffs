@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-FAKE UP ENSEMBLE SCORES
+SYNTHESIZE RATINGS FOR 1,000 PLANS
 
 $ test/synthesize_ratings.py
 
@@ -13,26 +13,26 @@ from csv import DictReader
 
 import os
 
-scores_csv: str = "~/iCloud/fileout/ensembles/NC20C_RMfRST_100_scores.csv"
-
-cols: List[str] = [
-    "map",
-    "proportionality",
-    "competitiveness",
-    "minority",
-    "compactness",
-    "splitting",
-]
+from rdabase import write_csv
 
 
-def synthesize_ratings(
-    scores_csv: str,
-    cols: List[str],
-    *,
-    spread: List[int] = [10, 10, 10, 10, 10],
-    delta: List[int] = [0, 0, 0, 0, 0, 20]
-):
+def main() -> None:
     """Synthesize ratings for a 1,000 plan ensemble."""
+
+    scores_csv: str = "~/iCloud/fileout/ensembles/NC20C_RMfRST_100_scores.csv"
+    ratings_csv: str = "testdata/synthetic_ratings.csv"
+
+    cols: List[str] = [
+        "map",
+        "proportionality",
+        "competitiveness",
+        "minority",
+        "compactness",
+        "splitting",
+    ]
+
+    spread: List[int] = [10, 10, 10, 10, 10]
+    delta: List[int] = [0, 0, 0, 0, 0, 20]
 
     scores: List[Dict[str, str]] = list()
 
@@ -56,14 +56,10 @@ def synthesize_ratings(
                     )
                 scores.append(dup)
 
-    # TODO - Write the new file
-
-    pass
+    write_csv(ratings_csv, scores, cols)
 
 
-synthesize_ratings(scores_csv, cols)
-
-
-pass
+if __name__ == "__main__":
+    main()
 
 ### END ###
