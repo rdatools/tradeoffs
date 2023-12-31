@@ -38,10 +38,7 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
 
-    scores_csv: str = "testdata/synthetic_ratings.csv"  # Only has map name & ratings
-    # scores_csv: str = "sample/sample_scores.csv"
-
-    # Transform a score CSV into a Pandas DataFrame
+    # Transform the ratings from a score CSV into a Pandas DataFrame
 
     fieldnames: List[str] = [
         "map",
@@ -53,9 +50,9 @@ def main() -> None:
     ]
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df = scores_to_df(scores_csv, fieldnames, fieldtypes)
+    df = scores_to_df(args.scores, fieldnames, fieldtypes)
 
-    # Configure & show the box plot for the scores
+    # Configure & show the box plot for the ratings
 
     boxplot_traces: List[Dict] = []
 
