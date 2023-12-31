@@ -3,7 +3,7 @@
 """
 FAKE UP ENSEMBLE SCORES
 
-$ scripts/fake_box_plot.py
+$ test/synthesize_ratings.py
 
 """
 
