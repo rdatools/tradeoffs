@@ -11,7 +11,9 @@ from typing import List, Dict
 import random
 from csv import DictReader
 
-scores_csv: str = "sample/sample_scores.csv"
+import os
+
+scores_csv: str = "~/iCloud/fileout/ensembles/NC20C_RMfRST_100_scores.csv"
 
 cols: List[str] = [
     "map",
@@ -23,24 +25,35 @@ cols: List[str] = [
 ]
 
 
-def wtf(scores_csv: str, cols: List[str]):
+def synthesize_ratings(
+    scores_csv: str,
+    cols: List[str],
+    *,
+    spread: List[int] = [10, 10, 10, 10, 10],
+    delta: List[int] = [0, 0, 0, 0, 0, 20]
+):
+    """Synthesize ratings for a 1,000 plan ensemble."""
+
     scores: List[Dict[str, str]] = list()
-    with open(scores_csv, "r", encoding="utf-8-sig") as f:
+
+    with open(os.path.expanduser(scores_csv), "r", encoding="utf-8-sig") as f:
         reader: DictReader[str] = DictReader(
             f, fieldnames=None, restkey=None, restval=None, dialect="excel"
         )
         for row in reader:
-            keep: Dict[str, str] = {k: row[k] for k in cols}
-            scores.append(keep)
+            ratings: Dict[str, str] = {k: row[k] for k in cols}
+            scores.append(ratings)
 
             for i in range(9):
                 dup: Dict[str, str] = dict()
-                for k in cols:
-                    if k == "map":
-                        dup[k] = str(i + 1) + keep[k][1:]
-                    else:
-                        offset: int = random.randint(-50, 50)
-                        dup[k] = str(max(min(int(keep[k]) + offset, 100), 0))
+                dup["map"] = str(i + 1) + row["map"][1:]
+                for j, k in enumerate(cols[1:]):
+                    mid: int = int(ratings[k]) + delta[j]
+                    dup[k] = str(
+                        random.randint(
+                            max(mid - spread[j], 0), min(mid + spread[j], 100)
+                        )
+                    )
                 scores.append(dup)
 
     # TODO - Write the new file
@@ -48,7 +61,7 @@ def wtf(scores_csv: str, cols: List[str]):
     pass
 
 
-wtf(scores_csv, cols)
+synthesize_ratings(scores_csv, cols)
 
 
 pass

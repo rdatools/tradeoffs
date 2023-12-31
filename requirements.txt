@@ -1,2 +1,3 @@
-chart_studio
+pandas
 plotly
+rdabase
