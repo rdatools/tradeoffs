@@ -108,6 +108,7 @@ def is_pareto_efficient_dumb(costs) -> np.ndarray:
     :param costs: An (n_points, n_costs) array
     :return: A (n_points, ) boolean array, indicating whether each point is Pareto efficient
     """
+
     is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
     for i, c in enumerate(costs):
         is_efficient[i] = np.all(np.any(costs[:i] > c, axis=1)) and np.all(
