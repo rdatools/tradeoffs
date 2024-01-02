@@ -20,12 +20,13 @@ import argparse
 from argparse import ArgumentParser, Namespace
 from typing import Any, List, Dict, Callable
 
+import pandas as pd
+
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 
 from rdabase import require_args
-
 from tradeoffs import scores_to_df
 
 
@@ -46,7 +47,7 @@ def main() -> None:
     ]
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df = scores_to_df(args.scores, fieldnames, fieldtypes)
+    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
     # Configure & show the box plot for the ratings
 
