@@ -8,28 +8,18 @@ import numpy as np
 import pandas as pd
 import itertools
 
-import rdaensemble as e
-
-# TODO - Import these from rdaensemble
-# TODO - Reconcile w/ fieldnames
-# metrics: List[str] = [
-#     "proportionality",
-#     "competitiveness",
-#     "minority",
-#     "compactness",
-#     "splitting",
-# ]
+from rdaensemble.general import ratings_dimensions
 
 
 def find_frontiers(
-    ratings: pd.DataFrame, fieldnames: List[str]
+    ratings: pd.DataFrame,  # , fieldnames: List[str]
 ) -> Dict[str, List[Dict]]:
     """Find the frontier for a ratings dataframe.
 
     TODO - Verify that this works visually ... or add test cases!
     """
 
-    pairs: List = list(itertools.combinations(fieldnames[1:], 2))
+    pairs: List = list(itertools.combinations(ratings_dimensions, 2))
     frontiers: Dict[str, List[Dict]] = dict()
 
     for p in pairs:
@@ -45,12 +35,16 @@ def find_frontiers(
                 maps.append(ratings.iloc[i]["map"])
 
         for m in maps:
-            row = ratings.loc[ratings["map"] == m, fieldnames].values.flatten().tolist()
+            row = (
+                ratings.loc[ratings["map"] == m, ["map"] + ratings_dimensions]
+                .values.flatten()
+                .tolist()
+            )
             name: str = row.pop(0)
             point: List[int] = [int(r) for r in row]
             frontiers[label].append({"map": name, "ratings": point})
 
-        dimension: int = e.general.ratings_dimensions.index(p[0])
+        dimension: int = ratings_dimensions.index(p[0])
         frontiers[label] = sorted(
             frontiers[label], key=lambda d: d["ratings"][dimension], reverse=True
         )

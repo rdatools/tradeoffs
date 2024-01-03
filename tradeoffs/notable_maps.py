@@ -50,6 +50,7 @@ def id_most_notable_maps(
         for i, m in enumerate(v):
             name: str = m["map"]
             ratings: List[int] = m["ratings"]
+            assert len(ratings) == len(dimensions)
             j: int = i + 1
 
             for d in dimensions:

@@ -23,6 +23,7 @@ from typing import Any, List, Dict, Callable
 import pandas as pd
 
 from rdabase import require_args, read_json, write_json
+from rdaensemble.general import ratings_dimensions
 from tradeoffs import scores_to_df, find_frontiers, id_most_notable_maps
 
 
@@ -33,20 +34,13 @@ def main() -> None:
 
     # Read the ratings from a score CSV
 
-    fieldnames: List[str] = [
-        "map",
-        "proportionality",
-        "competitiveness",
-        "minority",
-        "compactness",
-        "splitting",
-    ]
+    fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
     ratings: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
     metadata: Dict[str, Any] = read_json(args.metadata)
 
-    frontiers: Dict[str, Any] = find_frontiers(ratings, fieldnames)
+    frontiers: Dict[str, Any] = find_frontiers(ratings)
     indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
