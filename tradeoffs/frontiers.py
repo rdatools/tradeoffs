@@ -9,7 +9,7 @@ import pandas as pd
 import itertools
 
 
-def find_frontier(
+def find_frontiers(
     ratings: pd.DataFrame, fieldnames: List[str]
 ) -> Dict[str, List[Dict]]:
     """Find the frontier for a ratings dataframe."""

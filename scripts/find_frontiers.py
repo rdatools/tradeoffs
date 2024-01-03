@@ -5,14 +5,15 @@ FIND THE RATINGS FRONTIER
 
 For example:
 
-$ scripts/find_frontier.py \
+$ scripts/find_frontiers.py \
 --scores testdata/synthetic_ratings.csv \
+--metadata testdata/synthetic_scores_metadata.json \
 --frontier output/test_frontier.json \
 --no-debug
 
 For documentation, type:
 
-$ scripts/find_frontier.py
+$ scripts/find_frontiers.py
 
 TODO - Confirm this works visually
 
@@ -24,8 +25,8 @@ from typing import Any, List, Dict, Callable
 
 import pandas as pd
 
-from rdabase import require_args, write_json
-from tradeoffs import scores_to_df, find_frontier
+from rdabase import require_args, read_json, write_json
+from tradeoffs import scores_to_df, find_frontiers
 
 
 def main() -> None:
@@ -46,11 +47,12 @@ def main() -> None:
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
     ratings: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
-    frontiers: Dict[str, Any] = find_frontier(ratings, fieldnames)
+    metadata: Dict[str, Any] = read_json(args.metadata)
 
-    output: Dict[str, Any] = dict()
-    # TODO - Add metadata
-    output["pairs"] = frontiers
+    frontiers: Dict[str, Any] = find_frontiers(ratings, fieldnames)
+
+    output: Dict[str, Any] = metadata
+    output["frontiers"] = frontiers
 
     write_json(args.frontier, output)
 
@@ -86,6 +88,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
+        "metadata": "testdata/synthetic_scores_metadata.json",
         "frontier": "output/test_frontier.json",
     }
     args = require_args(args, args.debug, debug_defaults)

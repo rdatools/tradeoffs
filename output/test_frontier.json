@@ -1,5 +1,15 @@
 {
-    "pairs": {
+    "username": "alecramsay",
+    "date_created": "12/27/23",
+    "time_created": "06:59:10",
+    "repository": "rdatools/rdaensemble",
+    "state": "NC",
+    "cycle": "2020",
+    "plan_type": "Congress",
+    "units": "VTD",
+    "plans": "NC20C_RMfRST_100_plans.json",
+    "rdascore": "2.0.5",
+    "frontiers": {
         "proportionality_competitiveness": [
             {
                 "map": "106_525",
