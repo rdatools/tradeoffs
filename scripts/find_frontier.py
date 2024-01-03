@@ -13,6 +13,9 @@ $ scripts/find_frontier.py \
 For documentation, type:
 
 $ scripts/find_frontier.py
+
+TODO - Confirm this works visually
+
 """
 
 import argparse

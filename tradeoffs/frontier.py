@@ -34,6 +34,8 @@ def find_frontier(
             point: Dict = dict(zip(fieldnames, row))
             frontiers[label].append(point)
 
+        frontiers[label] = sorted(frontiers[label], key=lambda d: d[p[0]], reverse=True)
+
     return frontiers
 
 
