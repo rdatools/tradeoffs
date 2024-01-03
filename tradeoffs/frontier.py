@@ -9,11 +9,13 @@ import pandas as pd
 import itertools
 
 
-def find_frontier(ratings: pd.DataFrame, fieldnames: List[str]) -> Dict[str, Any]:
+def find_frontier(
+    ratings: pd.DataFrame, fieldnames: List[str]
+) -> Dict[str, List[Dict]]:
     """Find the frontier for a ratings dataframe."""
 
     pairs: List = list(itertools.combinations(fieldnames[1:], 2))
-    frontiers: Dict[str, Any] = dict()
+    frontiers: Dict[str, List[Dict]] = dict()
 
     for p in pairs:
         label: str = f"{p[0]}_{p[1]}"
@@ -28,9 +30,8 @@ def find_frontier(ratings: pd.DataFrame, fieldnames: List[str]) -> Dict[str, Any
                 maps.append(ratings.iloc[i]["map"])
 
         for m in maps:
-            point = (
-                ratings.loc[ratings["map"] == m, fieldnames].values.flatten().tolist()
-            )
+            row = ratings.loc[ratings["map"] == m, fieldnames].values.flatten().tolist()
+            point: Dict = dict(zip(fieldnames, row))
             frontiers[label].append(point)
 
     return frontiers

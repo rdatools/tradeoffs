@@ -1,391 +1,391 @@
 {
     "pairs": {
         "proportionality_competitiveness": [
-            [
-                "106_525",
-                76,
-                13,
-                65,
-                26,
-                44
-            ],
-            [
-                "225_551",
-                36,
-                30,
-                54,
-                24,
-                34
-            ],
-            [
-                "625_551",
-                49,
-                29,
-                45,
-                29,
-                24
-            ],
-            [
-                "925_551",
-                35,
-                35,
-                44,
-                37,
-                21
-            ],
-            [
-                "934_563",
-                53,
-                27,
-                49,
-                32,
-                33
-            ],
-            [
-                "343_574",
-                34,
-                40,
-                50,
-                25,
-                27
-            ],
-            [
-                "543_574",
-                33,
-                53,
-                63,
-                32,
-                27
-            ],
-            [
-                "355_589",
-                66,
-                20,
-                56,
-                25,
-                40
-            ]
+            {
+                "map": "106_525",
+                "proportionality": 76,
+                "competitiveness": 13,
+                "minority": 65,
+                "compactness": 26,
+                "splitting": 44
+            },
+            {
+                "map": "225_551",
+                "proportionality": 36,
+                "competitiveness": 30,
+                "minority": 54,
+                "compactness": 24,
+                "splitting": 34
+            },
+            {
+                "map": "625_551",
+                "proportionality": 49,
+                "competitiveness": 29,
+                "minority": 45,
+                "compactness": 29,
+                "splitting": 24
+            },
+            {
+                "map": "925_551",
+                "proportionality": 35,
+                "competitiveness": 35,
+                "minority": 44,
+                "compactness": 37,
+                "splitting": 21
+            },
+            {
+                "map": "934_563",
+                "proportionality": 53,
+                "competitiveness": 27,
+                "minority": 49,
+                "compactness": 32,
+                "splitting": 33
+            },
+            {
+                "map": "343_574",
+                "proportionality": 34,
+                "competitiveness": 40,
+                "minority": 50,
+                "compactness": 25,
+                "splitting": 27
+            },
+            {
+                "map": "543_574",
+                "proportionality": 33,
+                "competitiveness": 53,
+                "minority": 63,
+                "compactness": 32,
+                "splitting": 27
+            },
+            {
+                "map": "355_589",
+                "proportionality": 66,
+                "competitiveness": 20,
+                "minority": 56,
+                "compactness": 25,
+                "splitting": 40
+            }
         ],
         "proportionality_minority": [
-            [
-                "925_551",
-                35,
-                35,
-                44,
-                37,
-                21
-            ],
-            [
-                "133_562",
-                40,
-                50,
-                40,
-                18,
-                30
-            ],
-            [
-                "343_574",
-                34,
-                40,
-                50,
-                25,
-                27
-            ],
-            [
-                "543_574",
-                33,
-                53,
-                63,
-                32,
-                27
-            ]
+            {
+                "map": "925_551",
+                "proportionality": 35,
+                "competitiveness": 35,
+                "minority": 44,
+                "compactness": 37,
+                "splitting": 21
+            },
+            {
+                "map": "133_562",
+                "proportionality": 40,
+                "competitiveness": 50,
+                "minority": 40,
+                "compactness": 18,
+                "splitting": 30
+            },
+            {
+                "map": "343_574",
+                "proportionality": 34,
+                "competitiveness": 40,
+                "minority": 50,
+                "compactness": 25,
+                "splitting": 27
+            },
+            {
+                "map": "543_574",
+                "proportionality": 33,
+                "competitiveness": 53,
+                "minority": 63,
+                "compactness": 32,
+                "splitting": 27
+            }
         ],
         "proportionality_compactness": [
-            [
-                "627_553",
-                47,
-                47,
-                41,
-                13,
-                33
-            ],
-            [
-                "533_562",
-                49,
-                40,
-                54,
-                10,
-                33
-            ],
-            [
-                "633_562",
-                35,
-                53,
-                55,
-                18,
-                26
-            ],
-            [
-                "343_574",
-                34,
-                40,
-                50,
-                25,
-                27
-            ],
-            [
-                "543_574",
-                33,
-                53,
-                63,
-                32,
-                27
-            ],
-            [
-                "474_610",
-                70,
-                48,
-                54,
-                4,
-                34
-            ],
-            [
-                "874_610",
-                74,
-                43,
-                55,
-                3,
-                31
-            ]
+            {
+                "map": "627_553",
+                "proportionality": 47,
+                "competitiveness": 47,
+                "minority": 41,
+                "compactness": 13,
+                "splitting": 33
+            },
+            {
+                "map": "533_562",
+                "proportionality": 49,
+                "competitiveness": 40,
+                "minority": 54,
+                "compactness": 10,
+                "splitting": 33
+            },
+            {
+                "map": "633_562",
+                "proportionality": 35,
+                "competitiveness": 53,
+                "minority": 55,
+                "compactness": 18,
+                "splitting": 26
+            },
+            {
+                "map": "343_574",
+                "proportionality": 34,
+                "competitiveness": 40,
+                "minority": 50,
+                "compactness": 25,
+                "splitting": 27
+            },
+            {
+                "map": "543_574",
+                "proportionality": 33,
+                "competitiveness": 53,
+                "minority": 63,
+                "compactness": 32,
+                "splitting": 27
+            },
+            {
+                "map": "474_610",
+                "proportionality": 70,
+                "competitiveness": 48,
+                "minority": 54,
+                "compactness": 4,
+                "splitting": 34
+            },
+            {
+                "map": "874_610",
+                "proportionality": 74,
+                "competitiveness": 43,
+                "minority": 55,
+                "compactness": 3,
+                "splitting": 31
+            }
         ],
         "proportionality_splitting": [
-            [
-                "925_551",
-                35,
-                35,
-                44,
-                37,
-                21
-            ],
-            [
-                "033_562",
-                42,
-                49,
-                50,
-                20,
-                0
-            ],
-            [
-                "543_574",
-                33,
-                53,
-                63,
-                32,
-                27
-            ],
-            [
-                "370_606",
-                38,
-                40,
-                56,
-                29,
-                20
-            ]
+            {
+                "map": "925_551",
+                "proportionality": 35,
+                "competitiveness": 35,
+                "minority": 44,
+                "compactness": 37,
+                "splitting": 21
+            },
+            {
+                "map": "033_562",
+                "proportionality": 42,
+                "competitiveness": 49,
+                "minority": 50,
+                "compactness": 20,
+                "splitting": 0
+            },
+            {
+                "map": "543_574",
+                "proportionality": 33,
+                "competitiveness": 53,
+                "minority": 63,
+                "compactness": 32,
+                "splitting": 27
+            },
+            {
+                "map": "370_606",
+                "proportionality": 38,
+                "competitiveness": 40,
+                "minority": 56,
+                "compactness": 29,
+                "splitting": 20
+            }
         ],
         "competitiveness_minority": [
-            [
-                "106_525",
-                76,
-                13,
-                65,
-                26,
-                44
-            ],
-            [
-                "715_534",
-                76,
-                16,
-                45,
-                28,
-                20
-            ],
-            [
-                "839_568",
-                78,
-                28,
-                40,
-                36,
-                32
-            ],
-            [
-                "544_575",
-                87,
-                22,
-                41,
-                24,
-                24
-            ]
+            {
+                "map": "106_525",
+                "proportionality": 76,
+                "competitiveness": 13,
+                "minority": 65,
+                "compactness": 26,
+                "splitting": 44
+            },
+            {
+                "map": "715_534",
+                "proportionality": 76,
+                "competitiveness": 16,
+                "minority": 45,
+                "compactness": 28,
+                "splitting": 20
+            },
+            {
+                "map": "839_568",
+                "proportionality": 78,
+                "competitiveness": 28,
+                "minority": 40,
+                "compactness": 36,
+                "splitting": 32
+            },
+            {
+                "map": "544_575",
+                "proportionality": 87,
+                "competitiveness": 22,
+                "minority": 41,
+                "compactness": 24,
+                "splitting": 24
+            }
         ],
         "competitiveness_compactness": [
-            [
-                "106_525",
-                76,
-                13,
-                65,
-                26,
-                44
-            ],
-            [
-                "415_534",
-                92,
-                17,
-                54,
-                19,
-                24
-            ],
-            [
-                "149_580",
-                99,
-                18,
-                56,
-                16,
-                40
-            ],
-            [
-                "874_610",
-                74,
-                43,
-                55,
-                3,
-                31
-            ],
-            [
-                "176_612",
-                80,
-                24,
-                63,
-                11,
-                25
-            ],
-            [
-                "676_612",
-                73,
-                25,
-                55,
-                8,
-                22
-            ],
-            [
-                "976_612",
-                80,
-                20,
-                54,
-                15,
-                37
-            ]
+            {
+                "map": "106_525",
+                "proportionality": 76,
+                "competitiveness": 13,
+                "minority": 65,
+                "compactness": 26,
+                "splitting": 44
+            },
+            {
+                "map": "415_534",
+                "proportionality": 92,
+                "competitiveness": 17,
+                "minority": 54,
+                "compactness": 19,
+                "splitting": 24
+            },
+            {
+                "map": "149_580",
+                "proportionality": 99,
+                "competitiveness": 18,
+                "minority": 56,
+                "compactness": 16,
+                "splitting": 40
+            },
+            {
+                "map": "874_610",
+                "proportionality": 74,
+                "competitiveness": 43,
+                "minority": 55,
+                "compactness": 3,
+                "splitting": 31
+            },
+            {
+                "map": "176_612",
+                "proportionality": 80,
+                "competitiveness": 24,
+                "minority": 63,
+                "compactness": 11,
+                "splitting": 25
+            },
+            {
+                "map": "676_612",
+                "proportionality": 73,
+                "competitiveness": 25,
+                "minority": 55,
+                "compactness": 8,
+                "splitting": 22
+            },
+            {
+                "map": "976_612",
+                "proportionality": 80,
+                "competitiveness": 20,
+                "minority": 54,
+                "compactness": 15,
+                "splitting": 37
+            }
         ],
         "competitiveness_splitting": [
-            [
-                "006_525",
-                81,
-                22,
-                59,
-                30,
-                4
-            ],
-            [
-                "106_525",
-                76,
-                13,
-                65,
-                26,
-                44
-            ],
-            [
-                "715_534",
-                76,
-                16,
-                45,
-                28,
-                20
-            ]
+            {
+                "map": "006_525",
+                "proportionality": 81,
+                "competitiveness": 22,
+                "minority": 59,
+                "compactness": 30,
+                "splitting": 4
+            },
+            {
+                "map": "106_525",
+                "proportionality": 76,
+                "competitiveness": 13,
+                "minority": 65,
+                "compactness": 26,
+                "splitting": 44
+            },
+            {
+                "map": "715_534",
+                "proportionality": 76,
+                "competitiveness": 16,
+                "minority": 45,
+                "compactness": 28,
+                "splitting": 20
+            }
         ],
         "minority_compactness": [
-            [
-                "627_553",
-                47,
-                47,
-                41,
-                13,
-                33
-            ],
-            [
-                "873_609",
-                47,
-                48,
-                40,
-                17,
-                25
-            ],
-            [
-                "174_610",
-                80,
-                52,
-                48,
-                3,
-                31
-            ],
-            [
-                "674_610",
-                78,
-                53,
-                44,
-                8,
-                21
-            ],
-            [
-                "774_610",
-                78,
-                59,
-                45,
-                5,
-                38
-            ],
-            [
-                "991_635",
-                63,
-                43,
-                42,
-                12,
-                28
-            ]
+            {
+                "map": "627_553",
+                "proportionality": 47,
+                "competitiveness": 47,
+                "minority": 41,
+                "compactness": 13,
+                "splitting": 33
+            },
+            {
+                "map": "873_609",
+                "proportionality": 47,
+                "competitiveness": 48,
+                "minority": 40,
+                "compactness": 17,
+                "splitting": 25
+            },
+            {
+                "map": "174_610",
+                "proportionality": 80,
+                "competitiveness": 52,
+                "minority": 48,
+                "compactness": 3,
+                "splitting": 31
+            },
+            {
+                "map": "674_610",
+                "proportionality": 78,
+                "competitiveness": 53,
+                "minority": 44,
+                "compactness": 8,
+                "splitting": 21
+            },
+            {
+                "map": "774_610",
+                "proportionality": 78,
+                "competitiveness": 59,
+                "minority": 45,
+                "compactness": 5,
+                "splitting": 38
+            },
+            {
+                "map": "991_635",
+                "proportionality": 63,
+                "competitiveness": 43,
+                "minority": 42,
+                "compactness": 12,
+                "splitting": 28
+            }
         ],
         "minority_splitting": [],
         "compactness_splitting": [
-            [
-                "074_610",
-                77,
-                50,
-                50,
-                12,
-                0
-            ],
-            [
-                "574_610",
-                75,
-                57,
-                47,
-                6,
-                29
-            ],
-            [
-                "674_610",
-                78,
-                53,
-                44,
-                8,
-                21
-            ]
+            {
+                "map": "074_610",
+                "proportionality": 77,
+                "competitiveness": 50,
+                "minority": 50,
+                "compactness": 12,
+                "splitting": 0
+            },
+            {
+                "map": "574_610",
+                "proportionality": 75,
+                "competitiveness": 57,
+                "minority": 47,
+                "compactness": 6,
+                "splitting": 29
+            },
+            {
+                "map": "674_610",
+                "proportionality": 78,
+                "competitiveness": 53,
+                "minority": 44,
+                "compactness": 8,
+                "splitting": 21
+            }
         ]
     }
 }
