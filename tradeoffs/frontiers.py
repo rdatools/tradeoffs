@@ -8,15 +8,17 @@ import numpy as np
 import pandas as pd
 import itertools
 
+import rdaensemble as e
+
 # TODO - Import these from rdaensemble
 # TODO - Reconcile w/ fieldnames
-metrics: List[str] = [
-    "proportionality",
-    "competitiveness",
-    "minority",
-    "compactness",
-    "splitting",
-]
+# metrics: List[str] = [
+#     "proportionality",
+#     "competitiveness",
+#     "minority",
+#     "compactness",
+#     "splitting",
+# ]
 
 
 def find_frontiers(
@@ -48,7 +50,7 @@ def find_frontiers(
             point: List[int] = [int(r) for r in row]
             frontiers[label].append({"map": name, "ratings": point})
 
-        dimension: int = metrics.index(p[0])
+        dimension: int = e.general.ratings_dimensions.index(p[0])
         frontiers[label] = sorted(
             frontiers[label], key=lambda d: d["ratings"][dimension], reverse=True
         )
