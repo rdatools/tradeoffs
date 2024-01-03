@@ -22,7 +22,10 @@ metrics: List[str] = [
 def find_frontiers(
     ratings: pd.DataFrame, fieldnames: List[str]
 ) -> Dict[str, List[Dict]]:
-    """Find the frontier for a ratings dataframe."""
+    """Find the frontier for a ratings dataframe.
+
+    TODO - Verify that this works visually ... or add test cases!
+    """
 
     pairs: List = list(itertools.combinations(fieldnames[1:], 2))
     frontiers: Dict[str, List[Dict]] = dict()
@@ -44,14 +47,11 @@ def find_frontiers(
             name: str = row.pop(0)
             point: List[int] = [int(r) for r in row]
             frontiers[label].append({"map": name, "ratings": point})
-            # point: Dict = dict(zip(fieldnames, row))
-            # frontiers[label].append(point)
 
         dimension: int = metrics.index(p[0])
         frontiers[label] = sorted(
             frontiers[label], key=lambda d: d["ratings"][dimension], reverse=True
         )
-        # frontiers[label] = sorted(frontiers[label], key=lambda d: d[p[0]], reverse=True)
 
     return frontiers
 

@@ -14,9 +14,6 @@ $ scripts/find_frontiers.py \
 For documentation, type:
 
 $ scripts/find_frontiers.py
-
-TODO - Confirm this works visually
-
 """
 
 import argparse
@@ -50,10 +47,11 @@ def main() -> None:
     metadata: Dict[str, Any] = read_json(args.metadata)
 
     frontiers: Dict[str, Any] = find_frontiers(ratings, fieldnames)
-    id_most_notable_maps(frontiers)
+    indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
     output["frontiers"] = frontiers
+    output["notable_maps"] = indices
 
     write_json(args.frontier, output)
 
