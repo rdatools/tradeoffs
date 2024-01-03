@@ -32,44 +32,31 @@ def better_map(
 # end import
 
 
-def id_most_notable_maps(frontiers: Dict[str, List[Dict]]) -> Dict[str, int]:
-    """Identify the most notable map for each dimension in the frontiers.
-
-    "notable_maps": [
-    {
-        "proportionality": "957_591",
-        "ratings": [
-            100,
-            53,
-            46,
-            32,
-            37
-        ]
-    },
-
-    total: int = 0
-    qualifying: int = 0
-
-    for s in scores:
-        total += 1
-        ratings: List[int] = [int(s[m]) for m in metrics]
-        if not qualifying_map(ratings, filters):
-            continue
-
-        for d in dimensions:
-            if better_map(ratings, notable_maps[d], d):
-                notable_maps[d][metrics[d]] = s["map"]
-                notable_maps[d]["ratings"] = ratings
-
-        qualifying += 1
-    """
+def id_most_notable_maps(
+    frontiers: Dict[str, List[Dict]]
+) -> List[Dict[str, Dict[str, str | int]]]:
+    """Identify the most notable map for each dimension in the frontiers."""
 
     # output: Dict[str, Any] = dict()
-    # notable_maps: List[Dict[str, Any]] = [{m: "None", "ratings": []} for m in metrics]
+    notable_maps: List[Dict[str, Any]] = [{m: "None", "ratings": []} for m in metrics]
+    indices: List[Dict[str, Dict[str, str | int]]] = [
+        {m: {"frontier": "None", "offset": -1}} for m in metrics
+    ]
 
-    notable_maps: Dict[str, int] = dict()
+    for k, v in frontiers.items():
+        for i, m in enumerate(v):
+            name: str = m["map"]
+            ratings: List[int] = m["ratings"]
+            j: int = i + 1
 
-    return notable_maps
+            for d in dimensions:
+                if better_map(ratings, notable_maps[d], d):
+                    notable_maps[d][metrics[d]] = name
+                    notable_maps[d]["ratings"] = ratings
+
+                    # TODO - Add index
+
+    return indices
 
 
 ### END ###

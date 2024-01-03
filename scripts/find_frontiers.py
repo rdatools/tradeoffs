@@ -26,7 +26,7 @@ from typing import Any, List, Dict, Callable
 import pandas as pd
 
 from rdabase import require_args, read_json, write_json
-from tradeoffs import scores_to_df, find_frontiers
+from tradeoffs import scores_to_df, find_frontiers, id_most_notable_maps
 
 
 def main() -> None:
@@ -50,6 +50,7 @@ def main() -> None:
     metadata: Dict[str, Any] = read_json(args.metadata)
 
     frontiers: Dict[str, Any] = find_frontiers(ratings, fieldnames)
+    id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
     output["frontiers"] = frontiers
