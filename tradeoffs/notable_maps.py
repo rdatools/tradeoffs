@@ -35,7 +35,7 @@ def better_map(
 def id_most_notable_maps(
     frontiers: Dict[str, List[Dict]]
 ) -> List[Dict[str, Dict[str, str | int]]]:
-    """Identify the most notable map for each dimension in the frontiers.
+    """Identify the *most* notable map for each dimension in the frontiers.
 
     TODO - Hand verify these results.
     """
