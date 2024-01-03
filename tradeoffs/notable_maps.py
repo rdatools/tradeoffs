@@ -4,32 +4,7 @@ ID NOTABLE MAPS IN A SET OF PAIRWISE FRONTIERS
 
 from typing import Any, Dict, List
 
-# TODO - Import these from rdaensemble
-metrics: List[str] = [
-    "proportionality",
-    "competitiveness",
-    "minority",
-    "compactness",
-    "splitting",
-]
-dimensions: List[int] = list(range(5))
-
-
-def better_map(
-    ratings: List[int], current_best: Dict[str, Any], dimension: int
-) -> bool:
-    if current_best[metrics[dimension]] == "None":
-        return True
-    if (ratings[dimension] > current_best["ratings"][dimension]) or (
-        ratings[dimension] == current_best["ratings"][dimension]
-        and sum(ratings) > sum(current_best["ratings"])
-    ):
-        return True
-    else:
-        return False
-
-
-# end import
+from rdaensemble.general import ratings_dimensions, ratings_indexes, better_map
 
 
 def id_most_notable_maps(
@@ -41,24 +16,25 @@ def id_most_notable_maps(
     """
 
     # output: Dict[str, Any] = dict()
-    notable_maps: List[Dict[str, Any]] = [{m: "None", "ratings": []} for m in metrics]
+    notable_maps: List[Dict[str, Any]] = [
+        {m: "None", "ratings": []} for m in ratings_dimensions
+    ]
     indices: List[Dict[str, Dict[str, str | int]]] = [
-        {m: {"frontier": "None", "offset": -1}} for m in metrics
+        {m: {"frontier": "None", "offset": -1}} for m in ratings_dimensions
     ]
 
     for k, v in frontiers.items():
         for i, m in enumerate(v):
             name: str = m["map"]
             ratings: List[int] = m["ratings"]
-            assert len(ratings) == len(dimensions)
-            j: int = i + 1
+            assert len(ratings) == len(ratings_dimensions)
 
-            for d in dimensions:
-                if better_map(ratings, notable_maps[d], d):
-                    notable_maps[d][metrics[d]] = name
-                    notable_maps[d]["ratings"] = ratings
+            for j in ratings_indexes:
+                if better_map(ratings, notable_maps[j], j):
+                    notable_maps[j][ratings_dimensions[j]] = name
+                    notable_maps[j]["ratings"] = ratings
 
-                    indices[d] = {metrics[d]: {"frontier": k, "offset": i}}
+                    indices[j] = {ratings_dimensions[j]: {"frontier": k, "offset": i}}
 
     return indices
 
