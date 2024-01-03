@@ -13,388 +13,480 @@
         "proportionality_competitiveness": [
             {
                 "map": "106_525",
-                "proportionality": 76,
-                "competitiveness": 13,
-                "minority": 65,
-                "compactness": 26,
-                "splitting": 44
+                "ratings": [
+                    76,
+                    13,
+                    65,
+                    26,
+                    44
+                ]
             },
             {
                 "map": "355_589",
-                "proportionality": 66,
-                "competitiveness": 20,
-                "minority": 56,
-                "compactness": 25,
-                "splitting": 40
+                "ratings": [
+                    66,
+                    20,
+                    56,
+                    25,
+                    40
+                ]
             },
             {
                 "map": "934_563",
-                "proportionality": 53,
-                "competitiveness": 27,
-                "minority": 49,
-                "compactness": 32,
-                "splitting": 33
+                "ratings": [
+                    53,
+                    27,
+                    49,
+                    32,
+                    33
+                ]
             },
             {
                 "map": "625_551",
-                "proportionality": 49,
-                "competitiveness": 29,
-                "minority": 45,
-                "compactness": 29,
-                "splitting": 24
+                "ratings": [
+                    49,
+                    29,
+                    45,
+                    29,
+                    24
+                ]
             },
             {
                 "map": "225_551",
-                "proportionality": 36,
-                "competitiveness": 30,
-                "minority": 54,
-                "compactness": 24,
-                "splitting": 34
+                "ratings": [
+                    36,
+                    30,
+                    54,
+                    24,
+                    34
+                ]
             },
             {
                 "map": "925_551",
-                "proportionality": 35,
-                "competitiveness": 35,
-                "minority": 44,
-                "compactness": 37,
-                "splitting": 21
+                "ratings": [
+                    35,
+                    35,
+                    44,
+                    37,
+                    21
+                ]
             },
             {
                 "map": "343_574",
-                "proportionality": 34,
-                "competitiveness": 40,
-                "minority": 50,
-                "compactness": 25,
-                "splitting": 27
+                "ratings": [
+                    34,
+                    40,
+                    50,
+                    25,
+                    27
+                ]
             },
             {
                 "map": "543_574",
-                "proportionality": 33,
-                "competitiveness": 53,
-                "minority": 63,
-                "compactness": 32,
-                "splitting": 27
+                "ratings": [
+                    33,
+                    53,
+                    63,
+                    32,
+                    27
+                ]
             }
         ],
         "proportionality_minority": [
             {
                 "map": "133_562",
-                "proportionality": 40,
-                "competitiveness": 50,
-                "minority": 40,
-                "compactness": 18,
-                "splitting": 30
+                "ratings": [
+                    40,
+                    50,
+                    40,
+                    18,
+                    30
+                ]
             },
             {
                 "map": "925_551",
-                "proportionality": 35,
-                "competitiveness": 35,
-                "minority": 44,
-                "compactness": 37,
-                "splitting": 21
+                "ratings": [
+                    35,
+                    35,
+                    44,
+                    37,
+                    21
+                ]
             },
             {
                 "map": "343_574",
-                "proportionality": 34,
-                "competitiveness": 40,
-                "minority": 50,
-                "compactness": 25,
-                "splitting": 27
+                "ratings": [
+                    34,
+                    40,
+                    50,
+                    25,
+                    27
+                ]
             },
             {
                 "map": "543_574",
-                "proportionality": 33,
-                "competitiveness": 53,
-                "minority": 63,
-                "compactness": 32,
-                "splitting": 27
+                "ratings": [
+                    33,
+                    53,
+                    63,
+                    32,
+                    27
+                ]
             }
         ],
         "proportionality_compactness": [
             {
                 "map": "874_610",
-                "proportionality": 74,
-                "competitiveness": 43,
-                "minority": 55,
-                "compactness": 3,
-                "splitting": 31
+                "ratings": [
+                    74,
+                    43,
+                    55,
+                    3,
+                    31
+                ]
             },
             {
                 "map": "474_610",
-                "proportionality": 70,
-                "competitiveness": 48,
-                "minority": 54,
-                "compactness": 4,
-                "splitting": 34
+                "ratings": [
+                    70,
+                    48,
+                    54,
+                    4,
+                    34
+                ]
             },
             {
                 "map": "533_562",
-                "proportionality": 49,
-                "competitiveness": 40,
-                "minority": 54,
-                "compactness": 10,
-                "splitting": 33
+                "ratings": [
+                    49,
+                    40,
+                    54,
+                    10,
+                    33
+                ]
             },
             {
                 "map": "627_553",
-                "proportionality": 47,
-                "competitiveness": 47,
-                "minority": 41,
-                "compactness": 13,
-                "splitting": 33
+                "ratings": [
+                    47,
+                    47,
+                    41,
+                    13,
+                    33
+                ]
             },
             {
                 "map": "633_562",
-                "proportionality": 35,
-                "competitiveness": 53,
-                "minority": 55,
-                "compactness": 18,
-                "splitting": 26
+                "ratings": [
+                    35,
+                    53,
+                    55,
+                    18,
+                    26
+                ]
             },
             {
                 "map": "343_574",
-                "proportionality": 34,
-                "competitiveness": 40,
-                "minority": 50,
-                "compactness": 25,
-                "splitting": 27
+                "ratings": [
+                    34,
+                    40,
+                    50,
+                    25,
+                    27
+                ]
             },
             {
                 "map": "543_574",
-                "proportionality": 33,
-                "competitiveness": 53,
-                "minority": 63,
-                "compactness": 32,
-                "splitting": 27
+                "ratings": [
+                    33,
+                    53,
+                    63,
+                    32,
+                    27
+                ]
             }
         ],
         "proportionality_splitting": [
             {
                 "map": "033_562",
-                "proportionality": 42,
-                "competitiveness": 49,
-                "minority": 50,
-                "compactness": 20,
-                "splitting": 0
+                "ratings": [
+                    42,
+                    49,
+                    50,
+                    20,
+                    0
+                ]
             },
             {
                 "map": "370_606",
-                "proportionality": 38,
-                "competitiveness": 40,
-                "minority": 56,
-                "compactness": 29,
-                "splitting": 20
+                "ratings": [
+                    38,
+                    40,
+                    56,
+                    29,
+                    20
+                ]
             },
             {
                 "map": "925_551",
-                "proportionality": 35,
-                "competitiveness": 35,
-                "minority": 44,
-                "compactness": 37,
-                "splitting": 21
+                "ratings": [
+                    35,
+                    35,
+                    44,
+                    37,
+                    21
+                ]
             },
             {
                 "map": "543_574",
-                "proportionality": 33,
-                "competitiveness": 53,
-                "minority": 63,
-                "compactness": 32,
-                "splitting": 27
+                "ratings": [
+                    33,
+                    53,
+                    63,
+                    32,
+                    27
+                ]
             }
         ],
         "competitiveness_minority": [
             {
                 "map": "839_568",
-                "proportionality": 78,
-                "competitiveness": 28,
-                "minority": 40,
-                "compactness": 36,
-                "splitting": 32
+                "ratings": [
+                    78,
+                    28,
+                    40,
+                    36,
+                    32
+                ]
             },
             {
                 "map": "544_575",
-                "proportionality": 87,
-                "competitiveness": 22,
-                "minority": 41,
-                "compactness": 24,
-                "splitting": 24
+                "ratings": [
+                    87,
+                    22,
+                    41,
+                    24,
+                    24
+                ]
             },
             {
                 "map": "715_534",
-                "proportionality": 76,
-                "competitiveness": 16,
-                "minority": 45,
-                "compactness": 28,
-                "splitting": 20
+                "ratings": [
+                    76,
+                    16,
+                    45,
+                    28,
+                    20
+                ]
             },
             {
                 "map": "106_525",
-                "proportionality": 76,
-                "competitiveness": 13,
-                "minority": 65,
-                "compactness": 26,
-                "splitting": 44
+                "ratings": [
+                    76,
+                    13,
+                    65,
+                    26,
+                    44
+                ]
             }
         ],
         "competitiveness_compactness": [
             {
                 "map": "874_610",
-                "proportionality": 74,
-                "competitiveness": 43,
-                "minority": 55,
-                "compactness": 3,
-                "splitting": 31
+                "ratings": [
+                    74,
+                    43,
+                    55,
+                    3,
+                    31
+                ]
             },
             {
                 "map": "676_612",
-                "proportionality": 73,
-                "competitiveness": 25,
-                "minority": 55,
-                "compactness": 8,
-                "splitting": 22
+                "ratings": [
+                    73,
+                    25,
+                    55,
+                    8,
+                    22
+                ]
             },
             {
                 "map": "176_612",
-                "proportionality": 80,
-                "competitiveness": 24,
-                "minority": 63,
-                "compactness": 11,
-                "splitting": 25
+                "ratings": [
+                    80,
+                    24,
+                    63,
+                    11,
+                    25
+                ]
             },
             {
                 "map": "976_612",
-                "proportionality": 80,
-                "competitiveness": 20,
-                "minority": 54,
-                "compactness": 15,
-                "splitting": 37
+                "ratings": [
+                    80,
+                    20,
+                    54,
+                    15,
+                    37
+                ]
             },
             {
                 "map": "149_580",
-                "proportionality": 99,
-                "competitiveness": 18,
-                "minority": 56,
-                "compactness": 16,
-                "splitting": 40
+                "ratings": [
+                    99,
+                    18,
+                    56,
+                    16,
+                    40
+                ]
             },
             {
                 "map": "415_534",
-                "proportionality": 92,
-                "competitiveness": 17,
-                "minority": 54,
-                "compactness": 19,
-                "splitting": 24
+                "ratings": [
+                    92,
+                    17,
+                    54,
+                    19,
+                    24
+                ]
             },
             {
                 "map": "106_525",
-                "proportionality": 76,
-                "competitiveness": 13,
-                "minority": 65,
-                "compactness": 26,
-                "splitting": 44
+                "ratings": [
+                    76,
+                    13,
+                    65,
+                    26,
+                    44
+                ]
             }
         ],
         "competitiveness_splitting": [
             {
                 "map": "006_525",
-                "proportionality": 81,
-                "competitiveness": 22,
-                "minority": 59,
-                "compactness": 30,
-                "splitting": 4
+                "ratings": [
+                    81,
+                    22,
+                    59,
+                    30,
+                    4
+                ]
             },
             {
                 "map": "715_534",
-                "proportionality": 76,
-                "competitiveness": 16,
-                "minority": 45,
-                "compactness": 28,
-                "splitting": 20
+                "ratings": [
+                    76,
+                    16,
+                    45,
+                    28,
+                    20
+                ]
             },
             {
                 "map": "106_525",
-                "proportionality": 76,
-                "competitiveness": 13,
-                "minority": 65,
-                "compactness": 26,
-                "splitting": 44
+                "ratings": [
+                    76,
+                    13,
+                    65,
+                    26,
+                    44
+                ]
             }
         ],
         "minority_compactness": [
             {
                 "map": "174_610",
-                "proportionality": 80,
-                "competitiveness": 52,
-                "minority": 48,
-                "compactness": 3,
-                "splitting": 31
+                "ratings": [
+                    80,
+                    52,
+                    48,
+                    3,
+                    31
+                ]
             },
             {
                 "map": "774_610",
-                "proportionality": 78,
-                "competitiveness": 59,
-                "minority": 45,
-                "compactness": 5,
-                "splitting": 38
+                "ratings": [
+                    78,
+                    59,
+                    45,
+                    5,
+                    38
+                ]
             },
             {
                 "map": "674_610",
-                "proportionality": 78,
-                "competitiveness": 53,
-                "minority": 44,
-                "compactness": 8,
-                "splitting": 21
+                "ratings": [
+                    78,
+                    53,
+                    44,
+                    8,
+                    21
+                ]
             },
             {
                 "map": "991_635",
-                "proportionality": 63,
-                "competitiveness": 43,
-                "minority": 42,
-                "compactness": 12,
-                "splitting": 28
+                "ratings": [
+                    63,
+                    43,
+                    42,
+                    12,
+                    28
+                ]
             },
             {
                 "map": "627_553",
-                "proportionality": 47,
-                "competitiveness": 47,
-                "minority": 41,
-                "compactness": 13,
-                "splitting": 33
+                "ratings": [
+                    47,
+                    47,
+                    41,
+                    13,
+                    33
+                ]
             },
             {
                 "map": "873_609",
-                "proportionality": 47,
-                "competitiveness": 48,
-                "minority": 40,
-                "compactness": 17,
-                "splitting": 25
+                "ratings": [
+                    47,
+                    48,
+                    40,
+                    17,
+                    25
+                ]
             }
         ],
         "minority_splitting": [],
         "compactness_splitting": [
             {
                 "map": "074_610",
-                "proportionality": 77,
-                "competitiveness": 50,
-                "minority": 50,
-                "compactness": 12,
-                "splitting": 0
+                "ratings": [
+                    77,
+                    50,
+                    50,
+                    12,
+                    0
+                ]
             },
             {
                 "map": "674_610",
-                "proportionality": 78,
-                "competitiveness": 53,
-                "minority": 44,
-                "compactness": 8,
-                "splitting": 21
+                "ratings": [
+                    78,
+                    53,
+                    44,
+                    8,
+                    21
+                ]
             },
             {
                 "map": "574_610",
-                "proportionality": 75,
-                "competitiveness": 57,
-                "minority": 47,
-                "compactness": 6,
-                "splitting": 29
+                "ratings": [
+                    75,
+                    57,
+                    47,
+                    6,
+                    29
+                ]
             }
         ]
     }
