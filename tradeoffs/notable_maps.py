@@ -15,7 +15,6 @@ def id_most_notable_maps(
     TODO - Hand verify these results.
     """
 
-    # output: Dict[str, Any] = dict()
     notable_maps: List[Dict[str, Any]] = [
         {m: "None", "ratings": []} for m in ratings_dimensions
     ]
