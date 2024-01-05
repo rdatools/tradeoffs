@@ -24,7 +24,12 @@ import pandas as pd
 
 from rdabase import require_args, read_json, write_json
 from rdaensemble.general import ratings_dimensions
-from tradeoffs import scores_to_df, find_frontiers, id_most_notable_maps
+from tradeoffs import (
+    scores_to_df,
+    find_frontiers,
+    is_pareto_efficient_value,
+    id_most_notable_maps,
+)
 
 
 def main() -> None:
@@ -40,7 +45,7 @@ def main() -> None:
     ratings: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
     metadata: Dict[str, Any] = read_json(args.metadata)
 
-    frontiers: Dict[str, Any] = find_frontiers(ratings)
+    frontiers: Dict[str, Any] = find_frontiers(ratings, is_pareto_efficient_value)
     indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata

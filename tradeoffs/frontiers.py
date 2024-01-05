@@ -2,7 +2,7 @@
 FRONTIER HELPERS
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Callable
 
 import numpy as np
 import pandas as pd
@@ -11,13 +11,8 @@ import itertools
 from rdaensemble.general import ratings_dimensions
 
 
-def find_frontiers(
-    ratings: pd.DataFrame,  # , fieldnames: List[str]
-) -> Dict[str, List[Dict]]:
-    """Find the frontier for a ratings dataframe.
-
-    TODO - Verify that this works visually ... or add test cases!
-    """
+def find_frontiers(ratings: pd.DataFrame, fn: Callable) -> Dict[str, List[Dict]]:
+    """Find the frontiers for a ratings dataframe."""
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
     frontiers: Dict[str, List[Dict]] = dict()
@@ -27,7 +22,7 @@ def find_frontiers(
         frontiers[label] = list()
 
         subset: pd.DataFrame = ratings[list(p)]
-        is_frontier: np.ndarray = is_pareto_efficient_dumb(subset.to_numpy())
+        is_frontier: np.ndarray = fn(subset.to_numpy())
 
         maps: List[str] = list()
         for i, is_efficient in enumerate(is_frontier):
@@ -44,33 +39,15 @@ def find_frontiers(
             point: List[int] = [int(r) for r in row]
             frontiers[label].append({"map": name, "ratings": point})
 
-        dimension: int = ratings_dimensions.index(p[0])
+        d1: int = ratings_dimensions.index(p[0])
+        d2: int = ratings_dimensions.index(p[1])
         frontiers[label] = sorted(
-            frontiers[label], key=lambda d: d["ratings"][dimension], reverse=True
+            frontiers[label],
+            key=lambda d: (d["ratings"][d1], d["ratings"][d2]),
+            reverse=True,
         )
 
     return frontiers
-
-
-### HELPERS ###
-
-
-def is_pareto_efficient_dumb(costs: np.ndarray[Any, Any]) -> np.ndarray:
-    """
-    Source: https://stackoverflow.com/questions/32791911/fast-calculation-of-pareto-front-in-python
-
-    Very slow for many datapoints.  Fastest for many costs, most readable
-
-    Find the pareto-efficient points
-    :param costs: An (n_points, n_costs) array
-    :return: A (n_points, ) boolean array, indicating whether each point is Pareto efficient
-    """
-    is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
-    for i, c in enumerate(costs):
-        is_efficient[i] = np.all(np.any(costs[:i] > c, axis=1)) and np.all(
-            np.any(costs[i + 1 :] > c, axis=1)
-        )
-    return is_efficient
 
 
 def is_pareto_efficient_cost(costs: np.ndarray[Any, Any]) -> np.ndarray:
@@ -91,6 +68,26 @@ def is_pareto_efficient_value(values: np.ndarray[Any, Any]) -> np.ndarray:
     for i, v in enumerate(values):
         is_efficient[i] = np.all(np.any(values[:i] <= v, axis=1)) and np.all(
             np.any(values[i + 1 :] <= v, axis=1)
+        )
+    return is_efficient
+
+
+# Modeled after this from:
+# https://stackoverflow.com/questions/32791911/fast-calculation-of-pareto-front-in-python
+
+
+def is_pareto_efficient_dumb(costs: np.ndarray[Any, Any]) -> np.ndarray:
+    """
+    Very slow for many datapoints.  Fastest for many costs, most readable
+
+    Find the pareto-efficient points
+    :param costs: An (n_points, n_costs) array
+    :return: A (n_points, ) boolean array, indicating whether each point is Pareto efficient
+    """
+    is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
+    for i, c in enumerate(costs):
+        is_efficient[i] = np.all(np.any(costs[:i] > c, axis=1)) and np.all(
+            np.any(costs[i + 1 :] > c, axis=1)
         )
     return is_efficient
 
