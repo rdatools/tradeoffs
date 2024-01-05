@@ -52,7 +52,10 @@ def find_frontiers(
     return frontiers
 
 
-def is_pareto_efficient_dumb(costs) -> np.ndarray:
+### HELPERS ###
+
+
+def is_pareto_efficient_dumb(costs: np.ndarray[Any, Any]) -> np.ndarray:
     """
     Source: https://stackoverflow.com/questions/32791911/fast-calculation-of-pareto-front-in-python
 
@@ -62,11 +65,32 @@ def is_pareto_efficient_dumb(costs) -> np.ndarray:
     :param costs: An (n_points, n_costs) array
     :return: A (n_points, ) boolean array, indicating whether each point is Pareto efficient
     """
-
     is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
     for i, c in enumerate(costs):
         is_efficient[i] = np.all(np.any(costs[:i] > c, axis=1)) and np.all(
             np.any(costs[i + 1 :] > c, axis=1)
+        )
+    return is_efficient
+
+
+def is_pareto_efficient_cost(costs: np.ndarray[Any, Any]) -> np.ndarray:
+    """Pareto efficient costs. Smaller is better. Ties allowed."""
+
+    is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
+    for i, c in enumerate(costs):
+        is_efficient[i] = np.all(np.any(costs[:i] >= c, axis=1)) and np.all(
+            np.any(costs[i + 1 :] >= c, axis=1)
+        )
+    return is_efficient
+
+
+def is_pareto_efficient_value(values: np.ndarray[Any, Any]) -> np.ndarray:
+    """Pareto efficient values. Bigger is better. Ties allowed."""
+
+    is_efficient: np.ndarray = np.ones(values.shape[0], dtype=bool)
+    for i, v in enumerate(values):
+        is_efficient[i] = np.all(np.any(values[:i] <= v, axis=1)) and np.all(
+            np.any(values[i + 1 :] <= v, axis=1)
         )
     return is_efficient
 
