@@ -5,17 +5,17 @@ MAKE A SCATTER & LINE PLOT OF ENSEMBLE RATINGS AND FRONTIER
 
 For example:
 
-$ scripts/make_frontier_plot.py \
+$ scripts/make_frontier_plots.py \
 --scores testdata/synthetic_ratings.csv \
 --frontier output/test_frontier.json \
---output ~/Downloads \
+--prefix test \
+--output output \
 --no-debug
 
 For documentation, type:
 
-$ scripts/make_frontier_plot.py
+$ scripts/make_frontier_plots.py
 
-TODO
 """
 
 import argparse
@@ -85,7 +85,7 @@ def main() -> None:
         frontier_trace: Dict[str, Any] = {
             "x": fxvalues,
             "y": fyvalues,
-            "mode": "lines+markers",
+            "mode": "markers",  # "lines+markers",
             "marker_color": "black",
             "marker_size": 5,
         }
@@ -140,23 +140,20 @@ def main() -> None:
 
         fig.update_layout(scatter_layout)
 
-        # fig.show(config=scatter_config)
+        if args.debug:  # Show the plot in a browser window
+            fig.show(config=scatter_config)
+        else:  # Save the plot to a PNG file
+            pio.kaleido.scope.default_format = "png"
+            pio.kaleido.scope.default_width = plot_width
+            # pio.kaleido.scope.default_height
+            pio.kaleido.scope.default_scale = 1
 
-        # TODO
-        # if args.debug:  # Show the plot in a browser window
-        #     fig.show(config=scatter_config)
-        # else:  # Save the plot to a PNG file
-        #     pio.kaleido.scope.default_format = "png"
-        #     pio.kaleido.scope.default_width = plot_width
-        #     # pio.kaleido.scope.default_height
-        #     pio.kaleido.scope.default_scale = 1
+            plot_path: str = f"{args.output}/{args.prefix}_scatter_{pair}.png"
 
-        #     fig.to_image(engine="kaleido")
-        #     fig.write_image(args.image)
+            fig.to_image(engine="kaleido")
+            fig.write_image(plot_path)
 
-        break  # TODO
-
-    pass
+        pass
 
 
 def parse_args():
@@ -179,6 +176,11 @@ def parse_args():
     #     type=str,
     #     help="The PNG file to download the box plot to",
     # )
+    parser.add_argument(
+        "--prefix",
+        type=str,
+        help="The plot filename prefix",
+    )
     parser.add_argument(
         "-o",
         "--output",
@@ -204,7 +206,8 @@ def parse_args():
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
         "frontier": "output/test_frontier.json",
         # "image": "output/test_boxplot.png",
-        "output": "~/Downloads/",
+        "prefix": "test",
+        "output": "output",
     }
     args = require_args(args, args.debug, debug_defaults)
 
