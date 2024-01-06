@@ -66,6 +66,11 @@ def parse_args():
         help="A CSV ensemble of scores including ratings to plot",
     )
     parser.add_argument(
+        "--metadata",
+        type=str,
+        help="Metadata JSON for the scoring CSV",
+    )
+    parser.add_argument(
         "--frontier",
         type=str,
         help="Frontier maps JSON file",

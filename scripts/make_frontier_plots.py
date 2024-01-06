@@ -171,11 +171,6 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
-    # parser.add_argument(
-    #     "--image",
-    #     type=str,
-    #     help="The PNG file to download the box plot to",
-    # )
     parser.add_argument(
         "--prefix",
         type=str,
@@ -205,7 +200,6 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
         "frontier": "output/test_frontier.json",
-        # "image": "output/test_boxplot.png",
         "prefix": "test",
         "output": "output",
     }

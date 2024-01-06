@@ -55,8 +55,8 @@ def is_pareto_efficient_cost(costs: np.ndarray[Any, Any]) -> np.ndarray:
 
     is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
     for i, c in enumerate(costs):
-        is_efficient[i] = np.all(np.any(costs[:i] >= c, axis=1)) and np.all(
-            np.any(costs[i + 1 :] >= c, axis=1)
+        is_efficient[i] = np.all(np.any(costs[:i] > c, axis=1)) and np.all(
+            np.any(costs[i + 1 :] > c, axis=1)
         )
     return is_efficient
 
@@ -66,8 +66,8 @@ def is_pareto_efficient_value(values: np.ndarray[Any, Any]) -> np.ndarray:
 
     is_efficient: np.ndarray = np.ones(values.shape[0], dtype=bool)
     for i, v in enumerate(values):
-        is_efficient[i] = np.all(np.any(values[:i] <= v, axis=1)) and np.all(
-            np.any(values[i + 1 :] <= v, axis=1)
+        is_efficient[i] = np.all(np.any(values[:i] < v, axis=1)) and np.all(
+            np.any(values[i + 1 :] < v, axis=1)
         )
     return is_efficient
 
