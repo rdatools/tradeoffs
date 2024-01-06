@@ -51,7 +51,7 @@ def find_frontiers(ratings: pd.DataFrame, fn: Callable) -> Dict[str, List[Dict]]
 
 
 def is_pareto_efficient_cost(costs: np.ndarray[Any, Any]) -> np.ndarray:
-    """Pareto efficient costs. Smaller is better. Ties allowed."""
+    """Pareto efficient costs. Smaller is better."""
 
     is_efficient: np.ndarray = np.ones(costs.shape[0], dtype=bool)
     for i, c in enumerate(costs):
@@ -62,7 +62,7 @@ def is_pareto_efficient_cost(costs: np.ndarray[Any, Any]) -> np.ndarray:
 
 
 def is_pareto_efficient_value(values: np.ndarray[Any, Any]) -> np.ndarray:
-    """Pareto efficient values. Bigger is better. Ties allowed."""
+    """Pareto efficient values. Bigger is better."""
 
     is_efficient: np.ndarray = np.ones(values.shape[0], dtype=bool)
     for i, v in enumerate(values):
