@@ -55,7 +55,9 @@ def main() -> None:
 
     scatter_traces: List[Dict] = list()
 
-    pair: pd.DataFrame = df[[ydim, xdim]]
+    xvalues: List[int] = df[xdim].tolist()
+    yvalues: List[int] = df[ydim].tolist()
+    # pair: pd.DataFrame = df[[ydim, xdim]]
 
     scatter_layout = {
         "width": plot_width,
@@ -98,7 +100,18 @@ def main() -> None:
         "responsive": True,
     }
 
-    fig = px.scatter(pair, x=xdim, y=ydim)
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(
+            x=xvalues,
+            y=yvalues,
+            mode="markers",
+            marker_color="gray",
+            marker_size=2,
+        )
+    )
+    # fig = go.Figure(data=go.Scatter(x=xvalues, y=yvalues, mode="markers"))
+    # fig = px.scatter(pair, x=xdim, y=ydim)
 
     fig.update_layout(scatter_layout)
 
