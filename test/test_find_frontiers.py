@@ -16,6 +16,7 @@ class TestFindFrontiers:
         x: int = 10
         y: int = 10
         d: int = 5
+
         points: List[List[int]] = [
             [
                 0,
@@ -27,8 +28,8 @@ class TestFindFrontiers:
             ],
             [
                 1,
-                x + d - 1,
-                y + d - 1,
+                x + d,
+                y + d,
                 random.randint(x - d, x + d),
                 random.randint(x - d, x + d),
                 random.randint(x - d, x + d),
@@ -37,6 +38,22 @@ class TestFindFrontiers:
                 2,
                 x + d - 1,
                 y + d - 1,
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+            ],
+            [
+                8,
+                x + d,
+                y + d - 1,
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+            ],
+            [
+                9,
+                x + d - 1,
+                y + d,
                 random.randint(x - d, x + d),
                 random.randint(x - d, x + d),
                 random.randint(x - d, x + d),
@@ -82,7 +99,7 @@ class TestFindFrontiers:
                 random.randint(x - d, x + d),
             ],
         ]
-        expected: List[int] = [1, 2, 3, 4]
+        expected: List[int] = [1]
 
         random.shuffle(points)
 
