@@ -7,6 +7,7 @@ For example:
 
 $ scripts/make_frontier_plot.py \
 --scores testdata/synthetic_ratings.csv \
+--frontier output/test_frontier.json \
 --image output/test_boxplot.png \
 --no-debug
 
@@ -27,7 +28,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 
-from rdabase import require_args
+from rdabase import require_args, read_json
 from rdaensemble.general import ratings_dimensions
 
 from tradeoffs import scores_to_df, bgcolor, plot_width, plot_height, buttons
@@ -50,6 +51,10 @@ def main() -> None:
     ylabel: str = ydim.capitalize()
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
+
+    # Read the frontier from a JSON file
+
+    frontiers: Dict[str, Any] = read_json(args.frontier)
 
     # Configure & show the scatter plot for the ratings & frontier
 
@@ -142,6 +147,11 @@ def parse_args():
         help="A CSV ensemble of scores including ratings to plot",
     )
     parser.add_argument(
+        "--frontier",
+        type=str,
+        help="Frontier maps JSON file",
+    )
+    parser.add_argument(
         "--image",
         type=str,
         help="The PNG file to download the box plot to",
@@ -162,6 +172,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
+        "frontier": "output/test_frontier.json",
         "image": "output/test_boxplot.png",
     }
     args = require_args(args, args.debug, debug_defaults)
