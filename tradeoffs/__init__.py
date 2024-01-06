@@ -6,6 +6,7 @@ from .frontiers import (
     is_pareto_efficient_value,
 )
 from .notable_maps import id_most_notable_maps
+from .plots import *
 from .readwrite import *
 
 name: str = "tradeoffs"

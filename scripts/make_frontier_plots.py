@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 
 """
-MAKE A BOX PLOT FOR RATINGS
+MAKE A SCATTER & LINE PLOT OF ENSEMBLE RATINGS AND FRONTIER
 
 For example:
 
-$ scripts/make_box_plot.py \
+$ scripts/make_frontier_plot.py \
 --scores testdata/synthetic_ratings.csv \
 --image output/test_boxplot.png \
 --no-debug
 
 For documentation, type:
 
-$ scripts/make_box_plot.py
+$ scripts/make_frontier_plot.py
 
+TODO
 """
 
 import argparse
@@ -42,31 +43,25 @@ def main() -> None:
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
+    # TODO
+    ydim: str = ratings_dimensions[0]
+    xdim: str = ratings_dimensions[3]
+    xlabel: str = xdim.capitalize()
+    ylabel: str = ydim.capitalize()
+
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
-    # Configure & show the box plot for the ratings
+    # Configure & show the scatter plot for the ratings & frontier
 
-    boxplot_traces: List[Dict] = list()
+    scatter_traces: List[Dict] = list()
 
-    for name in fieldnames[1:]:
-        trace: Dict = {
-            "type": "box",
-            "y": df[name],
-            "name": name.capitalize(),
-            "boxpoints": "all",  # "outliers",
-            "jitter": 0.5,
-            "whiskerwidth": 0.2,
-            "marker": {"size": 2, "symbol": "circle"},
-            "line": {"width": 1},
-            "selectedpoints": [0],  # Highlight the first map
-            "selected": {"marker": {"size": 5, "color": "black"}},
-        }
-        boxplot_traces.append(trace)
+    pair: pd.DataFrame = df[[ydim, xdim]]
 
-    boxplot_layout = {
+    scatter_layout = {
         "width": plot_width,
         "height": plot_height,
         "yaxis": {
+            "title_text": ylabel,
             "range": [0, 100],
             "showgrid": True,
             "zeroline": True,
@@ -76,13 +71,23 @@ def main() -> None:
             "zerolinecolor": "rgb(255, 255, 255)",
             "zerolinewidth": 2,
         },
-        "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
+        "xaxis": {
+            "title_text": xlabel,
+            "range": [0, 100],
+            "showgrid": True,
+            "zeroline": True,
+            "dtick": 5,
+            "gridcolor": "rgb(255, 255, 255)",
+            "gridwidth": 1,
+            "zerolinecolor": "rgb(255, 255, 255)",
+            "zerolinewidth": 2,
+        },
+        # "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
         "showlegend": False,
         "paper_bgcolor": bgcolor,
         "plot_bgcolor": bgcolor,
     }
-
-    boxplot_config = {
+    scatter_config = {
         "toImageButtonOptions": {
             "format": "png",  # one of png, svg, jpeg, webp
             "filename": "box-plot",
@@ -93,22 +98,22 @@ def main() -> None:
         "responsive": True,
     }
 
-    fig = go.Figure()
-    for t in boxplot_traces:
-        fig.add_trace(go.Box(t))
+    fig = px.scatter(pair, x=xdim, y=ydim)
 
-    fig.update_layout(boxplot_layout)
+    fig.update_layout(scatter_layout)
 
-    if args.debug:  # Show the plot in a browser window
-        fig.show(config=boxplot_config)
-    else:  # Save the plot to a PNG file
-        pio.kaleido.scope.default_format = "png"
-        pio.kaleido.scope.default_width = plot_width
-        # pio.kaleido.scope.default_height
-        pio.kaleido.scope.default_scale = 1
+    fig.show()
 
-        fig.to_image(engine="kaleido")
-        fig.write_image(args.image)
+    # if args.debug:  # Show the plot in a browser window
+    #     fig.show(config=scatter_config)
+    # else:  # Save the plot to a PNG file
+    #     pio.kaleido.scope.default_format = "png"
+    #     pio.kaleido.scope.default_width = plot_width
+    #     # pio.kaleido.scope.default_height
+    #     pio.kaleido.scope.default_scale = 1
+
+    #     fig.to_image(engine="kaleido")
+    #     fig.write_image(args.image)
 
     pass
 
