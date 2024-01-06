@@ -57,7 +57,16 @@ def main() -> None:
 
     xvalues: List[int] = df[xdim].tolist()
     yvalues: List[int] = df[ydim].tolist()
-    # pair: pd.DataFrame = df[[ydim, xdim]]
+
+    points_trace: Dict[str, Any] = {
+        "x": xvalues,
+        "y": yvalues,
+        "mode": "markers",
+        "marker_color": "gray",
+        "marker_size": 2,
+    }
+
+    scatter_traces.append(points_trace)
 
     scatter_layout = {
         "width": plot_width,
@@ -101,21 +110,12 @@ def main() -> None:
     }
 
     fig = go.Figure()
-    fig.add_trace(
-        go.Scatter(
-            x=xvalues,
-            y=yvalues,
-            mode="markers",
-            marker_color="gray",
-            marker_size=2,
-        )
-    )
-    # fig = go.Figure(data=go.Scatter(x=xvalues, y=yvalues, mode="markers"))
-    # fig = px.scatter(pair, x=xdim, y=ydim)
+    for t in scatter_traces:
+        fig.add_trace(go.Scatter(t))
 
     fig.update_layout(scatter_layout)
 
-    fig.show()
+    fig.show(config=scatter_config)
 
     # if args.debug:  # Show the plot in a browser window
     #     fig.show(config=scatter_config)
