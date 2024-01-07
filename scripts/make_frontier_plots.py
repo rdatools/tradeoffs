@@ -8,6 +8,7 @@ For example:
 $ scripts/make_frontier_plots.py \
 --scores testdata/synthetic_ratings.csv \
 --frontier output/test_frontier.json \
+--focus testdata/map_scores.csv \
 --prefix test \
 --output output \
 --no-debug
@@ -47,6 +48,12 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
+    # Read the focus map from a CSV file
+    focus_ratings: List[int] = list()
+    if args.focus:
+        focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
+        focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
+
     # Read the frontier from a JSON file
 
     data: Dict[str, Any] = read_json(args.frontier)
@@ -75,10 +82,21 @@ def main() -> None:
             "x": xvalues,
             "y": yvalues,
             "mode": "markers",
-            "marker_color": "gray",
-            "marker_size": 2,
+            "marker_color": "black",  # "gray",
+            "marker_size": 1,
         }
         scatter_traces.append(points_trace)
+
+        if args.focus:
+            focus_trace: Dict[str, Any] = {
+                "x": [focus_ratings[d2]],
+                "y": [focus_ratings[d1]],
+                "mode": "markers",
+                "marker_symbol": "star",
+                "marker_color": "red",
+                "marker_size": 9,
+            }
+            scatter_traces.append(focus_trace)
 
         fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
         fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
@@ -172,6 +190,11 @@ def parse_args():
         help="Frontier maps JSON file",
     )
     parser.add_argument(
+        "--focus",
+        type=str,
+        help="The flattened scores for a map to highlight",
+    )
+    parser.add_argument(
         "--prefix",
         type=str,
         help="The plot filename prefix",
@@ -200,6 +223,7 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
         "frontier": "output/test_frontier.json",
+        "focus": "testdata/map_scores.csv",
         "prefix": "test",
         "output": "output",
     }
