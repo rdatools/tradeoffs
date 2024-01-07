@@ -113,7 +113,7 @@ def main() -> None:
         ylabel: str = ydim.capitalize()
         scatter_layout = {
             "width": plot_width,
-            "height": plot_height,
+            # "height": plot_height,
             "yaxis": {
                 "title_text": ylabel,
                 "range": [-3, 103],
@@ -139,6 +139,8 @@ def main() -> None:
                 "gridwidth": 1,
                 "zerolinecolor": "rgb(255, 255, 255)",
                 "zerolinewidth": 2,
+                "scaleanchor": "y",
+                "scaleratio": 1,
             },
             # "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
             "showlegend": False,
