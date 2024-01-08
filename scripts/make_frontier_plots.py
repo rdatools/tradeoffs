@@ -82,7 +82,7 @@ def main() -> None:
             "x": xvalues,
             "y": yvalues,
             "mode": "markers",
-            "marker_color": "black",  # "gray",
+            "marker_color": "black",
             "marker_size": 1,
         }
         scatter_traces.append(points_trace)
@@ -103,7 +103,7 @@ def main() -> None:
         frontier_trace: Dict[str, Any] = {
             "x": fxvalues,
             "y": fyvalues,
-            "mode": "markers",  # "lines+markers",
+            "mode": "markers",
             "marker_color": "black",
             "marker_size": 5,
         }
@@ -112,18 +112,19 @@ def main() -> None:
         xlabel: str = xdim.capitalize()
         ylabel: str = ydim.capitalize()
         xy_range: List[int] = [-1, 101]
+        height: int = 500
+        width: int = round(height * 0.80)
         scatter_layout = {
-            "width": plot_width,
-            # "height": plot_height,
+            "autosize": False,
+            "width": width,
+            "height": height,
             "yaxis": {
                 "title_text": ylabel,
                 "range": xy_range,
-                # "range": [0, 100],
                 "showgrid": True,
                 "zeroline": True,
                 "tickvals": [i for i in range(0, 101, 5)],
-                # "dtick": 5,
-                "gridcolor": "rgb(255, 255, 255)",
+                "gridcolor": "lightgray",
                 "gridwidth": 1,
                 "zerolinecolor": "rgb(255, 255, 255)",
                 "zerolinewidth": 2,
@@ -131,17 +132,17 @@ def main() -> None:
             "xaxis": {
                 "title_text": xlabel,
                 "range": xy_range,
-                # "range": [0, 100],
                 "showgrid": True,
                 "zeroline": True,
                 "tickvals": [i for i in range(0, 101, 5)],
-                # "dtick": 5,
-                "gridcolor": "rgb(255, 255, 255)",
+                "gridcolor": "lightgray",
                 "gridwidth": 1,
                 "zerolinecolor": "rgb(255, 255, 255)",
                 "zerolinewidth": 2,
+                "scaleanchor": "y",
+                "scaleratio": 1,
             },
-            # "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
+            "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
             "showlegend": False,
             "paper_bgcolor": bgcolor,
             "plot_bgcolor": bgcolor,
