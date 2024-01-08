@@ -111,12 +111,13 @@ def main() -> None:
 
         xlabel: str = xdim.capitalize()
         ylabel: str = ydim.capitalize()
+        xy_range: List[int] = [-1, 101]
         scatter_layout = {
             "width": plot_width,
             # "height": plot_height,
             "yaxis": {
                 "title_text": ylabel,
-                "range": [-3, 103],
+                "range": xy_range,
                 # "range": [0, 100],
                 "showgrid": True,
                 "zeroline": True,
@@ -129,7 +130,7 @@ def main() -> None:
             },
             "xaxis": {
                 "title_text": xlabel,
-                "range": [-3, 103],
+                "range": xy_range,
                 # "range": [0, 100],
                 "showgrid": True,
                 "zeroline": True,
@@ -139,8 +140,6 @@ def main() -> None:
                 "gridwidth": 1,
                 "zerolinecolor": "rgb(255, 255, 255)",
                 "zerolinewidth": 2,
-                "scaleanchor": "y",
-                "scaleratio": 1,
             },
             # "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
             "showlegend": False,
@@ -166,6 +165,7 @@ def main() -> None:
 
         if args.debug:  # Show the plot in a browser window
             fig.show(config=scatter_config)
+            continue
         else:  # Save the plot to a PNG file
             pio.kaleido.scope.default_format = "png"
             pio.kaleido.scope.default_width = plot_width
@@ -177,7 +177,7 @@ def main() -> None:
             fig.to_image(engine="kaleido")
             fig.write_image(plot_path)
 
-        pass
+        continue
 
 
 def parse_args():
