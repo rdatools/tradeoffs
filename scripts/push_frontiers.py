@@ -22,7 +22,7 @@ $ scripts/push_frontiers.py -h
 
 import argparse
 from argparse import ArgumentParser, Namespace
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Tuple
 
 from csv import DictReader
 import itertools
@@ -54,19 +54,25 @@ def main() -> None:
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
     for dd in pairs:
+        d1: int = ratings_dimensions.index(dd[0])
+        d2: int = ratings_dimensions.index(dd[1])
+
         pair_key: str = f"{dd[0]}_{dd[1]}"
         pair_key = "proportionality_compactness"  # TODO - DEBUG
 
-        for f in frontiers[pair_key]:
-            map_id: str = f["map"]
+        for pt in frontiers[pair_key]:
+            map_id: str = pt["map"]
             map_id = "057_591"  # TODO - DEBUG
+            ratings: List[int] = pt["ratings"]
+
+            pt_to_push: Tuple[int, int] = (ratings[d1], ratings[d2])
 
             plan_item: Dict[
                 str, str | float | Dict[str, int | str]
             ] = plan_from_ensemble(map_id, ensemble)
             plan_dict: Dict[str, int | str] = plan_item["plan"]  # type: ignore
             assignments: List[Assignment] = make_plan(plan_dict)
-            plan: List[Dict[str, str | int]] = [
+            plan_to_push: List[Dict[str, str | int]] = [
                 {"GEOID": a.geoid, "DISTRICT": a.district} for a in assignments
             ]
 
