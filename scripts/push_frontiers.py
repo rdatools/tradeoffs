@@ -22,7 +22,7 @@ $ scripts/push_frontiers.py -h
 
 import argparse
 from argparse import ArgumentParser, Namespace
-from typing import Any, List, Dict, Tuple
+from typing import Any, List, Dict, Tuple, Set
 
 from csv import DictReader
 import itertools
@@ -61,6 +61,7 @@ def main() -> None:
         pair_key = "proportionality_compactness"  # TODO - DEBUG
 
         for pt in frontiers[pair_key]:
+            # Get a frontier point & plan
             map_id: str = pt["map"]
             map_id = "057_591"  # TODO - DEBUG
             ratings: List[int] = pt["ratings"]
@@ -76,6 +77,11 @@ def main() -> None:
                 {"GEOID": a.geoid, "DISTRICT": a.district} for a in assignments
             ]
 
+            #
+
+            district_by_geoid: Dict[str, str | int] = index_plan(plan_to_push)
+            geoids_by_district: Dict[str | int, Set[str]] = invert_plan(plan_to_push)
+
             pass  # TODO - DEBUG
 
         break  # TODO - DEBUG
@@ -83,19 +89,35 @@ def main() -> None:
     pass  # TODO - DEBUG
 
 
-# TODO - DELETE
-# def read_scores(scores_csv: str, fieldnames: List[str]) -> List[Dict[str, str]]:
-#     """Read plan scores from a CSV file. Values are strings."""
+def index_plan(plan: List[Dict[str, str | int]]) -> Dict[str, str | int]:
+    """Index districts by geoid."""
 
-#     scores: List[Dict[str, str]] = list()
-#     with open(scores_csv, "r", encoding="utf-8-sig") as f:
-#         reader: DictReader[str] = DictReader(
-#             f, fieldnames=None, restkey=None, restval=None, dialect="excel"
-#         )
-#         for row in reader:
-#             scores.append({k: row[k] for k in fieldnames})
+    indexed: Dict[str, str | int] = dict()
 
-#     return scores
+    for row in plan:
+        geoid: str = str(row["GEOID"])
+        district: int | str = row["DISTRICT"]
+
+        indexed[geoid] = district
+
+    return indexed
+
+
+def invert_plan(plan: List[Dict[str, str | int]]) -> Dict[str | int, Set[str]]:
+    """Return geoids by district."""
+
+    inverted: Dict[str | int, Set[str]] = dict()
+
+    for row in plan:
+        geoid: str = str(row["GEOID"])
+        district: int | str = row["DISTRICT"]
+
+        if district not in inverted:
+            inverted[district] = set()
+
+        inverted[district].add(geoid)
+
+    return inverted
 
 
 def parse_args():
