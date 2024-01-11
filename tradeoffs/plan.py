@@ -98,6 +98,11 @@ class EvolvingPlan:
 
         return border_segments
 
+    def district_adjacencies(self) -> List[Tuple[District, District]]:
+        """Get all district adjacencies."""
+
+        return sorted(list(self._border_segments.keys()))
+
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
 
