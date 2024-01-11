@@ -22,7 +22,7 @@ BorderSegment: TypeAlias = Dict[
 
 
 class EvolvingPlan:
-    """An ensemble plan that can be evolved."""
+    """A plan from an ensemble that can easily & efficiently evolve."""
 
     _features: List[Feature]
     _features_index: Dict[str, int]
