@@ -2,7 +2,7 @@
 EVOLVING PLAN
 """
 
-from typing import Any, List, Dict, Set, Tuple, NamedTuple, TypeAlias
+from typing import Any, List, Dict, Set, Tuple, TypeAlias, NamedTuple, TypedDict
 
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
@@ -16,10 +16,9 @@ Feature = Assignment
 
 District: TypeAlias = int | str
 FeatureOffsets: TypeAlias = Set[int]
-
-
-class BorderSegment(NamedTuple):
-    features: Dict[District, FeatureOffsets]  # Two: one for each side/district
+BorderSegment: TypeAlias = Dict[
+    District, FeatureOffsets
+]  # Two: one for each side/district
 
 
 class EvolvingPlan:
@@ -39,8 +38,9 @@ class EvolvingPlan:
         self._features_index = {f.geoid: i for i, f in enumerate(assignments)}
         self._features_by_district = self.invert_plan()
         self._features_graph = self.index_graph(graph)
+        self._border_segments = self.init_border_segments()
 
-    def invert_plan(self):
+    def invert_plan(self) -> Dict[str | int, Set[int]]:
         """Collect geoids by district."""
 
         inverted: Dict[str | int, Set[int]] = dict()
@@ -56,7 +56,7 @@ class EvolvingPlan:
 
         return inverted
 
-    def index_graph(self, graph: Dict[str, List[str]]):
+    def index_graph(self, graph: Dict[str, List[str]]) -> Dict[int, List[int]]:
         """Convert a geoid-based graph to an offset-based graph."""
 
         indexed_graph: Dict[int, List[int]] = dict()
@@ -70,6 +70,33 @@ class EvolvingPlan:
             ]
 
         return indexed_graph
+
+    def init_border_segments(self) -> Dict[Tuple[District, District], BorderSegment]:
+        """Initialize border segments."""
+
+        border_segments: Dict[Tuple[District, District], BorderSegment] = dict()
+
+        for i, neighbors in self._features_graph.items():
+            for n in neighbors:
+                d1: District = self._features[i].district
+                d2: District = self._features[n].district
+
+                if d1 == d2:
+                    continue
+
+                seg_key: Tuple[District, District] = (
+                    (d1, d2) if int(d1) < int(d2) else (d2, d1)
+                )
+                if seg_key not in border_segments:
+                    border_segments[seg_key] = {
+                        d1: set(),
+                        d2: set(),
+                    }
+
+                border_segments[seg_key][d1].add(i)
+                border_segments[seg_key][d2].add(n)
+
+        return border_segments
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
