@@ -10,7 +10,7 @@ from rdabase import read_json
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
-from tradeoffs import EvolvingPlan
+from tradeoffs import *  # TODO
 
 
 class Args(NamedTuple):
@@ -51,7 +51,19 @@ def main() -> None:
     #
 
     ep: EvolvingPlan = EvolvingPlan(district_by_geoid, graph)
+
+    #
+
     district_pairs = ep.district_adjacencies()
+    for pair in district_pairs:
+        print(f"Adjacent: {pair}")
+
+        d1: District = pair[0]
+        d2: District = pair[1]
+
+        border_segment: BorderSegment = ep._border_segments[pair]
+
+        pass
 
     # ep.to_csv("output/test_plan.csv")
 
