@@ -53,6 +53,8 @@ def main() -> None:
     ep: EvolvingPlan = EvolvingPlan(district_by_geoid, graph)
     district_pairs = ep.district_adjacencies()
 
+    ep.to_csv("output/test_plan.csv")
+
     pass
 
 
