@@ -50,7 +50,7 @@ def main() -> None:
 
     #
 
-    ep: EvolvingPlan = EvolvingPlan(district_by_geoid)
+    ep: EvolvingPlan = EvolvingPlan(district_by_geoid, graph)
 
     pass
 
