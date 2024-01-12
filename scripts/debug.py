@@ -50,20 +50,37 @@ def main() -> None:
 
     #
 
-    ep: EvolvingPlan = EvolvingPlan(district_by_geoid, graph)
+    ep: EPlan = EPlan(district_by_geoid, graph)
 
-    #
+    # Check each border feature
 
     district_pairs = ep.district_adjacencies()
     for pair in district_pairs:
         print(f"Adjacent: {pair}")
 
-        d1: District = pair[0]
-        d2: District = pair[1]
+        for i, _ in enumerate(pair):
+            j: Offset = (i + 1) % 2
 
-        border_segment: BorderSegment = ep._border_segments[pair]
+            d1: District = pair[i]
+            d2: District = pair[j]
 
-        pass
+            print(f"... District {d1}:")
+
+            features: List[Offset] = list(ep.district_features(d1))
+            border_features: Set[Offset] = ep.border_features(d1, d2)
+
+            for candidate in border_features:
+                proposed: List[Offset] = features.copy()
+                proposed.remove(candidate)
+
+                if not ep.is_connected(proposed):
+                    print(
+                        f"...... District would not be connected, if feature {candidate} were removed!"
+                    )
+                else:
+                    print(
+                        f"...... District would be connected, if feature {candidate} were removed."
+                    )
 
     # ep.to_csv("output/test_plan.csv")
 

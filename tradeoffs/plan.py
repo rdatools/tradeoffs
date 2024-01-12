@@ -17,13 +17,13 @@ class Assignment(NamedTuple):
 """
 Feature = Assignment
 
-FeatureOffsets: TypeAlias = Set[int]
+FeatureOffsets: TypeAlias = Set[Offset]
 BorderSegment: TypeAlias = Dict[
     District, FeatureOffsets
 ]  # Two: one for each side/district
 
 
-class EvolvingPlan:
+class EPlan:
     """A plan from an ensemble that can easily & efficiently evolve."""
 
     _features: List[Feature]
@@ -43,6 +43,8 @@ class EvolvingPlan:
 
         if not self.all_connected():
             raise Exception("Starting plan is not connected!")
+        else:
+            print("Starting plan is connected!")
 
         self._border_segments = self.init_border_segments()
 
@@ -88,6 +90,11 @@ class EvolvingPlan:
 
         return True
 
+    def is_connected(self, ids: List[Offset]) -> bool:
+        """Would a district with these features be connected?"""
+
+        return is_connected(ids, self._features_graph)  # type: ignore
+
     def init_border_segments(self) -> Dict[Tuple[District, District], BorderSegment]:
         """Initialize border segments."""
 
@@ -119,6 +126,26 @@ class EvolvingPlan:
         """Get all district adjacencies."""
 
         return sorted(list(self._border_segments.keys()))
+
+    def district_features(self, district: District) -> Set[Offset]:
+        """Get all feature offsets for a district."""
+
+        return self._features_by_district[district]
+
+    def border_features(
+        self, from_district: District, to_district: District
+    ) -> Set[Offset]:
+        """The offsets for features that could be reassigned from one district to another."""
+
+        seg_key: Tuple[District, District] = (
+            (from_district, to_district)
+            if int(from_district) < int(to_district)
+            else (to_district, from_district)
+        )
+
+        border_features: Set[Offset] = self._border_segments[seg_key][from_district]
+
+        return border_features
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
