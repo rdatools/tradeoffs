@@ -15,6 +15,7 @@ from .scores import (
     cull_ratings,
 )
 from .plan import *  # TODO - be specific
+from .connected import is_connected
 from .readwrite import *
 from .datatypes import *
 

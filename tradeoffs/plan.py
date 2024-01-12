@@ -6,7 +6,9 @@ from typing import Any, List, Dict, Set, Tuple, TypeAlias, NamedTuple, TypedDict
 
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
+
 from .datatypes import *
+from .connected import is_connected
 
 """
 class Assignment(NamedTuple):
@@ -25,28 +27,32 @@ class EvolvingPlan:
     """A plan from an ensemble that can easily & efficiently evolve."""
 
     _features: List[Feature]
-    _features_index: Dict[str, int]
-    _features_by_district: Dict[District, Set[int]]
-    _features_graph: Dict[int, List[int]]
+    _features_index: Dict[str, Offset]
+    _features_by_district: Dict[District, Set[Offset]]
+    _features_graph: Dict[Offset, List[Offset]]
     _border_segments: Dict[Tuple[District, District], BorderSegment]
 
     def __init__(
-        self, district_by_geoid: Dict[GeoID, District], graph: Dict[str, List[str]]
+        self, district_by_geoid: Dict[GeoID, District], graph: Dict[GeoID, List[GeoID]]
     ) -> None:
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = assignments
         self._features_index = {f.geoid: i for i, f in enumerate(assignments)}
         self._features_by_district = self.invert_plan()
         self._features_graph = self.index_graph(graph)
+
+        if not self.is_connected():
+            raise Exception("Starting plan is not connected!")
+
         self._border_segments = self.init_border_segments()
 
-    def invert_plan(self) -> Dict[District, Set[int]]:
-        """Collect geoids by district."""
+    def invert_plan(self) -> Dict[District, Set[Offset]]:
+        """Collect geoid offsets by district."""
 
-        inverted: Dict[District, Set[int]] = dict()
+        inverted: Dict[District, Set[Offset]] = dict()
 
         for i, f in enumerate(self._features):
-            offset: int = self._features_index[f.geoid]
+            offset: Offset = self._features_index[f.geoid]
             district: District = f.district
 
             if district not in inverted:
@@ -56,20 +62,31 @@ class EvolvingPlan:
 
         return inverted
 
-    def index_graph(self, graph: Dict[str, List[str]]) -> Dict[int, List[int]]:
+    def index_graph(
+        self, graph: Dict[GeoID, List[GeoID]]
+    ) -> Dict[Offset, List[Offset]]:
         """Convert a geoid-based graph to an offset-based graph."""
 
-        indexed_graph: Dict[int, List[int]] = dict()
+        indexed_graph: Dict[Offset, List[Offset]] = dict()
 
         for geoid, neighbors in graph.items():
             if geoid == OUT_OF_STATE:
                 continue
-            offset: int = self._features_index[geoid]
+            offset: Offset = self._features_index[geoid]
             indexed_graph[offset] = [
                 self._features_index[n] for n in neighbors if n != OUT_OF_STATE
             ]
 
         return indexed_graph
+
+    def is_connected(self) -> bool:
+        """Is the plan fully connected?"""
+
+        for district, offsets in self._features_by_district.items():
+            if not is_connected(list(offsets), self._features_graph):  # type: ignore
+                return False
+
+        return True
 
     def init_border_segments(self) -> Dict[Tuple[District, District], BorderSegment]:
         """Initialize border segments."""
