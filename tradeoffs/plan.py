@@ -41,7 +41,7 @@ class EvolvingPlan:
         self._features_by_district = self.invert_plan()
         self._features_graph = self.index_graph(graph)
 
-        if not self.is_connected():
+        if not self.all_connected():
             raise Exception("Starting plan is not connected!")
 
         self._border_segments = self.init_border_segments()
@@ -79,7 +79,7 @@ class EvolvingPlan:
 
         return indexed_graph
 
-    def is_connected(self) -> bool:
+    def all_connected(self) -> bool:
         """Is the plan fully connected?"""
 
         for district, offsets in self._features_by_district.items():
