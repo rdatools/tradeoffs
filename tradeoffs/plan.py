@@ -6,15 +6,15 @@ from typing import Any, List, Dict, Set, Tuple, TypeAlias, NamedTuple, TypedDict
 
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
+from .datatypes import District
 
 """
 class Assignment(NamedTuple):
     geoid: str
-    district: int | str
+    district: District
 """
 Feature = Assignment
 
-District: TypeAlias = int | str
 FeatureOffsets: TypeAlias = Set[int]
 BorderSegment: TypeAlias = Dict[
     District, FeatureOffsets
@@ -26,12 +26,12 @@ class EvolvingPlan:
 
     _features: List[Feature]
     _features_index: Dict[str, int]
-    _features_by_district: Dict[str | int, Set[int]]
+    _features_by_district: Dict[District, Set[int]]
     _features_graph: Dict[int, List[int]]
     _border_segments: Dict[Tuple[District, District], BorderSegment]
 
     def __init__(
-        self, district_by_geoid: Dict[str, int | str], graph: Dict[str, List[str]]
+        self, district_by_geoid: Dict[str, District], graph: Dict[str, List[str]]
     ) -> None:
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = assignments
@@ -40,14 +40,14 @@ class EvolvingPlan:
         self._features_graph = self.index_graph(graph)
         self._border_segments = self.init_border_segments()
 
-    def invert_plan(self) -> Dict[str | int, Set[int]]:
+    def invert_plan(self) -> Dict[District, Set[int]]:
         """Collect geoids by district."""
 
-        inverted: Dict[str | int, Set[int]] = dict()
+        inverted: Dict[District, Set[int]] = dict()
 
         for i, f in enumerate(self._features):
             offset: int = self._features_index[f.geoid]
-            district: int | str = f.district
+            district: District = f.district
 
             if district not in inverted:
                 inverted[district] = set()
@@ -106,7 +106,7 @@ class EvolvingPlan:
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
 
-        plan: List[Dict[str, str | int]] = [
+        plan: List[Dict[str, District]] = [
             {"GEOID": a.geoid, "DISTRICT": a.district} for a in self._features
         ]
 

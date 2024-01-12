@@ -16,5 +16,6 @@ from .scores import (
 )
 from .plan import *  # TODO - be specific
 from .readwrite import *
+from .datatypes import *
 
 name: str = "tradeoffs"
