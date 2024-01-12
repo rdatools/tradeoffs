@@ -6,7 +6,7 @@ from typing import Any, List, Dict, Set, Tuple, TypeAlias, NamedTuple, TypedDict
 
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
-from .datatypes import District
+from .datatypes import *
 
 """
 class Assignment(NamedTuple):
@@ -31,7 +31,7 @@ class EvolvingPlan:
     _border_segments: Dict[Tuple[District, District], BorderSegment]
 
     def __init__(
-        self, district_by_geoid: Dict[str, District], graph: Dict[str, List[str]]
+        self, district_by_geoid: Dict[GeoID, District], graph: Dict[str, List[str]]
     ) -> None:
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = assignments
@@ -106,7 +106,7 @@ class EvolvingPlan:
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
 
-        plan: List[Dict[str, District]] = [
+        plan: List[Dict[GeoID, District]] = [
             {"GEOID": a.geoid, "DISTRICT": a.district} for a in self._features
         ]
 

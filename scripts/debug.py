@@ -34,19 +34,19 @@ def main() -> None:
 
     # Load data
 
-    data: Dict[str, Dict[str, District]] = load_data(args.data)
+    data: Dict[str, Dict[GeoID, District]] = load_data(args.data)
     shapes: Dict[str, Any] = load_shapes(args.shapes)
-    graph: Dict[str, List[str]] = load_graph(args.graph)
+    graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
     ensemble: Dict[str, Any] = read_json(args.plans)
-    plans: List[Dict[str, str | float | Dict[str, District]]] = ensemble["plans"]
+    plans: List[Dict[str, Name | Weight | Dict[GeoID, District]]] = ensemble["plans"]
 
     # Get the first plan, for debugging
 
-    p: Dict[str, str | float | Dict[str, District]] = plans[0]
-    name: str = str(p["name"])
-    district_by_geoid: Dict[str, District] = p["plan"]  # type: ignore
+    p: Dict[str, Name | Weight | Dict[GeoID, District]] = plans[0]
+    name: Name = str(p["name"])
+    district_by_geoid: Dict[GeoID, District] = p["plan"]  # type: ignore
 
     #
 
