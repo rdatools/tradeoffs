@@ -20,6 +20,7 @@ class Args(NamedTuple):
     data: str
     shapes: str
     graph: str
+    verbose: bool
 
 
 def main() -> None:
@@ -30,6 +31,7 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
+        verbose=True,
     )
 
     # Load data

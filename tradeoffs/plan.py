@@ -62,6 +62,7 @@ class EPlan:
         ratings: List[int],
         pop_by_geoid: Dict[GeoID, int],
         graph: Dict[GeoID, List[GeoID]],
+        verbose: bool = False,
     ) -> None:
         self._generation = 0
 
@@ -84,6 +85,10 @@ class EPlan:
             print("Starting plan is connected!")
 
         self._border_segments = self.init_border_segments()
+
+    def __repr__(self) -> str:
+        # TODO - More ...
+        return f"Plan({self._generation}: {self._ratings}, ...)"
 
     def invert_plan(self) -> List[District]:
         inverted: Dict[DistrictID, District] = dict()
