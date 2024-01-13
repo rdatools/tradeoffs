@@ -40,8 +40,12 @@ BorderSegment: TypeAlias = Dict[
 class EPlan:
     """A plan from an ensemble that can easily & efficiently evolve."""
 
+    _generation: int
+
     _features: List[Feature]
     _features_index: Dict[GeoID, FeatureOffset]
+
+    _ratings: List[int]
 
     _districts: List[District]
     _districts_index: Dict[DistrictID, DistrictOffset]
@@ -55,14 +59,19 @@ class EPlan:
     def __init__(
         self,
         district_by_geoid: Dict[GeoID, DistrictID],
+        ratings: List[int],
         pop_by_geoid: Dict[GeoID, int],
         graph: Dict[GeoID, List[GeoID]],
     ) -> None:
+        self._generation = 0
+
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = [
             Feature(a.geoid, a.district, pop_by_geoid[a.geoid]) for a in assignments
         ]
         self._features_index = {f.id: i for i, f in enumerate(self._features)}
+
+        self._ratings = ratings
 
         self._districts = self.invert_plan()
         self._districts_index = {d["id"]: i for i, d in enumerate(self._districts)}

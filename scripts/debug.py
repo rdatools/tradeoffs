@@ -60,7 +60,8 @@ def main() -> None:
 
     ##
 
-    ep: EPlan = EPlan(district_by_geoid, pop_by_geoid, graph)
+    ep: EPlan = EPlan(district_by_geoid, ratings, pop_by_geoid, graph)
+    print(ep)
 
     # Check each border feature
 
