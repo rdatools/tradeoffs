@@ -15,11 +15,25 @@ class Assignment(NamedTuple):
     geoid: str
     district: DistrictID
 """
-Feature = Assignment
 
-FeatureOffsets: TypeAlias = Set[Offset]
+FeatureOffset: TypeAlias = Offset
+DistrictOffset: TypeAlias = Offset
+
+
+class Feature(NamedTuple):
+    id: GeoID
+    district: DistrictID
+    pop: int
+
+
+class District(TypedDict):
+    id: DistrictID
+    features: Set[FeatureOffset]
+    pop: int
+
+
 BorderSegment: TypeAlias = Dict[
-    DistrictID, FeatureOffsets
+    DistrictOffset, Set[FeatureOffset]
 ]  # Two: one for each side/district
 
 
@@ -27,20 +41,32 @@ class EPlan:
     """A plan from an ensemble that can easily & efficiently evolve."""
 
     _features: List[Feature]
-    _features_index: Dict[str, Offset]
-    _features_by_district: Dict[DistrictID, Set[Offset]]
-    _features_graph: Dict[Offset, List[Offset]]
-    _border_segments: Dict[Tuple[DistrictID, DistrictID], BorderSegment]
+    _features_index: Dict[GeoID, FeatureOffset]
+
+    _districts: List[District]
+    _districts_index: Dict[DistrictID, DistrictOffset]
+
+    _total_pop: int
+    _target_pop: int
+
+    _features_graph: Dict[FeatureOffset, List[FeatureOffset]]
+    _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
 
     def __init__(
         self,
         district_by_geoid: Dict[GeoID, DistrictID],
+        pop_by_geoid: Dict[GeoID, int],
         graph: Dict[GeoID, List[GeoID]],
     ) -> None:
         assignments: List[Assignment] = make_plan(district_by_geoid)
-        self._features = assignments
-        self._features_index = {f.geoid: i for i, f in enumerate(assignments)}
-        self._features_by_district = self.invert_plan()
+        self._features = [
+            Feature(a.geoid, a.district, pop_by_geoid[a.geoid]) for a in assignments
+        ]
+        self._features_index = {f.id: i for i, f in enumerate(self._features)}
+
+        self._districts = self.invert_plan()
+        self._districts_index = {d["id"]: i for i, d in enumerate(self._districts)}
+
         self._features_graph = self.index_graph(graph)
 
         if not self.all_connected():
@@ -50,21 +76,23 @@ class EPlan:
 
         self._border_segments = self.init_border_segments()
 
-    def invert_plan(self) -> Dict[DistrictID, Set[Offset]]:
-        """Collect geoid offsets by district."""
+    def invert_plan(self) -> List[District]:
+        inverted: Dict[DistrictID, District] = dict()
 
-        inverted: Dict[DistrictID, Set[Offset]] = dict()
+        self._total_pop = 0
 
         for i, f in enumerate(self._features):
-            offset: Offset = self._features_index[f.geoid]
-            district: DistrictID = f.district
+            if f.district not in inverted:
+                inverted[f.district] = {"id": f.district, "features": set(), "pop": 0}
 
-            if district not in inverted:
-                inverted[district] = set()
+            inverted[f.district]["features"].add(self._features_index[f.id])
+            inverted[f.district]["pop"] += f.pop
+            self._total_pop += f.pop
 
-            inverted[district].add(offset)
+        districts: List[District] = list(inverted.values())
+        self._target_pop = self._total_pop // len(districts)
 
-        return inverted
+        return districts
 
     def index_graph(
         self, graph: Dict[GeoID, List[GeoID]]
@@ -86,16 +114,16 @@ class EPlan:
     def all_connected(self) -> bool:
         """Is the plan fully connected?"""
 
-        for district, offsets in self._features_by_district.items():
-            if not is_connected(list(offsets), self._features_graph):  # type: ignore
+        for d in self._districts:
+            if not is_connected(list(d["features"]), self._features_graph):
                 return False
 
         return True
 
-    def is_connected(self, ids: List[Offset]) -> bool:
-        """Would a district with these features be connected?"""
+    def is_connected(self, offsets: List[FeatureOffset]) -> bool:
+        """Would a district with these feature offsets be connected?"""
 
-        return is_connected(ids, self._features_graph)  # type: ignore
+        return is_connected(offsets, self._features_graph)
 
     def init_border_segments(
         self,

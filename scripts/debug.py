@@ -39,18 +39,28 @@ def main() -> None:
     graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
+    pop_by_geoid: Dict[GeoID, int] = {k: int(v["TOTAL_POP"]) for k, v in data.items()}
+
+    frontiers: Dict[str, Any] = read_json(args.frontier)
     ensemble: Dict[str, Any] = read_json(args.plans)
     plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
 
-    # Get the first plan, for debugging
+    ## Get a plan and ratings for debugging ##
+
+    frontier: List[Dict[str, Any]] = frontiers["frontiers"][
+        "proportionality_compactness"
+    ]
+    ratings: List[int] = frontier[0]["ratings"]
+
+    # Use the offset in the frontier, to get the plan in the ensemble
 
     p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
     name: Name = str(p["name"])
     district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
 
-    #
+    ##
 
-    ep: EPlan = EPlan(district_by_geoid, graph)
+    ep: EPlan = EPlan(district_by_geoid, pop_by_geoid, graph)
 
     # Check each border feature
 
