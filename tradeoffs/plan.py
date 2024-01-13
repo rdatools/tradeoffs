@@ -96,15 +96,15 @@ class EPlan:
 
     def index_graph(
         self, graph: Dict[GeoID, List[GeoID]]
-    ) -> Dict[Offset, List[Offset]]:
+    ) -> Dict[FeatureOffset, List[FeatureOffset]]:
         """Convert a geoid-based graph to an offset-based graph."""
 
-        indexed_graph: Dict[Offset, List[Offset]] = dict()
+        indexed_graph: Dict[FeatureOffset, List[FeatureOffset]] = dict()
 
         for geoid, neighbors in graph.items():
             if geoid == OUT_OF_STATE:
                 continue
-            offset: Offset = self._features_index[geoid]
+            offset: FeatureOffset = self._features_index[geoid]
             indexed_graph[offset] = [
                 self._features_index[n] for n in neighbors if n != OUT_OF_STATE
             ]
@@ -127,21 +127,23 @@ class EPlan:
 
     def init_border_segments(
         self,
-    ) -> Dict[Tuple[DistrictID, DistrictID], BorderSegment]:
+    ) -> Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]:
         """Initialize border segments."""
 
-        border_segments: Dict[Tuple[DistrictID, DistrictID], BorderSegment] = dict()
+        border_segments: Dict[
+            Tuple[DistrictOffset, DistrictOffset], BorderSegment
+        ] = dict()
 
         for i, neighbors in self._features_graph.items():
             for n in neighbors:
-                d1: DistrictID = self._features[i].district
-                d2: DistrictID = self._features[n].district
+                d1: DistrictOffset = self._districts_index[self._features[i].district]
+                d2: DistrictOffset = self._districts_index[self._features[n].district]
 
                 if d1 == d2:
                     continue
 
-                seg_key: Tuple[DistrictID, DistrictID] = (
-                    (d1, d2) if int(d1) < int(d2) else (d2, d1)
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = (
+                    (d1, d2) if d1 < d2 else (d2, d1)
                 )
                 if seg_key not in border_segments:
                     border_segments[seg_key] = {
@@ -154,28 +156,30 @@ class EPlan:
 
         return border_segments
 
-    def district_adjacencies(self) -> List[Tuple[DistrictID, DistrictID]]:
+    def district_adjacencies(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
         """Get all district adjacencies."""
 
         return sorted(list(self._border_segments.keys()))
 
-    def district_features(self, district: DistrictID) -> Set[Offset]:
+    def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
         """Get all feature offsets for a district."""
 
-        return self._features_by_district[district]
+        return self._districts[district]["features"]
 
     def border_features(
-        self, from_district: DistrictID, to_district: DistrictID
-    ) -> Set[Offset]:
+        self, from_district: DistrictOffset, to_district: DistrictOffset
+    ) -> Set[FeatureOffset]:
         """The offsets for features that could be reassigned from one district to another."""
 
-        seg_key: Tuple[DistrictID, DistrictID] = (
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = (
             (from_district, to_district)
-            if int(from_district) < int(to_district)
+            if from_district < to_district
             else (to_district, from_district)
         )
 
-        border_features: Set[Offset] = self._border_segments[seg_key][from_district]
+        border_features: Set[FeatureOffset] = self._border_segments[seg_key][
+            from_district
+        ]
 
         return border_features
 
@@ -183,7 +187,7 @@ class EPlan:
         """Write the plan to a CSV."""
 
         plan: List[Dict[GeoID, DistrictID]] = [
-            {"GEOID": a.geoid, "DISTRICT": a.district} for a in self._features
+            {"GEOID": f.id, "DISTRICT": f.district} for f in self._features
         ]
 
         write_csv(plan_path, plan, ["GEOID", "DISTRICT"])
