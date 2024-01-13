@@ -7,9 +7,9 @@ TODO - Refactor some of this into other repos?
 from typing import TypeAlias
 
 GeoID: TypeAlias = str
-Offset: TypeAlias = int
+DistrictID: TypeAlias = int | str
 
-District: TypeAlias = int | str
+Offset: TypeAlias = int
 
 Name: TypeAlias = str
 Weight: TypeAlias = float

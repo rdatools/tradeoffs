@@ -13,13 +13,13 @@ from .connected import is_connected
 """
 class Assignment(NamedTuple):
     geoid: str
-    district: District
+    district: DistrictID
 """
 Feature = Assignment
 
 FeatureOffsets: TypeAlias = Set[Offset]
 BorderSegment: TypeAlias = Dict[
-    District, FeatureOffsets
+    DistrictID, FeatureOffsets
 ]  # Two: one for each side/district
 
 
@@ -28,12 +28,14 @@ class EPlan:
 
     _features: List[Feature]
     _features_index: Dict[str, Offset]
-    _features_by_district: Dict[District, Set[Offset]]
+    _features_by_district: Dict[DistrictID, Set[Offset]]
     _features_graph: Dict[Offset, List[Offset]]
-    _border_segments: Dict[Tuple[District, District], BorderSegment]
+    _border_segments: Dict[Tuple[DistrictID, DistrictID], BorderSegment]
 
     def __init__(
-        self, district_by_geoid: Dict[GeoID, District], graph: Dict[GeoID, List[GeoID]]
+        self,
+        district_by_geoid: Dict[GeoID, DistrictID],
+        graph: Dict[GeoID, List[GeoID]],
     ) -> None:
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = assignments
@@ -48,14 +50,14 @@ class EPlan:
 
         self._border_segments = self.init_border_segments()
 
-    def invert_plan(self) -> Dict[District, Set[Offset]]:
+    def invert_plan(self) -> Dict[DistrictID, Set[Offset]]:
         """Collect geoid offsets by district."""
 
-        inverted: Dict[District, Set[Offset]] = dict()
+        inverted: Dict[DistrictID, Set[Offset]] = dict()
 
         for i, f in enumerate(self._features):
             offset: Offset = self._features_index[f.geoid]
-            district: District = f.district
+            district: DistrictID = f.district
 
             if district not in inverted:
                 inverted[district] = set()
@@ -95,20 +97,22 @@ class EPlan:
 
         return is_connected(ids, self._features_graph)  # type: ignore
 
-    def init_border_segments(self) -> Dict[Tuple[District, District], BorderSegment]:
+    def init_border_segments(
+        self,
+    ) -> Dict[Tuple[DistrictID, DistrictID], BorderSegment]:
         """Initialize border segments."""
 
-        border_segments: Dict[Tuple[District, District], BorderSegment] = dict()
+        border_segments: Dict[Tuple[DistrictID, DistrictID], BorderSegment] = dict()
 
         for i, neighbors in self._features_graph.items():
             for n in neighbors:
-                d1: District = self._features[i].district
-                d2: District = self._features[n].district
+                d1: DistrictID = self._features[i].district
+                d2: DistrictID = self._features[n].district
 
                 if d1 == d2:
                     continue
 
-                seg_key: Tuple[District, District] = (
+                seg_key: Tuple[DistrictID, DistrictID] = (
                     (d1, d2) if int(d1) < int(d2) else (d2, d1)
                 )
                 if seg_key not in border_segments:
@@ -122,22 +126,22 @@ class EPlan:
 
         return border_segments
 
-    def district_adjacencies(self) -> List[Tuple[District, District]]:
+    def district_adjacencies(self) -> List[Tuple[DistrictID, DistrictID]]:
         """Get all district adjacencies."""
 
         return sorted(list(self._border_segments.keys()))
 
-    def district_features(self, district: District) -> Set[Offset]:
+    def district_features(self, district: DistrictID) -> Set[Offset]:
         """Get all feature offsets for a district."""
 
         return self._features_by_district[district]
 
     def border_features(
-        self, from_district: District, to_district: District
+        self, from_district: DistrictID, to_district: DistrictID
     ) -> Set[Offset]:
         """The offsets for features that could be reassigned from one district to another."""
 
-        seg_key: Tuple[District, District] = (
+        seg_key: Tuple[DistrictID, DistrictID] = (
             (from_district, to_district)
             if int(from_district) < int(to_district)
             else (to_district, from_district)
@@ -150,7 +154,7 @@ class EPlan:
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
 
-        plan: List[Dict[GeoID, District]] = [
+        plan: List[Dict[GeoID, DistrictID]] = [
             {"GEOID": a.geoid, "DISTRICT": a.district} for a in self._features
         ]
 

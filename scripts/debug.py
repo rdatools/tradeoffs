@@ -34,19 +34,19 @@ def main() -> None:
 
     # Load data
 
-    data: Dict[str, Dict[GeoID, District]] = load_data(args.data)
+    data: Dict[str, Dict[GeoID, DistrictID]] = load_data(args.data)
     shapes: Dict[str, Any] = load_shapes(args.shapes)
     graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
     ensemble: Dict[str, Any] = read_json(args.plans)
-    plans: List[Dict[str, Name | Weight | Dict[GeoID, District]]] = ensemble["plans"]
+    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
 
     # Get the first plan, for debugging
 
-    p: Dict[str, Name | Weight | Dict[GeoID, District]] = plans[0]
+    p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
     name: Name = str(p["name"])
-    district_by_geoid: Dict[GeoID, District] = p["plan"]  # type: ignore
+    district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
 
     #
 
@@ -61,10 +61,10 @@ def main() -> None:
         for i, _ in enumerate(pair):
             j: Offset = (i + 1) % 2
 
-            d1: District = pair[i]
-            d2: District = pair[j]
+            d1: DistrictID = pair[i]
+            d2: DistrictID = pair[j]
 
-            print(f"... District {d1}:")
+            print(f"... DistrictID {d1}:")
 
             features: List[Offset] = list(ep.district_features(d1))
             border_features: Set[Offset] = ep.border_features(d1, d2)
@@ -75,11 +75,11 @@ def main() -> None:
 
                 if not ep.is_connected(proposed):
                     print(
-                        f"...... District would not be connected, if feature {candidate} were removed!"
+                        f"...... DistrictID would not be connected, if feature {candidate} were removed!"
                     )
                 else:
                     print(
-                        f"...... District would be connected, if feature {candidate} were removed."
+                        f"...... DistrictID would be connected, if feature {candidate} were removed."
                     )
 
     # ep.to_csv("output/test_plan.csv")

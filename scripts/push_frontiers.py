@@ -35,14 +35,14 @@ from rdabase import (
 )
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
-from tradeoffs import GeoID, District, Name, Weight
+from tradeoffs import GeoID, DistrictID, Name, Weight
 
 
 def main() -> None:
     args: argparse.Namespace = parse_args()
 
     ensemble: Dict[str, Any] = read_json(args.plans)
-    plans: List[Dict[str, Name | Weight | Dict[GeoID, District]]] = ensemble["plans"]
+    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
     # TODO - DELETE
     # scores: List[Dict[str, str]] = read_scores(args.scores, ratings_dimensions)
     frontiers: Dict[str, Any] = read_json(args.frontier)
@@ -70,18 +70,18 @@ def main() -> None:
             pt_to_push: Tuple[int, int] = (ratings[d1], ratings[d2])
 
             plan_item: Dict[
-                str, str | float | Dict[GeoID, District]
+                str, str | float | Dict[GeoID, DistrictID]
             ] = plan_from_ensemble(map_id, ensemble)
-            plan_dict: Dict[GeoID, District] = plan_item["plan"]  # type: ignore
+            plan_dict: Dict[GeoID, DistrictID] = plan_item["plan"]  # type: ignore
             assignments: List[Assignment] = make_plan(plan_dict)
-            plan_to_push: List[Dict[GeoID, District]] = [
+            plan_to_push: List[Dict[GeoID, DistrictID]] = [
                 {"GEOID": a.geoid, "DISTRICT": a.district} for a in assignments
             ]
 
             #
 
-            district_by_geoid: Dict[GeoID, District] = index_plan(plan_to_push)
-            geoids_by_district: Dict[District, Set[GeoID]] = invert_plan(plan_to_push)
+            district_by_geoid: Dict[GeoID, DistrictID] = index_plan(plan_to_push)
+            geoids_by_district: Dict[DistrictID, Set[GeoID]] = invert_plan(plan_to_push)
 
             pass  # TODO - DEBUG
 
@@ -90,28 +90,28 @@ def main() -> None:
     pass  # TODO - DEBUG
 
 
-def index_plan(plan: List[Dict[GeoID, District]]) -> Dict[GeoID, District]:
+def index_plan(plan: List[Dict[GeoID, DistrictID]]) -> Dict[GeoID, DistrictID]:
     """Index districts by geoid."""
 
-    indexed: Dict[GeoID, District] = dict()
+    indexed: Dict[GeoID, DistrictID] = dict()
 
     for row in plan:
         geoid: str = str(row["GEOID"])
-        district: District = row["DISTRICT"]
+        district: DistrictID = row["DISTRICT"]
 
         indexed[geoid] = district
 
     return indexed
 
 
-def invert_plan(plan: List[Dict[GeoID, District]]) -> Dict[District, Set[GeoID]]:
+def invert_plan(plan: List[Dict[GeoID, DistrictID]]) -> Dict[DistrictID, Set[GeoID]]:
     """Return geoids by district."""
 
-    inverted: Dict[District, Set[GeoID]] = dict()
+    inverted: Dict[DistrictID, Set[GeoID]] = dict()
 
     for row in plan:
         geoid: str = str(row["GEOID"])
-        district: District = row["DISTRICT"]
+        district: DistrictID = row["DISTRICT"]
 
         if district not in inverted:
             inverted[district] = set()
