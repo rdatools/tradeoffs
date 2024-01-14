@@ -52,7 +52,7 @@ def main() -> None:
     frontier: List[Dict[str, Any]] = frontiers["frontiers"][
         "proportionality_compactness"
     ]
-    ratings: List[int] = frontier[0]["ratings"]
+    # ratings: List[int] = frontier[0]["ratings"]
 
     # Use the offset in the frontier, to get the plan in the ensemble
 
@@ -62,7 +62,7 @@ def main() -> None:
 
     ##
 
-    ep: EPlan = EPlan(district_by_geoid, ratings, pop_by_geoid, graph)
+    ep: EPlan = EPlan(district_by_geoid, pop_by_geoid, graph)
     print(ep)
 
     # Check each border feature

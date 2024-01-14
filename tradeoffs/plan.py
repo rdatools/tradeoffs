@@ -45,7 +45,8 @@ class EPlan:
     _features: List[Feature]
     _features_index: Dict[GeoID, FeatureOffset]
 
-    _ratings: List[int]
+    _metrics: Tuple[float, float]
+    _ratings: Tuple[int, int]
 
     _districts: List[District]
     _districts_index: Dict[DistrictID, DistrictOffset]
@@ -59,7 +60,6 @@ class EPlan:
     def __init__(
         self,
         district_by_geoid: Dict[GeoID, DistrictID],
-        ratings: List[int],
         pop_by_geoid: Dict[GeoID, int],
         graph: Dict[GeoID, List[GeoID]],
         verbose: bool = False,
@@ -71,8 +71,6 @@ class EPlan:
             Feature(a.geoid, a.district, pop_by_geoid[a.geoid]) for a in assignments
         ]
         self._features_index = {f.id: i for i, f in enumerate(self._features)}
-
-        self._ratings = ratings
 
         self._districts = self.invert_plan()
         self._districts_index = {d["id"]: i for i, d in enumerate(self._districts)}
@@ -86,9 +84,12 @@ class EPlan:
 
         self._border_segments = self.init_border_segments()
 
+        self._metrics = (0.5, 0.5)  # TODO
+        self._ratings = (50, 50)  # TODO
+
     def __repr__(self) -> str:
         # TODO - More ...
-        return f"Plan({self._generation}: {self._ratings}, ...)"
+        return f"Plan({self._generation}: {self._metrics} - {self._ratings})"
 
     def invert_plan(self) -> List[District]:
         inverted: Dict[DistrictID, District] = dict()
