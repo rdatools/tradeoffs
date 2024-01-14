@@ -219,17 +219,18 @@ class EPlan:
         return pairs
 
     def random_moves(
-        self, pair: Tuple[DistrictOffset, DistrictOffset]
+        self, pair: Tuple[DistrictOffset, DistrictOffset], size: int = 1
     ) -> Tuple[List[Move], List[Move]]:
         """Generate random moves between two districts."""
 
-        # District pairs should already be ordered, but ...
         district_one: DistrictOffset = pair[0] if pair[0] < pair[1] else pair[1]
         district_two: DistrictOffset = pair[1] if pair[0] < pair[1] else pair[0]
 
         seg_key: Tuple[DistrictOffset, DistrictOffset] = (district_one, district_two)
         if seg_key not in self._border_segments:
             raise Exception("No border segments between these districts!")
+
+        # TODO - Abstract out random moves of size 1
 
         features_one: List[FeatureOffset] = list(
             self._border_segments[seg_key][district_one]
