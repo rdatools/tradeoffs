@@ -55,9 +55,8 @@ def main() -> None:
     frontier: List[Dict[str, Any]] = frontiers["frontiers"][
         "proportionality_compactness"
     ]
-    # ratings: List[int] = frontier[0]["ratings"]
 
-    # Use the offset in the frontier, to get the plan in the ensemble
+    # TODO - Use the offset in the frontier, to get the plan in the ensemble
 
     p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
     name: Name = str(p["name"])
@@ -68,36 +67,42 @@ def main() -> None:
     ep: EPlan = EPlan(
         district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose
     )
-    # print(ep)
 
-    # Check each border feature
+    random_districts: List[
+        Tuple[DistrictOffset, DistrictOffset]
+    ] = ep.random_districts()
 
-    random_districts = ep.random_districts()
+    if args.verbose:
+        print(f"... # pairs of adjacent districts: {len(random_districts)}")
+
     for pair in random_districts:
-        print(f"Adjacent: {pair}")
+        # TODO - Convert the underlying representation to a list?
+        d1_features: List[Offset] = list(ep.district_features(pair[0]))
+        d2_features: List[Offset] = list(ep.district_features(pair[1]))
 
-        for i, _ in enumerate(pair):
-            j: Offset = (i + 1) % 2
+        moves_from_one: List[Move]
+        moves_from_two: List[Move]
+        moves_from_one, moves_from_two = ep.random_moves(pair)
 
-            d1: DistrictID = pair[i]
-            d2: DistrictID = pair[j]
+        if args.verbose:
+            print(
+                f"... # moves: {pair[0]} -> {pair[1]} = {len(moves_from_one)} | {pair[1]} -> {pair[0]} = {len(moves_from_two)}"
+            )
 
-            print(f"... DistrictID {d1}:")
+        # TODO - Add the logic to alternate betwee the lists and end with the shortest one
+        for move in moves_from_one:
+            feature: Offset = move.feature
+            district: DistrictOffset = move.from_district
 
-            features: List[Offset] = list(ep.district_features(d1))
-            border_features: Set[Offset] = ep.border_features(d1, d2)
+            proposed: List[
+                Offset
+            ] = d1_features.copy()  # TODO - The list of features has change with moves!
+            proposed.remove(feature)
 
-            for candidate in border_features:
-                proposed: List[Offset] = features.copy()
-                proposed.remove(candidate)
-
-                if not ep._is_connected(proposed):
+            if not ep._is_connected(proposed):
+                if args.verbose:
                     print(
-                        f"...... DistrictID would not be connected, if feature {candidate} were removed!"
-                    )
-                else:
-                    print(
-                        f"...... DistrictID would be connected, if feature {candidate} were removed."
+                        f"...... district {district} would not be connected, if feature {feature} were removed!"
                     )
 
     # ep.to_csv("output/test_plan.csv")

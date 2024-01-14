@@ -39,6 +39,12 @@ BorderSegment: TypeAlias = Dict[
 ]  # Two: one for each side/district
 
 
+class Move(NamedTuple):
+    feature: FeatureOffset
+    from_district: DistrictOffset
+    to_district: DistrictOffset
+
+
 class EPlan:
     """A plan from an ensemble that can easily & efficiently evolve."""
 
@@ -181,6 +187,25 @@ class EPlan:
 
         return border_segments
 
+    # TODO - DELETE?
+    # def _border_features(
+    #     self, district_one: DistrictOffset, district_two: DistrictOffset
+    # ) -> Set[FeatureOffset]:
+    #     """Get the offsets for features that could be reassigned from one district to another."""
+
+    #     seg_key: Tuple[DistrictOffset, DistrictOffset] = (
+    #         (district_one, district_two)
+    #         if district_one < district_two
+    #         else (district_two, district_one)
+    #     )
+
+    #     if seg_key not in self._border_segments:
+    #         raise Exception("No border segments between these districts!")
+
+    #     features: Set[FeatureOffset] = self._border_segments[seg_key][district_one]
+
+    #     return features
+
     ### PUBLIC ###
 
     def random_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
@@ -193,34 +218,42 @@ class EPlan:
 
         return pairs
 
-    def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
-        """Get all feature offsets for a district.
+    def random_moves(
+        self, pair: Tuple[DistrictOffset, DistrictOffset]
+    ) -> Tuple[List[Move], List[Move]]:
+        """Generate random moves between two districts."""
 
-        TODO - PRIVATE?
-        """
+        # District pairs should already be ordered, but ...
+        district_one: DistrictOffset = pair[0] if pair[0] < pair[1] else pair[1]
+        district_two: DistrictOffset = pair[1] if pair[0] < pair[1] else pair[0]
 
-        return self._districts[district]["features"]
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = (district_one, district_two)
+        if seg_key not in self._border_segments:
+            raise Exception("No border segments between these districts!")
 
-    def border_features(
-        self, from_district: DistrictOffset, to_district: DistrictOffset
-    ) -> Set[FeatureOffset]:
-        """Get the offsets for features that could be reassigned from one district to another.
-
-        TODO - PRIVATE?
-        """
-
-        seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-            (from_district, to_district)
-            if from_district < to_district
-            else (to_district, from_district)
+        features_one: List[FeatureOffset] = list(
+            self._border_segments[seg_key][district_one]
+        )
+        features_two: List[FeatureOffset] = list(
+            self._border_segments[seg_key][district_two]
         )
 
-        if seg_key not in self._border_segments:
-            return set()
+        random.shuffle(features_one)
+        random.shuffle(features_two)
 
-        features: Set[FeatureOffset] = self._border_segments[seg_key][from_district]
+        moves_from_one: List[Move] = [
+            Move(f, district_one, district_two) for f in features_one
+        ]
+        moves_from_two: List[Move] = [
+            Move(f, district_two, district_one) for f in features_two
+        ]
 
-        return features
+        return (moves_from_one, moves_from_two)
+
+    def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
+        """Get all feature offsets for a district."""
+
+        return self._districts[district]["features"]
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
