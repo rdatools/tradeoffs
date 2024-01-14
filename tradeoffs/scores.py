@@ -2,49 +2,90 @@
 SCORING
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
+
+from rdabase import Assignment
+
+from .datatypes import DistrictID, GeoID, Offset
 
 
-def is_better(dimension: str, currents: List[float], proposeds: List[float]) -> bool:
-    """Is one (pair of) raw metric(s) better than another?"""
+class Scorer:
+    """A scorer to rate plans for a set of data & shapes."""
 
-    def more_proportional() -> bool:
-        """Is one proportionality metric better than another?"""
+    _data: Dict[str, Dict[str, str | int]]
+    _shapes: Dict[str, Any]
+    _metadata: Dict[str, Any]
 
-        current: float = currents[0]
-        proposed: float = proposeds[0]
+    def __init__(
+        self,
+        data: Dict[str, Dict[str, str | int]],
+        shapes: Dict[str, Any],
+        metadata: Dict[str, Any],
+    ) -> None:
+        self._data = data
+        self._shapes = shapes
+        self._metadata = metadata
 
-        return proposed < current
+    def rate(
+        self, assignments: List[Assignment], dimensions: Tuple[str, str]
+    ) -> Tuple[float, float]:
+        """Rate a plan on a pair of dimensions."""
 
-    def more_competitive() -> bool:
-        """Is one competitiveness metric better than another?"""
+        pair: List[float] = list()
 
-        current: float = currents[0]
-        proposed: float = proposeds[0]
+        for d in dimensions:
+            match d:
+                case "proportionality":
+                    pair.append(self._rate_proportionality(assignments))
+                case "competitiveness":
+                    pair.append(self._rate_competitiveness(assignments))
+                case "minority":
+                    pair.append(self._rate_minority(assignments))
+                case "compactness":
+                    pair.append(self._rate_compactness(assignments))
+                case "splitting":
+                    pair.append(self._rate_splitting(assignments))
+                case _:
+                    raise ValueError(f"Unknown dimension: {d}")
 
-        return proposed > current
+        return (pair[0], pair[1])
 
-    def better_minority() -> bool:
-        """Is one minority metric better than another?"""
+    ### PRIVATE ###
+
+    def _rate_proportionality(self, assignments: List[Assignment]) -> float:
+        """Rate a plan on proportionality."""
 
         # TODO
-        return proposeds[0] > currents[0] and proposeds[1] > currents[1]
 
-    def more_compact() -> bool:
-        """Is one compactness metric better than another?"""
+        return 0.0
 
-        # TODO
-        return proposeds[0] > currents[0] and proposeds[1] > currents[1]
-
-    def less_splitting() -> bool:
-        """Is one splitting metric better than another?"""
+    def _rate_competitiveness(self, assignments: List[Assignment]) -> float:
+        """Rate a plan on competitiveness."""
 
         # TODO
-        return proposeds[0] < currents[0] and proposeds[1] < currents[1]
 
-    # TODO
+        return 0.0
 
-    return True  # TODO
+    def _rate_minority(self, assignments: List[Assignment]) -> float:
+        """Rate a plan on minority representation."""
+
+        # TODO
+
+        return 0.0
+
+    def _rate_compactness(self, assignments: List[Assignment]) -> float:
+        """Rate a plan on compactness."""
+
+        # TODO
+
+        return 0.0
+
+    def _rate_splitting(self, assignments: List[Assignment]) -> float:
+        """Rate a plan on county-district splitting."""
+
+        # TODO
+
+        return 0.0
 
 
 ### MAKE A ONE-ROW SCORECARD FROM A DRA MAP-ANALYTICS.JSON EXPORT ###
