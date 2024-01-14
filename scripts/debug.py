@@ -6,7 +6,7 @@ DEBUGGING SCRIPT
 
 from typing import Any, List, Dict, NamedTuple
 
-from rdabase import read_json
+from rdabase import read_json, starting_seed
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
@@ -47,6 +47,9 @@ def main() -> None:
     ensemble: Dict[str, Any] = read_json(args.plans)
     plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
 
+    N: int = int(metadata["D"])
+    seed: int = starting_seed(args.state, N)
+
     ## Get a plan and ratings for debugging ##
 
     frontier: List[Dict[str, Any]] = frontiers["frontiers"][
@@ -62,13 +65,13 @@ def main() -> None:
 
     ##
 
-    ep: EPlan = EPlan(district_by_geoid, pop_by_geoid, graph)
+    ep: EPlan = EPlan(district_by_geoid, pop_by_geoid, graph, seed)
     print(ep)
 
     # Check each border feature
 
-    district_pairs = ep.district_adjacencies()
-    for pair in district_pairs:
+    random_districts = ep.random_districts()
+    for pair in random_districts:
         print(f"Adjacent: {pair}")
 
         for i, _ in enumerate(pair):
@@ -86,7 +89,7 @@ def main() -> None:
                 proposed: List[Offset] = features.copy()
                 proposed.remove(candidate)
 
-                if not ep.is_connected(proposed):
+                if not ep._is_connected(proposed):
                     print(
                         f"...... DistrictID would not be connected, if feature {candidate} were removed!"
                     )

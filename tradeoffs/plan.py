@@ -4,6 +4,8 @@ EVOLVING PLAN
 
 from typing import Any, List, Dict, Set, Tuple, TypeAlias, NamedTuple, TypedDict
 
+import random
+
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
 
@@ -62,9 +64,13 @@ class EPlan:
         district_by_geoid: Dict[GeoID, DistrictID],
         pop_by_geoid: Dict[GeoID, int],
         graph: Dict[GeoID, List[GeoID]],
+        seed: int,
+        *,
+        pop_threshold: float = 0.01,  # +/- 1% for each district
         verbose: bool = False,
     ) -> None:
         self._generation = 0
+        random.seed(seed)
 
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = [
@@ -72,17 +78,17 @@ class EPlan:
         ]
         self._features_index = {f.id: i for i, f in enumerate(self._features)}
 
-        self._districts = self.invert_plan()
+        self._districts = self._invert_plan()
         self._districts_index = {d["id"]: i for i, d in enumerate(self._districts)}
 
-        self._features_graph = self.index_graph(graph)
+        self._features_graph = self._index_graph(graph)
 
-        if not self.all_connected():
+        if not self._all_connected():
             raise Exception("Starting plan is not connected!")
         else:
             print("Starting plan is connected!")
 
-        self._border_segments = self.init_border_segments()
+        self._border_segments = self._init_border_segments()
 
         self._metrics = (0.5, 0.5)  # TODO
         self._ratings = (50, 50)  # TODO
@@ -91,7 +97,9 @@ class EPlan:
         # TODO - More ...
         return f"Plan({self._generation}: {self._metrics} - {self._ratings})"
 
-    def invert_plan(self) -> List[District]:
+    ### PRIVATE ###
+
+    def _invert_plan(self) -> List[District]:
         inverted: Dict[DistrictID, District] = dict()
 
         self._total_pop = 0
@@ -109,7 +117,7 @@ class EPlan:
 
         return districts
 
-    def index_graph(
+    def _index_graph(
         self, graph: Dict[GeoID, List[GeoID]]
     ) -> Dict[FeatureOffset, List[FeatureOffset]]:
         """Convert a geoid-based graph to an offset-based graph."""
@@ -126,7 +134,7 @@ class EPlan:
 
         return indexed_graph
 
-    def all_connected(self) -> bool:
+    def _all_connected(self) -> bool:
         """Is the plan fully connected?"""
 
         for d in self._districts:
@@ -135,12 +143,12 @@ class EPlan:
 
         return True
 
-    def is_connected(self, offsets: List[FeatureOffset]) -> bool:
+    def _is_connected(self, offsets: List[FeatureOffset]) -> bool:
         """Would a district with these feature offsets be connected?"""
 
         return is_connected(offsets, self._features_graph)
 
-    def init_border_segments(
+    def _init_border_segments(
         self,
     ) -> Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]:
         """Initialize border segments."""
@@ -171,10 +179,17 @@ class EPlan:
 
         return border_segments
 
-    def district_adjacencies(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
-        """Get all district adjacencies."""
+    ### PUBLIC ###
 
-        return sorted(list(self._border_segments.keys()))
+    def random_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
+        """Get all pairs of adjacent districts in random order."""
+
+        pairs: List[Tuple[DistrictOffset, DistrictOffset]] = list(
+            self._border_segments.keys()
+        )
+        random.shuffle(pairs)
+
+        return pairs
 
     def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
         """Get all feature offsets for a district."""
@@ -184,7 +199,7 @@ class EPlan:
     def border_features(
         self, from_district: DistrictOffset, to_district: DistrictOffset
     ) -> Set[FeatureOffset]:
-        """The offsets for features that could be reassigned from one district to another."""
+        """Get the offsets for features that could be reassigned from one district to another."""
 
         seg_key: Tuple[DistrictOffset, DistrictOffset] = (
             (from_district, to_district)
@@ -192,11 +207,11 @@ class EPlan:
             else (to_district, from_district)
         )
 
-        border_features: Set[FeatureOffset] = self._border_segments[seg_key][
+        _border_features: Set[FeatureOffset] = self._border_segments[seg_key][
             from_district
         ]
 
-        return border_features
+        return _border_features
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
