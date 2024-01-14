@@ -5,6 +5,7 @@ SCORING
 from typing import Any, Dict, List, Tuple
 
 from rdabase import Assignment
+import rdapy as rda
 
 from .datatypes import DistrictID, GeoID, Offset
 
