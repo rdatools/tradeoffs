@@ -85,13 +85,15 @@ class EPlan:
 
         if not self._all_connected():
             raise Exception("Starting plan is not connected!")
-        else:
-            print("Starting plan is connected!")
 
         self._border_segments = self._init_border_segments()
 
         self._metrics = (0.5, 0.5)  # TODO
         self._ratings = (50, 50)  # TODO
+
+        if verbose:
+            print("Starting plan is connected!")
+            print(self)
 
     def __repr__(self) -> str:
         # TODO - More ...
@@ -192,14 +194,20 @@ class EPlan:
         return pairs
 
     def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
-        """Get all feature offsets for a district."""
+        """Get all feature offsets for a district.
+
+        TODO - PRIVATE?
+        """
 
         return self._districts[district]["features"]
 
     def border_features(
         self, from_district: DistrictOffset, to_district: DistrictOffset
     ) -> Set[FeatureOffset]:
-        """Get the offsets for features that could be reassigned from one district to another."""
+        """Get the offsets for features that could be reassigned from one district to another.
+
+        TODO - PRIVATE?
+        """
 
         seg_key: Tuple[DistrictOffset, DistrictOffset] = (
             (from_district, to_district)
@@ -207,11 +215,12 @@ class EPlan:
             else (to_district, from_district)
         )
 
-        _border_features: Set[FeatureOffset] = self._border_segments[seg_key][
-            from_district
-        ]
+        if seg_key not in self._border_segments:
+            return set()
 
-        return _border_features
+        features: Set[FeatureOffset] = self._border_segments[seg_key][from_district]
+
+        return features
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
