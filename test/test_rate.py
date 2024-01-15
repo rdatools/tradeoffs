@@ -371,22 +371,22 @@ class TestRatings:
         # Polsby-Popper compactness scorer
 
         # Polsby-Popper: in range (AL)
-        assert rate_polsby(0.1860) == 21
+        assert approx_equal(measure_polsby(0.1860), 21.4999, 2)
 
         # Polsby-Popper: in range (NC)
-        assert rate_polsby(0.2418) == 35
+        assert approx_equal(measure_polsby(0.2418), 35.4499, 2)
 
         # Polsby-Popper: min
-        assert rate_polsby(POLSBY_MIN) == 0
+        assert approx_equal(measure_polsby(POLSBY_MIN), 0.0)
 
         # Polsby-Popper: max
-        assert rate_polsby(POLSBY_MAX) == 100
+        assert approx_equal(measure_polsby(POLSBY_MAX), 100.0)
 
         # Polsby-Popper: too low
-        assert rate_polsby(POLSBY_MIN - EPSILON) == 0
+        assert measure_polsby(POLSBY_MIN - 0.05) < 0.0
 
         # Polsby-Popper: too high
-        assert rate_polsby(POLSBY_MAX + EPSILON) == 100
+        assert measure_polsby(POLSBY_MAX + 0.05) > 100.0
 
     def test_rate_splitting(self) -> None:
         # Combine splitting ratings
