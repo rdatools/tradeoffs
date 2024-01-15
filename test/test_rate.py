@@ -2,6 +2,8 @@
 
 """
 TEST NORMALIZATION & RATINGS
+
+NOTE - This is a copy of the test_rate module from dra2020/rdapy/test_rate.
 """
 
 import random
