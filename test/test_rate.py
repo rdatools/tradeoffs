@@ -218,8 +218,13 @@ class TestRatings:
         Vf = 0.5
         Sf = 0.5
 
-        assert approx_equal(measure_proportionality(0.25, Vf, Sf), -25.0)
-        assert approx_equal(measure_proportionality(0.0, Vf, Sf), 100.0)
+        assert approx_equal(
+            measure_proportionality(0.00, Vf, Sf), 100.0
+        )  # Completely unbiased
+        assert approx_equal(measure_proportionality(0.05, Vf, Sf), 75.0)  # 5% biased
+        assert approx_equal(measure_proportionality(0.10, Vf, Sf), 50.0)  # 10% biased
+        assert approx_equal(measure_proportionality(0.20, Vf, Sf), 0.0)  # 20% biased
+        assert approx_equal(measure_proportionality(0.25, Vf, Sf), -25.0)  # 25% biased
 
     def test_rate_competitiveness(self) -> None:
         # Completely uncompetitive
