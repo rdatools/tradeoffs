@@ -276,6 +276,34 @@ class TestRatings:
         correct: int = 85
         assert rate_minority_opportunity(12.56, 18, 22.92, 18) == correct
 
+    def test_measure_minority_opportunity(self) -> None:
+        bonus: float = 100.0
+
+        # No possibilities
+        assert approx_equal(measure_minority_opportunity(1, 0, 0, 0), 0.0)
+
+        # No opportunities
+        assert approx_equal(measure_minority_opportunity(0, 10, 0, 0), 0.0)
+
+        # Half
+        assert approx_equal(measure_minority_opportunity(5, 10, 0, 0), (bonus / 2.0))
+
+        # All
+        assert approx_equal(measure_minority_opportunity(10, 10, 0, 0), bonus)
+
+        # Extra
+        assert approx_equal(measure_minority_opportunity(11, 10, 0, 0), 110.0)
+
+        # Combined score
+
+        # * Opportunity districts = (12.56 / 18) * 100 <<< 69.7777
+        # * Coalition districts = (22.92 / 18) * 100 <<< 127.3333
+        # * Combined = 69.7777 + [0.5 * 127.3333]
+        correct: float = 133.4444
+        assert approx_equal(
+            measure_minority_opportunity(12.56, 18, 22.92, 18), correct, 4
+        )
+
     def test_rate_compactness(self) -> None:
         assert rate_compactness(30, 60) == 45
 

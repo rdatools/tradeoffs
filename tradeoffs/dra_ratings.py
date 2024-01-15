@@ -144,6 +144,25 @@ def rate_minority_opportunity(od: float, pod: float, cd: float, pcd: float) -> i
     return rating
 
 
+def measure_minority_opportunity(od: float, pod: float, cd: float, pcd: float) -> float:
+    """ADDED: for continuous, unclipped ratings"""
+
+    # Score minority opportunity [0–100]
+    cd_weight: float = 0.5
+
+    # Not clipped
+    # Cap opportunity & coalition districts
+    # od_capped: float = min(od, pod)
+    # cd_capped = min(cd, pcd)
+
+    opportunity_score: float = (od / pod) * 100.0 if (pod > 0.0) else 0.0
+    coalition_score: float = (cd / pcd) * 100.0 if (pcd > 0.0) else 0.0
+
+    rating: float = opportunity_score + (cd_weight * coalition_score)
+
+    return rating
+
+
 ### RATE COMPACTNESS ###
 
 
