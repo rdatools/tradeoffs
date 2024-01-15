@@ -94,6 +94,24 @@ def rate_competitiveness(raw_cdf: float) -> int:
     return rating
 
 
+def measure_competitiveness(raw_cdf: float) -> float:
+    """ADDED: for continuous, unclipped ratings"""
+
+    _normalizer: Normalizer = Normalizer(raw_cdf)
+
+    worst: float = 0.0
+    best: float = 0.75
+
+    # Not clipped
+    # _normalizer.clip(worst, best)
+    _normalizer.unitize(worst, best)
+    _normalizer.rescale_continuous()
+
+    rating: float = _normalizer.normalized_float
+
+    return rating
+
+
 ### RATE MINORITY REPRESENTATION ###
 
 

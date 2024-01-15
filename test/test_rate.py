@@ -233,6 +233,18 @@ class TestRatings:
         # Over competitive
         assert rate_competitiveness(0.80) == 100
 
+    def test_measure_competitiveness(self) -> None:
+        # Completely uncompetitive
+        assert approx_equal(measure_competitiveness(0.00), 0.0)
+        # 25% / 50% competitive
+        assert approx_equal(measure_competitiveness(0.25), 33.3333, 4)
+        # 50% / 50% competitive
+        assert approx_equal(measure_competitiveness(0.50), 66.6667, 4)
+        # Perfectly competitive
+        assert approx_equal(measure_competitiveness(0.75), 100.0)
+        # Over competitive
+        assert approx_equal(measure_competitiveness(0.80), 106.6667, 4)
+
     def test_rate_minority_opportunity(self) -> None:
         bonus: int = 100
 
