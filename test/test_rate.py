@@ -3,12 +3,13 @@
 """
 TEST NORMALIZATION & RATINGS
 
-NOTE - This is a copy of the test_rate.py module from dra2020/rdapy/test_rate.
+NOTE - This is an *augmented* copy of the test_rate.py module from dra2020/rdapy/test_rate.
 """
 
 import random
 
-from rdapy.rate import *
+# from rdapy.rate import *
+from tradeoffs import *
 from testutils import *
 
 EPSILON: float = 1 / 10**6
@@ -103,23 +104,23 @@ class TestNormalizer:
     def test_rescale(self) -> None:
         n: Normalizer = Normalizer(0.63)
         n.rescale()
-        assert n.normalized_num == 63
+        assert n.normalized_int == 63
 
         n: Normalizer = Normalizer(0.6372)
         n.rescale()
-        assert n.normalized_num == 64
+        assert n.normalized_int == 64
 
         n: Normalizer = Normalizer(0.6312)
         n.rescale()
-        assert n.normalized_num == 63
+        assert n.normalized_int == 63
 
         n: Normalizer = Normalizer(0.0)
         n.rescale()
-        assert n.normalized_num == 0
+        assert n.normalized_int == 0
 
         n: Normalizer = Normalizer(1.0)
         n.rescale()
-        assert n.normalized_num == 100
+        assert n.normalized_int == 100
 
 
 class TestRatings:
@@ -212,6 +213,13 @@ class TestRatings:
         assert rate_proportionality(0.2857, 0.4072, 1 / 7) == 4  # SC 116th
         assert rate_proportionality(0.1111, 0.3802, 2 / 9) == 100  # TN 116th
         assert rate_proportionality(0.1216, 0.4370, 11.6218 / 36) == 71  # TX 116th
+
+    def test_measure_proportionality(self) -> None:
+        Vf = 0.5
+        Sf = 0.5
+
+        assert approx_equal(measure_proportionality(0.25, Vf, Sf), -25.0)
+        assert approx_equal(measure_proportionality(0.0, Vf, Sf), 100.0)
 
     def test_rate_competitiveness(self) -> None:
         # Completely uncompetitive

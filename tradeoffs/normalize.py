@@ -3,7 +3,8 @@
 """
 NORMALIZE
 
-NOTE - This is an unmodified copy of the normalize.py module in dra2020/rdapy/rate.
+NOTE - This is an *augmented* copy of the normalize.py module in dra2020/rdapy/rate,
+to support continuous (float) unclipped (less than 0.0, greater than 100.0) ratings.
 """
 
 # Constants
@@ -15,7 +16,8 @@ DISTANCE_WEIGHT: int = 2  # Square deviations from the ideal
 class Normalizer:
     raw_num: float
     wip_num: float
-    normalized_num: int
+    normalized_int: int
+    normalized_float: float
 
     def __init__(self, raw_value: float) -> None:
         self.raw_num = raw_value
@@ -31,7 +33,8 @@ class Normalizer:
 
     # Invert a value in the unit range [0.0–1.0] (so that bigger is better).
     def invert(self) -> float:
-        assert (self.wip_num >= 0.0) and (self.wip_num <= 1.0)
+        # Not clipped
+        # assert (self.wip_num >= 0.0) and (self.wip_num <= 1.0)
 
         self.wip_num = 1.0 - self.wip_num
         return self.wip_num
@@ -59,7 +62,8 @@ class Normalizer:
         min_range: float = min(begin_range, end_range)
         max_range: float = max(begin_range, end_range)
 
-        assert (self.wip_num >= min_range) and (self.wip_num <= max_range)
+        # Not clipped
+        # assert (self.wip_num >= min_range) and (self.wip_num <= max_range)
 
         ranged: float = self.wip_num - min_range
         self.wip_num = abs(ranged / (end_range - begin_range))
@@ -70,7 +74,8 @@ class Normalizer:
     # NOTE - If the range is already such that "bigger is better," then the closer
     #   the value is to 1.0 (the best) the *less* it will decay.
     def decay(self) -> float:
-        assert (self.wip_num >= 0.0) and (self.wip_num <= 1.0)
+        # Not clipped
+        # assert (self.wip_num >= 0.0) and (self.wip_num <= 1.0)
 
         self.wip_num = pow(self.wip_num, DISTANCE_WEIGHT)
         return self.wip_num
@@ -79,8 +84,15 @@ class Normalizer:
     def rescale(self) -> int:
         assert (self.wip_num >= 0.0) and (self.wip_num <= 1.0)
 
-        self.normalized_num = round(self.wip_num * NORMALIZED_RANGE)
-        return self.normalized_num
+        self.normalized_int = round(self.wip_num * NORMALIZED_RANGE)
+        return self.normalized_int
+
+    def rescale_continuous(self) -> float:
+        # Not clipped
+        # assert (self.wip_num >= 0.0) and (self.wip_num <= 1.0)
+
+        self.normalized_float = self.wip_num * NORMALIZED_RANGE
+        return self.normalized_float
 
 
 ### END ###

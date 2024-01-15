@@ -33,9 +33,41 @@ def rate_proportionality(raw_disproportionality: float, Vf: float, Sf: float) ->
         _normalizer.invert()
         _normalizer.rescale()
 
-        rating: int = _normalizer.normalized_num
+        rating: int = _normalizer.normalized_int
 
         return rating
+
+
+def measure_proportionality(
+    raw_disproportionality: float, Vf: float, Sf: float
+) -> float:
+    """ADDED: for continuous, unclipped ratings"""
+
+    # No anti-majoritarian penalty
+    # if is_antimajoritarian(Vf, Sf):
+    #     return 0
+    # else:
+
+    # Adjust bias to incorporate an acceptable winner's bonus based on Vf
+    extra: float = extra_bonus(Vf)
+    adjusted: float = adjust_deviation(Vf, raw_disproportionality, extra)
+
+    # Then normalize
+    _normalizer: Normalizer = Normalizer(adjusted)
+
+    best: float = 0.0
+    worst: float = 0.20
+
+    _normalizer.positive()
+    # Not clipped
+    # _normalizer.clip(worst, best)
+    _normalizer.unitize(worst, best)
+    _normalizer.invert()
+    _normalizer.rescale_continuous()
+
+    rating: float = _normalizer.normalized_float
+
+    return rating
 
 
 ### RATE COMPETITIVENESS ###
@@ -57,7 +89,7 @@ def rate_competitiveness(raw_cdf: float) -> int:
     _normalizer.unitize(worst, best)
     _normalizer.rescale()
 
-    rating: int = _normalizer.normalized_num
+    rating: int = _normalizer.normalized_int
 
     return rating
 
@@ -107,7 +139,7 @@ def rate_reock(raw_value: float) -> int:
     _normalizer.unitize(worst, best)
     _normalizer.rescale()
 
-    return _normalizer.normalized_num
+    return _normalizer.normalized_int
 
 
 def rate_polsby(raw_value: float) -> int:
@@ -120,7 +152,7 @@ def rate_polsby(raw_value: float) -> int:
     _normalizer.unitize(worst, best)
     _normalizer.rescale()
 
-    return _normalizer.normalized_num
+    return _normalizer.normalized_int
 
 
 def rate_compactness(reock_rating: int, polsby_rating: int) -> int:
@@ -178,7 +210,7 @@ def rate_county_splitting(
     _normalizer.rescale()
 
     # 09-07-21 - Preserve max value (100) for only when no counties are split
-    rating: int = _normalizer.normalized_num
+    rating: int = _normalizer.normalized_int
     if (rating == 100) and (raw_county_splitting > 1.0):
         rating = 100 - 1
 
@@ -204,7 +236,7 @@ def rate_district_splitting(
     _normalizer.rescale()
 
     # 09-07-21 - Preserve max value (100) for only when no districts are split
-    rating = _normalizer.normalized_num
+    rating = _normalizer.normalized_int
     if (rating == 100) and (raw_district_splitting > 1.0):
         rating = 100 - 1
 
