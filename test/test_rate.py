@@ -346,6 +346,48 @@ class TestRatings:
         # Polsby-Popper: too high
         assert rate_polsby(POLSBY_MAX + EPSILON) == 100
 
+    def test_measure_compactness(self) -> None:
+        assert approx_equal(measure_compactness(30.0, 60.0), 45.0)
+
+        # Reock compactness scorer
+        # Reock: in range (AL)
+        assert approx_equal(measure_reock(0.3848), 53.9199, 2)
+
+        # Reock: in range (NC)
+        assert approx_equal(measure_reock(0.3373), 34.9199, 2)
+
+        # Reock: min
+        assert approx_equal(measure_reock(REOCK_MIN), 0.0)
+
+        # Reock: max
+        assert approx_equal(measure_reock(REOCK_MAX), 100.0)
+
+        # Reock: too low
+        assert measure_reock(REOCK_MIN - 0.05) < 0.0
+
+        # Reock: too high
+        assert measure_reock(REOCK_MAX + 0.05) > 100.0
+
+        # Polsby-Popper compactness scorer
+
+        # Polsby-Popper: in range (AL)
+        assert rate_polsby(0.1860) == 21
+
+        # Polsby-Popper: in range (NC)
+        assert rate_polsby(0.2418) == 35
+
+        # Polsby-Popper: min
+        assert rate_polsby(POLSBY_MIN) == 0
+
+        # Polsby-Popper: max
+        assert rate_polsby(POLSBY_MAX) == 100
+
+        # Polsby-Popper: too low
+        assert rate_polsby(POLSBY_MIN - EPSILON) == 0
+
+        # Polsby-Popper: too high
+        assert rate_polsby(POLSBY_MAX + EPSILON) == 100
+
     def test_rate_splitting(self) -> None:
         # Combine splitting ratings
 

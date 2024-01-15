@@ -104,7 +104,7 @@ def measure_competitiveness(raw_cdf: float) -> float:
 
     # Not clipped
     # _normalizer.clip(worst, best)
-    _normalizer.unitize(worst, best)
+    _normalizer.unitize_positive_scale(worst, best)
     _normalizer.rescale_continuous()
 
     rating: float = _normalizer.normalized_float
@@ -200,6 +200,51 @@ def rate_compactness(reock_rating: int, polsby_rating: int) -> int:
         ((reock_rating * reock_weight) + (polsby_rating * polsby_weight))
         / NORMALIZED_RANGE
     )
+
+    return rating
+
+
+def measure_reock(raw_value: float) -> float:
+    """ADDED: for continuous, unclipped ratings"""
+
+    _normalizer: Normalizer = Normalizer(raw_value)
+
+    worst: float = REOCK_MIN
+    best: float = REOCK_MAX
+
+    # Not clipped
+    # _normalizer.clip(worst, best)
+    _normalizer.unitize_positive_scale(worst, best)
+    _normalizer.rescale_continuous()
+
+    return _normalizer.normalized_float
+
+
+def measure_polsby(raw_value: float) -> float:
+    """ADDED: for continuous, unclipped ratings"""
+
+    _normalizer: Normalizer = Normalizer(raw_value)
+
+    worst: float = POLSBY_MIN
+    best: float = POLSBY_MAX
+
+    # Not clipped
+    # _normalizer.clip(worst, best)
+    _normalizer.unitize_positive_scale(worst, best)
+    _normalizer.rescale_continuous()
+
+    return _normalizer.normalized_float
+
+
+def measure_compactness(reock_rating: float, polsby_rating: float) -> float:
+    """ADDED: for continuous, unclipped ratings"""
+
+    reock_weight: float = 50.0
+    polsby_weight: float = NORMALIZED_RANGE - reock_weight
+
+    rating: float = (
+        (reock_rating * reock_weight) + (polsby_rating * polsby_weight)
+    ) / NORMALIZED_RANGE
 
     return rating
 

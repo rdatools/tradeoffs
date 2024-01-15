@@ -70,6 +70,19 @@ class Normalizer:
 
         return self.wip_num
 
+    def unitize_positive_scale(self, begin_range: float, end_range: float) -> float:
+        # Handle the ends of the range being given either order
+        min_range: float = min(begin_range, end_range)
+        max_range: float = max(begin_range, end_range)
+
+        # Not clipped
+        # assert (self.wip_num >= min_range) and (self.wip_num <= max_range)
+
+        ranged: float = self.wip_num - min_range
+        self.wip_num = ranged / (end_range - begin_range)
+
+        return self.wip_num
+
     # Decay a value in the unit range [0.0–1.0] by its distance from zero.
     # NOTE - If the range is already such that "bigger is better," then the closer
     #   the value is to 1.0 (the best) the *less* it will decay.
