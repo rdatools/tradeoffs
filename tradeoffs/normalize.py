@@ -2,6 +2,8 @@
 
 """
 NORMALIZE
+
+NOTE - This is an unmodified copy of the normalize.py module in dra2020/rdapy/rate.
 """
 
 # Constants

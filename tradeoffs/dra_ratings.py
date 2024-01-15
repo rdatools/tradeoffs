@@ -2,6 +2,9 @@
 
 """
 DRA-SPECIFIC RATINGS ("SCORES")
+
+NOTE - This is an *augmented* copy of the dra_ratings.py module in dra2020/rdapy/rate,
+to enable continuous (float) unclipped (less than 0.0, greater than 100.0) ratings.
 """
 
 from .normalize import Normalizer, NORMALIZED_RANGE

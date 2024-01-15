@@ -2,6 +2,8 @@
 
 """
 ROUGH EQUALITY UTILITIES
+
+NOTE - This is an unmodified copy of the equal.py module in dra2020/rdapy/testutils.
 """
 
 
