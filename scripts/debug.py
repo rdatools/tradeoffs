@@ -50,7 +50,7 @@ def main() -> None:
     N: int = int(metadata["D"])
     seed: int = starting_seed(args.state, N)
 
-    ## Get a plan and ratings for debugging ##
+    ## TODO - Get a plan and ratings for debugging ##
 
     frontier: List[Dict[str, Any]] = frontiers["frontiers"][
         "proportionality_compactness"
@@ -64,48 +64,7 @@ def main() -> None:
 
     ##
 
-    ep: EPlan = EPlan(
-        district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose
-    )
-
-    random_districts: List[
-        Tuple[DistrictOffset, DistrictOffset]
-    ] = ep.random_districts()
-
-    if args.verbose:
-        print(f"... # pairs of adjacent districts: {len(random_districts)}")
-
-    for pair in random_districts:
-        # TODO - Convert the underlying representation to a list?
-        d1_features: List[Offset] = list(ep.district_features(pair[0]))
-        d2_features: List[Offset] = list(ep.district_features(pair[1]))
-
-        moves_from_one: List[Move]
-        moves_from_two: List[Move]
-        moves_from_one, moves_from_two = ep.random_moves(pair)
-
-        if args.verbose:
-            print(
-                f"... # moves: {pair[0]} -> {pair[1]} = {len(moves_from_one)} | {pair[1]} -> {pair[0]} = {len(moves_from_two)}"
-            )
-
-        # TODO - Add the logic to alternate betwee the lists and end with the shortest one
-        for move in moves_from_one:
-            feature: Offset = move.feature
-            district: DistrictOffset = move.from_district
-
-            proposed: List[
-                Offset
-            ] = d1_features.copy()  # TODO - The list of features has change with moves!
-            proposed.remove(feature)
-
-            if not ep._is_connected(proposed):
-                if args.verbose:
-                    print(
-                        f"...... district {district} would not be connected, if feature {feature} were removed!"
-                    )
-
-    # ep.to_csv("output/test_plan.csv")
+    # TODO - Rate it
 
     pass
 

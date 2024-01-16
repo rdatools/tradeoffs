@@ -5,7 +5,9 @@ SCORING
 from typing import Any, Dict, List, Tuple
 
 from rdabase import Assignment
+
 import rdapy as rda
+from rdascore import aggregate_data_by_district, aggregate_shapes_by_district
 
 from .datatypes import DistrictID, GeoID, Offset
 
@@ -13,19 +15,24 @@ from .datatypes import DistrictID, GeoID, Offset
 class Scorer:
     """A scorer to rate plans for a set of data & shapes."""
 
-    _data: Dict[str, Dict[str, str | int]]
-    _shapes: Dict[str, Any]
-    _metadata: Dict[str, Any]
+    _n_districts: int
+    _n_counties: int
+    _county_to_index: Dict[str, int]
+    _district_to_index: Dict[int | str, int]
 
     def __init__(
         self,
         data: Dict[str, Dict[str, str | int]],
         shapes: Dict[str, Any],
+        graph: Dict[GeoID, List[GeoID]],
         metadata: Dict[str, Any],
     ) -> None:
-        self._data = data
-        self._shapes = shapes
-        self._metadata = metadata
+        """Pre-process data & shapes for scoring."""
+
+        self._n_districts: int = metadata["D"]
+        self._n_counties: int = metadata["C"]
+        self._county_to_index: Dict[str, int] = metadata["county_to_index"]
+        self._district_to_index: Dict[int | str, int] = metadata["district_to_index"]
 
     def rate(
         self, assignments: List[Assignment], dimensions: Tuple[str, str]

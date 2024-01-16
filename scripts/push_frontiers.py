@@ -50,7 +50,7 @@ def main() -> None:
 
     data: Dict[str, Dict[str, str | int]] = load_data(args.data)
     shapes: Dict[str, Any] = load_shapes(args.shapes)
-    graph: Dict[str, List[str]] = load_graph(args.graph)
+    graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))

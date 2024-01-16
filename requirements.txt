@@ -1,5 +1,8 @@
 numpy
 pandas
 plotly
+pytest
 rdabase
 rdaensemble
+rdapy
+rdascore
