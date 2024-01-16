@@ -10,15 +10,26 @@ import rdapy as rda
 from rdascore import aggregate_data_by_district, aggregate_shapes_by_district
 
 from .datatypes import DistrictID, GeoID, Offset
+from .dra_ratings import measure_proportionality
 
 
 class Scorer:
     """A scorer to rate plans for a set of data & shapes."""
 
+    _data: Dict[str, Dict[str, str | int]]
+    _shapes: Dict[str, Any]
+    _graph: Dict[GeoID, List[GeoID]]
+    _metadata: Dict[str, Any]
+
     _n_districts: int
     _n_counties: int
     _county_to_index: Dict[str, int]
     _district_to_index: Dict[int | str, int]
+
+    _assignments: List[Assignment]
+    _aggregates: Dict[str, Any]
+    _partisan_metrics: Dict[str, float]
+    _district_props: List[Dict[str, Any]]
 
     def __init__(
         self,
@@ -28,6 +39,11 @@ class Scorer:
         metadata: Dict[str, Any],
     ) -> None:
         """Pre-process data & shapes for scoring."""
+
+        self._data: Dict[str, Dict[str, str | int]] = data
+        self._shapes: Dict[str, Any] = shapes
+        self._graph: Dict[GeoID, List[GeoID]] = graph
+        self._metadata: Dict[str, Any] = metadata
 
         self._n_districts: int = metadata["D"]
         self._n_counties: int = metadata["C"]
@@ -39,20 +55,23 @@ class Scorer:
     ) -> Tuple[float, float]:
         """Rate a plan on a pair of dimensions."""
 
+        self._aggregates = None
+        self._partisan_metrics = None
+        self._district_props = None
         pair: List[float] = list()
 
         for d in dimensions:
             match d:
                 case "proportionality":
-                    pair.append(self._rate_proportionality(assignments))
+                    pair.append(self._measure_proportionality(assignments))
                 case "competitiveness":
-                    pair.append(self._rate_competitiveness(assignments))
+                    pair.append(self._measure_competitiveness(assignments))
                 case "minority":
-                    pair.append(self._rate_minority(assignments))
+                    pair.append(self._measure_minority(assignments))
                 case "compactness":
-                    pair.append(self._rate_compactness(assignments))
+                    pair.append(self._measure_compactness(assignments))
                 case "splitting":
-                    pair.append(self._rate_splitting(assignments))
+                    pair.append(self._measure_splitting(assignments))
                 case _:
                     raise ValueError(f"Unknown dimension: {d}")
 
@@ -60,40 +79,123 @@ class Scorer:
 
     ### PRIVATE ###
 
-    def _rate_proportionality(self, assignments: List[Assignment]) -> float:
-        """Rate a plan on proportionality."""
+    def _get_aggregates(self) -> Dict[str, Any]:
+        if self._aggregates is None:
+            self._aggregates = aggregate_data_by_district(
+                self._assignments,
+                self._data,
+                self._n_districts,
+                self._n_counties,
+                self._county_to_index,
+                self._district_to_index,
+            )
 
-        # TODO
+        return self._aggregates
 
-        return 0.0
+    def _get_partisan_metrics(self) -> Dict[str, float]:
+        if self._partisan_metrics is None:
+            self._partisan_metrics = calc_partisan_metrics(
+                self._aggregates["total_d_votes"],
+                self._aggregates["total_votes"],
+                self._aggregates["d_by_district"],
+                self._aggregates["tot_by_district"],
+            )
 
-    def _rate_competitiveness(self, assignments: List[Assignment]) -> float:
-        """Rate a plan on competitiveness."""
+        return self._partisan_metrics
 
-        # TODO
+    def _get_district_props(self) -> List[Dict[str, Any]]:
+        if self._district_props is None:
+            self._district_props = aggregate_shapes_by_district(
+                self._assignments, self._shapes, self._graph, self._n_districts
+            )
 
-        return 0.0
+        return self._district_props
 
-    def _rate_minority(self, assignments: List[Assignment]) -> float:
+    def _measure_proportionality(self, assignments: List[Assignment]) -> float:
+        """Measure a plan's proportionality."""
+
+        aggregates: Dict[str, Any] = self._get_aggregates()
+        partisan_metrics: Dict[str, float] = self._get_partisan_metrics()
+
+        raw_disproportionality: float = partisan_metrics["pr_deviation"]
+        Vf: float = (partisan_metrics["estimated_vote_pct"],)
+        Sf: float = partisan_metrics["estimated_seat_pct"]
+
+        measure: float = measure_proportionality(raw_disproportionality, Vf, Sf)
+
+        return measure
+
+    def _measure_competitiveness(self, assignments: List[Assignment]) -> float:
+        """Measure a plan's competitiveness."""
+
+        aggregates: Dict[str, Any] = self._get_aggregates()
+        partisan_metrics: Dict[str, float] = self._get_partisan_metrics()
+
+        raw_cdf: float = partisan_metrics["competitive_district_pct"]
+
+        measure: float = measure_competitiveness(raw_cdf)
+
+        return measure
+
+    def _measure_minority(self, assignments: List[Assignment]) -> float:
         """Rate a plan on minority representation."""
 
+        aggregates: Dict[str, Any] = self._get_aggregates()
         # TODO
 
         return 0.0
 
-    def _rate_compactness(self, assignments: List[Assignment]) -> float:
+    def _measure_compactness(self, assignments: List[Assignment]) -> float:
         """Rate a plan on compactness."""
 
+        district_props: List[Dict[str, Any]] = self._get_district_props()
         # TODO
 
         return 0.0
 
-    def _rate_splitting(self, assignments: List[Assignment]) -> float:
+    def _measure_splitting(self, assignments: List[Assignment]) -> float:
         """Rate a plan on county-district splitting."""
 
+        aggregates: Dict[str, Any] = self._get_aggregates()
         # TODO
 
         return 0.0
+
+
+def calc_partisan_metrics(
+    total_d_votes: int,
+    total_votes: int,
+    d_by_district: Dict[int, int],
+    tot_by_district: Dict[int, int],
+) -> Dict[str, float]:
+    """Calulate *select* partisan metrics.
+
+    NOTE - This is a subset of the metrics in the rdascore package.
+    """
+
+    partisan_metrics: Dict[str, float] = dict()
+
+    Vf: float = total_d_votes / total_votes
+    Vf_array: List[float] = [
+        d / tot for d, tot in zip(d_by_district.values(), tot_by_district.values())
+    ]
+    partisan_metrics["estimated_vote_pct"] = Vf
+
+    estS: float = rda.est_seats(Vf_array)
+    estSf: float = estS / N
+    partisan_metrics["estimated_seat_pct"] = estSf
+
+    deviation: float = rda.calc_disproportionality_from_best(
+        estSf, bestSf
+    )  # This is the dis-proportionality
+
+    cD: float = rda.est_competitive_districts(Vf_array)
+    cDf: float = cD / N
+
+    partisan_metrics["pr_deviation"] = deviation
+    partisan_metrics["competitive_district_pct"] = cDf
+
+    return partisan_metrics
 
 
 ### MAKE A ONE-ROW SCORECARD FROM A DRA MAP-ANALYTICS.JSON EXPORT ###
