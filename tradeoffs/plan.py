@@ -187,25 +187,6 @@ class EPlan:
 
         return border_segments
 
-    # TODO - DELETE?
-    # def _border_features(
-    #     self, district_one: DistrictOffset, district_two: DistrictOffset
-    # ) -> Set[FeatureOffset]:
-    #     """Get the offsets for features that could be reassigned from one district to another."""
-
-    #     seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-    #         (district_one, district_two)
-    #         if district_one < district_two
-    #         else (district_two, district_one)
-    #     )
-
-    #     if seg_key not in self._border_segments:
-    #         raise Exception("No border segments between these districts!")
-
-    #     features: Set[FeatureOffset] = self._border_segments[seg_key][district_one]
-
-    #     return features
-
     ### PUBLIC ###
 
     def random_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:

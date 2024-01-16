@@ -17,7 +17,7 @@ from .scores import (
 from .plan import *  # TODO - be specific
 from .connected import is_connected
 from .normalize import Normalizer
-from .dra_ratings import *  # TODO - be specific
+from .dra_ratings import *
 from .readwrite import *
 from .datatypes import *
 
