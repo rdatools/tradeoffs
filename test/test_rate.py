@@ -697,5 +697,36 @@ class TestRatings:
         assert rate_district_splitting(1.4200, nC, nLD) == 44
         assert abs(rate_splitting(0, 44) - 22) <= 1
 
+    def test_rate_splitting(self) -> None:
+        # Combine splitting ratings
+
+        # Some county- & district splitting
+        assert abs(rate_splitting(30, 60) - 45) <= 1
+
+        # Little county- & district- splitting
+        assert rate_splitting(99, 100) == 99
+
+        # No county- & district- splitting
+        assert rate_splitting(100, 100) == 100
+
+        # Rate state splitting
+
+        # XX	C	CD	C_DC'	C_CD'	UD	U_DC'	U_CD'	LD	L_DC'	L_CD'	C_CT	C_DT	C_RC	C_RD	C_R'	U_CT	U_DT	U_RC	U_RD	U_R'	L_CT	L_DT	L_RC	L_RD	L_R'
+        # AZ	15	9	1.3520	1.4240	30	1.7100	1.2000				1.11	1.20	33	44	39	1.20	1.09	0	71	36
+
+        # AZ splitting
+
+        nC: int = 15
+        nCD: int = 9
+        nUD: int = 30
+
+        assert approx_equal(measure_county_splitting(1.3520, nC, nCD), 32.8222, 4)
+        assert approx_equal(measure_district_splitting(1.4240, nC, nCD), 43.4343, 4)
+        assert approx_equal(measure_splitting(32.8222, 43.4343), 38.12825, 4)
+
+        assert approx_equal(measure_county_splitting(1.7100, nC, nUD), -28.7879, 4)
+        assert approx_equal(measure_district_splitting(1.2000, nC, nUD), 70.4361, 4)
+        assert approx_equal(measure_splitting(-28.7879, 70.4361), 20.8241, 4)
+
 
 ### END ###

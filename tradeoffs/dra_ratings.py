@@ -5,6 +5,8 @@ DRA-SPECIFIC RATINGS ("SCORES")
 
 NOTE - This is an *augmented* copy of the dra_ratings.py module in dra2020/rdapy/rate,
 to enable continuous (float) unclipped (less than 0.0, greater than 100.0) ratings.
+The "rate_" functions are the original integer versions, and the "measure_" functions
+are the new continuous unclipped versions.
 """
 
 from .normalize import Normalizer, NORMALIZED_RANGE
@@ -338,6 +340,65 @@ def rate_splitting(county_rating: int, district_rating: int) -> int:
     # The max county- or district-splitting rating is 99 when there are splits.
     if (rating == 100) and ((county_rating < 100) or (district_rating < 100)):
         rating = 100 - 1
+
+    return rating
+
+
+def measure_county_splitting(
+    raw_county_splitting: float, n_counties: int, n_districts: int
+) -> float:
+    _normalizer: Normalizer = Normalizer(raw_county_splitting)
+
+    # The practical ideal raw measurement depends on the # of counties & districts
+    best: float = (
+        best_target(n_counties, n_districts)
+        if (n_counties > n_districts)
+        else MAX_SPLITTING
+    )
+    worst: float = best * WORST_MULTIPLIER
+
+    # Not clipped
+    # _normalizer.clip(best, worst)
+    _normalizer.unitize(best, worst)
+    _normalizer.invert()
+    _normalizer.rescale_continuous()
+
+    rating: float = _normalizer.normalized_float
+
+    return rating
+
+
+def measure_district_splitting(
+    raw_district_splitting: float, n_counties: int, n_districts: int
+) -> float:
+    _normalizer: Normalizer = Normalizer(raw_district_splitting)
+
+    # The practical ideal raw measurement depends on the # of counties & districts
+    best: float = (
+        MAX_SPLITTING
+        if (n_counties > n_districts)
+        else best_target(n_counties, n_districts)
+    )
+    worst: float = best * WORST_MULTIPLIER
+
+    # Not clipped
+    # _normalizer.clip(best, worst)
+    _normalizer.unitize(best, worst)
+    _normalizer.invert()
+    _normalizer.rescale_continuous()
+
+    rating: float = _normalizer.normalized_float
+
+    return rating
+
+
+def measure_splitting(county_rating: float, district_rating: float) -> float:
+    county_weight: int = 50
+    district_weight: int = NORMALIZED_RANGE - county_weight
+
+    rating: float = (
+        (county_rating * county_weight) + (district_rating * district_weight)
+    ) / NORMALIZED_RANGE
 
     return rating
 
