@@ -102,7 +102,7 @@ class EPlan:
             print(self)
 
     def __repr__(self) -> str:
-        # TODO - More ...
+        # TODO - Flesh this out
         return f"Plan({self._generation}: {self._metrics} - {self._ratings})"
 
     ### PRIVATE ###
@@ -245,51 +245,6 @@ class EPlan:
         ]
 
         write_csv(plan_path, plan, ["GEOID", "DISTRICT"])
-
-    # TODO - More ...
-
-
-# TODO - ???
-def is_better(dimension: str, currents: List[float], proposeds: List[float]) -> bool:
-    """Is one (pair of) raw metric(s) better than another?"""
-
-    def more_proportional() -> bool:
-        """Is one proportionality metric better than another?"""
-
-        current: float = currents[0]
-        proposed: float = proposeds[0]
-
-        return proposed < current
-
-    def more_competitive() -> bool:
-        """Is one competitiveness metric better than another?"""
-
-        current: float = currents[0]
-        proposed: float = proposeds[0]
-
-        return proposed > current
-
-    def better_minority() -> bool:
-        """Is one minority metric better than another?"""
-
-        # TODO
-        return proposeds[0] > currents[0] and proposeds[1] > currents[1]
-
-    def more_compact() -> bool:
-        """Is one compactness metric better than another?"""
-
-        # TODO
-        return proposeds[0] > currents[0] and proposeds[1] > currents[1]
-
-    def less_splitting() -> bool:
-        """Is one splitting metric better than another?"""
-
-        # TODO
-        return proposeds[0] < currents[0] and proposeds[1] < currents[1]
-
-    # TODO
-
-    return True  # TODO
 
 
 ### END ###

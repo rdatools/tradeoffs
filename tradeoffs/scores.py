@@ -171,6 +171,17 @@ class Scorer:
         return 0.0
 
 
+def is_better(one: Tuple[float, float], two: Tuple[float, float]) -> bool:
+    """Is the 2nd pair of measures better than the 1st?
+
+    Two must be better than one on one or the other measure.
+    """
+
+    return (one[0] < two[0] and one[1] <= two[1]) or (
+        one[0] <= two[0] and one[1] < two[1]
+    )
+
+
 def calc_partisan_metrics(
     total_d_votes: int,
     total_votes: int,
@@ -211,6 +222,8 @@ def calc_partisan_metrics(
 
     return partisan_metrics
 
+
+# TODO - More ...
 
 ### MAKE A ONE-ROW SCORECARD FROM A DRA MAP-ANALYTICS.JSON EXPORT ###
 
