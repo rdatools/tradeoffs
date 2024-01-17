@@ -37,6 +37,8 @@ class Scorer:
         shapes: Dict[str, Any],
         graph: Dict[GeoID, List[GeoID]],
         metadata: Dict[str, Any],
+        *,
+        verbose: bool = False,
     ) -> None:
         """Pre-process data & shapes for scoring."""
 
@@ -50,6 +52,10 @@ class Scorer:
         self._county_to_index: Dict[str, int] = metadata["county_to_index"]
         self._district_to_index: Dict[int | str, int] = metadata["district_to_index"]
 
+        self._aggregates = None
+        self._partisan_metrics = None
+        self._district_props = None
+
     def measure_dimensions(
         self, assignments: List[Assignment], dimensions: Tuple[str, str]
     ) -> Tuple[float, float]:
@@ -58,20 +64,22 @@ class Scorer:
         self._aggregates = None
         self._partisan_metrics = None
         self._district_props = None
+        self._assignments = assignments
+
         pair: List[float] = list()
 
         for d in dimensions:
             match d:
                 case "proportionality":
-                    pair.append(self._measure_proportionality(assignments))
+                    pair.append(self._measure_proportionality())
                 case "competitiveness":
-                    pair.append(self._measure_competitiveness(assignments))
+                    pair.append(self._measure_competitiveness())
                 case "minority":
-                    pair.append(self._measure_minority(assignments))
+                    pair.append(self._measure_minority())
                 case "compactness":
-                    pair.append(self._measure_compactness(assignments))
+                    pair.append(self._measure_compactness())
                 case "splitting":
-                    pair.append(self._measure_splitting(assignments))
+                    pair.append(self._measure_splitting())
                 case _:
                     raise ValueError(f"Unknown dimension: {d}")
 
@@ -112,7 +120,7 @@ class Scorer:
 
         return self._district_props
 
-    def _measure_proportionality(self, assignments: List[Assignment]) -> float:
+    def _measure_proportionality(self) -> float:
         """Measure a plan's proportionality."""
 
         aggregates: Dict[str, Any] = self._get_aggregates()
@@ -126,7 +134,7 @@ class Scorer:
 
         return measure
 
-    def _measure_competitiveness(self, assignments: List[Assignment]) -> float:
+    def _measure_competitiveness(self) -> float:
         """Measure a plan's competitiveness."""
 
         aggregates: Dict[str, Any] = self._get_aggregates()
@@ -138,7 +146,7 @@ class Scorer:
 
         return measure
 
-    def _measure_minority(self, assignments: List[Assignment]) -> float:
+    def _measure_minority(self) -> float:
         """Rate a plan on minority representation."""
 
         aggregates: Dict[str, Any] = self._get_aggregates()
@@ -146,7 +154,7 @@ class Scorer:
 
         return 0.0
 
-    def _measure_compactness(self, assignments: List[Assignment]) -> float:
+    def _measure_compactness(self) -> float:
         """Rate a plan on compactness."""
 
         district_props: List[Dict[str, Any]] = self._get_district_props()
@@ -154,7 +162,7 @@ class Scorer:
 
         return 0.0
 
-    def _measure_splitting(self, assignments: List[Assignment]) -> float:
+    def _measure_splitting(self) -> float:
         """Rate a plan on county-district splitting."""
 
         aggregates: Dict[str, Any] = self._get_aggregates()

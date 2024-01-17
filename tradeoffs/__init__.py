@@ -6,7 +6,7 @@ from .frontiers import (
     is_pareto_efficient_value,
 )
 from .notable_maps import id_most_notable_maps
-from .plots import *
+from .plots import *  # TODO - Be specific
 from .scores import (
     Scorer,
     cull_partisan_metrics,
@@ -15,7 +15,7 @@ from .scores import (
     cull_splitting_metrics,
     cull_ratings,
 )
-from .plan import *  # TODO - be specific
+from .plan import *  # TODO - Be specific
 from .connected import is_connected
 from .normalize import Normalizer
 from .dra_ratings import *

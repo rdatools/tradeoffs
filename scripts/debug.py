@@ -6,11 +6,13 @@ DEBUGGING SCRIPT
 
 from typing import Any, List, Dict, NamedTuple
 
+import itertools
+
 from rdabase import read_json, starting_seed
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
-from tradeoffs import *  # TODO
+from tradeoffs import Scorer
 
 
 class Args(NamedTuple):
@@ -50,21 +52,34 @@ def main() -> None:
     N: int = int(metadata["D"])
     seed: int = starting_seed(args.state, N)
 
-    ## TODO - Get a plan and ratings for debugging ##
+    # Instantiate a Scorer
 
-    frontier: List[Dict[str, Any]] = frontiers["frontiers"][
-        "proportionality_compactness"
-    ]
+    s: Scorer = Scorer(
+        data,
+        shapes,
+        graph,
+        metadata,
+        verbose=args.verbose,
+    )
 
-    # TODO - Use the offset in the frontier, to get the plan in the ensemble
+    # TODO - For each frontier (pair of dimensions) ...
+    pairs: List[Tuple[str, str]] = list(itertools.combinations(ratings_dimensions, 2))
+    pair: str = ("proportionality", "competitiveness")
+    frontier_key: str = "_".join(pair)
+    points: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+    # TODO - For each point in the frontier ...
+    # TODO - Use the offset in the frontier to get the plan from the ensemble
+
+    # HACK - Get a plan and ratings for debugging
 
     p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
     name: Name = str(p["name"])
     district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
+    assignments: List[Assignment] = make_plan(district_by_geoid)
 
-    ##
+    # TODO - Evaluate the plan
 
-    # TODO - Evaluate it
+    measurements: Tuple[float, float] = s.measure_dimensions(assignments, pair)
 
     pass
 
