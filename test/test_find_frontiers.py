@@ -8,7 +8,7 @@ import random
 import pandas as pd
 import numpy as np
 
-from tradeoffs import is_pareto_efficient_value
+from tradeoffs.frontiers import is_pareto_efficient_value
 
 
 class TestFindFrontiers:

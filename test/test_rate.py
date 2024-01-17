@@ -9,7 +9,7 @@ NOTE - This is an *augmented* copy of the test_rate.py module from dra2020/rdapy
 import random
 
 # from rdapy.rate import *
-from tradeoffs import *
+from tradeoffs.dra_ratings import *
 from testutils import *
 
 EPSILON: float = 1 / 10**6

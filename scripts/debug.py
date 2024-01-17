@@ -64,7 +64,7 @@ def main() -> None:
 
     ##
 
-    # TODO - Rate it
+    # TODO - Evaluate it
 
     pass
 

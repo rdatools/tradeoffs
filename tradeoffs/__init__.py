@@ -8,6 +8,7 @@ from .frontiers import (
 from .notable_maps import id_most_notable_maps
 from .plots import *
 from .scores import (
+    Scorer,
     cull_partisan_metrics,
     cull_minority_metrics,
     cull_compactness_metrics,
