@@ -2,7 +2,7 @@
 SCORING
 """
 
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, Optional
 
 from rdabase import Assignment
 
@@ -10,7 +10,7 @@ import rdapy as rda
 from rdascore import aggregate_data_by_district, aggregate_shapes_by_district
 
 from .datatypes import DistrictID, GeoID, Offset
-from .dra_ratings import measure_proportionality
+from .dra_ratings import measure_proportionality, measure_competitiveness
 
 
 class Scorer:
@@ -27,9 +27,9 @@ class Scorer:
     _district_to_index: Dict[int | str, int]
 
     _assignments: List[Assignment]
-    _aggregates: Dict[str, Any]
-    _partisan_metrics: Dict[str, float]
-    _district_props: List[Dict[str, Any]]
+    _aggregates: Optional[Dict[str, Any]]
+    _partisan_metrics: Optional[Dict[str, float]]
+    _district_props: Optional[List[Dict[str, Any]]]
 
     def __init__(
         self,
@@ -50,10 +50,10 @@ class Scorer:
         self._county_to_index: Dict[str, int] = metadata["county_to_index"]
         self._district_to_index: Dict[int | str, int] = metadata["district_to_index"]
 
-    def rate(
+    def measure_dimensions(
         self, assignments: List[Assignment], dimensions: Tuple[str, str]
     ) -> Tuple[float, float]:
-        """Rate a plan on a pair of dimensions."""
+        """Evaluate a plan on a pair of dimensions."""
 
         self._aggregates = None
         self._partisan_metrics = None
@@ -93,6 +93,7 @@ class Scorer:
         return self._aggregates
 
     def _get_partisan_metrics(self) -> Dict[str, float]:
+        assert self._aggregates is not None
         if self._partisan_metrics is None:
             self._partisan_metrics = calc_partisan_metrics(
                 self._aggregates["total_d_votes"],
@@ -118,7 +119,7 @@ class Scorer:
         partisan_metrics: Dict[str, float] = self._get_partisan_metrics()
 
         raw_disproportionality: float = partisan_metrics["pr_deviation"]
-        Vf: float = (partisan_metrics["estimated_vote_pct"],)
+        Vf: float = partisan_metrics["estimated_vote_pct"]
         Sf: float = partisan_metrics["estimated_seat_pct"]
 
         measure: float = measure_proportionality(raw_disproportionality, Vf, Sf)
@@ -181,9 +182,14 @@ def calc_partisan_metrics(
     ]
     partisan_metrics["estimated_vote_pct"] = Vf
 
+    N: int = len(Vf_array)
+
     estS: float = rda.est_seats(Vf_array)
     estSf: float = estS / N
     partisan_metrics["estimated_seat_pct"] = estSf
+
+    bestS: int = rda.calc_best_seats(N, Vf)
+    bestSf: float = bestS / N
 
     deviation: float = rda.calc_disproportionality_from_best(
         estSf, bestSf
