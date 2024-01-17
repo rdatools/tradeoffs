@@ -1,7 +1,5 @@
 """
 DATA TYPES
-
-TODO - Refactor some of this into other repos?
 """
 
 from typing import TypeAlias
