@@ -67,9 +67,9 @@ def measure_proportionality(
     _normalizer.invert()
     _normalizer.rescale_continuous()
 
-    rating: float = _normalizer.normalized_float
+    measurement: float = _normalizer.normalized_float
 
-    return rating
+    return measurement
 
 
 ### RATE COMPETITIVENESS ###
@@ -109,9 +109,9 @@ def measure_competitiveness(raw_cdf: float) -> float:
     _normalizer.unitize_positive_scale(worst, best)
     _normalizer.rescale_continuous()
 
-    rating: float = _normalizer.normalized_float
+    measurement: float = _normalizer.normalized_float
 
-    return rating
+    return measurement
 
 
 ### RATE MINORITY REPRESENTATION ###
@@ -160,9 +160,9 @@ def measure_minority_opportunity(od: float, pod: float, cd: float, pcd: float) -
     opportunity_score: float = (od / pod) * 100.0 if (pod > 0.0) else 0.0
     coalition_score: float = (cd / pcd) * 100.0 if (pcd > 0.0) else 0.0
 
-    rating: float = opportunity_score + (cd_weight * coalition_score)
+    measurement: float = opportunity_score + (cd_weight * coalition_score)
 
-    return rating
+    return measurement
 
 
 ### RATE COMPACTNESS ###
@@ -238,17 +238,17 @@ def measure_polsby(raw_value: float) -> float:
     return _normalizer.normalized_float
 
 
-def measure_compactness(reock_rating: float, polsby_rating: float) -> float:
+def measure_compactness(reock_measurement: float, polsby_measurement: float) -> float:
     """ADDED: for continuous, unclipped ratings"""
 
     reock_weight: float = 50.0
     polsby_weight: float = NORMALIZED_RANGE - reock_weight
 
-    rating: float = (
-        (reock_rating * reock_weight) + (polsby_rating * polsby_weight)
+    measurement: float = (
+        (reock_measurement * reock_weight) + (polsby_measurement * polsby_weight)
     ) / NORMALIZED_RANGE
 
-    return rating
+    return measurement
 
 
 ### RATE SPLITTING ###
@@ -363,9 +363,9 @@ def measure_county_splitting(
     _normalizer.invert()
     _normalizer.rescale_continuous()
 
-    rating: float = _normalizer.normalized_float
+    measurement: float = _normalizer.normalized_float
 
-    return rating
+    return measurement
 
 
 def measure_district_splitting(
@@ -387,9 +387,9 @@ def measure_district_splitting(
     _normalizer.invert()
     _normalizer.rescale_continuous()
 
-    rating: float = _normalizer.normalized_float
+    measurement: float = _normalizer.normalized_float
 
-    return rating
+    return measurement
 
 
 def measure_splitting(county_rating: float, district_rating: float) -> float:
