@@ -75,36 +75,56 @@ def main() -> None:
     if args.verbose:
         print(f"... # pairs of adjacent districts: {len(random_districts)}")
 
-    for pair in random_districts:
-        # TODO - Convert the underlying representation to a list?
-        d1_features: List[Offset] = list(ep.district_features(pair[0]))
-        d2_features: List[Offset] = list(ep.district_features(pair[1]))
-
+    for district_one, district_two in random_districts:
         moves_from_one: List[Move]
         moves_from_two: List[Move]
-        moves_from_one, moves_from_two = ep.random_moves(pair)
+        moves_from_one, moves_from_two = ep.random_moves((district_one, district_two))
 
         if args.verbose:
             print(
-                f"... # moves: {pair[0]} -> {pair[1]} = {len(moves_from_one)} | {pair[1]} -> {pair[0]} = {len(moves_from_two)}"
+                f"... # moves: {district_one} -> {district_two} = {len(moves_from_one)} | {district_two} -> {district_one} = {len(moves_from_two)}"
             )
 
-        # TODO - Add the logic to alternate betwee the lists and end with the shortest one
-        for move in moves_from_one:
-            features: List[FeatureOffset] = move.features
-            district: DistrictOffset = move.from_district
+        # Alternate between the two lists of moves, to try to maintain population balance.
 
-            proposed: List[
-                FeatureOffset
-            ] = d1_features.copy()  # TODO - The list of features has change with moves!
-            for feature in features:
-                proposed.remove(feature)
+        done: bool = False
+        while True:
+            move: Optional[Move] = None
 
-            if not ep._is_connected(proposed):
-                if args.verbose:
-                    print(
-                        f"...... district {district} would not be connected, if ({features}) were moved!"
-                    )
+            # Try a move from district_one to district_two, until successful.
+
+            while True:
+                if len(moves_from_one) == 0:
+                    done = True
+                    break
+
+                move = moves_from_one.pop()
+                if not ep.is_valid(move):
+                    if args.verbose:
+                        print(
+                            f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
+                        )
+
+            pass  # TODO - Move the features ...
+
+            # Try a move from district_two to district_one, until successful.
+
+            while True:
+                if len(moves_from_two) == 0:
+                    done = True
+                    break
+
+                move = moves_from_two.pop()
+                if not ep.is_valid(move):
+                    if args.verbose:
+                        print(
+                            f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
+                        )
+
+            pass  # TODO - Move the features ...
+
+            if done:
+                break
 
     # ep.to_csv("output/test_plan.csv")
 

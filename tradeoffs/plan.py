@@ -2,7 +2,17 @@
 EVOLVING PLAN
 """
 
-from typing import Any, List, Dict, Set, Tuple, TypeAlias, NamedTuple, TypedDict
+from typing import (
+    Any,
+    List,
+    Dict,
+    Set,
+    Tuple,
+    TypeAlias,
+    NamedTuple,
+    TypedDict,
+    Optional,
+)
 
 import random
 
@@ -53,8 +63,7 @@ class EPlan:
     _features: List[Feature]
     _features_index: Dict[GeoID, FeatureOffset]
 
-    _metrics: Tuple[float, float]
-    _ratings: Tuple[int, int]
+    _measurements: Optional[Tuple[float, float]]
 
     _districts: List[District]
     _districts_index: Dict[DistrictID, DistrictOffset]
@@ -75,7 +84,7 @@ class EPlan:
         pop_threshold: float = 0.01,  # +/- 1% for each district
         verbose: bool = False,
     ) -> None:
-        self._generation = 0
+        self._generation = 0  # TODO - Increment this with each move
         random.seed(seed)
 
         assignments: List[Assignment] = make_plan(district_by_geoid)
@@ -94,16 +103,11 @@ class EPlan:
 
         self._border_segments = self._init_border_segments()
 
-        self._metrics = (0.5, 0.5)  # TODO
-        self._ratings = (50, 50)  # TODO
+        self._measurements = None
 
         if verbose:
             print("Starting plan is connected!")
             print(self)
-
-    def __repr__(self) -> str:
-        # TODO - Flesh this out
-        return f"Plan({self._generation}: {self._metrics} - {self._ratings})"
 
     ### PRIVATE ###
 
@@ -182,6 +186,7 @@ class EPlan:
                         d2: set(),
                     }
 
+                # TODO - Make sure borders are initialized correctly (d1 vs. d2)!
                 border_segments[seg_key][d1].add(i)
                 border_segments[seg_key][d2].add(n)
 
@@ -250,6 +255,23 @@ class EPlan:
         random.shuffle(moves_from_two)
 
         return (moves_from_one, moves_from_two)
+
+    def is_valid(self, move: Move) -> bool:
+        """Would this be a valid move?"""
+
+        # TODO - from & to districts are adjacent
+        # TODO - precinct is on the border
+
+        proposed: List[Offset] = list(self.district_features(move.from_district))
+        for feature in move.features:
+            proposed.remove(feature)
+
+        # TODO - Check that the population would be OK
+
+        if not self._is_connected(proposed):
+            return False
+
+        return True
 
     def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
         """Get all feature offsets for a district."""
