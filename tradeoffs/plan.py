@@ -40,7 +40,7 @@ BorderSegment: TypeAlias = Dict[
 
 
 class Move(NamedTuple):
-    feature: FeatureOffset
+    features: List[FeatureOffset]
     from_district: DistrictOffset
     to_district: DistrictOffset
 
@@ -187,6 +187,30 @@ class EPlan:
 
         return border_segments
 
+    def _size_1_moves(
+        self,
+        seg_key: Tuple[DistrictOffset, DistrictOffset],
+        district_one: DistrictOffset,
+        district_two: DistrictOffset,
+    ) -> Tuple[List[Move], List[Move]]:
+        """Generate all size-1 moves between two districts."""
+
+        from_one: List[List[FeatureOffset]] = [
+            [f] for f in list(self._border_segments[seg_key][district_one])
+        ]
+        from_two: List[List[FeatureOffset]] = [
+            [f] for f in list(self._border_segments[seg_key][district_two])
+        ]
+
+        moves_from_one: List[Move] = [
+            Move(m, district_one, district_two) for m in from_one
+        ]
+        moves_from_two: List[Move] = [
+            Move(m, district_two, district_one) for m in from_two
+        ]
+
+        return (moves_from_one, moves_from_two)
+
     ### PUBLIC ###
 
     def random_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
@@ -211,24 +235,19 @@ class EPlan:
         if seg_key not in self._border_segments:
             raise Exception("No border segments between these districts!")
 
-        # TODO - Abstract out random moves of size 1
+        moves_from_one: List[Move]
+        moves_from_two: List[Move]
 
-        features_one: List[FeatureOffset] = list(
-            self._border_segments[seg_key][district_one]
-        )
-        features_two: List[FeatureOffset] = list(
-            self._border_segments[seg_key][district_two]
-        )
+        match size:
+            case 1:
+                moves_from_one, moves_from_two = self._size_1_moves(
+                    seg_key, district_one, district_two
+                )
+            case _:
+                raise Exception("Only size-1 moves are supported right now!")
 
-        random.shuffle(features_one)
-        random.shuffle(features_two)
-
-        moves_from_one: List[Move] = [
-            Move(f, district_one, district_two) for f in features_one
-        ]
-        moves_from_two: List[Move] = [
-            Move(f, district_two, district_one) for f in features_two
-        ]
+        random.shuffle(moves_from_one)
+        random.shuffle(moves_from_two)
 
         return (moves_from_one, moves_from_two)
 
