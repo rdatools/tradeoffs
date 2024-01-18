@@ -62,24 +62,22 @@ def main() -> None:
         verbose=args.verbose,
     )
 
-    # TODO - For each frontier (pair of dimensions) ...
     pairs: List[Tuple[str, str]] = list(itertools.combinations(ratings_dimensions, 2))
-    pair: str = ("proportionality", "competitiveness")
-    frontier_key: str = "_".join(pair)
-    points: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
-    # TODO - For each point in the frontier ...
-    # TODO - Use the offset in the frontier to get the plan from the ensemble
+    for pair in pairs:
+        frontier_key: str = "_".join(pair)
+        points: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+        # TODO - For each point in the frontier ...
+        # TODO - Use the offset in the frontier to get the plan from the ensemble
+        # HACK - Get a plan and ratings for debugging
 
-    # HACK - Get a plan and ratings for debugging
+        p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
+        name: Name = str(p["name"])
+        district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
+        assignments: List[Assignment] = make_plan(district_by_geoid)
 
-    p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
-    name: Name = str(p["name"])
-    district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
-    assignments: List[Assignment] = make_plan(district_by_geoid)
+        # TODO - Evaluate the plan
 
-    # TODO - Evaluate the plan
-
-    measurements: Tuple[float, float] = s.measure_dimensions(assignments, pair)
+        measurements: Tuple[float, float] = s.measure_dimensions(assignments, pair)
 
     pass
 

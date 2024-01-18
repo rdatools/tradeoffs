@@ -308,6 +308,24 @@ def calc_partisan_metrics(
     return partisan_metrics
 
 
+# Definitions copied from rdascore package
+
+census_fields: List[str] = [
+    "TOTAL_POP",
+    "TOTAL_VAP",
+    "WHITE_VAP",
+    "HISPANIC_VAP",
+    "BLACK_VAP",
+    "NATIVE_VAP",
+    "ASIAN_VAP",
+    "PACIFIC_VAP",
+    "MINORITY_VAP",
+]
+
+total_pop_field: str = census_fields[0]
+total_vap_field: str = census_fields[1]
+
+
 def calc_minority_metrics(
     demos_totals: Dict[str, int],
     demos_by_district: List[Dict[str, int]],
