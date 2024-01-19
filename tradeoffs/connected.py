@@ -27,7 +27,7 @@ def is_connected(ids: List[Offset], graph: Dict[Offset, List[Offset]]) -> bool:
     while to_process:
         node: Offset = to_process.pop()
         visited.add(node)
-        neighbors: List[Offset] = list(graph[node])
+        neighbors: List[Offset] = graph[node]  # TODO - list(graph[node])
         neighbors_to_visit: List[Offset] = [
             n for n in neighbors if n in all_geos and n not in visited
         ]

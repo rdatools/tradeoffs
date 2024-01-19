@@ -186,7 +186,6 @@ class Plan:
                         d2: set(),
                     }
 
-                # TODO - Make sure borders are initialized correctly (d1 vs. d2)!
                 border_segments[seg_key][d1].add(i)
                 border_segments[seg_key][d2].add(n)
 
