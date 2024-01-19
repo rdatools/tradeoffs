@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-DEBUGGING SCRIPT
+DEBUG MEASURING - The measuring of proposed moves
 """
 
 from typing import Any, List, Dict, NamedTuple

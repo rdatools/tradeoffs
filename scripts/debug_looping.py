@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-DEBUGGING SCRIPT
+DEBUGG LOOPING - The Balzer looping
 """
 
 from typing import Any, List, Dict, NamedTuple
