@@ -7,7 +7,7 @@ TEST PLAN CLASS
 from typing import List, Dict, Tuple, Set
 
 from rdabase import Assignment
-from tradeoffs import GeoID, DistrictID, FeatureOffset, DistrictOffset, EPlan
+from tradeoffs import GeoID, DistrictID, FeatureOffset, DistrictOffset, Plan
 
 from tradeoffs.plan import *
 from testutils import *
@@ -79,7 +79,7 @@ class TestRatings:
 
         #
 
-        ep: EPlan = EPlan(district_by_geoid, pop_by_geoid, graph, seed, verbose=True)
+        ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed, verbose=True)
 
         # offset_to_geoid: Dict[FeatureOffset, GeoID] = {
         #     v: k for k, v in ep._features_index.items()

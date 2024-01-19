@@ -55,7 +55,7 @@ class Move(NamedTuple):
     to_district: DistrictOffset
 
 
-class EPlan:
+class Plan:
     """A plan that can easily & efficiently evolve."""
 
     _generation: int
