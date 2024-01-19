@@ -22,35 +22,6 @@ from rdaensemble.general import make_plan
 from .datatypes import *
 from .connected import is_connected
 
-"""
-class Assignment(NamedTuple):
-    geoid: str
-    district: DistrictID
-"""
-
-
-class Feature(NamedTuple):
-    id: GeoID
-    district: DistrictID
-    pop: int
-
-
-class District(TypedDict):
-    id: DistrictID
-    features: List[FeatureOffset]
-    pop: int
-
-
-BorderSegment: TypeAlias = Dict[
-    DistrictOffset, List[FeatureOffset]
-]  # Two: one for each side/district
-
-
-class Move(NamedTuple):
-    features: List[FeatureOffset]
-    from_district: DistrictOffset
-    to_district: DistrictOffset
-
 
 class Plan:
     """A plan that can easily & efficiently evolve."""
