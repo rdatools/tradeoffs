@@ -28,8 +28,8 @@ class Assignment(NamedTuple):
     district: DistrictID
 """
 
-FeatureOffset: TypeAlias = Offset
-DistrictOffset: TypeAlias = Offset
+FeatureOffset: TypeAlias = int
+DistrictOffset: TypeAlias = int
 
 
 class Feature(NamedTuple):
@@ -275,7 +275,7 @@ class Plan:
         # TODO - from & to districts are adjacent
         # TODO - precinct is on the border
 
-        proposed: List[Offset] = list(
+        proposed: List[FeatureOffset] = list(
             self.district_features(move.from_district)
         )  # Copy the list of feature offsets
         for feature in move.features:

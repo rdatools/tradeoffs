@@ -89,6 +89,9 @@ def main() -> None:
         while True:
             move: Optional[Move] = None
 
+            # TODO - Collapse these two loops into one loop, that alternates between the two lists of moves.
+            # TODO - Randomize the order of the two lists
+
             # Try a move from district_one to district_two, until successful.
 
             while True:

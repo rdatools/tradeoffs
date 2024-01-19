@@ -9,7 +9,7 @@ from rdabase import Assignment
 import rdapy as rda
 from rdascore import aggregate_data_by_district, aggregate_shapes_by_district
 
-from .datatypes import DistrictID, GeoID, Offset
+from .datatypes import DistrictID, GeoID
 from .dra_ratings import (
     measure_proportionality,
     measure_competitiveness,
