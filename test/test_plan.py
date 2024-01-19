@@ -4,6 +4,7 @@
 TEST PLAN CLASS
 """
 
+import random
 from typing import List, Dict, Tuple, Set
 
 from rdabase import Assignment
@@ -37,9 +38,6 @@ class TestRatings:
             Assignment(geoid="C4", district=4),
             Assignment(geoid="D4", district=4),
         ]  # Four square districts, ea. with four features
-        district_by_geoid: Dict[GeoID, DistrictID] = {
-            a.geoid: a.district for a in assignments
-        }
 
         border_keys: List[Tuple[DistrictID, DistrictID]] = [
             (1, 2),
@@ -79,81 +77,60 @@ class TestRatings:
 
         #
 
-        ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed, verbose=True)
+        for _ in range(10):
+            district_by_geoid: Dict[GeoID, DistrictID] = {
+                a.geoid: a.district for a in assignments
+            }
+            ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed, verbose=True)
 
-        # offset_to_geoid: Dict[FeatureOffset, GeoID] = {
-        #     v: k for k, v in ep._features_index.items()
-        # }
-        # offset_to_districtid: Dict[DistrictOffset, DistrictID] = {
-        #     v: k for k, v in ep._districts_index.items()
-        # }
+            indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = list()
+            for x, y in border_keys:
+                d1: DistrictOffset = ep._districts_index[x]
+                d2: DistrictOffset = ep._districts_index[y]
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = (
+                    (d1, d2) if d1 < d2 else (d2, d1)
+                )
+                indexed_border_keys.append(seg_key)
 
-        # for pair in ep.sorted_districts():
-        #     district_one, district_two = pair
+            indexed_border_segs = dict()
+            for k, v in border_segments.items():
+                x, y = k
 
-        #     print(
-        #         f"Districts {offset_to_districtid[district_one]} : {offset_to_districtid[district_two]}"
-        #     )
+                x_offsets = [ep._features_index[geoid] for geoid in v[x]]
+                y_offsets = [ep._features_index[geoid] for geoid in v[y]]
 
-        #     one_offsets: List[FeatureOffset] = list(ep._border_segments[pair][district_one])
-        #     two_offsets: List[FeatureOffset] = list(ep._border_segments[pair][district_two])
+                d1: DistrictOffset = ep._districts_index[x]
+                d2: DistrictOffset = ep._districts_index[y]
 
-        #     one_geoids: List[GeoID] = [offset_to_geoid[o] for o in one_offsets]
-        #     two_geoids: List[GeoID] = [offset_to_geoid[o] for o in two_offsets]
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = (
+                    (d1, d2) if d1 < d2 else (d2, d1)
+                )
 
-        #     print(f"... District {offset_to_districtid[district_one]} border: {one_geoids}")
-        #     print(f"... District {offset_to_districtid[district_two]} border: {two_geoids}")
+                indexed_border_segs[seg_key] = (
+                    {d1: set(x_offsets), d2: set(y_offsets)}
+                    if d1 < d2
+                    else {d2: set(y_offsets), d1: set(x_offsets)}
+                )
 
-        #     print()
+            # Tests
 
-        #
+            actual_borders = ep._border_segments
+            assert len(actual_borders) == len(border_keys)
 
-        indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = list()
-        for x, y in border_keys:
-            d1: DistrictOffset = ep._districts_index[x]
-            d2: DistrictOffset = ep._districts_index[y]
-            seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-                (d1, d2) if d1 < d2 else (d2, d1)
-            )
-            indexed_border_keys.append(seg_key)
+            for b in indexed_border_keys:
+                assert b in actual_borders
 
-        indexed_border_segs = dict()
-        for k, v in border_segments.items():
-            x, y = k
+            for k, v in indexed_border_segs.items():
+                assert k in actual_borders
+                assert len(v) == len(actual_borders[k])
+                for d, offsets in v.items():
+                    assert d in actual_borders[k]
+                    assert len(offsets) == len(actual_borders[k][d])
 
-            x_offsets = [ep._features_index[geoid] for geoid in v[x]]
-            y_offsets = [ep._features_index[geoid] for geoid in v[y]]
+                    for o in offsets:
+                        assert o in actual_borders[k][d]
 
-            d1: DistrictOffset = ep._districts_index[x]
-            d2: DistrictOffset = ep._districts_index[y]
-
-            seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-                (d1, d2) if d1 < d2 else (d2, d1)
-            )
-
-            indexed_border_segs[seg_key] = (
-                {d1: set(x_offsets), d2: set(y_offsets)}
-                if d1 < d2
-                else {d2: set(y_offsets), d1: set(x_offsets)}
-            )
-
-        # Tests
-
-        actual_borders = ep._border_segments
-        assert len(actual_borders) == len(border_keys)
-
-        for b in indexed_border_keys:
-            assert b in actual_borders
-
-        for k, v in indexed_border_segs.items():
-            assert k in actual_borders
-            assert len(v) == len(actual_borders[k])
-            for d, offsets in v.items():
-                assert d in actual_borders[k]
-                assert len(offsets) == len(actual_borders[k][d])
-
-                for o in offsets:
-                    assert o in actual_borders[k][d]
+            random.shuffle(assignments)
 
 
 ### END ###
