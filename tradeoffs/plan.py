@@ -38,9 +38,12 @@ class Plan:
 
     _total_pop: int
     _target_pop: int
+    _pop_threshold: float
 
     _features_graph: Dict[FeatureOffset, List[FeatureOffset]]
     _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
+
+    _verbose: bool
 
     def __init__(
         self,
@@ -53,6 +56,8 @@ class Plan:
         verbose: bool = False,
     ) -> None:
         self._generation = 0  # TODO - Increment this with each move
+        self._pop_threshold = pop_threshold
+
         random.seed(seed)
 
         assignments: List[Assignment] = make_plan(district_by_geoid)
@@ -73,6 +78,7 @@ class Plan:
 
         self._measurements = None
 
+        self._verbose = verbose
         if verbose:
             print("Starting plan is connected!")
             print(self)
@@ -240,19 +246,57 @@ class Plan:
     def is_valid(self, move: Move) -> bool:
         """Would this be a valid move?"""
 
-        # TODO - from & to districts are adjacent
-        # TODO - precinct is on the border
+        d1: DistrictOffset = move.from_district
+        d2: DistrictOffset = move.to_district
+
+        # 1 - The from & to districts are adjacent
+
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = (
+            (d1, d2) if d1 < d2 else (d2, d1)
+        )
+        if seg_key not in self._border_segments:
+            if self._verbose:
+                print(f"Move: {move}")
+                print(f"... districts {d1} and {d2} are not adjacent!")
+            return False
+
+        # 2 - The move features are connected & at least one is on that border
+
+        # TODO
+
+        # 3 - The moved-from district would still be connected
 
         proposed: List[FeatureOffset] = list(
             self.district_features(move.from_district)
         )  # Copy the list of feature offsets
-        for feature in move.features:
-            proposed.remove(feature)
+        proposed_pop: int = self._districts[move.from_district]["pop"]
 
-        # TODO - Check that the population would be OK
+        for offset in move.features:
+            proposed_pop -= self._features[offset].pop
+            proposed.remove(offset)
 
         if not self._is_connected(proposed):
+            if self._verbose:
+                print(f"Move: {move}")
+                print(
+                    f"... districts {d1} would not be connected, if ({move.features}) features were moved."
+                )
             return False
+
+        # 4 - The moved-from district population would still be w/in tolerance
+        tolerance: int = round(self._target_pop * self._pop_threshold)
+        lower: int = self._target_pop - tolerance
+        upper: int = self._target_pop + tolerance
+        if proposed_pop < lower or proposed_pop > upper:
+            if self._verbose:
+                print(f"Move: {move}")
+                print(
+                    f"... district {d1} population ({proposed_pop}) would be out of tolerance, if ({move.features}) features were moved."
+                )
+            return False
+
+        if self._verbose:
+            print(f"Move: {move} is valid!")
 
         return True
 
