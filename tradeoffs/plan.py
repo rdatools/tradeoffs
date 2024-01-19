@@ -218,6 +218,15 @@ class EPlan:
 
     ### PUBLIC ###
 
+    def sorted_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
+        """Get all pairs of adjacent districts in sorted order."""
+
+        pairs: List[Tuple[DistrictOffset, DistrictOffset]] = list(
+            self._border_segments.keys()
+        )
+
+        return pairs
+
     def random_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
         """Get all pairs of adjacent districts in random order."""
 

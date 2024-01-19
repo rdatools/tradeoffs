@@ -8,7 +8,7 @@ from typing import Any, List, Dict, NamedTuple
 
 import itertools
 
-from rdabase import read_json, starting_seed
+from rdabase import Assignment, read_json, starting_seed
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
