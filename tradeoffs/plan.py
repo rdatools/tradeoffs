@@ -28,9 +28,6 @@ class Assignment(NamedTuple):
     district: DistrictID
 """
 
-FeatureOffset: TypeAlias = int
-DistrictOffset: TypeAlias = int
-
 
 class Feature(NamedTuple):
     id: GeoID
