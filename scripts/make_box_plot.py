@@ -46,7 +46,7 @@ def main() -> None:
 
     # Configure & show the box plot for the ratings
 
-    boxplot_traces: List[Dict] = list()
+    boxplot_traces: List[Dict] = []
 
     for name in fieldnames[1:]:
         trace: Dict = {

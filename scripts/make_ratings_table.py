@@ -38,12 +38,12 @@ def main() -> None:
         "splitting",
     ]
 
-    rows: List[Dict[str, Any]] = list()
+    rows: List[Dict[str, Any]] = []
     for m in data["notable_maps"]:
         name: str = list(m.keys())[0]
         ratings: Dict[str, int] = dict(zip([c.upper() for c in cols], m["ratings"]))
 
-        row: Dict[str, Any] = dict()
+        row: Dict[str, Any] = {}
         row["MAP"] = m[name]
         row.update(ratings)
 

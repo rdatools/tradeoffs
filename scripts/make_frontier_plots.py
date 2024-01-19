@@ -49,7 +49,7 @@ def main() -> None:
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
     # Read the focus map from a CSV file
-    focus_ratings: List[int] = list()
+    focus_ratings: List[int] = []
     if args.focus:
         focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
         focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
@@ -74,7 +74,7 @@ def main() -> None:
 
         # Configure & show the scatter plot for the ratings & frontier
 
-        scatter_traces: List[Dict] = list()
+        scatter_traces: List[Dict] = []
 
         yvalues: List[int] = df[ydim].tolist()
         xvalues: List[int] = df[xdim].tolist()

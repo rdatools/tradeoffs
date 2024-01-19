@@ -93,7 +93,7 @@ class Scorer:
 
         self._assignments = assignments
 
-        pair: List[float] = list()
+        pair: List[float] = []
 
         for d in dimensions:
             match d:
@@ -278,7 +278,7 @@ def calc_partisan_metrics(
     NOTE - This is a subset of the metrics in the rdascore package.
     """
 
-    partisan_metrics: Dict[str, float] = dict()
+    partisan_metrics: Dict[str, float] = {}
 
     Vf: float = total_d_votes / total_votes
     Vf_array: List[float] = [
@@ -336,16 +336,16 @@ def calc_minority_metrics(
     NOTE - This is a copy of the function in the rdascore package.
     """
 
-    statewide_demos: Dict[str, float] = dict()
+    statewide_demos: Dict[str, float] = {}
     for demo in census_fields[2:]:  # Skip total population & total VAP
         simple_demo: str = demo.split("_")[0].lower()
         statewide_demos[simple_demo] = (
             demos_totals[demo] / demos_totals[total_vap_field]
         )
 
-    by_district: List[Dict[str, float]] = list()
+    by_district: List[Dict[str, float]] = []
     for i in range(1, n_districts + 1):
-        district_demos: Dict[str, float] = dict()
+        district_demos: Dict[str, float] = {}
         for demo in census_fields[2:]:  # Skip total population & total VAP
             simple_demo: str = demo.split("_")[0].lower()
             district_demos[simple_demo] = (
@@ -382,7 +382,7 @@ def calc_compactness_metrics(
     avg_reock: float = tot_reock / len(district_props)
     avg_polsby: float = tot_polsby / len(district_props)
 
-    compactness_metrics: Dict[str, float] = dict()
+    compactness_metrics: Dict[str, float] = {}
     compactness_metrics["reock"] = avg_reock
     compactness_metrics["polsby_popper"] = avg_polsby
 
@@ -397,7 +397,7 @@ def calc_splitting_metrics(CxD: List[List[float]]) -> Dict[str, float]:
 
     all_results: Dict[str, float] = rda.calc_county_district_splitting(CxD)
 
-    splitting_metrics: Dict[str, float] = dict()
+    splitting_metrics: Dict[str, float] = {}
     splitting_metrics["county_splitting"] = all_results["county"]
     splitting_metrics["district_splitting"] = all_results["district"]
 
@@ -413,7 +413,7 @@ def calc_splitting_metrics(CxD: List[List[float]]) -> Dict[str, float]:
 def cull_partisan_metrics(data: Dict[str, Any]) -> Dict[str, float]:
     """Cull partisan metrics."""
 
-    partisan_metrics: Dict[str, float] = dict()
+    partisan_metrics: Dict[str, float] = {}
 
     # partisan_metrics["estimated_vote_pct"] = Vf # Not exported
 
@@ -467,7 +467,7 @@ def cull_partisan_metrics(data: Dict[str, Any]) -> Dict[str, float]:
 def cull_minority_metrics(data: Dict[str, Any]) -> Dict[str, float]:
     """Cull minority metrics."""
 
-    minority_metrics: Dict[str, float] = dict()
+    minority_metrics: Dict[str, float] = {}
     minority_metrics["opportunity_districts"] = data["minority"]["opportunityDistricts"]
     minority_metrics["proportional_opportunities"] = data["minority"][
         "proportionalOpportunities"
@@ -483,7 +483,7 @@ def cull_minority_metrics(data: Dict[str, Any]) -> Dict[str, float]:
 def cull_compactness_metrics(data: Dict[str, Any]) -> Dict[str, float]:
     """Cull compactness metrics."""
 
-    compactness_metrics: Dict[str, float] = dict()
+    compactness_metrics: Dict[str, float] = {}
     compactness_metrics["reock"] = data["compactness"]["reock"]["raw"]
     compactness_metrics["polsby_popper"] = data["compactness"]["polsby"]["raw"]
 
@@ -493,7 +493,7 @@ def cull_compactness_metrics(data: Dict[str, Any]) -> Dict[str, float]:
 def cull_splitting_metrics(data: Dict[str, Any]) -> Dict[str, float]:
     """Cull county-district splitting metrics."""
 
-    splitting_metrics: Dict[str, float] = dict()
+    splitting_metrics: Dict[str, float] = {}
     splitting_metrics["county_splitting"] = data["splitting"]["county"]["raw"]
     splitting_metrics["district_splitting"] = data["splitting"]["district"]["raw"]
 
@@ -503,7 +503,7 @@ def cull_splitting_metrics(data: Dict[str, Any]) -> Dict[str, float]:
 def cull_ratings(data: Dict[str, Any]) -> Dict[str, int]:
     """Cull ratings."""
 
-    ratings: Dict[str, int] = dict()
+    ratings: Dict[str, int] = {}
     ratings["proportionality"] = data["bias"]["score"]
     ratings["competitiveness"] = data["responsiveness"]["score"]
     ratings["minority"] = data["minority"]["score"]

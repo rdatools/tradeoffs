@@ -34,7 +34,7 @@ def main() -> None:
     spread: List[int] = [10, 10, 10, 10, 10]
     delta: List[int] = [0, 0, 0, 0, 30]
 
-    scores: List[Dict[str, str]] = list()
+    scores: List[Dict[str, str]] = []
 
     with open(os.path.expanduser(scores_csv), "r", encoding="utf-8-sig") as f:
         reader: DictReader[str] = DictReader(
@@ -45,7 +45,7 @@ def main() -> None:
             scores.append(ratings)
 
             for i in range(9):
-                dup: Dict[str, str] = dict()
+                dup: Dict[str, str] = {}
                 dup["map"] = str(i + 1) + row["map"][1:]
                 for j, k in enumerate(cols[1:]):
                     mid: int = int(ratings[k]) + delta[j]

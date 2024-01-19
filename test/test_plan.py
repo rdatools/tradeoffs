@@ -83,7 +83,7 @@ class TestRatings:
             }
             ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed, verbose=True)
 
-            indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = list()
+            indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = []
             for x, y in border_keys:
                 d1: DistrictOffset = ep._districts_index[x]
                 d2: DistrictOffset = ep._districts_index[y]
@@ -92,7 +92,7 @@ class TestRatings:
                 )
                 indexed_border_keys.append(seg_key)
 
-            indexed_border_segs = dict()
+            indexed_border_segs = {}
             for k, v in border_segments.items():
                 x, y = k
 

@@ -40,12 +40,12 @@ class Feature(NamedTuple):
 
 class District(TypedDict):
     id: DistrictID
-    features: Set[FeatureOffset]
+    features: List[FeatureOffset]
     pop: int
 
 
 BorderSegment: TypeAlias = Dict[
-    DistrictOffset, Set[FeatureOffset]
+    DistrictOffset, List[FeatureOffset]
 ]  # Two: one for each side/district
 
 
@@ -112,19 +112,19 @@ class Plan:
     ### PRIVATE ###
 
     def _invert_plan(self) -> List[District]:
-        inverted: Dict[DistrictID, District] = dict()
+        inverted: Dict[DistrictID, District] = {}
 
         self._total_pop = 0
 
         for i, f in enumerate(self._features):
             if f.district not in inverted:
-                inverted[f.district] = {"id": f.district, "features": set(), "pop": 0}
+                inverted[f.district] = {"id": f.district, "features": [], "pop": 0}
 
-            inverted[f.district]["features"].add(self._features_index[f.id])
+            inverted[f.district]["features"].append(self._features_index[f.id])
             inverted[f.district]["pop"] += f.pop
             self._total_pop += f.pop
 
-        districts: List[District] = list(inverted.values())
+        districts: List[District] = list(inverted.values())  # Lose the keys
         self._target_pop = self._total_pop // len(districts)
 
         return districts
@@ -134,7 +134,7 @@ class Plan:
     ) -> Dict[FeatureOffset, List[FeatureOffset]]:
         """Convert a geoid-based graph to an offset-based graph."""
 
-        indexed_graph: Dict[FeatureOffset, List[FeatureOffset]] = dict()
+        indexed_graph: Dict[FeatureOffset, List[FeatureOffset]] = {}
 
         for geoid, neighbors in graph.items():
             if geoid == OUT_OF_STATE:
@@ -150,7 +150,7 @@ class Plan:
         """Is the plan fully connected?"""
 
         for d in self._districts:
-            if not is_connected(list(d["features"]), self._features_graph):
+            if not is_connected(d["features"], self._features_graph):
                 return False
 
         return True
@@ -166,8 +166,9 @@ class Plan:
         """Initialize border segments."""
 
         border_segments: Dict[
-            Tuple[DistrictOffset, DistrictOffset], BorderSegment
-        ] = dict()
+            Tuple[DistrictOffset, DistrictOffset],
+            Dict[DistrictOffset, Set[FeatureOffset]],  # A set to avoid duplicates
+        ] = {}
 
         for i, neighbors in self._features_graph.items():
             for n in neighbors:
@@ -189,6 +190,10 @@ class Plan:
                 border_segments[seg_key][d1].add(i)
                 border_segments[seg_key][d2].add(n)
 
+        converted: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment] = {}
+        for k, v in border_segments.items():
+            converted[k] = {d: list(offsets) for d, offsets in v.items()}
+
         return border_segments
 
     def _size_1_moves(
@@ -200,10 +205,10 @@ class Plan:
         """Generate all size-1 moves between two districts."""
 
         from_one: List[List[FeatureOffset]] = [
-            [f] for f in list(self._border_segments[seg_key][district_one])
+            [f] for f in self._border_segments[seg_key][district_one]
         ]
         from_two: List[List[FeatureOffset]] = [
-            [f] for f in list(self._border_segments[seg_key][district_two])
+            [f] for f in self._border_segments[seg_key][district_two]
         ]
 
         moves_from_one: List[Move] = [
@@ -270,7 +275,9 @@ class Plan:
         # TODO - from & to districts are adjacent
         # TODO - precinct is on the border
 
-        proposed: List[Offset] = list(self.district_features(move.from_district))
+        proposed: List[Offset] = list(
+            self.district_features(move.from_district)
+        )  # Copy the list of feature offsets
         for feature in move.features:
             proposed.remove(feature)
 

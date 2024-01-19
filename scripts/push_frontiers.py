@@ -93,7 +93,7 @@ def main() -> None:
 def index_plan(plan: List[Dict[GeoID, DistrictID]]) -> Dict[GeoID, DistrictID]:
     """Index districts by geoid."""
 
-    indexed: Dict[GeoID, DistrictID] = dict()
+    indexed: Dict[GeoID, DistrictID] = {}
 
     for row in plan:
         geoid: str = str(row["GEOID"])
@@ -107,7 +107,7 @@ def index_plan(plan: List[Dict[GeoID, DistrictID]]) -> Dict[GeoID, DistrictID]:
 def invert_plan(plan: List[Dict[GeoID, DistrictID]]) -> Dict[DistrictID, Set[GeoID]]:
     """Return geoids by district."""
 
-    inverted: Dict[DistrictID, Set[GeoID]] = dict()
+    inverted: Dict[DistrictID, Set[GeoID]] = {}
 
     for row in plan:
         geoid: str = str(row["GEOID"])

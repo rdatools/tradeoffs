@@ -15,16 +15,16 @@ def find_frontiers(ratings: pd.DataFrame, fn: Callable) -> Dict[str, List[Dict]]
     """Find the frontiers for a ratings dataframe."""
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
-    frontiers: Dict[str, List[Dict]] = dict()
+    frontiers: Dict[str, List[Dict]] = {}
 
     for p in pairs:
         label: str = f"{p[0]}_{p[1]}"
-        frontiers[label] = list()
+        frontiers[label] = []
 
         subset: pd.DataFrame = ratings[list(p)]
         is_frontier: np.ndarray = fn(subset.to_numpy())
 
-        maps: List[str] = list()
+        maps: List[str] = []
         for i, is_efficient in enumerate(is_frontier):
             if is_efficient:
                 maps.append(ratings.iloc[i]["map"])

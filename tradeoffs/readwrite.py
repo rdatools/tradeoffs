@@ -13,7 +13,7 @@ def scores_to_df(
 ) -> pd.DataFrame:
     """Convert ratings in a scores CSV file into a Pandas dataframe."""
 
-    scores: List[Dict[str, str]] = list()
+    scores: List[Dict[str, str]] = []
     with open(scores_csv, "r", encoding="utf-8-sig") as f:
         reader: DictReader[str] = DictReader(
             f, fieldnames=None, restkey=None, restval=None, dialect="excel"
@@ -21,7 +21,7 @@ def scores_to_df(
         for row in reader:
             scores.append(row)
 
-    data: List[List[str | int | float]] = list()
+    data: List[List[str | int | float]] = []
     for score in scores:
         data.append([fieldtypes[i](score[f]) for i, f in enumerate(fieldnames)])
 

@@ -46,7 +46,7 @@ def main() -> None:
     splitting_metrics: Dict[str, float] = cull_splitting_metrics(data)
     ratings: Dict[str, int] = cull_ratings(data)
 
-    scorecard: Dict[str, Any] = dict()
+    scorecard: Dict[str, Any] = {}
     scorecard["map"] = args.name
     # scorecard["population_deviation"] = deviation # Not exported
     scorecard.update(partisan_metrics)
