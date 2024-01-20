@@ -145,7 +145,7 @@ class Plan:
         return is_connected(offsets, self._features_graph)
 
     def is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
-        """Would a a district with these features be within the population tolerance?"""
+        """Would a district with these features be within the population tolerance?"""
 
         pop: int = 0
         for offset in features:
@@ -278,7 +278,7 @@ class Plan:
         return (moves_from_one, moves_from_two)
 
     def is_valid_plan(self) -> bool:
-        """Is the initial or current plan valid?"""
+        """Is this plan state valid?"""
 
         valid: bool = True
 
@@ -316,10 +316,8 @@ class Plan:
         proposed: List[FeatureOffset] = list(
             self.district_features(move.from_district)
         )  # Copy the list of feature offsets
-        proposed_pop: int = self._districts[move.from_district]["pop"]
 
         for offset in move.features:
-            proposed_pop -= self._features[offset].pop
             proposed.remove(offset)
 
         if not self._is_connected(proposed):
@@ -330,15 +328,13 @@ class Plan:
                 )
             return False
 
-        # 4 - The moved-from district population would still be w/in tolerance
-        tolerance: int = round(self._target_pop * self._pop_threshold)
-        lower: int = self._target_pop - tolerance
-        upper: int = self._target_pop + tolerance
-        if proposed_pop < lower or proposed_pop > upper:
+        # 4 - The moved-from district population would still be w/in population tolerance
+
+        if not self.is_within_tolerance(proposed):
             if self._verbose:
                 print(f"Move: {move}")
                 print(
-                    f"... district {d1} population ({proposed_pop}) would be out of tolerance, if ({move.features}) features were moved."
+                    f"... districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
                 )
             return False
 
