@@ -87,9 +87,7 @@ class TestRatings:
             for x, y in border_keys:
                 d1: DistrictOffset = ep._districts_index[x]
                 d2: DistrictOffset = ep._districts_index[y]
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-                    (d1, d2) if d1 < d2 else (d2, d1)
-                )
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = ep.segment_key(d1, d2)
                 indexed_border_keys.append(seg_key)
 
             indexed_border_segs = {}
@@ -102,9 +100,7 @@ class TestRatings:
                 d1: DistrictOffset = ep._districts_index[x]
                 d2: DistrictOffset = ep._districts_index[y]
 
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-                    (d1, d2) if d1 < d2 else (d2, d1)
-                )
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = ep.segment_key(d1, d2)
 
                 indexed_border_segs[seg_key] = (
                     {d1: set(x_offsets), d2: set(y_offsets)}

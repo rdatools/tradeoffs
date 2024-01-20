@@ -153,8 +153,8 @@ class Plan:
                 if d1 == d2:
                     continue
 
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-                    (d1, d2) if d1 < d2 else (d2, d1)
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(
+                    d1, d2
                 )
                 if seg_key not in border_segments:
                     border_segments[seg_key] = {
@@ -197,6 +197,17 @@ class Plan:
 
     ### PUBLIC ###
 
+    def segment_key(
+        self, d1: DistrictOffset, d2: DistrictOffset
+    ) -> Tuple[DistrictOffset, DistrictOffset]:
+        """Construct the canonical border segment key for a pair of districts (offsets)."""
+
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = (
+            (d1, d2) if d1 < d2 else (d2, d1)
+        )
+
+        return seg_key
+
     def sorted_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
         """Get all pairs of adjacent districts in sorted order."""
 
@@ -221,12 +232,12 @@ class Plan:
     ) -> Tuple[List[Move], List[Move]]:
         """Generate random moves between two districts."""
 
-        district_one: DistrictOffset = pair[0] if pair[0] < pair[1] else pair[1]
-        district_two: DistrictOffset = pair[1] if pair[0] < pair[1] else pair[0]
-
-        seg_key: Tuple[DistrictOffset, DistrictOffset] = (district_one, district_two)
+        d1, d2 = pair
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(d1, d2)
         if seg_key not in self._border_segments:
             raise Exception("No border segments between these districts!")
+
+        district_one, district_two = seg_key
 
         moves_from_one: List[Move]
         moves_from_two: List[Move]
@@ -252,9 +263,7 @@ class Plan:
 
         # 1 - The from & to districts are adjacent
 
-        seg_key: Tuple[DistrictOffset, DistrictOffset] = (
-            (d1, d2) if d1 < d2 else (d2, d1)
-        )
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(d1, d2)
         if seg_key not in self._border_segments:
             if self._verbose:
                 print(f"Move: {move}")

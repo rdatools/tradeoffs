@@ -2,6 +2,11 @@
 
 """
 DEBUGG LOOPING - The Balzer looping
+
+To run:
+
+$ scripts/debug_looping.py
+
 """
 
 from typing import Any, List, Dict, NamedTuple
