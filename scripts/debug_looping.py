@@ -83,9 +83,15 @@ def main() -> None:
         moves_from_two: List[Move]
         moves_from_one, moves_from_two = ep.random_moves((district_one, district_two))
 
+        n_moves_from_one: int = len(moves_from_one)
+        n_moves_from_two: int = len(moves_from_two)
+
+        n_valid_moves_from_one: int = 0
+        n_valid_moves_from_two: int = 0
+
         if args.verbose:
             print(
-                f"... # moves: {district_one} -> {district_two} = {len(moves_from_one)} | {district_two} -> {district_one} = {len(moves_from_two)}"
+                f"... # moves: {district_one} -> {district_two} = {n_moves_from_one} | {district_two} -> {district_one} = {n_moves_from_one}"
             )
 
         # Alternate between the two lists of moves, to try to maintain population balance.
@@ -110,6 +116,8 @@ def main() -> None:
                         print(
                             f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
                         )
+                else:
+                    n_valid_moves_from_one += 1
 
             pass  # TODO - Move the features ...
 
@@ -126,11 +134,21 @@ def main() -> None:
                         print(
                             f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
                         )
+                else:
+                    n_valid_moves_from_two += 1
 
             pass  # TODO - Move the features ...
 
             if done:
                 break
+
+        if args.verbose:
+            print(
+                f"... moves: {district_one} -> {district_two} = {n_valid_moves_from_one} of {n_moves_from_one} are valid."
+            )
+            print(
+                f"... moves: {district_two} -> {district_one} = {n_valid_moves_from_two} of {n_moves_from_two} are valid."
+            )
 
     # ep.to_csv("output/test_plan.csv")
 
