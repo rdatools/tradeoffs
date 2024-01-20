@@ -235,6 +235,10 @@ class Plan:
             from_district, to_district
         )
         if seg_key not in self._border_segments:
+            if self._verbose:
+                print(
+                    f"... the move districts ({from_district} -> {to_district}) are not adjacent!"
+                )
             return False
 
         # At least one feature in the move is on the border between the two districts
@@ -248,11 +252,17 @@ class Plan:
                 is_border = True
                 break
         if not is_border:
+            if self._verbose:
+                print(
+                    f"... no move feature ({features}) is on the border between the move districts ({from_district} -> {to_district})!"
+                )
             return False
 
         # The move features are connected
 
         if not self._is_connected(features):
+            if self._verbose:
+                print(f"... the move features ({features}) are not connected!")
             return False
 
         return True

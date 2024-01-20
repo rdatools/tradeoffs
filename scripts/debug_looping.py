@@ -144,10 +144,10 @@ def main() -> None:
 
         if args.verbose:
             print(
-                f"... moves: {district_one} -> {district_two} = {n_valid_moves_from_one} of {n_moves_from_one} are valid."
+                f"...... summary: {district_one} -> {district_two} = {n_valid_moves_from_one} of {n_moves_from_one} are valid."
             )
             print(
-                f"... moves: {district_two} -> {district_one} = {n_valid_moves_from_two} of {n_moves_from_two} are valid."
+                f"......          {district_two} -> {district_one} = {n_valid_moves_from_two} of {n_moves_from_two} are valid."
             )
 
     # ep.to_csv("output/test_plan.csv")
