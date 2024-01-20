@@ -78,7 +78,8 @@ class Plan:
 
         self._measurements = None
 
-        self._verbose = verbose
+        suppress_logging: bool = True  # DEBUG
+        self._verbose = verbose and not suppress_logging
         if verbose:
             print("Starting plan is connected!")
             print(self)
