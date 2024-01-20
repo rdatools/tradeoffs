@@ -229,17 +229,33 @@ class Plan:
     ) -> bool:
         """Is the set of features connected and is at least one on the border between the two districts?"""
 
+        # The from & to districts are adjacent
+
         seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(
             from_district, to_district
         )
         if seg_key not in self._border_segments:
             return False
-        district_one, district_two = seg_key
 
-        border_one: List[FeatureOffset] = self._border_segments[seg_key][district_one]
-        border_two: List[FeatureOffset] = self._border_segments[seg_key][district_two]
+        # At least one feature in the move is on the border between the two districts
 
-        return True  # TODO
+        from_border: List[FeatureOffset] = self._border_segments[seg_key][from_district]
+        # to_border: List[FeatureOffset] = self._border_segments[seg_key][to_district]
+
+        is_border: bool = False
+        for f in features:
+            if f in from_border:
+                is_border = True
+                break
+        if not is_border:
+            return False
+
+        # The move features are connected
+
+        if not self._is_connected(features):
+            return False
+
+        return True
 
     ### PUBLIC ###
 
