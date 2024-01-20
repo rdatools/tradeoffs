@@ -71,11 +71,8 @@ class Plan:
 
         self._features_graph = self._index_graph(graph)
 
-        if not self._all_connected():
-            raise Exception("Starting plan is not connected!")
-
-        if not self._all_within_tolerance():
-            raise Exception("Starting plan is not within population tolerance!")
+        if not self.is_valid_plan():
+            raise Exception("Starting plan is not valid!")
 
         self._border_segments = self._init_border_segments()
 
@@ -280,7 +277,22 @@ class Plan:
 
         return (moves_from_one, moves_from_two)
 
-    def is_valid(self, move: Move) -> bool:
+    def is_valid_plan(self) -> bool:
+        """Is the initial or current plan valid?"""
+
+        valid: bool = True
+
+        if not self._all_connected():
+            print("Starting plan is not connected!")
+            valid = False
+
+        if not self._all_within_tolerance():
+            print("Starting plan is not within population tolerance!")
+            valid = False
+
+        return valid
+
+    def is_valid_move(self, move: Move) -> bool:
         """Would this be a valid move?"""
 
         d1: DistrictOffset = move.from_district

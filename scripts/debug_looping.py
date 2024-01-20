@@ -105,7 +105,7 @@ def main() -> None:
                     break
 
                 move = moves_from_one.pop()
-                if not ep.is_valid(move):
+                if not ep.is_valid_move(move):
                     if args.verbose:
                         print(
                             f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
@@ -121,7 +121,7 @@ def main() -> None:
                     break
 
                 move = moves_from_two.pop()
-                if not ep.is_valid(move):
+                if not ep.is_valid_move(move):
                     if args.verbose:
                         print(
                             f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
