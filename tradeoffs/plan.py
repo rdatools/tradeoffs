@@ -55,16 +55,16 @@ class Plan:
         graph: Dict[GeoID, List[GeoID]],
         seed: int,
         *,
-        pop_threshold: float = 0.01,  # +/- 1% for each district
+        pop_threshold: float = 0.01,
         verbose: bool = False,
     ) -> None:
         """Initialize the plan."""
 
-        self._generation = 0  # Incremented w/ each move
+        random.seed(seed)
+
+        self._generation = 0
         self._pop_threshold = pop_threshold
         self._verbose = verbose
-
-        random.seed(seed)
 
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = [
