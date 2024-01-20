@@ -69,7 +69,7 @@ def main() -> None:
 
     ##
 
-    ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose)
+    ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed)
 
     random_districts: List[
         Tuple[DistrictOffset, DistrictOffset]

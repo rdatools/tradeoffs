@@ -1,5 +1,5 @@
 """
-EVOLVING PLAN
+A REDISTRICTING PLAN THAT CAN EASILY & EFFICIENTLY EVOLVE
 """
 
 from typing import (
@@ -55,8 +55,11 @@ class Plan:
         pop_threshold: float = 0.01,  # +/- 1% for each district
         verbose: bool = False,
     ) -> None:
-        self._generation = 0  # This is incremented with each move
+        """Initialize the plan."""
+
+        self._generation = 0  # Incremented w/ each move
         self._pop_threshold = pop_threshold
+        self._verbose = verbose
 
         random.seed(seed)
 
@@ -78,11 +81,12 @@ class Plan:
 
         self._measurements = None
 
-        suppress_logging: bool = True  # DEBUG
-        self._verbose = verbose and not suppress_logging
-        if verbose:
+        if self._verbose:
             print("Starting plan is connected!")
             print(self)
+
+    def __repr__(self) -> str:
+        return f"Plan({self._generation})"  # TODO - Flesh this out
 
     ### PRIVATE ###
 
@@ -218,9 +222,22 @@ class Plan:
         return (moves_from_one, moves_from_two)
 
     def _are_connected_border_features(
-        self, features: List[FeatureOffset], d1: DistrictOffset, d2: DistrictOffset
+        self,
+        features: List[FeatureOffset],
+        from_district: DistrictOffset,
+        to_district: DistrictOffset,
     ) -> bool:
         """Is the set of features connected and is at least one on the border between the two districts?"""
+
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(
+            from_district, to_district
+        )
+        if seg_key not in self._border_segments:
+            return False
+        district_one, district_two = seg_key
+
+        border_one: List[FeatureOffset] = self._border_segments[seg_key][district_one]
+        border_two: List[FeatureOffset] = self._border_segments[seg_key][district_two]
 
         return True  # TODO
 
@@ -360,8 +377,8 @@ class Plan:
         """Mutate the plan by applying a move.
 
         - Update the feature assignments
-            - Update the districts' features
-            - Update the affected border segments
+        - Update the districts' features
+        - Update the affected border segments -- find affected districts | all borders (?)
         - Bump the generation
         """
 

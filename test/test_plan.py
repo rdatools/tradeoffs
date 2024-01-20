@@ -81,7 +81,7 @@ class TestRatings:
             district_by_geoid: Dict[GeoID, DistrictID] = {
                 a.geoid: a.district for a in assignments
             }
-            ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed, verbose=True)
+            ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed)
 
             indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = []
             for x, y in border_keys:
