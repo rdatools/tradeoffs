@@ -74,6 +74,9 @@ class Plan:
         if not self._all_connected():
             raise Exception("Starting plan is not connected!")
 
+        if not self._all_within_tolerance():
+            raise Exception("Starting plan is not within population tolerance!")
+
         self._border_segments = self._init_border_segments()
 
         self._measurements = None
@@ -130,10 +133,32 @@ class Plan:
 
         return True
 
+    def _all_within_tolerance(self) -> bool:
+        """Are all districts within population tolerance?"""
+
+        for d in self._districts:
+            if not self.is_within_tolerance(d["features"]):
+                return False
+
+        return True
+
     def _is_connected(self, offsets: List[FeatureOffset]) -> bool:
         """Would a district with these feature offsets be connected?"""
 
         return is_connected(offsets, self._features_graph)
+
+    def is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
+        """Would a a district with these features be within the population tolerance?"""
+
+        pop: int = 0
+        for offset in features:
+            pop += self._features[offset].pop
+
+        tolerance: int = round(self._target_pop * self._pop_threshold)
+        lower: int = self._target_pop - tolerance
+        upper: int = self._target_pop + tolerance
+
+        return pop >= lower and pop <= upper
 
     def _init_border_segments(
         self,
