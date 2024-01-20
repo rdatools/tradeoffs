@@ -217,6 +217,13 @@ class Plan:
 
         return (moves_from_one, moves_from_two)
 
+    def _are_connected_border_features(
+        self, features: List[FeatureOffset], d1: DistrictOffset, d2: DistrictOffset
+    ) -> bool:
+        """Is the set of features connected and is at least one on the border between the two districts?"""
+
+        return True  # TODO
+
     ### PUBLIC ###
 
     def segment_key(
@@ -309,7 +316,13 @@ class Plan:
 
         # 2 - The move features are connected & at least one is on that border
 
-        # TODO
+        if not self._are_connected_border_features(move.features, d1, d2):
+            if self._verbose:
+                print(f"Move: {move}")
+                print(
+                    f"... features {move.features} are not connected and/or none are on the border between districts {d1} and {d2}!"
+                )
+            return False
 
         # 3 - The moved-from district would still be connected
 
