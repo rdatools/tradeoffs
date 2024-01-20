@@ -26,24 +26,27 @@ from .connected import is_connected
 class Plan:
     """A plan that can easily & efficiently evolve."""
 
+    # Dynamic
+
     _generation: int
 
     _features: List[Feature]
-    _features_index: Dict[GeoID, FeatureOffset]
-
-    _measurements: Optional[Tuple[float, float]]
-
     _districts: List[District]
+    _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
+
+    # Static
+
+    _verbose: bool
+
+    _features_index: Dict[GeoID, FeatureOffset]
+    _features_graph: Dict[FeatureOffset, List[FeatureOffset]]
     _districts_index: Dict[DistrictID, DistrictOffset]
 
     _total_pop: int
     _target_pop: int
     _pop_threshold: float
 
-    _features_graph: Dict[FeatureOffset, List[FeatureOffset]]
-    _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
-
-    _verbose: bool
+    _measurements: Optional[Tuple[float, float]]
 
     def __init__(
         self,
