@@ -55,7 +55,7 @@ class Plan:
         pop_threshold: float = 0.01,  # +/- 1% for each district
         verbose: bool = False,
     ) -> None:
-        self._generation = 0  # TODO - Increment this with each move
+        self._generation = 0  # This is incremented with each move
         self._pop_threshold = pop_threshold
 
         random.seed(seed)
@@ -355,6 +355,19 @@ class Plan:
             print(f"Move: {move} is valid!")
 
         return True
+
+    def mutate(self, move: Move):
+        """Mutate the plan by applying a move.
+
+        - Update the feature assignments
+            - Update the districts' features
+            - Update the affected border segments
+        - Bump the generation
+        """
+
+        # TODO - NYI
+
+        self._generation += 1
 
     def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
         """Get all feature offsets for a district."""
