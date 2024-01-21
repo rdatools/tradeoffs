@@ -366,11 +366,22 @@ class Plan:
                 )
             return False
 
-        # 3 - The moved-from district would still be connected
+        # 3 - The features are all in the moved-from district
 
         proposed: List[FeatureOffset] = list(
             self.district_features(move.from_district)
         )  # Copy the list of feature offsets
+
+        for offset in move.features:
+            if offset not in proposed:
+                if self._verbose:
+                    print(f"Move: {move}")
+                    print(
+                        f"... feature {offset} is not in district {move.from_district}!"
+                    )
+                return False
+
+        # 4 - The moved-from district would still be connected
 
         for offset in move.features:
             proposed.remove(offset)
@@ -383,7 +394,7 @@ class Plan:
                 )
             return False
 
-        # 4 - The moved-from district population would still be w/in population tolerance
+        # 5 - The moved-from district population would still be w/in population tolerance
 
         if not self.is_within_tolerance(proposed):
             if self._verbose:
@@ -399,23 +410,47 @@ class Plan:
         return True
 
     def mutate(self, move: Move):
-        """Mutate the plan by applying a move.
+        """Mutate the plan by applying a move."""
 
-        - Update the feature assignments
-        - Update the districts' features
-        - Update the affected border segments -- find affected districts | all borders (?)
-        - Bump the generation
-        """
+        for offset in move.features:
+            if self._verbose:
+                print(
+                    f"    moving feature {offset} from district {move.from_district} to {move.to_district} ..."
+                )
 
-        for f in move.features:
-            print(
-                f"    moving feature {f} from district {move.from_district} to {move.to_district} ..."
-            )
+            # Update the feature assignment
+
+            f: Feature = self._features[offset]
+            self._features[offset] = Feature(f.id, move.to_district, f.pop)
+
+            # Update the two districts' features
+
+            from_district: District = self._districts[move.from_district]
+            from_district["features"].remove(offset)
+            from_district["pop"] -= f.pop
+            to_district: District = self._districts[move.to_district]
+            to_district["features"].append(offset)
+            to_district["pop"] += f.pop
+
+            # Find all the affected border segments & update them
+
+            neighboring_districts: Set[DistrictOffset] = set()
+            for neighbor in self._features_graph[offset]:
+                ndo: DistrictOffset = self._districts_index[
+                    self._features[neighbor].district
+                ]  # TODO - HERE
+                if ndo != move.to_district:
+                    neighboring_districts.add(ndo)
+
+            pairs: List[Tuple[DistrictOffset, DistrictOffset]] = [
+                (self.segment_key(move.to_district, d))
+                for d in list(neighboring_districts)
+            ]
 
             # TODO
-            # _features: List[Feature]
-            # _districts: List[District]
             # _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
+
+            pass
 
         self._generation += 1
 
