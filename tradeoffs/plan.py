@@ -46,8 +46,6 @@ class Plan:
     _target_pop: int
     _pop_threshold: float
 
-    _measurements: Optional[Tuple[float, float]]
-
     def __init__(
         self,
         district_by_geoid: Dict[GeoID, DistrictID],
@@ -82,10 +80,8 @@ class Plan:
 
         self._border_segments = self._init_border_segments()
 
-        self._measurements = None
-
         if self._verbose:
-            print("Starting plan is connected!")
+            print("Starting plan is valid.")
             print(self)
 
     def __repr__(self) -> str:
