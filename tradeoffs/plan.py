@@ -40,7 +40,8 @@ class Plan:
 
     _features_index: Dict[GeoID, FeatureOffset]
     _features_graph: Dict[FeatureOffset, List[FeatureOffset]]
-    _districts_index: Dict[DistrictID, DistrictOffset]
+    _district_indexes: Dict[DistrictID, DistrictOffset]
+    _district_ids: Dict[DistrictOffset, DistrictID]
 
     _total_pop: int
     _target_pop: int
@@ -71,7 +72,8 @@ class Plan:
         self._features_index = {f.id: i for i, f in enumerate(self._features)}
 
         self._districts = self._invert_plan()
-        self._districts_index = {d["id"]: i for i, d in enumerate(self._districts)}
+        self._district_indexes = {d["id"]: i for i, d in enumerate(self._districts)}
+        self._district_ids = {v: k for k, v in self._district_indexes.items()}
 
         self._features_graph = self._index_graph(graph)
 
@@ -172,8 +174,8 @@ class Plan:
 
         for i, neighbors in self._features_graph.items():
             for n in neighbors:
-                d1: DistrictOffset = self._districts_index[self._features[i].district]
-                d2: DistrictOffset = self._districts_index[self._features[n].district]
+                d1: DistrictOffset = self._district_indexes[self._features[i].district]
+                d2: DistrictOffset = self._district_indexes[self._features[n].district]
 
                 if d1 == d2:
                     continue
@@ -421,7 +423,8 @@ class Plan:
             # Update the feature assignment
 
             f: Feature = self._features[offset]
-            self._features[offset] = Feature(f.id, move.to_district, f.pop)
+            new_district_id: DistrictID = self._district_ids[move.to_district]
+            self._features[offset] = Feature(f.id, new_district_id, f.pop)
 
             # Update the two districts' features
 
@@ -436,9 +439,9 @@ class Plan:
 
             neighboring_districts: Set[DistrictOffset] = set()
             for neighbor in self._features_graph[offset]:
-                ndo: DistrictOffset = self._districts_index[
+                ndo: DistrictOffset = self._district_indexes[
                     self._features[neighbor].district
-                ]  # TODO - HERE
+                ]
                 if ndo != move.to_district:
                     neighboring_districts.add(ndo)
 

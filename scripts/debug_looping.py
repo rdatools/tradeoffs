@@ -80,6 +80,7 @@ def main() -> None:
     if args.verbose:
         print(f"# pairs of adjacent districts: {len(random_districts)}")
 
+    moves_made: int = 0
     for d1, d2 in random_districts:
         districts: List[DistrictOffset] = [d1, d2]
 
@@ -102,13 +103,13 @@ def main() -> None:
 
         done: bool = False
         while True:
-            print(
-                f"... # remaining moves: {districts[0]} = {len(moves[0])} | {districts[1]} = {len(moves[1])}"
-            )
             for i in move_lists:
                 j: int = 1 - i
 
                 while True:
+                    print(
+                        f"... # remaining moves: {districts[0]} = {len(moves[0])} | {districts[1]} = {len(moves[1])}"
+                    )
                     if len(moves[i]) == 0:
                         done = True
                         break
@@ -124,6 +125,7 @@ def main() -> None:
                         continue
                     else:
                         plan.mutate(move)
+                        moves_made += 1
                         valid_counts[i] += 1
                         break
 
@@ -141,6 +143,10 @@ def main() -> None:
                 f"             {districts[1]} -> {districts[0]} = {valid_counts[1]} of {tried_counts[1]} tried were valid."
             )
             print()
+
+    if args.verbose:
+        print(f"# moves made: {moves_made}")
+        print()
 
     # plan.to_csv("output/test_plan.csv")
 
