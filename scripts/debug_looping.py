@@ -9,13 +9,15 @@ $ scripts/debug_looping.py
 
 """
 
+import random
+
 from typing import Any, List, Dict, NamedTuple
 
 from rdabase import read_json, starting_seed
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
-from tradeoffs import *  # TODO
+from tradeoffs import Plan, GeoID, DistrictID, DistrictOffset, Move, Name, Weight
 
 
 class Args(NamedTuple):
@@ -105,10 +107,6 @@ def main() -> None:
             for i in move_lists:
                 j: int = 1 - i
 
-                # print(
-                #     f"... # remaining moves: {districts[i]} = {len(moves[i])} | {districts[j]} = {len([j])}"
-                # )
-
                 while True:
                     if len(moves[i]) == 0:
                         done = True
@@ -122,7 +120,8 @@ def main() -> None:
                             )
                         continue
                     else:
-                        pass  # TODO - Apply the move
+                        pass  # TODO - Apply the move!
+
                         valid_counts[i] += 1
                         break
 
@@ -134,10 +133,10 @@ def main() -> None:
 
         if args.verbose:
             print(
-                f"summary: {districts[0]} -> {districts[1]} = {valid_counts[0]} of {list_lengths[0]} are valid."
+                f"summary: {districts[0]} -> {districts[1]} = {valid_counts[0]} of {list_lengths[0]} were valid."
             )
             print(
-                f"         {districts[1]} -> {districts[0]} = {valid_counts[1]} of {list_lengths[1]} are valid."
+                f"         {districts[1]} -> {districts[0]} = {valid_counts[1]} of {list_lengths[1]} were valid."
             )
             print()
 
