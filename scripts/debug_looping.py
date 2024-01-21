@@ -69,11 +69,11 @@ def main() -> None:
 
     ##
 
-    ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed)
+    plan: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed)
 
     random_districts: List[
         Tuple[DistrictOffset, DistrictOffset]
-    ] = ep.random_districts()
+    ] = plan.random_districts()
 
     if args.verbose:
         print(f"... # pairs of adjacent districts: {len(random_districts)}")
@@ -81,7 +81,7 @@ def main() -> None:
     for district_one, district_two in random_districts:
         moves_from_one: List[Move]
         moves_from_two: List[Move]
-        moves_from_one, moves_from_two = ep.random_moves((district_one, district_two))
+        moves_from_one, moves_from_two = plan.random_moves((district_one, district_two))
 
         n_moves_from_one: int = len(moves_from_one)
         n_moves_from_two: int = len(moves_from_two)
@@ -111,7 +111,7 @@ def main() -> None:
                     break
 
                 move = moves_from_one.pop()
-                if not ep.is_valid_move(move):
+                if not plan.is_valid_move(move):
                     if args.verbose:
                         print(
                             f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
@@ -129,7 +129,7 @@ def main() -> None:
                     break
 
                 move = moves_from_two.pop()
-                if not ep.is_valid_move(move):
+                if not plan.is_valid_move(move):
                     if args.verbose:
                         print(
                             f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
@@ -150,7 +150,7 @@ def main() -> None:
                 f"......          {district_two} -> {district_one} = {n_valid_moves_from_two} of {n_moves_from_two} are valid."
             )
 
-    # ep.to_csv("output/test_plan.csv")
+    # plan.to_csv("output/test_plan.csv")
 
     pass
 

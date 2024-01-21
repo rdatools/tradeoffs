@@ -81,26 +81,30 @@ class TestRatings:
             district_by_geoid: Dict[GeoID, DistrictID] = {
                 a.geoid: a.district for a in assignments
             }
-            ep: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed)
+            plan: Plan = Plan(district_by_geoid, pop_by_geoid, graph, seed)
 
             indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = []
             for x, y in border_keys:
-                d1: DistrictOffset = ep._districts_index[x]
-                d2: DistrictOffset = ep._districts_index[y]
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = ep.segment_key(d1, d2)
+                d1: DistrictOffset = plan._districts_index[x]
+                d2: DistrictOffset = plan._districts_index[y]
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = plan.segment_key(
+                    d1, d2
+                )
                 indexed_border_keys.append(seg_key)
 
             indexed_border_segs = {}
             for k, v in border_segments.items():
                 x, y = k
 
-                x_offsets = [ep._features_index[geoid] for geoid in v[x]]
-                y_offsets = [ep._features_index[geoid] for geoid in v[y]]
+                x_offsets = [plan._features_index[geoid] for geoid in v[x]]
+                y_offsets = [plan._features_index[geoid] for geoid in v[y]]
 
-                d1: DistrictOffset = ep._districts_index[x]
-                d2: DistrictOffset = ep._districts_index[y]
+                d1: DistrictOffset = plan._districts_index[x]
+                d2: DistrictOffset = plan._districts_index[y]
 
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = ep.segment_key(d1, d2)
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = plan.segment_key(
+                    d1, d2
+                )
 
                 indexed_border_segs[seg_key] = (
                     {d1: set(x_offsets), d2: set(y_offsets)}
@@ -110,7 +114,7 @@ class TestRatings:
 
             # Tests
 
-            actual_borders = ep._border_segments
+            actual_borders = plan._border_segments
             assert len(actual_borders) == len(border_keys)
 
             for b in indexed_border_keys:
