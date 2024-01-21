@@ -28,7 +28,7 @@ class Plan:
 
     # Dynamic
 
-    _generation: int
+    _generation: int  # TODO - Make this a public property?
 
     _features: List[Feature]
     _districts: List[District]
@@ -407,7 +407,15 @@ class Plan:
         - Bump the generation
         """
 
-        # TODO - NYI
+        for f in move.features:
+            print(
+                f"    moving feature {f} from district {move.from_district} to {move.to_district} ..."
+            )
+
+            # TODO
+            # _features: List[Feature]
+            # _districts: List[District]
+            # _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
 
         self._generation += 1
 

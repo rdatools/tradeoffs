@@ -85,6 +85,7 @@ def main() -> None:
 
         moves: List[List[Move]] = plan.random_moves((d1, d2))
         list_lengths: List[int] = [len(moves[0]), len(moves[1])]
+        tried_counts: List[int] = [0, 0]
         valid_counts: List[int] = [0, 0]
 
         one: int = random.randint(0, 1)  # Start w/ one list at random
@@ -113,15 +114,16 @@ def main() -> None:
                         break
 
                     move: Move = moves[i].pop()
+                    tried_counts[i] += 1
+
                     if not plan.is_valid_move(move):
                         if args.verbose:
                             print(
-                                f"...   district {move.from_district} would not be valid, if features ({move.features}) were moved!"
+                                f"... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
                             )
                         continue
                     else:
-                        pass  # TODO - Apply the move!
-
+                        plan.mutate(move)
                         valid_counts[i] += 1
                         break
 
@@ -133,10 +135,10 @@ def main() -> None:
 
         if args.verbose:
             print(
-                f"summary: {districts[0]} -> {districts[1]} = {valid_counts[0]} of {list_lengths[0]} were valid."
+                f"    Summary: {districts[0]} -> {districts[1]} = {valid_counts[0]} of {tried_counts[0]} tried were valid."
             )
             print(
-                f"         {districts[1]} -> {districts[0]} = {valid_counts[1]} of {list_lengths[1]} were valid."
+                f"             {districts[1]} -> {districts[0]} = {valid_counts[1]} of {tried_counts[1]} tried were valid."
             )
             print()
 
