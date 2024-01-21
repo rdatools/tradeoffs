@@ -300,7 +300,7 @@ class Plan:
 
     def random_moves(
         self, pair: Tuple[DistrictOffset, DistrictOffset], size: int = 1
-    ) -> Tuple[List[Move], List[Move]]:
+    ) -> List[List[Move]]:
         """Generate random moves between two districts."""
 
         d1, d2 = pair
@@ -324,7 +324,7 @@ class Plan:
         random.shuffle(moves_from_one)
         random.shuffle(moves_from_two)
 
-        return (moves_from_one, moves_from_two)
+        return [moves_from_one, moves_from_two]
 
     def is_valid_plan(self) -> bool:
         """Is this plan state valid?"""

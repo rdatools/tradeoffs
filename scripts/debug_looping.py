@@ -76,79 +76,70 @@ def main() -> None:
     ] = plan.random_districts()
 
     if args.verbose:
-        print(f"... # pairs of adjacent districts: {len(random_districts)}")
+        print(f"# pairs of adjacent districts: {len(random_districts)}")
 
-    for district_one, district_two in random_districts:
-        moves_from_one: List[Move]
-        moves_from_two: List[Move]
-        moves_from_one, moves_from_two = plan.random_moves((district_one, district_two))
+    for d1, d2 in random_districts:
+        districts: List[DistrictOffset] = [d1, d2]
 
-        n_moves_from_one: int = len(moves_from_one)
-        n_moves_from_two: int = len(moves_from_two)
+        moves: List[List[Move]] = plan.random_moves((d1, d2))
+        list_lengths: List[int] = [len(moves[0]), len(moves[1])]
+        valid_counts: List[int] = [0, 0]
 
-        n_valid_moves_from_one: int = 0
-        n_valid_moves_from_two: int = 0
+        one: int = random.randint(0, 1)  # Start w/ one list at random
+        two: int = 1 - one
+        move_lists: List[int] = [one, two]
 
         if args.verbose:
             print(
-                f"... # moves: {district_one} -> {district_two} = {n_moves_from_one} | {district_two} -> {district_one} = {n_moves_from_one}"
+                f"# moves: {districts[0]} -> {districts[1]} = {list_lengths[0]} | {districts[1]} -> {districts[0]} = {list_lengths[1]}"
             )
 
         # Alternate between the two lists of moves, to try to maintain population balance.
+        # Stop when either list is empty.
 
         done: bool = False
         while True:
-            move: Optional[Move] = None
+            print(
+                f"... # remaining moves: {districts[0]} = {len(moves[0])} | {districts[1]} = {len(moves[1])}"
+            )
+            for i in move_lists:
+                j: int = 1 - i
 
-            # TODO - Collapse these two loops into one loop, that alternates between the two lists of moves.
-            # TODO - Randomize the order of the two lists
+                # print(
+                #     f"... # remaining moves: {districts[i]} = {len(moves[i])} | {districts[j]} = {len([j])}"
+                # )
 
-            # Try a move from district_one to district_two, until successful.
+                while True:
+                    if len(moves[i]) == 0:
+                        done = True
+                        break
 
-            while True:
-                if len(moves_from_one) == 0:
-                    done = True
+                    move: Move = moves[i].pop()
+                    if not plan.is_valid_move(move):
+                        if args.verbose:
+                            print(
+                                f"...   district {move.from_district} would not be valid, if features ({move.features}) were moved!"
+                            )
+                        continue
+                    else:
+                        pass  # TODO - Apply the move
+                        valid_counts[i] += 1
+                        break
+
+                if done:
                     break
-
-                move = moves_from_one.pop()
-                if not plan.is_valid_move(move):
-                    if args.verbose:
-                        print(
-                            f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
-                        )
-                else:
-                    n_valid_moves_from_one += 1
-
-            pass  # TODO - Move the features ...
-
-            # Try a move from district_two to district_one, until successful.
-
-            while True:
-                if len(moves_from_two) == 0:
-                    done = True
-                    break
-
-                move = moves_from_two.pop()
-                if not plan.is_valid_move(move):
-                    if args.verbose:
-                        print(
-                            f"...... district {move.from_district} would not be valid, if features ({move.features}) were moved!"
-                        )
-                else:
-                    n_valid_moves_from_two += 1
-
-            pass  # TODO - Move the features ...
 
             if done:
                 break
 
         if args.verbose:
             print(
-                f"...... summary: {district_one} -> {district_two} = {n_valid_moves_from_one} of {n_moves_from_one} are valid."
+                f"summary: {districts[0]} -> {districts[1]} = {valid_counts[0]} of {list_lengths[0]} are valid."
             )
             print(
-                f"......          {district_two} -> {district_one} = {n_valid_moves_from_two} of {n_moves_from_two} are valid."
+                f"         {districts[1]} -> {districts[0]} = {valid_counts[1]} of {list_lengths[1]} are valid."
             )
+            print()
 
     # plan.to_csv("output/test_plan.csv")
 
