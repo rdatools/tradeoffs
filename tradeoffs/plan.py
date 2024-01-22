@@ -204,12 +204,24 @@ class Plan:
 
         if self._debug:
             for k, v in converted.items():
-                districts: List[DistrictOffset] = list(v.keys())
-                for d in districts:
-                    for offset in v[d]:
-                        assert self._features[offset].district == self._district_ids[d]
+                self._validate_border_segment(k, v)
 
         return converted
+
+    def _validate_border_segment(
+        self, seg_key: Tuple[DistrictOffset, DistrictOffset], bs: BorderSegment
+    ) -> None:
+        for d, offsets in bs.items():
+            d_id: DistrictID = self._district_ids[d]
+            for offset in offsets:
+                f: Feature = self._features[offset]
+                if f.district != d_id:
+                    geoid: GeoID = f.id
+                    d_index: DistrictOffset = self._district_indexes[f.district]
+                    print(
+                        f"DEBUG - border segment feature {offset}/{geoid} is in district {d_index}/{f.district} not {d}/{d_id}!"
+                    )
+        # TODO - Verify that features are on the border between the two districts
 
     def _size_1_moves(
         self,
@@ -218,6 +230,9 @@ class Plan:
         district_two: DistrictOffset,
     ) -> Tuple[List[Move], List[Move]]:
         """Generate all size-1 moves between two districts."""
+
+        if self._debug:
+            self._validate_border_segment(seg_key, self._border_segments[seg_key])
 
         from_one: List[List[FeatureOffset]] = [
             [f] for f in self._border_segments[seg_key][district_one]
@@ -232,6 +247,12 @@ class Plan:
         moves_from_two: List[Move] = [
             Move(m, district_two, district_one) for m in from_two
         ]
+
+        if self._debug:
+            for m in moves_from_one:
+                self.is_valid_move(m)
+            for m in moves_from_two:
+                self.is_valid_move(m)
 
         return (moves_from_one, moves_from_two)
 
@@ -367,7 +388,7 @@ class Plan:
         seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(d1, d2)
         if seg_key not in self._border_segments:
             if self._verbose:
-                print(f"... Error: Districts {d1} and {d2} are not adjacent!")
+                print(f"... ERROR - Districts {d1} and {d2} are not adjacent!")
             return False
 
         # 2 - The move features are connected & at least one is on that border
@@ -391,7 +412,7 @@ class Plan:
             if offset not in proposed:
                 if self._verbose:
                     print(
-                        f"... Error: Feature {offset} is not in district {move.from_district}!"
+                        f"... ERROR - Feature {offset} is not in district {move.from_district}!"
                     )
                 return False
 
@@ -403,7 +424,7 @@ class Plan:
         if not self._is_connected(proposed):
             if self._verbose:
                 print(
-                    f"... Error: Districts {d1} would not be connected, if ({move.features}) features were moved."
+                    f"... ERROR - Districts {d1} would not be connected, if ({move.features}) features were moved."
                 )
             return False
 
@@ -412,7 +433,7 @@ class Plan:
         if not self.is_within_tolerance(proposed):
             if self._verbose:
                 print(
-                    f"... Error: Districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
+                    f"... ERROR - Districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
                 )
             return False
 
