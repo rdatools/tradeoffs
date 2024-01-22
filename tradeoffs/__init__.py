@@ -15,7 +15,7 @@ from .scores import (
     cull_splitting_metrics,
     cull_ratings,
 )
-from .plan import *  # TODO - Be specific
+from .plan import Plan, segment_key
 from .connected import is_connected
 from .normalize import Normalizer
 from .dra_ratings import *
