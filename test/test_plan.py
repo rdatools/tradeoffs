@@ -87,9 +87,7 @@ class TestRatings:
             for x, y in border_keys:
                 d1: DistrictOffset = plan._district_indexes[x]
                 d2: DistrictOffset = plan._district_indexes[y]
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = plan.segment_key(
-                    d1, d2
-                )
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(d1, d2)
                 indexed_border_keys.append(seg_key)
 
             indexed_border_segs = {}
@@ -102,9 +100,7 @@ class TestRatings:
                 d1: DistrictOffset = plan._district_indexes[x]
                 d2: DistrictOffset = plan._district_indexes[y]
 
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = plan.segment_key(
-                    d1, d2
-                )
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(d1, d2)
 
                 indexed_border_segs[seg_key] = (
                     {d1: set(x_offsets), d2: set(y_offsets)}
