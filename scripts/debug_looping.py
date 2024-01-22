@@ -120,7 +120,7 @@ def main() -> None:
 
                     if plan.is_valid_move(move):
                         valid = True
-                        plan.mutate(move)
+                        # plan.mutate(move) # TODO
                         valid_counts[i] += 1
 
                     print(
