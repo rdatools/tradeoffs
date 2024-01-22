@@ -28,7 +28,8 @@ class Plan:
 
     # Dynamic
 
-    _generation: int  # TODO - Make this a public property?
+    _generation: int  # Number of mutations applied
+    _moves: int  # Number of features moved
 
     _features: List[Feature]
     _districts: List[District]
@@ -62,6 +63,7 @@ class Plan:
         random.seed(seed)
 
         self._generation = 0
+        self._moves = 0
         self._pop_threshold = pop_threshold
         self._verbose = verbose
 
@@ -83,11 +85,12 @@ class Plan:
         self._border_segments = self._init_border_segments()
 
         if self._verbose:
-            print("Starting plan is valid.")
+            print()
             print(self)
+            print()
 
     def __repr__(self) -> str:
-        return f"Plan({self._generation})"  # TODO - Flesh this out
+        return f"Plan: # of mutations = {self._generation}, # features moves = {self._moves}"
 
     ### PRIVATE ###
 
@@ -354,15 +357,13 @@ class Plan:
         seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(d1, d2)
         if seg_key not in self._border_segments:
             if self._verbose:
-                print(f"Move: {move}")
-                print(f"... districts {d1} and {d2} are not adjacent!")
+                print(f"... Error: Districts {d1} and {d2} are not adjacent!")
             return False
 
         # 2 - The move features are connected & at least one is on that border
 
         if not self._are_connected_border_features(move.features, d1, d2):
             if self._verbose:
-                print(f"Move: {move}")
                 print(
                     f"... features {move.features} are not connected and/or none are on the border between districts {d1} and {d2}!"
                 )
@@ -377,9 +378,8 @@ class Plan:
         for offset in move.features:
             if offset not in proposed:
                 if self._verbose:
-                    print(f"Move: {move}")
                     print(
-                        f"... feature {offset} is not in district {move.from_district}!"
+                        f"... Error: Feature {offset} is not in district {move.from_district}!"
                     )
                 return False
 
@@ -390,9 +390,8 @@ class Plan:
 
         if not self._is_connected(proposed):
             if self._verbose:
-                print(f"Move: {move}")
                 print(
-                    f"... districts {d1} would not be connected, if ({move.features}) features were moved."
+                    f"... Error: Districts {d1} would not be connected, if ({move.features}) features were moved."
                 )
             return False
 
@@ -400,14 +399,10 @@ class Plan:
 
         if not self.is_within_tolerance(proposed):
             if self._verbose:
-                print(f"Move: {move}")
                 print(
-                    f"... districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
+                    f"... Error: Districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
                 )
             return False
-
-        if self._verbose:
-            print(f"Move: {move} is valid!")
 
         return True
 
@@ -417,7 +412,7 @@ class Plan:
         for offset in move.features:
             if self._verbose:
                 print(
-                    f"    moving feature {offset} from district {move.from_district} to {move.to_district} ..."
+                    f"... Moving feature {offset} from district {move.from_district} to {move.to_district} ..."
                 )
 
             # Update the feature assignment
@@ -434,6 +429,8 @@ class Plan:
             to_district: District = self._districts[move.to_district]
             to_district["features"].append(offset)
             to_district["pop"] += f.pop
+
+            self._moves += 1
 
             # Find all the affected border segments & update them
 
