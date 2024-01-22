@@ -261,6 +261,7 @@ class Plan:
 
         return (moves_from_one, moves_from_two)
 
+    # TODO - DELETE
     def _are_connected_border_features(
         self,
         features: List[FeatureOffset],
@@ -385,29 +386,32 @@ class Plan:
     def is_valid_move(self, move: Move) -> bool:
         """Would this be a valid move?"""
 
-        d1: DistrictOffset = move.from_district
-        d2: DistrictOffset = move.to_district
+        from_id: DistrictID = self._district_ids[move.from_district]
+        to_id: DistrictID = self._district_ids[move.to_district]
+        enum_features: List = [f"{f}/{self._features[f].id}" for f in move.features]
 
         # 1 - The from & to districts are adjacent
 
-        seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(d1, d2)
+        seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(
+            move.from_district, move.to_district
+        )
         if seg_key not in self._border_segments:
             if self._verbose:
-                print(f"... WARNING - Districts {d1} and {d2} are not adjacent!")
-            return False
-
-        # 2 - The move features are connected & at least one is on that border
-
-        if len(move.features) > 1 and not self._are_connected_border_features(
-            move.features, d1, d2
-        ):
-            if self._verbose:
                 print(
-                    f"... WARNING - Features {move.features} are not connected and/or none are on the border between districts {d1} and {d2}!"
+                    f"... ERROR - Districts {move.from_district}/{from_id} and {move.to_district}/{to_id} are not adjacent!"
                 )
             return False
 
-        # 3 - The features are all in the moved-from district
+        # 2 - Mutiple move features are connected
+
+        if len(move.features) > 1 and not self._is_connected(move.features):
+            if self._verbose:
+                print(
+                    f"... ERROR - The move features {enum_features} are not connected!"
+                )
+                return False
+
+        # 3 - The move features are all in the moved-from district
 
         proposed: List[FeatureOffset] = list(
             self._districts[move.from_district]["features"]
@@ -416,12 +420,35 @@ class Plan:
         for offset in move.features:
             if offset not in proposed:
                 if self._verbose:
+                    f: Feature = self._features[offset]
+                    geoid: GeoID = f.id
+                    d_id: DistrictID = self._district_ids[move.from_district]
                     print(
-                        f"... WARNING - Feature {offset} is not in district {move.from_district}!"
+                        f"... ERROR - Feature {offset}/{geoid} is not in district {move.from_district}/{d_id}!"
                     )
                 return False
 
-        # 4 - The moved-from district would still be connected
+        # 4 - At least one feature in the move is on the border between the two districts
+
+        from_border: List[FeatureOffset] = self._border_segments[seg_key][
+            move.from_district
+        ]
+
+        on_border: bool = False
+        for f in move.features:
+            if f in from_border:
+                on_border = True
+                break
+        if not on_border:
+            if self._verbose:
+                print(
+                    f"... ERROR - Of {len(move.features)} features, none is on the border between districts ({from_district}/{from_id} -> {to_district}/{to_id})!"
+                )
+            return False
+
+        # The move is well formed, syntactically. Now warn about semantic effects.
+
+        # 5 - The moved-from district would still be connected
 
         for offset in move.features:
             proposed.remove(offset)
@@ -429,16 +456,16 @@ class Plan:
         if not self._is_connected(proposed):
             if self._verbose:
                 print(
-                    f"... WARNING - Districts {d1} would not be connected, if ({move.features}) features were moved."
+                    f"... WARNING - District {move.from_district}/{from_id} would not be connected, if feature(s) {enum_features} were moved."
                 )
             return False
 
-        # 5 - The moved-from district population would still be w/in population tolerance
+        # 6 - The moved-from district population would still be w/in population tolerance
 
         if not self.is_within_tolerance(proposed):
             if self._verbose:
                 print(
-                    f"... WARNING - Districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
+                    f"... WARNING - Districts {move.from_district}/{from_id} would not be within population tolerance, if feature(s) {enum_features}  were moved."
                 )
             return False
 
