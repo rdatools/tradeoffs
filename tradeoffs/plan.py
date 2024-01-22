@@ -57,15 +57,18 @@ class Plan:
         *,
         pop_threshold: float = 0.01,
         verbose: bool = False,
+        debug: bool = False,
     ) -> None:
         """Initialize the plan."""
 
         random.seed(seed)
 
+        self._verbose = verbose
+        self._debug = debug
+
         self._generation = 0
         self._moves = 0
         self._pop_threshold = pop_threshold
-        self._verbose = verbose
 
         assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = [
@@ -199,7 +202,7 @@ class Plan:
         for k, v in border_segments.items():
             converted[k] = {d: list(offsets) for d, offsets in v.items()}
 
-        return border_segments
+        return converted
 
     def _size_1_moves(
         self,
@@ -362,7 +365,9 @@ class Plan:
 
         # 2 - The move features are connected & at least one is on that border
 
-        if not self._are_connected_border_features(move.features, d1, d2):
+        if len(move.features) > 1 and not self._are_connected_border_features(
+            move.features, d1, d2
+        ):
             if self._verbose:
                 print(
                     f"... features {move.features} are not connected and/or none are on the border between districts {d1} and {d2}!"

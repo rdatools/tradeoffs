@@ -37,4 +37,6 @@ class Move(NamedTuple):
     to_district: DistrictOffset
 
 
+Swap: TypeAlias = List[Move]
+
 ### END ###

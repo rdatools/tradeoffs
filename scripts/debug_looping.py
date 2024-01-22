@@ -72,7 +72,7 @@ def main() -> None:
     ##
 
     plan: Plan = Plan(
-        district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose
+        district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose, debug=True
     )
 
     random_districts: List[
