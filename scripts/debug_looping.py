@@ -115,15 +115,19 @@ def main() -> None:
 
                     move: Move = moves[i].pop()
                     tried_counts[i] += 1
+                    valid: bool = False
 
                     if plan.is_valid_move(move):
+                        valid = True
                         plan.mutate(move)
                         valid_counts[i] += 1
-                        break
 
                     print(
                         f"... # remaining moves: {districts[0]} = {len(moves[0])} | {districts[1]} = {len(moves[1])}"
                     )
+
+                    if valid:
+                        break
 
                 if done:
                     break

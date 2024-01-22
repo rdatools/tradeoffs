@@ -37,6 +37,6 @@ class Move(NamedTuple):
     to_district: DistrictOffset
 
 
-Swap: TypeAlias = List[Move]
+Mutation: TypeAlias = List[Move]  # One or more Moves, each of arbitrary size
 
 ### END ###
