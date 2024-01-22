@@ -202,6 +202,13 @@ class Plan:
         for k, v in border_segments.items():
             converted[k] = {d: list(offsets) for d, offsets in v.items()}
 
+        if self._debug:
+            for k, v in converted.items():
+                districts: List[DistrictOffset] = list(v.keys())
+                for d in districts:
+                    for offset in v[d]:
+                        assert self._features[offset].district == self._district_ids[d]
+
         return converted
 
     def _size_1_moves(
@@ -377,7 +384,7 @@ class Plan:
         # 3 - The features are all in the moved-from district
 
         proposed: List[FeatureOffset] = list(
-            self.district_features(move.from_district)
+            self._districts[move.from_district]["features"]
         )  # Copy the list of feature offsets
 
         for offset in move.features:
@@ -458,11 +465,6 @@ class Plan:
             pass
 
         self._generation += 1
-
-    def district_features(self, district: DistrictOffset) -> Set[FeatureOffset]:
-        """Get all feature offsets for a district."""
-
-        return self._districts[district]["features"]
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
