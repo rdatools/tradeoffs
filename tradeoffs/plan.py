@@ -393,7 +393,7 @@ class Plan:
         seg_key: Tuple[DistrictOffset, DistrictOffset] = self.segment_key(d1, d2)
         if seg_key not in self._border_segments:
             if self._verbose:
-                print(f"... Districts {d1} and {d2} are not adjacent!")
+                print(f"... WARNING - Districts {d1} and {d2} are not adjacent!")
             return False
 
         # 2 - The move features are connected & at least one is on that border
@@ -403,7 +403,7 @@ class Plan:
         ):
             if self._verbose:
                 print(
-                    f"... features {move.features} are not connected and/or none are on the border between districts {d1} and {d2}!"
+                    f"... WARNING - Features {move.features} are not connected and/or none are on the border between districts {d1} and {d2}!"
                 )
             return False
 
@@ -417,7 +417,7 @@ class Plan:
             if offset not in proposed:
                 if self._verbose:
                     print(
-                        f"... Feature {offset} is not in district {move.from_district}!"
+                        f"... WARNING - Feature {offset} is not in district {move.from_district}!"
                     )
                 return False
 
@@ -429,7 +429,7 @@ class Plan:
         if not self._is_connected(proposed):
             if self._verbose:
                 print(
-                    f"... Districts {d1} would not be connected, if ({move.features}) features were moved."
+                    f"... WARNING - Districts {d1} would not be connected, if ({move.features}) features were moved."
                 )
             return False
 
@@ -438,7 +438,7 @@ class Plan:
         if not self.is_within_tolerance(proposed):
             if self._verbose:
                 print(
-                    f"... Districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
+                    f"... WARNING - Districts {d1} would not be within population tolerance, if ({move.features}) features were moved."
                 )
             return False
 
