@@ -96,6 +96,7 @@ def main() -> None:
         move_lists: List[int] = [one, two]
 
         if args.verbose:
+            print()
             print(
                 f"# moves: {districts[0]} -> {districts[1]} = {list_lengths[0]} | {districts[1]} -> {districts[0]} = {list_lengths[1]}"
             )
