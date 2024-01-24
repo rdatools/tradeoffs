@@ -310,6 +310,26 @@ class Plan:
         return False
 
     def _size_1_moves(
+        self, seg_key: Tuple[DistrictOffset, DistrictOffset]
+    ) -> Tuple[List[Move], List[Move]]:
+        """Generate all size-1 moves between two districts."""
+
+        d1, d2 = seg_key
+
+        from_one: List[List[FeatureOffset]] = [
+            [f] for f in self._border_segments[seg_key][d1]
+        ]
+        from_two: List[List[FeatureOffset]] = [
+            [f] for f in self._border_segments[seg_key][d2]
+        ]
+
+        moves_from_one: List[Move] = [Move(m, d1, d2) for m in from_one]
+        moves_from_two: List[Move] = [Move(m, d2, d1) for m in from_two]
+
+        return (moves_from_one, moves_from_two)
+
+    # TODO - DELETE
+    def _size_1_moves_OLD(
         self,
         seg_key: Tuple[DistrictOffset, DistrictOffset],
         district_one: DistrictOffset,
@@ -354,6 +374,43 @@ class Plan:
 
         return pairs
 
+    def random_mutations(
+        self, seg_key: Tuple[DistrictOffset, DistrictOffset], size: int = 1
+    ) -> List[Mutation]:
+        """Generate random mutations of two districts."""
+
+        d1, d2 = seg_key
+
+        if self._debug:
+            if seg_key not in self._border_segments:
+                raise Exception("No border segments between these districts!")
+
+        moves_from_one: List[Move]
+        moves_from_two: List[Move]
+
+        match size:
+            case 1:
+                moves_from_one, moves_from_two = self._size_1_moves(seg_key)
+            case _:
+                raise Exception("Only size-1 moves are supported right now!")
+
+        random.shuffle(moves_from_one)
+        random.shuffle(moves_from_two)
+
+        mutations: List[Mutation] = []
+        while len(moves_from_one) > 0 or len(moves_from_two) > 0:
+            mutation: Mutation = []
+
+            if len(moves_from_one) > 0:
+                mutation.append(moves_from_one.pop())
+            if len(moves_from_two) > 0:
+                mutation.append(moves_from_two.pop())
+
+            mutations.append(mutation)
+
+        return mutations
+
+    # TODO - DELETE
     def random_moves(
         self, pair: Tuple[DistrictOffset, DistrictOffset], size: int = 1
     ) -> List[List[Move]]:
@@ -371,7 +428,7 @@ class Plan:
 
         match size:
             case 1:
-                moves_from_one, moves_from_two = self._size_1_moves(
+                moves_from_one, moves_from_two = self._size_1_moves_OLD(
                     seg_key, district_one, district_two
                 )
             case _:
@@ -396,6 +453,17 @@ class Plan:
             valid = False
 
         return valid
+
+    def is_valid_mutation(self, mutation: Mutation) -> bool:
+        """Would this be a valid mutation?"""
+
+        for move in mutation:
+            if not self.is_valid_move(move):
+                return False
+
+        # TODO - It's possible that each move is valid, but the overall mutation is not.
+
+        return True
 
     def is_valid_move(self, move: Move) -> bool:
         """Would this be a valid move?"""
@@ -486,7 +554,62 @@ class Plan:
 
         return True
 
-    def mutate(self, move: Move):
+    # TODO - HERE
+    def mutate(self, mutation: Mutation):
+        """Mutate the plan by applying a mutation."""
+
+        for move in mutation:
+            from_district: District = self._districts[move.from_district]
+            to_district: District = self._districts[move.to_district]
+
+            from_id: DistrictID = self._district_ids[move.from_district]
+            to_id: DistrictID = self._district_ids[move.to_district]
+
+            border_segments: Set[Tuple[DistrictOffset, DistrictOffset]] = set()
+            border_segments.add(segment_key(move.from_district, move.to_district))
+
+            for offset in move.features:
+                f: Feature = self._features[offset]
+
+                if self._verbose:
+                    print(
+                        f"... Moving feature {offset}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
+                    )
+
+                # Update the feature assignment
+
+                self._features[offset] = Feature(f.id, to_id, f.pop)
+
+                # Update the two districts' features
+
+                from_district["features"].remove(offset)
+                from_district["pop"] -= f.pop
+
+                to_district["features"].append(offset)
+                to_district["pop"] += f.pop
+
+                self._moves += 1
+
+                # Find all the affected border segments -- could be others
+
+                for neighbor in self._features_graph[offset]:
+                    neighbor_district: DistrictOffset = self._district_indexes[
+                        self._features[neighbor].district
+                    ]
+                    if neighbor_district not in [move.from_district, move.to_district]:
+                        border_segments.add(
+                            segment_key(move.to_district, neighbor_district)
+                        )
+
+            # Update the affected border segments
+
+            for bs in border_segments:
+                self._update_border_segment(bs)
+
+        self._generation += 1
+
+    # TODO - DELETE
+    def mutate_OLD(self, move: Move):
         """Mutate the plan by applying a move."""
 
         from_district: District = self._districts[move.from_district]

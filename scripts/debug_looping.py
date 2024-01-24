@@ -77,6 +77,9 @@ def main() -> None:
 
     # plan.to_csv("output/test_plan.csv")
 
+    # TODO - Iterate until done.
+    done: bool = True
+
     random_districts: List[
         Tuple[DistrictOffset, DistrictOffset]
     ] = plan.random_districts()
@@ -85,65 +88,27 @@ def main() -> None:
         print(f"# pairs of adjacent districts: {len(random_districts)}")
         print()
 
-    for d1, d2 in random_districts:
-        districts: List[DistrictOffset] = [d1, d2]
-
-        moves: List[List[Move]] = plan.random_moves((d1, d2))
-        list_lengths: List[int] = [len(moves[0]), len(moves[1])]
-        tried_counts: List[int] = [0, 0]
-        valid_counts: List[int] = [0, 0]
-
-        one: int = random.randint(0, 1)  # Start w/ one list at random
-        two: int = 1 - one
-        move_lists: List[int] = [one, two]
+    for seg_key in random_districts:
+        mutations: List[Mutation] = plan.random_mutations(seg_key)
+        tried_count: int = 0
+        valid_count: int = 0
 
         if args.verbose:
             print()
-            print(
-                f"# moves: {districts[0]} -> {districts[1]} = {list_lengths[0]} | {districts[1]} -> {districts[0]} = {list_lengths[1]}"
-            )
+            print(f"# mutations between districts {seg_key}: {len(mutations)}")
 
-        # Alternate between the two lists of moves, to try to maintain population balance.
-        # Stop when either list is empty.
+        for m in mutations:
+            tried_count += 1
+            if plan.is_valid_mutation(m):
+                plan.mutate(m)
+                valid_count += 1
+                done = False
 
-        done: bool = False
-        while True:
-            for i in move_lists:
-                j: int = 1 - i
-
-                while True:
-                    if len(moves[i]) == 0:
-                        done = True
-                        break
-
-                    move: Move = moves[i].pop()
-                    tried_counts[i] += 1
-                    valid: bool = False
-
-                    if plan.is_valid_move(move):
-                        valid = True
-                        plan.mutate(move)
-                        valid_counts[i] += 1
-
-                    print(
-                        f"... # remaining moves: {districts[0]} = {len(moves[0])} | {districts[1]} = {len(moves[1])}"
-                    )
-
-                    if valid:
-                        break
-
-                if done:
-                    break
-
-            if done:
-                break
+            print(f"... # remaining mutations: {len(mutations)}")
 
         if args.verbose:
             print(
-                f"    Summary: {districts[0]} -> {districts[1]} = {valid_counts[0]} of {tried_counts[0]} tried were valid."
-            )
-            print(
-                f"             {districts[1]} -> {districts[0]} = {valid_counts[1]} of {tried_counts[1]} tried were valid."
+                f"    Summary: {valid_count} of {tried_count} mutations tried were valid."
             )
             print()
 
