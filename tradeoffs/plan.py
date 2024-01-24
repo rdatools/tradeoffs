@@ -127,8 +127,8 @@ class Plan:
         for geoid, neighbors in graph.items():
             if geoid == OUT_OF_STATE:
                 continue
-            offset: FeatureOffset = self._features_index[geoid]
-            indexed_graph[offset] = [
+            node: FeatureOffset = self._features_index[geoid]
+            indexed_graph[node] = [
                 self._features_index[n] for n in neighbors if n != OUT_OF_STATE
             ]
 
@@ -180,23 +180,30 @@ class Plan:
             Dict[DistrictOffset, Set[FeatureOffset]],  # A set to avoid duplicates
         ] = {}
 
-        for i, neighbors in self._features_graph.items():
-            for n in neighbors:
-                d1: DistrictOffset = self._district_indexes[self._features[i].district]
-                d2: DistrictOffset = self._district_indexes[self._features[n].district]
+        for node, neighbors in self._features_graph.items():
+            d_node: DistrictOffset = self._district_indexes[
+                self._features[node].district
+            ]
 
-                if d1 == d2:
+            for neighbor in neighbors:
+                d_neighbor: DistrictOffset = self._district_indexes[
+                    self._features[neighbor].district
+                ]
+
+                if d_node == d_neighbor:
                     continue
 
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(d1, d2)
+                seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(
+                    d_node, d_neighbor
+                )
                 if seg_key not in border_segments:
                     border_segments[seg_key] = {
-                        d1: set(),
-                        d2: set(),
+                        d_node: set(),
+                        d_neighbor: set(),
                     }
 
-                border_segments[seg_key][d1].add(i)
-                border_segments[seg_key][d2].add(n)
+                border_segments[seg_key][d_node].add(node)
+                border_segments[seg_key][d_neighbor].add(neighbor)
 
         converted: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment] = {}
         for k, v in border_segments.items():
