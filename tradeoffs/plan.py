@@ -212,7 +212,7 @@ class Plan:
         if self._debug:
             valid: bool = True
             print()
-            print("DEBUG - Check initial border segments:")
+            print("DEBUG - Check initial border segments.")
             for k, v in converted.items():
                 if not self._valid_border_segment(k, v):
                     valid = False
@@ -265,14 +265,14 @@ class Plan:
 
         valid: bool = True
         for d, offsets in bs.items():
-            d_id: DistrictID = self._district_ids[d]
-
             if d not in seg_key:
                 valid = False
                 print(
                     f"DEBUG - Border district {d}/{d_id} is not in segment key {seg_key}!"
                 )
                 break
+
+            d_id: DistrictID = self._district_ids[d]
 
             for offset in offsets:
                 f: Feature = self._features[offset]
@@ -297,11 +297,14 @@ class Plan:
 
         return valid
 
-    def _does_border_district(self, f: FeatureOffset, d: DistrictOffset) -> bool:
+    def _does_border_district(self, fo: FeatureOffset, do: DistrictOffset) -> bool:
         """Does this feature border that district?"""
 
-        for neighbor in self._features_graph[f]:
-            if self._features[neighbor].district == d:
+        for neighbor_offset in self._features_graph[fo]:
+            ndo: DistrictOffset = self._district_indexes[
+                self._features[neighbor_offset].district
+            ]
+            if ndo == do:
                 return True
 
         return False
