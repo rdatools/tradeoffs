@@ -75,6 +75,8 @@ def main() -> None:
         district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose, debug=True
     )
 
+    # plan.to_csv("output/test_plan.csv")
+
     random_districts: List[
         Tuple[DistrictOffset, DistrictOffset]
     ] = plan.random_districts()
@@ -120,7 +122,7 @@ def main() -> None:
 
                     if plan.is_valid_move(move):
                         valid = True
-                        # plan.mutate(move) # TODO
+                        plan.mutate(move)
                         valid_counts[i] += 1
 
                     print(
