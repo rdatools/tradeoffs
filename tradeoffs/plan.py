@@ -144,21 +144,28 @@ class Plan:
 
         return pop >= lower and pop <= upper
 
-    # TODO - Update this
     def _size_1_moves(self, seg_key: BorderKey) -> Tuple[List[Move], List[Move]]:
         """Generate all size-1 moves between two districts."""
 
         d1, d2 = seg_key
+        d1_id: DistrictID = self._district_ids[d1]
+        d2_id: DistrictID = self._district_ids[d2]
 
-        from_one: List[List[FeatureOffset]] = [
-            [f] for f in self._border_segments[seg_key][d1]
-        ]
-        from_two: List[List[FeatureOffset]] = [
-            [f] for f in self._border_segments[seg_key][d2]
-        ]
+        from_one: List[FeatureOffset] = []
+        for fo in self._districts[d1]["features"]:
+            for no in self._feature_graph[fo]:
+                if self._features[no].district == d2_id:
+                    from_one.append(fo)
+                    break
+        from_two: List[FeatureOffset] = []
+        for fo in self._districts[d2]["features"]:
+            for no in self._feature_graph[fo]:
+                if self._features[no].district == d1_id:
+                    from_one.append(fo)
+                    break
 
-        moves_from_one: List[Move] = [Move(m, d1, d2) for m in from_one]
-        moves_from_two: List[Move] = [Move(m, d2, d1) for m in from_two]
+        moves_from_one: List[Move] = [Move([f], d1, d2) for f in from_one]
+        moves_from_two: List[Move] = [Move([f], d2, d1) for f in from_two]
 
         return (moves_from_one, moves_from_two)
 
