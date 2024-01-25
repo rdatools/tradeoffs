@@ -261,6 +261,7 @@ class Plan:
 
         return valid
 
+    # TODO
     def mutate(self, mutation: Mutation):
         """Mutate the plan by applying a mutation. Save undo info."""
 
@@ -276,11 +277,6 @@ class Plan:
         for move in mutation:
             from_district: District = self._districts[move.from_district]
             to_district: District = self._districts[move.to_district]
-
-            # TODO - DELETE
-            # print(
-            #     f"... Before: # features {len(self._districts[move.from_district]['features'])} : {len(self._districts[move.to_district]['features'])}"
-            # )
 
             from_id: DistrictID = from_district["id"]
             to_id: DistrictID = to_district["id"]
@@ -305,13 +301,9 @@ class Plan:
 
                 self._features_moved += 1
 
-                # TODO - DELETE
-                # print(
-                #     f"... After: # features {len(self._districts[move.from_district]['features'])} : {len(self._districts[move.to_district]['features'])}"
-                # )
-
         self._generation += 1
 
+    # TODO
     def undo(self):
         """Undo the last mutation applied to the plan."""
 
@@ -323,6 +315,10 @@ class Plan:
             self._features_moved -= 1
 
         self._generation -= 1
+
+        if self._debug:
+            if not self.is_valid_plan():
+                raise Exception("Plan is not valid after undo!")
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""

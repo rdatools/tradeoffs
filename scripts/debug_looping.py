@@ -96,15 +96,18 @@ def main() -> None:
             print(f"# mutations between districts {seg_key}: {len(mutations)}")
 
         for m in mutations:
+            print(f"... Trying {m}")
             tried_count += 1
             plan.mutate(m)
 
-            if plan.is_valid_plan(seg_key):
+            if plan.is_valid_plan(seg_key):  # TODO - And if it's better
                 valid_count += 1
                 done = False
+                print("... Success!")
             else:
                 plan.undo()
 
+            print()
             print(f"... # remaining mutations: {len(mutations) - tried_count}")
 
         if args.verbose:
