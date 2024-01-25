@@ -164,8 +164,8 @@ class Plan:
 
     ### PUBLIC ###
 
-    def sorted_districts(self) -> List[BorderKey]:
-        """Get all pairs of adjacent districts in sorted order."""
+    def random_adjacent_districts(self) -> List[BorderKey]:
+        """Get all pairs of adjacent districts in random order."""
 
         border_segments: Set[BorderKey] = set()
 
@@ -187,14 +187,6 @@ class Plan:
                     border_segments.add(seg_key)
 
         pairs: List[BorderKey] = list(border_segments)
-        pairs.sort()
-
-        return pairs
-
-    def random_districts(self) -> List[BorderKey]:
-        """Get all pairs of adjacent districts in random order."""
-
-        pairs: List[BorderKey] = self.sorted_districts()
         random.shuffle(pairs)
 
         return pairs
