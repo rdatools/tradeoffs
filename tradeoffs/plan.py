@@ -38,8 +38,8 @@ class Plan:
 
     _verbose: bool
 
-    _features_index: Dict[GeoID, FeatureOffset]
-    _features_graph: Dict[FeatureOffset, List[FeatureOffset]]
+    _feature_indexes: Dict[GeoID, FeatureOffset]
+    _feature_graph: Dict[FeatureOffset, List[FeatureOffset]]
     _district_indexes: Dict[DistrictID, DistrictOffset]
     _district_ids: Dict[DistrictOffset, DistrictID]
 
@@ -73,13 +73,13 @@ class Plan:
         self._features = [
             Feature(a.geoid, a.district, pop_by_geoid[a.geoid]) for a in assignments
         ]
-        self._features_index = {f.id: i for i, f in enumerate(self._features)}
+        self._feature_indexes = {f.id: i for i, f in enumerate(self._features)}
 
         self._districts = self._invert_plan()
         self._district_indexes = {d["id"]: i for i, d in enumerate(self._districts)}
         self._district_ids = {v: k for k, v in self._district_indexes.items()}
 
-        self._features_graph = self._index_graph(graph)
+        self._feature_graph = self._index_graph(graph)
 
         if not self.is_valid_plan():
             raise Exception("Starting plan is not valid!")
@@ -105,7 +105,7 @@ class Plan:
             if f.district not in inverted:
                 inverted[f.district] = {"id": f.district, "features": [], "pop": 0}
 
-            inverted[f.district]["features"].append(self._features_index[f.id])
+            inverted[f.district]["features"].append(self._feature_indexes[f.id])
             inverted[f.district]["pop"] += f.pop
             self._total_pop += f.pop
 
@@ -124,9 +124,9 @@ class Plan:
         for geoid, neighbors in graph.items():
             if geoid == OUT_OF_STATE:
                 continue
-            node: FeatureOffset = self._features_index[geoid]
+            node: FeatureOffset = self._feature_indexes[geoid]
             indexed_graph[node] = [
-                self._features_index[n] for n in neighbors if n != OUT_OF_STATE
+                self._feature_indexes[n] for n in neighbors if n != OUT_OF_STATE
             ]
 
         return indexed_graph
@@ -145,9 +145,7 @@ class Plan:
         return pop >= lower and pop <= upper
 
     # TODO - Update this
-    def _size_1_moves(
-        self, seg_key: Tuple[DistrictOffset, DistrictOffset]
-    ) -> Tuple[List[Move], List[Move]]:
+    def _size_1_moves(self, seg_key: BorderKey) -> Tuple[List[Move], List[Move]]:
         """Generate all size-1 moves between two districts."""
 
         d1, d2 = seg_key
@@ -166,28 +164,42 @@ class Plan:
 
     ### PUBLIC ###
 
-    def sorted_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
+    def sorted_districts(self) -> List[BorderKey]:
         """Get all pairs of adjacent districts in sorted order."""
 
-        pairs: List[Tuple[DistrictOffset, DistrictOffset]] = list(
-            self._border_segments.keys()
-        )
+        border_segments: Set[BorderKey] = set()
+
+        for node, neighbors in self._features_graph.items():
+            d_node: DistrictOffset = self._district_indexes[
+                self._features[node].district
+            ]
+
+            for neighbor in neighbors:
+                d_neighbor: DistrictOffset = self._district_indexes[
+                    self._features[neighbor].district
+                ]
+
+                if d_node == d_neighbor:
+                    continue
+
+                seg_key: BorderKey = segment_key(d_node, d_neighbor)
+                if seg_key not in border_segments:
+                    border_segments.add(seg_key)
+
+        pairs: List[BorderKey] = list(border_segments)
+        pairs.sort()
 
         return pairs
 
-    def random_districts(self) -> List[Tuple[DistrictOffset, DistrictOffset]]:
+    def random_districts(self) -> List[BorderKey]:
         """Get all pairs of adjacent districts in random order."""
 
-        pairs: List[Tuple[DistrictOffset, DistrictOffset]] = list(
-            self._border_segments.keys()
-        )
+        pairs: List[BorderKey] = self.sorted_districts()
         random.shuffle(pairs)
 
         return pairs
 
-    def random_mutations(
-        self, seg_key: Tuple[DistrictOffset, DistrictOffset], size: int = 1
-    ) -> List[Mutation]:
+    def random_mutations(self, seg_key: BorderKey, size: int = 1) -> List[Mutation]:
         """Generate random mutations of two districts."""
 
         d1, d2 = seg_key
@@ -221,9 +233,7 @@ class Plan:
 
         return mutations
 
-    def is_valid_plan(
-        self, changed: Optional[Tuple[DistrictOffset, DistrictOffset]] = None
-    ) -> bool:
+    def is_valid_plan(self, changed: Optional[BorderKey] = None) -> bool:
         """Is this plan state valid?"""
 
         district_offsets: List[DistrictOffset] = (
@@ -240,7 +250,7 @@ class Plan:
                 if self._verbose:
                     print(f"District {do}/{d_id} is not within population tolerance!")
                 valid = False
-            if not is_connected(district_features, self._features_graph):
+            if not is_connected(district_features, self._feature_graph):
                 if self._verbose:
                     print(f"District {do}/{d_id} is not connected!")
                 valid = False
@@ -268,9 +278,7 @@ class Plan:
         # NOTE - Syntactically incorrect moves may have been valid when they were specified.
         # 1 - The from & to districts are adjacent
 
-        seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(
-            move.from_district, move.to_district
-        )
+        seg_key: BorderKey = segment_key(move.from_district, move.to_district)
         if seg_key not in self._border_segments:
             if self._verbose:
                 print(
@@ -281,7 +289,7 @@ class Plan:
         # 2 - Mutiple move features are connected
 
         if len(move.features) > 1 and not is_connected(
-            move.features, self._features_graph
+            move.features, self._feature_graph
         ):
             if self._verbose:
                 print(
@@ -331,7 +339,7 @@ class Plan:
         for offset in move.features:
             proposed.remove(offset)
 
-        if not is_connected(proposed, self._features_graph):
+        if not is_connected(proposed, self._feature_graph):
             if self._verbose:
                 print(
                     f"... WARNING - District {move.from_district}/{from_id} would not be connected, if feature(s) {enum_features} were moved."
@@ -360,7 +368,7 @@ class Plan:
             from_id: DistrictID = self._district_ids[move.from_district]
             to_id: DistrictID = self._district_ids[move.to_district]
 
-            # border_segments: Set[Tuple[DistrictOffset, DistrictOffset]] = set()
+            # border_segments: Set[BorderKey] = set()
             # border_segments.add(segment_key(move.from_district, move.to_district))
 
             for offset in move.features:
@@ -387,7 +395,7 @@ class Plan:
 
                 # Find all the affected border segments -- could be others
 
-                for neighbor in self._features_graph[offset]:
+                for neighbor in self._feature_graph[offset]:
                     neighbor_district: DistrictOffset = self._district_indexes[
                         self._features[neighbor].district
                     ]

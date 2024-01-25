@@ -80,9 +80,7 @@ def main() -> None:
     # TODO - Iterate until done.
     done: bool = True
 
-    random_districts: List[
-        Tuple[DistrictOffset, DistrictOffset]
-    ] = plan.random_districts()
+    random_districts: List[BorderKey] = plan.random_districts()
 
     if args.verbose:
         print(f"# pairs of adjacent districts: {len(random_districts)}")

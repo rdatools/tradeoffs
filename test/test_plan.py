@@ -94,8 +94,8 @@ class TestRatings:
             for k, v in border_segments.items():
                 x, y = k
 
-                x_offsets = [plan._features_index[geoid] for geoid in v[x]]
-                y_offsets = [plan._features_index[geoid] for geoid in v[y]]
+                x_offsets = [plan._feature_indexes[geoid] for geoid in v[x]]
+                y_offsets = [plan._feature_indexes[geoid] for geoid in v[y]]
 
                 d1: DistrictOffset = plan._district_indexes[x]
                 d2: DistrictOffset = plan._district_indexes[y]
