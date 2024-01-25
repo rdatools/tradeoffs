@@ -2,7 +2,7 @@
 DATA TYPES
 """
 
-from typing import TypeAlias, NamedTuple, List, Dict, TypedDict
+from typing import TypeAlias, NamedTuple, List, Dict, Tuple, TypedDict
 
 GeoID: TypeAlias = str
 DistrictID: TypeAlias = int | str
@@ -26,9 +26,12 @@ class District(TypedDict):
     pop: int
 
 
-BorderSegment: TypeAlias = Dict[
-    DistrictOffset, List[FeatureOffset]
-]  # Two: one for each side/district
+BorderKey: TypeAlias = Tuple[DistrictOffset, DistrictOffset]
+
+# TODO - DELETE
+# BorderSegment: TypeAlias = Dict[
+#     DistrictOffset, List[FeatureOffset]
+# ]  # Two: one for each side/district
 
 
 class Move(NamedTuple):

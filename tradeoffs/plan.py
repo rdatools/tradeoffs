@@ -33,7 +33,6 @@ class Plan:
 
     _features: List[Feature]
     _districts: List[District]
-    _border_segments: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]
 
     # Static
 
@@ -87,8 +86,6 @@ class Plan:
         elif self._verbose:
             print("Starting plan is valid.")
 
-        self._border_segments = self._init_border_segments()
-
         if self._verbose:
             print()
             print(self)
@@ -134,30 +131,7 @@ class Plan:
 
         return indexed_graph
 
-    def _all_connected(self) -> bool:
-        """Is the plan fully connected?"""
-
-        for d in self._districts:
-            if not is_connected(d["features"], self._features_graph):
-                return False
-
-        return True
-
-    def _all_within_tolerance(self) -> bool:
-        """Are all districts within population tolerance?"""
-
-        for d in self._districts:
-            if not self.is_within_tolerance(d["features"]):
-                return False
-
-        return True
-
-    def _is_connected(self, offsets: List[FeatureOffset]) -> bool:
-        """Would a district with these feature offsets be connected?"""
-
-        return is_connected(offsets, self._features_graph)
-
-    def is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
+    def _is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
         """Would a district with these features be within the population tolerance?"""
 
         pop: int = 0
@@ -170,145 +144,7 @@ class Plan:
 
         return pop >= lower and pop <= upper
 
-    def _init_border_segments(
-        self,
-    ) -> Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment]:
-        """Initialize border segments."""
-
-        border_segments: Dict[
-            Tuple[DistrictOffset, DistrictOffset],
-            Dict[DistrictOffset, Set[FeatureOffset]],  # A set to avoid duplicates
-        ] = {}
-
-        for node, neighbors in self._features_graph.items():
-            d_node: DistrictOffset = self._district_indexes[
-                self._features[node].district
-            ]
-
-            for neighbor in neighbors:
-                d_neighbor: DistrictOffset = self._district_indexes[
-                    self._features[neighbor].district
-                ]
-
-                if d_node == d_neighbor:
-                    continue
-
-                seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(
-                    d_node, d_neighbor
-                )
-                if seg_key not in border_segments:
-                    border_segments[seg_key] = {
-                        d_node: set(),
-                        d_neighbor: set(),
-                    }
-
-                border_segments[seg_key][d_node].add(node)
-                border_segments[seg_key][d_neighbor].add(neighbor)
-
-        converted: Dict[Tuple[DistrictOffset, DistrictOffset], BorderSegment] = {}
-        for k, v in border_segments.items():
-            converted[k] = {d: list(offsets) for d, offsets in v.items()}
-
-        if self._debug:
-            valid: bool = True
-            print()
-            print("DEBUG - Check initial border segments.")
-            for k, v in converted.items():
-                if not self._valid_border_segment(k, v):
-                    valid = False
-                    print("DEBUG - Likely more ...")
-                    break
-            if valid:
-                print("DEBUG - Initial border segments are valid.")
-
-        return converted
-
-    def _update_border_segment(
-        self, seg_key: Tuple[DistrictOffset, DistrictOffset]
-    ) -> None:
-        """Initialize a border segment."""
-
-        d1, d2 = seg_key
-        if self._debug:
-            if d1 >= d2:
-                print("DEBUG - Badly formed segment key: ({d1}, {d2})!")
-
-        border_segment: Dict[
-            DistrictOffset, Set[FeatureOffset]  # A set to avoid duplicates
-        ] = {
-            d1: set(),
-            d2: set(),
-        }  # A pair of adjacent districts
-
-        districts: List[DistrictOffset] = [d1, d2]
-        for i, d in enumerate(districts):
-            j: int = 1 - i
-            for f in self._districts[d]["features"]:
-                if self._does_border_district(f, districts[j]):
-                    border_segment[d].add(f)
-
-        converted: BorderSegment = {}
-        for k, v in border_segment.items():
-            converted[k] = list(v)
-
-        if self._debug:
-            if not self._valid_border_segment(seg_key, converted):
-                print()
-                print(f"DEBUG - Initial border segment {seg_key} is not valid.")
-
-        self._border_segments[seg_key] = converted
-
-    def _valid_border_segment(
-        self, seg_key: Tuple[DistrictOffset, DistrictOffset], bs: BorderSegment
-    ) -> bool:
-        """Validate a border segment."""
-
-        valid: bool = True
-        for d, offsets in bs.items():
-            if d not in seg_key:
-                valid = False
-                print(
-                    f"DEBUG - Border district {d}/{d_id} is not in segment key {seg_key}!"
-                )
-                break
-
-            d_id: DistrictID = self._district_ids[d]
-
-            for offset in offsets:
-                f: Feature = self._features[offset]
-
-                if f.district != d_id:
-                    valid = False
-                    d_index: DistrictOffset = self._district_indexes[f.district]
-                    print(
-                        f"DEBUG - Border segment feature {offset}/{f.id} is assigned to district {d_index}/{f.district} not {d}/{d_id}!"
-                    )
-                    break
-
-                if not self._does_border_district(offset, d):
-                    valid = False
-                    print(
-                        f"DEBUG - Border segment feature {offset}/{f.id} is not on the border with district {d}/{d_id}!"
-                    )
-                    break
-
-            if not valid:
-                break
-
-        return valid
-
-    def _does_border_district(self, fo: FeatureOffset, do: DistrictOffset) -> bool:
-        """Does this feature border that district?"""
-
-        for neighbor_offset in self._features_graph[fo]:
-            ndo: DistrictOffset = self._district_indexes[
-                self._features[neighbor_offset].district
-            ]
-            if ndo == do:
-                return True
-
-        return False
-
+    # TODO - Update this
     def _size_1_moves(
         self, seg_key: Tuple[DistrictOffset, DistrictOffset]
     ) -> Tuple[List[Move], List[Move]]:
@@ -325,31 +161,6 @@ class Plan:
 
         moves_from_one: List[Move] = [Move(m, d1, d2) for m in from_one]
         moves_from_two: List[Move] = [Move(m, d2, d1) for m in from_two]
-
-        return (moves_from_one, moves_from_two)
-
-    # TODO - DELETE
-    def _size_1_moves_OLD(
-        self,
-        seg_key: Tuple[DistrictOffset, DistrictOffset],
-        district_one: DistrictOffset,
-        district_two: DistrictOffset,
-    ) -> Tuple[List[Move], List[Move]]:
-        """Generate all size-1 moves between two districts."""
-
-        from_one: List[List[FeatureOffset]] = [
-            [f] for f in self._border_segments[seg_key][district_one]
-        ]
-        from_two: List[List[FeatureOffset]] = [
-            [f] for f in self._border_segments[seg_key][district_two]
-        ]
-
-        moves_from_one: List[Move] = [
-            Move(m, district_one, district_two) for m in from_one
-        ]
-        moves_from_two: List[Move] = [
-            Move(m, district_two, district_one) for m in from_two
-        ]
 
         return (moves_from_one, moves_from_two)
 
@@ -410,47 +221,29 @@ class Plan:
 
         return mutations
 
-    # TODO - DELETE
-    def random_moves(
-        self, pair: Tuple[DistrictOffset, DistrictOffset], size: int = 1
-    ) -> List[List[Move]]:
-        """Generate random moves between two districts."""
-
-        d1, d2 = pair
-        seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(d1, d2)
-        if seg_key not in self._border_segments:
-            raise Exception("No border segments between these districts!")
-
-        district_one, district_two = seg_key
-
-        moves_from_one: List[Move]
-        moves_from_two: List[Move]
-
-        match size:
-            case 1:
-                moves_from_one, moves_from_two = self._size_1_moves_OLD(
-                    seg_key, district_one, district_two
-                )
-            case _:
-                raise Exception("Only size-1 moves are supported right now!")
-
-        random.shuffle(moves_from_one)
-        random.shuffle(moves_from_two)
-
-        return [moves_from_one, moves_from_two]
-
-    def is_valid_plan(self) -> bool:
+    def is_valid_plan(
+        self, changed: Optional[Tuple[DistrictOffset, DistrictOffset]] = None
+    ) -> bool:
         """Is this plan state valid?"""
 
+        district_offsets: List[DistrictOffset] = (
+            list(changed)
+            if changed is not None
+            else list(self._district_indexes.values())
+        )
+
         valid: bool = True
-
-        if not self._all_connected():
-            print("Starting plan is not connected!")
-            valid = False
-
-        if not self._all_within_tolerance():
-            print("Starting plan is not within population tolerance!")
-            valid = False
+        for do in district_offsets:
+            d_id: DistrictID = self._district_ids[do]
+            district_features: List[FeatureOffset] = self._districts[do]["features"]
+            if not self._is_within_tolerance(district_features):
+                if self._verbose:
+                    print(f"District {do}/{d_id} is not within population tolerance!")
+                valid = False
+            if not is_connected(district_features, self._features_graph):
+                if self._verbose:
+                    print(f"District {do}/{d_id} is not connected!")
+                valid = False
 
         return valid
 
@@ -487,7 +280,9 @@ class Plan:
 
         # 2 - Mutiple move features are connected
 
-        if len(move.features) > 1 and not self._is_connected(move.features):
+        if len(move.features) > 1 and not is_connected(
+            move.features, self._features_graph
+        ):
             if self._verbose:
                 print(
                     f"... Warning - The move features {enum_features} are not connected!"
@@ -536,7 +331,7 @@ class Plan:
         for offset in move.features:
             proposed.remove(offset)
 
-        if not self._is_connected(proposed):
+        if not is_connected(proposed, self._features_graph):
             if self._verbose:
                 print(
                     f"... WARNING - District {move.from_district}/{from_id} would not be connected, if feature(s) {enum_features} were moved."
@@ -545,7 +340,7 @@ class Plan:
 
         # 6 - The moved-from district population would still be w/in population tolerance
 
-        if not self.is_within_tolerance(proposed):
+        if not self._is_within_tolerance(proposed):
             if self._verbose:
                 print(
                     f"... WARNING - Districts {move.from_district}/{from_id} would not be within population tolerance, if feature(s) {enum_features} were moved."
@@ -565,8 +360,8 @@ class Plan:
             from_id: DistrictID = self._district_ids[move.from_district]
             to_id: DistrictID = self._district_ids[move.to_district]
 
-            border_segments: Set[Tuple[DistrictOffset, DistrictOffset]] = set()
-            border_segments.add(segment_key(move.from_district, move.to_district))
+            # border_segments: Set[Tuple[DistrictOffset, DistrictOffset]] = set()
+            # border_segments.add(segment_key(move.from_district, move.to_district))
 
             for offset in move.features:
                 f: Feature = self._features[offset]
@@ -603,61 +398,8 @@ class Plan:
 
             # Update the affected border segments
 
-            for bs in border_segments:
-                self._update_border_segment(bs)
-
-        self._generation += 1
-
-    # TODO - DELETE
-    def mutate_OLD(self, move: Move):
-        """Mutate the plan by applying a move."""
-
-        from_district: District = self._districts[move.from_district]
-        to_district: District = self._districts[move.to_district]
-
-        from_id: DistrictID = self._district_ids[move.from_district]
-        to_id: DistrictID = self._district_ids[move.to_district]
-
-        border_segments: Set[Tuple[DistrictOffset, DistrictOffset]] = set()
-        border_segments.add(segment_key(move.from_district, move.to_district))
-
-        for offset in move.features:
-            f: Feature = self._features[offset]
-
-            if self._verbose:
-                print(
-                    f"... Moving feature {offset}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
-                )
-
-            # Update the feature assignment
-
-            self._features[offset] = Feature(f.id, to_id, f.pop)
-
-            # Update the two districts' features
-
-            from_district["features"].remove(offset)
-            from_district["pop"] -= f.pop
-
-            to_district["features"].append(offset)
-            to_district["pop"] += f.pop
-
-            self._moves += 1
-
-            # Find all the affected border segments -- could be others
-
-            for neighbor in self._features_graph[offset]:
-                neighbor_district: DistrictOffset = self._district_indexes[
-                    self._features[neighbor].district
-                ]
-                if neighbor_district not in [move.from_district, move.to_district]:
-                    border_segments.add(
-                        segment_key(move.to_district, neighbor_district)
-                    )
-
-        # Update the affected border segments
-
-        for bs in border_segments:
-            self._update_border_segment(bs)
+            # for bs in border_segments:
+            #     self._update_border_segment(bs)
 
         self._generation += 1
 
@@ -674,12 +416,10 @@ class Plan:
 ### HELPERS ###
 
 
-def segment_key(
-    d1: DistrictOffset, d2: DistrictOffset
-) -> Tuple[DistrictOffset, DistrictOffset]:
+def segment_key(d1: DistrictOffset, d2: DistrictOffset) -> BorderKey:
     """Construct the canonical border segment key for a pair of districts (offsets)."""
 
-    seg_key: Tuple[DistrictOffset, DistrictOffset] = (d1, d2) if d1 < d2 else (d2, d1)
+    seg_key: BorderKey = (d1, d2) if d1 < d2 else (d2, d1)
 
     return seg_key
 
