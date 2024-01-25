@@ -26,18 +26,7 @@ from .connected import is_connected
 class Plan:
     """A plan that can easily & efficiently evolve."""
 
-    # Dynamic
-
-    _generation: int  # Number of mutations applied
-    _moves: int  # Number of features moved
-    _last_mutation: Mutation  # Last mutation applied
-
-    _features: List[Feature]
-    _districts: List[District]
-
     # Static
-
-    _verbose: bool
 
     _feature_indexes: Dict[GeoID, FeatureOffset]
     _feature_graph: Dict[FeatureOffset, List[FeatureOffset]]
@@ -47,6 +36,21 @@ class Plan:
     _total_pop: int
     _target_pop: int
     _pop_threshold: float
+
+    _verbose: bool
+
+    # Dynamic
+
+    _features: List[Feature]
+    _districts: List[District]
+
+    _generation: int
+    _features_moved: int
+
+    _undo_feature_offsets: List[FeatureOffset]
+    _undo_features: List[Feature]
+    _undo_district_offsets: List[DistrictOffset]
+    _undo_districts: List[District]
 
     def __init__(
         self,
@@ -67,7 +71,7 @@ class Plan:
         self._debug = debug
 
         self._generation = 0
-        self._moves = 0
+        self._features_moved = 0
         self._pop_threshold = pop_threshold
 
         assignments: List[Assignment] = make_plan(district_by_geoid)
@@ -93,7 +97,7 @@ class Plan:
             print()
 
     def __repr__(self) -> str:
-        return f"Plan: # of mutations = {self._generation}, # features moves = {self._moves}"
+        return f"Plan: # of mutations = {self._generation}, # features moves = {self._features_moved}"
 
     ### PRIVATE ###
 
@@ -162,7 +166,7 @@ class Plan:
         for fo in self._districts[d2]["features"]:
             for no in self._feature_graph[fo]:
                 if self._features[no].district == d1_id:
-                    from_one.append(fo)
+                    from_two.append(fo)
                     break
 
         assert len(from_one) > 0 and len(from_two) > 0
@@ -179,7 +183,7 @@ class Plan:
 
         border_segments: Set[BorderKey] = set()
 
-        for node, neighbors in self._features_graph.items():
+        for node, neighbors in self._feature_graph.items():
             d_node: DistrictOffset = self._district_indexes[
                 self._features[node].district
             ]
@@ -256,7 +260,16 @@ class Plan:
         return valid
 
     def mutate(self, mutation: Mutation):
-        """Mutate the plan by applying a mutation."""
+        """Mutate the plan by applying a mutation. Save undo info."""
+
+        self._undo_district_offsets = [
+            mutation[0].from_district,
+            mutation[0].to_district,
+        ]  # The pair of districts is the same for all moves in a mutation
+        self._undo_districts = [self._districts[d] for d in self._undo_district_offsets]
+
+        self._undo_feature_offsets = []
+        self._undo_features = []
 
         for move in mutation:
             from_district: District = self._districts[move.from_district]
@@ -265,22 +278,17 @@ class Plan:
             from_id: DistrictID = self._district_ids[move.from_district]
             to_id: DistrictID = self._district_ids[move.to_district]
 
-            # border_segments: Set[BorderKey] = set()
-            # border_segments.add(segment_key(move.from_district, move.to_district))
-
+            self._undo_feature_offsets.extend(move.features)
             for offset in move.features:
                 f: Feature = self._features[offset]
+                self._undo_features.append(f)
 
                 if self._verbose:
                     print(
                         f"... Moving feature {offset}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
                     )
 
-                # Update the feature assignment
-
                 self._features[offset] = Feature(f.id, to_id, f.pop)
-
-                # Update the two districts' features
 
                 from_district["features"].remove(offset)
                 from_district["pop"] -= f.pop
@@ -288,25 +296,21 @@ class Plan:
                 to_district["features"].append(offset)
                 to_district["pop"] += f.pop
 
-                self._moves += 1
-
-                # Find all the affected border segments -- could be others
-
-                for neighbor in self._feature_graph[offset]:
-                    neighbor_district: DistrictOffset = self._district_indexes[
-                        self._features[neighbor].district
-                    ]
-                    if neighbor_district not in [move.from_district, move.to_district]:
-                        border_segments.add(
-                            segment_key(move.to_district, neighbor_district)
-                        )
-
-            # Update the affected border segments
-
-            # for bs in border_segments:
-            #     self._update_border_segment(bs)
+                self._features_moved += 1
 
         self._generation += 1
+
+    def undo(self):
+        """Undo the last mutation applied to the plan."""
+
+        for i, do in enumerate(self._undo_district_offsets):
+            self._districts[do] = self._undo_districts[i]
+
+        for j, fo in enumerate(self._undo_feature_offsets):
+            self._features[fo] = self._undo_features[j]
+            self._features_moved -= 1
+
+        self._generation -= 1
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""

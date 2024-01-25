@@ -80,13 +80,13 @@ def main() -> None:
     # TODO - Iterate until done.
     done: bool = True
 
-    random_districts: List[BorderKey] = plan.random_adjacent_districts()
+    random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
     if args.verbose:
-        print(f"# pairs of adjacent districts: {len(random_districts)}")
+        print(f"# pairs of adjacent districts: {len(random_adjacent_districts)}")
         print()
 
-    for seg_key in random_districts:
+    for seg_key in random_adjacent_districts:
         mutations: List[Mutation] = plan.random_mutations(seg_key)
         tried_count: int = 0
         valid_count: int = 0
@@ -96,11 +96,14 @@ def main() -> None:
             print(f"# mutations between districts {seg_key}: {len(mutations)}")
 
         for m in mutations:
+            plan.mutate(m)
             tried_count += 1
-            if plan.is_valid_mutation(m):
-                plan.mutate(m)
+
+            if plan.is_valid_plan():
                 valid_count += 1
                 done = False
+            else:
+                plan.undo()
 
             print(f"... # remaining mutations: {len(mutations)}")
 

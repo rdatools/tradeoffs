@@ -28,18 +28,15 @@ class District(TypedDict):
 
 BorderKey: TypeAlias = Tuple[DistrictOffset, DistrictOffset]
 
-# TODO - DELETE
-# BorderSegment: TypeAlias = Dict[
-#     DistrictOffset, List[FeatureOffset]
-# ]  # Two: one for each side/district
-
 
 class Move(NamedTuple):
-    features: List[FeatureOffset]
+    features: List[FeatureOffset]  # One or more features
     from_district: DistrictOffset
     to_district: DistrictOffset
 
 
-Mutation: TypeAlias = List[Move]  # One or more Moves, each of arbitrary size
+Mutation: TypeAlias = List[
+    Move
+]  # One or more Moves between a pair of adjacent districts
 
 ### END ###
