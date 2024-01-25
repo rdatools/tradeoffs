@@ -30,6 +30,7 @@ class Plan:
 
     _generation: int  # Number of mutations applied
     _moves: int  # Number of features moved
+    _last_mutation: Mutation  # Last mutation applied
 
     _features: List[Feature]
     _districts: List[District]
@@ -164,6 +165,8 @@ class Plan:
                     from_one.append(fo)
                     break
 
+        assert len(from_one) > 0 and len(from_two) > 0
+
         moves_from_one: List[Move] = [Move([f], d1, d2) for f in from_one]
         moves_from_two: List[Move] = [Move([f], d2, d1) for f in from_two]
 
@@ -202,10 +205,6 @@ class Plan:
         """Generate random mutations of two districts."""
 
         d1, d2 = seg_key
-
-        if self._debug:
-            if seg_key not in self._border_segments:
-                raise Exception("No border segments between these districts!")
 
         moves_from_one: List[Move]
         moves_from_two: List[Move]
@@ -256,107 +255,6 @@ class Plan:
 
         return valid
 
-    def is_valid_mutation(self, mutation: Mutation) -> bool:
-        """Would this be a valid mutation?"""
-
-        for move in mutation:
-            if not self.is_valid_move(move):
-                return False
-
-        # TODO - It's possible that each move is valid, but the overall mutation is not.
-
-        return True
-
-    def is_valid_move(self, move: Move) -> bool:
-        """Would this be a valid move?"""
-
-        from_id: DistrictID = self._district_ids[move.from_district]
-        to_id: DistrictID = self._district_ids[move.to_district]
-        enum_features: List = [f"{f}/{self._features[f].id}" for f in move.features]
-
-        # NOTE - Syntactically incorrect moves may have been valid when they were specified.
-        # 1 - The from & to districts are adjacent
-
-        seg_key: BorderKey = segment_key(move.from_district, move.to_district)
-        if seg_key not in self._border_segments:
-            if self._verbose:
-                print(
-                    f"... Warning - Districts {move.from_district}/{from_id} and {move.to_district}/{to_id} are not adjacent!"
-                )
-            return False
-
-        # 2 - Mutiple move features are connected
-
-        if len(move.features) > 1 and not is_connected(
-            move.features, self._feature_graph
-        ):
-            if self._verbose:
-                print(
-                    f"... Warning - The move features {enum_features} are not connected!"
-                )
-                return False
-
-        # 3 - The move features are all in the moved-from district
-
-        proposed: List[FeatureOffset] = list(
-            self._districts[move.from_district]["features"]
-        )  # Copy the list of feature offsets
-
-        for offset in move.features:
-            if offset not in proposed:
-                if self._verbose:
-                    f: Feature = self._features[offset]
-                    geoid: GeoID = f.id
-                    d_id: DistrictID = self._district_ids[move.from_district]
-                    print(
-                        f"... Warning - Feature {offset}/{geoid} is not in district {move.from_district}/{d_id}!"
-                    )
-                return False
-
-        # 4 - At least one feature in the move is on the border between the two districts
-
-        from_border: List[FeatureOffset] = self._border_segments[seg_key][
-            move.from_district
-        ]
-
-        on_border: bool = False
-        for f in move.features:
-            if f in from_border:
-                on_border = True
-                break
-        if not on_border:
-            if self._verbose:
-                print(
-                    f"... Warning - None of {len(move.features)} features is on the border between districts ({move.from_district}/{from_id} -> {move.to_district}/{to_id})!"
-                )
-            return False
-
-        # The move is well formed, syntactically. Now warn about semantic effects.
-
-        # 5 - The moved-from district would still be connected
-
-        for offset in move.features:
-            proposed.remove(offset)
-
-        if not is_connected(proposed, self._feature_graph):
-            if self._verbose:
-                print(
-                    f"... WARNING - District {move.from_district}/{from_id} would not be connected, if feature(s) {enum_features} were moved."
-                )
-            return False
-
-        # 6 - The moved-from district population would still be w/in population tolerance
-
-        if not self._is_within_tolerance(proposed):
-            if self._verbose:
-                print(
-                    f"... WARNING - Districts {move.from_district}/{from_id} would not be within population tolerance, if feature(s) {enum_features} were moved."
-                )
-            return False
-
-        return True
-
-    # TODO - HERE
     def mutate(self, mutation: Mutation):
         """Mutate the plan by applying a mutation."""
 
