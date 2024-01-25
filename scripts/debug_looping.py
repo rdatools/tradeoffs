@@ -96,8 +96,8 @@ def main() -> None:
             print(f"# mutations between districts {seg_key}: {len(mutations)}")
 
         for m in mutations:
-            plan.mutate(m)
             tried_count += 1
+            plan.mutate(m)
 
             if plan.is_valid_plan():
                 valid_count += 1
@@ -105,7 +105,7 @@ def main() -> None:
             else:
                 plan.undo()
 
-            print(f"... # remaining mutations: {len(mutations)}")
+            print(f"... # remaining mutations: {len(mutations) - tried_count}")
 
         if args.verbose:
             print(

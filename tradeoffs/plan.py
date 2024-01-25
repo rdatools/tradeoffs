@@ -136,18 +136,30 @@ class Plan:
 
         return indexed_graph
 
-    def _is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
-        """Would a district with these features be within the population tolerance?"""
+    def _is_within_tolerance(self, do: DistrictOffset) -> bool:
+        """Is this district within the population tolerance?"""
 
-        pop: int = 0
-        for offset in features:
-            pop += self._features[offset].pop
+        pop: int = self._districts[do]["pop"]
 
         tolerance: int = round(self._target_pop * self._pop_threshold)
         lower: int = self._target_pop - tolerance
         upper: int = self._target_pop + tolerance
 
         return pop >= lower and pop <= upper
+
+    # TODO - DELETE
+    # def _is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
+    #     """Would a district with these features be within the population tolerance?"""
+
+    #     pop: int = 0
+    #     for offset in features:
+    #         pop += self._features[offset].pop
+
+    #     tolerance: int = round(self._target_pop * self._pop_threshold)
+    #     lower: int = self._target_pop - tolerance
+    #     upper: int = self._target_pop + tolerance
+
+    #     return pop >= lower and pop <= upper
 
     def _size_1_moves(self, seg_key: BorderKey) -> Tuple[List[Move], List[Move]]:
         """Generate all size-1 moves between two districts."""
@@ -247,15 +259,19 @@ class Plan:
         valid: bool = True
         for do in district_offsets:
             d_id: DistrictID = self._district_ids[do]
-            district_features: List[FeatureOffset] = self._districts[do]["features"]
-            if not self._is_within_tolerance(district_features):
+            if not self._is_within_tolerance(do):
                 if self._verbose:
-                    print(f"District {do}/{d_id} is not within population tolerance!")
+                    print(
+                        f"... District {do}/{d_id} is not within population tolerance!"
+                    )
                 valid = False
+                break
+            district_features: List[FeatureOffset] = self._districts[do]["features"]
             if not is_connected(district_features, self._feature_graph):
                 if self._verbose:
-                    print(f"District {do}/{d_id} is not connected!")
+                    print(f"... District {do}/{d_id} is not connected!")
                 valid = False
+                break
 
         return valid
 
