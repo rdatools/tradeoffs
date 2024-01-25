@@ -147,20 +147,6 @@ class Plan:
 
         return pop >= lower and pop <= upper
 
-    # TODO - DELETE
-    # def _is_within_tolerance(self, features: List[FeatureOffset]) -> bool:
-    #     """Would a district with these features be within the population tolerance?"""
-
-    #     pop: int = 0
-    #     for offset in features:
-    #         pop += self._features[offset].pop
-
-    #     tolerance: int = round(self._target_pop * self._pop_threshold)
-    #     lower: int = self._target_pop - tolerance
-    #     upper: int = self._target_pop + tolerance
-
-    #     return pop >= lower and pop <= upper
-
     def _size_1_moves(self, seg_key: BorderKey) -> Tuple[List[Move], List[Move]]:
         """Generate all size-1 moves between two districts."""
 
@@ -291,8 +277,13 @@ class Plan:
             from_district: District = self._districts[move.from_district]
             to_district: District = self._districts[move.to_district]
 
-            from_id: DistrictID = self._district_ids[move.from_district]
-            to_id: DistrictID = self._district_ids[move.to_district]
+            # TODO - DELETE
+            # print(
+            #     f"... Before: # features {len(self._districts[move.from_district]['features'])} : {len(self._districts[move.to_district]['features'])}"
+            # )
+
+            from_id: DistrictID = from_district["id"]
+            to_id: DistrictID = to_district["id"]
 
             self._undo_feature_offsets.extend(move.features)
             for offset in move.features:
@@ -313,6 +304,11 @@ class Plan:
                 to_district["pop"] += f.pop
 
                 self._features_moved += 1
+
+                # TODO - DELETE
+                # print(
+                #     f"... After: # features {len(self._districts[move.from_district]['features'])} : {len(self._districts[move.to_district]['features'])}"
+                # )
 
         self._generation += 1
 
