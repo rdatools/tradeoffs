@@ -99,7 +99,7 @@ def main() -> None:
             tried_count += 1
             plan.mutate(m)
 
-            if plan.is_valid_plan():
+            if plan.is_valid_plan(seg_key):
                 valid_count += 1
                 done = False
             else:
