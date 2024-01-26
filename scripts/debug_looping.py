@@ -95,11 +95,11 @@ def main() -> None:
             print()
             print(f"# mutations between districts {seg_key}: {len(mutations)}")
 
-            print()
+            print("... Starting plan:")
             for do in list(seg_key):
                 d = plan._districts[do]
                 print(
-                    f"    District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}"
+                    f"... District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}/{sum(d['features'])}"
                 )
             print()
 
@@ -108,20 +108,20 @@ def main() -> None:
             tried_count += 1
             plan.mutate(m)
 
+            print("... After mutation:")
+            for do in list(seg_key):
+                d = plan._districts[do]
+                print(
+                    f"... District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}/{sum(d['features'])}"
+                )
+            print()
+
             if plan.is_valid_plan(seg_key):  # TODO - And if it's better
                 valid_count += 1
                 done = False
                 print("... Success!")
             else:
                 plan.undo()
-
-            print()
-            for do in list(seg_key):
-                d = plan._districts[do]
-                print(
-                    f"    District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}"
-                )
-            print()
 
             print()
             print(f"... # remaining mutations: {len(mutations) - tried_count}")

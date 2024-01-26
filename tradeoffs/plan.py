@@ -320,6 +320,14 @@ class Plan:
 
         self._generation -= 1
 
+        print("... After undo:")
+        for do in list(segment_key(*self._undo_district_offsets)):
+            d = self._districts[do]
+            print(
+                f"... District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}/{sum(d['features'])}"
+            )
+        print()
+
         if self._debug:
             if not self.is_valid_plan(segment_key(*self._undo_district_offsets)):
                 raise Exception("Plan is not valid after undo!")
