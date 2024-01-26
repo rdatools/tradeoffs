@@ -246,6 +246,7 @@ class Plan:
         valid: bool = True
         for do in district_offsets:
             d_id: DistrictID = self._district_ids[do]
+
             if not self._is_within_tolerance(do):
                 if self._verbose:
                     print(
@@ -253,6 +254,8 @@ class Plan:
                     )
                 valid = False
                 break
+
+            # TODO - Possibly optimize this using union_find instead
             district_features: List[FeatureOffset] = self._districts[do]["features"]
             if not is_connected(district_features, self._feature_graph):
                 if self._verbose:
@@ -262,9 +265,11 @@ class Plan:
 
         return valid
 
-    # TODO
     def mutate(self, mutation: Mutation):
         """Mutate the plan by applying a mutation. Save undo info."""
+
+        if self._verbose:
+            print(f"... Applying the mutation {mutation}.")
 
         self._undo_district_offsets = [
             mutation[0].from_district,
@@ -282,20 +287,16 @@ class Plan:
             to_id: DistrictID = self._districts[move.to_district]["id"]
 
             for fo in move.features:
+                f: Feature = self._features[fo]
+
                 self._undo_feature_offsets.append(fo)
-                f: Feature = Feature(*self._features[fo])  # Copy the feature
-                self._undo_features.append(f)
+                self._undo_features.append(copy.copy(f))  # Copy the feature
 
-                if self._verbose:
-                    print(
-                        f"... Moving feature {fo}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
-                    )
+                self._features[fo] = Feature(f.id, to_id, f.pop)  # Update the feature
 
-                self._features[fo] = Feature(f.id, to_id, f.pop)  # Update the features
-
+                # Update the districts
                 self._districts[move.from_district]["features"].remove(fo)
                 self._districts[move.from_district]["pop"] -= f.pop
-
                 self._districts[move.to_district]["features"].append(fo)
                 self._districts[move.to_district]["pop"] += f.pop
 
@@ -303,12 +304,11 @@ class Plan:
 
         self._generation += 1
 
-    # TODO
     def undo(self):
         """Undo the last mutation applied to the plan."""
 
         if self._verbose:
-            print("... Undoing the last mutation.")
+            print("... Undoing the mutation.")
 
         for i, do in enumerate(self._undo_district_offsets):
             self._districts[do] = self._undo_districts[i]

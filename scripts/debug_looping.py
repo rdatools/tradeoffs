@@ -92,8 +92,11 @@ def main() -> None:
         valid_count: int = 0
 
         if args.verbose:
+            d1, d2 = seg_key
+            d1_id: DistrictID = plan._district_ids[d1]
+            d2_id: DistrictID = plan._district_ids[d2]
             print()
-            print(f"# mutations between districts {seg_key}: {len(mutations)}")
+            print(f"{len(mutations)} mutations {d1}/{d1_id} <-> {d2}/{d2_id}:")
 
         for i, m in enumerate(mutations):
             tried_count += 1
