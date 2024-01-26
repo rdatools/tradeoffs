@@ -269,17 +269,16 @@ class Plan:
             mutation[0].from_district,
             mutation[0].to_district,
         ]  # The pair of districts is the same for all moves in a mutation
-        self._undo_districts = [self._districts[d] for d in self._undo_district_offsets]
+        self._undo_districts = [
+            dict(self._districts[d]) for d in self._undo_district_offsets
+        ]  # Copy the districts
 
         self._undo_feature_offsets = []
         self._undo_features = []
 
         for move in mutation:
-            from_district: District = self._districts[move.from_district]
-            to_district: District = self._districts[move.to_district]
-
-            from_id: DistrictID = from_district["id"]
-            to_id: DistrictID = to_district["id"]
+            from_id: DistrictID = self._districts[move.from_district]["id"]
+            to_id: DistrictID = self._districts[move.to_district]["id"]
 
             self._undo_feature_offsets.extend(move.features)
             for offset in move.features:
@@ -291,13 +290,15 @@ class Plan:
                         f"... Moving feature {offset}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
                     )
 
-                self._features[offset] = Feature(f.id, to_id, f.pop)
+                self._features[offset] = Feature(
+                    f.id, to_id, f.pop
+                )  # Make new features
 
-                from_district["features"].remove(offset)
-                from_district["pop"] -= f.pop
+                self._districts[move.from_district]["features"].remove(offset)
+                self._districts[move.from_district]["pop"] -= f.pop
 
-                to_district["features"].append(offset)
-                to_district["pop"] += f.pop
+                self._districts[move.to_district]["features"].append(offset)
+                self._districts[move.to_district]["pop"] += f.pop
 
                 self._features_moved += 1
 
@@ -317,7 +318,7 @@ class Plan:
         self._generation -= 1
 
         if self._debug:
-            if not self.is_valid_plan():
+            if not self.is_valid_plan(segment_key(*self._undo_district_offsets)):
                 raise Exception("Plan is not valid after undo!")
 
     def to_csv(self, plan_path: str) -> None:
