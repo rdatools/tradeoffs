@@ -29,10 +29,10 @@ class Plan:
 
     # Static
 
-    _feature_indexes: Dict[GeoID, FeatureOffset]
+    feature_indexes: Dict[GeoID, FeatureOffset]
     _feature_graph: Dict[FeatureOffset, List[FeatureOffset]]
-    _district_indexes: Dict[DistrictID, DistrictOffset]
-    _district_ids: Dict[DistrictOffset, DistrictID]
+    district_indexes: Dict[DistrictID, DistrictOffset]
+    district_ids: Dict[DistrictOffset, DistrictID]
 
     _total_pop: int
     _target_pop: int
@@ -79,11 +79,11 @@ class Plan:
         self._features = [
             Feature(a.geoid, a.district, pop_by_geoid[a.geoid]) for a in assignments
         ]
-        self._feature_indexes = {f.id: i for i, f in enumerate(self._features)}
+        self.feature_indexes = {f.id: i for i, f in enumerate(self._features)}
 
         self._districts = self._invert_plan()
-        self._district_indexes = {d["id"]: i for i, d in enumerate(self._districts)}
-        self._district_ids = {v: k for k, v in self._district_indexes.items()}
+        self.district_indexes = {d["id"]: i for i, d in enumerate(self._districts)}
+        self.district_ids = {v: k for k, v in self.district_indexes.items()}
 
         self._feature_graph = self._index_graph(graph)
 
@@ -111,7 +111,7 @@ class Plan:
             if f.district not in inverted:
                 inverted[f.district] = {"id": f.district, "features": [], "pop": 0}
 
-            inverted[f.district]["features"].append(self._feature_indexes[f.id])
+            inverted[f.district]["features"].append(self.feature_indexes[f.id])
             inverted[f.district]["pop"] += f.pop
             self._total_pop += f.pop
 
@@ -130,9 +130,9 @@ class Plan:
         for geoid, neighbors in graph.items():
             if geoid == OUT_OF_STATE:
                 continue
-            node: FeatureOffset = self._feature_indexes[geoid]
+            node: FeatureOffset = self.feature_indexes[geoid]
             indexed_graph[node] = [
-                self._feature_indexes[n] for n in neighbors if n != OUT_OF_STATE
+                self.feature_indexes[n] for n in neighbors if n != OUT_OF_STATE
             ]
 
         return indexed_graph
@@ -152,8 +152,8 @@ class Plan:
         """Generate all size-1 moves between two districts."""
 
         d1, d2 = seg_key
-        d1_id: DistrictID = self._district_ids[d1]
-        d2_id: DistrictID = self._district_ids[d2]
+        d1_id: DistrictID = self.district_ids[d1]
+        d2_id: DistrictID = self.district_ids[d2]
 
         from_one: List[FeatureOffset] = []
         for fo in self._districts[d1]["features"]:
@@ -183,12 +183,12 @@ class Plan:
         border_segments: Set[BorderKey] = set()
 
         for node, neighbors in self._feature_graph.items():
-            d_node: DistrictOffset = self._district_indexes[
+            d_node: DistrictOffset = self.district_indexes[
                 self._features[node].district
             ]
 
             for neighbor in neighbors:
-                d_neighbor: DistrictOffset = self._district_indexes[
+                d_neighbor: DistrictOffset = self.district_indexes[
                     self._features[neighbor].district
                 ]
 
@@ -240,12 +240,12 @@ class Plan:
         district_offsets: List[DistrictOffset] = (
             list(changed)
             if changed is not None
-            else list(self._district_indexes.values())
+            else list(self.district_indexes.values())
         )
 
         valid: bool = True
         for do in district_offsets:
-            d_id: DistrictID = self._district_ids[do]
+            d_id: DistrictID = self.district_ids[do]
 
             if not self._is_within_tolerance(do):
                 if self._verbose:

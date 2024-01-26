@@ -87,8 +87,8 @@ class TestPlan:
 
             # indexed_border_keys: List[Tuple[DistrictOffset, DistrictOffset]] = []
             # for x, y in border_keys:
-            #     d1: DistrictOffset = plan._district_indexes[x]
-            #     d2: DistrictOffset = plan._district_indexes[y]
+            #     d1: DistrictOffset = plan.district_indexes[x]
+            #     d2: DistrictOffset = plan.district_indexes[y]
             #     seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(d1, d2)
             #     indexed_border_keys.append(seg_key)
 
@@ -96,11 +96,11 @@ class TestPlan:
             # for k, v in border_segments.items():
             #     x, y = k
 
-            #     x_offsets = [plan._feature_indexes[geoid] for geoid in v[x]]
-            #     y_offsets = [plan._feature_indexes[geoid] for geoid in v[y]]
+            #     x_offsets = [plan.feature_indexes[geoid] for geoid in v[x]]
+            #     y_offsets = [plan.feature_indexes[geoid] for geoid in v[y]]
 
-            #     d1: DistrictOffset = plan._district_indexes[x]
-            #     d2: DistrictOffset = plan._district_indexes[y]
+            #     d1: DistrictOffset = plan.district_indexes[x]
+            #     d2: DistrictOffset = plan.district_indexes[y]
 
             #     seg_key: Tuple[DistrictOffset, DistrictOffset] = segment_key(d1, d2)
 

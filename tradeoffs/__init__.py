@@ -6,7 +6,11 @@ from .frontiers import (
     is_pareto_efficient_value,
 )
 from .notable_maps import id_most_notable_maps
-from .plots import *  # TODO - Be specific
+
+from .readwrite import *
+from .datatypes import *
+from .normalize import Normalizer
+from .dra_ratings import *
 from .score import (
     Scorer,
     cull_partisan_metrics,
@@ -15,11 +19,10 @@ from .score import (
     cull_splitting_metrics,
     cull_ratings,
 )
-from .plan import Plan, segment_key
 from .connected import is_connected
-from .normalize import Normalizer
-from .dra_ratings import *
-from .readwrite import *
-from .datatypes import *
+from .plan import Plan, segment_key
+from .push import *  # TODO - Be specific
+
+from .plots import *  # TODO - Be specific
 
 name: str = "tradeoffs"

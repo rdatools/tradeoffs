@@ -93,8 +93,8 @@ def main() -> None:
 
         if args.verbose:
             d1, d2 = seg_key
-            d1_id: DistrictID = plan._district_ids[d1]
-            d2_id: DistrictID = plan._district_ids[d2]
+            d1_id: DistrictID = plan.district_ids[d1]
+            d2_id: DistrictID = plan.district_ids[d2]
             print()
             print(f"{len(mutations)} mutations {d1}/{d1_id} <-> {d2}/{d2_id}:")
 
