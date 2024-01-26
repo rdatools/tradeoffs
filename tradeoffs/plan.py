@@ -30,9 +30,10 @@ class Plan:
     # Static
 
     feature_indexes: Dict[GeoID, FeatureOffset]
-    _feature_graph: Dict[FeatureOffset, List[FeatureOffset]]
     district_indexes: Dict[DistrictID, DistrictOffset]
     district_ids: Dict[DistrictOffset, DistrictID]
+
+    _feature_graph: Dict[FeatureOffset, List[FeatureOffset]]
 
     _total_pop: int
     _target_pop: int
@@ -98,7 +99,7 @@ class Plan:
             print()
 
     def __repr__(self) -> str:
-        return f"Plan: # of mutations = {self._generation}, # features moves = {self._features_moved}"
+        return f"Plan: # of mutations = {self._generation}, # features moved = {self._features_moved}"
 
     ### PRIVATE ###
 
