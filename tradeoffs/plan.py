@@ -308,6 +308,9 @@ class Plan:
     def undo(self):
         """Undo the last mutation applied to the plan."""
 
+        if self._verbose:
+            print("Undoing the last mutation.")
+
         for i, do in enumerate(self._undo_district_offsets):
             self._districts[do] = self._undo_districts[i]
 
