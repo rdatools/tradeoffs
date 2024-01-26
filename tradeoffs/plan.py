@@ -12,6 +12,7 @@ from typing import (
     NamedTuple,
     TypedDict,
     Optional,
+    Callable,
 )
 
 import random
@@ -91,12 +92,9 @@ class Plan:
         if not self.is_valid_plan():
             raise Exception("Starting plan is not valid!")
         elif self._verbose:
-            print("Starting plan is valid.")
-
-        if self._verbose:
             print()
+            print("Starting plan:")
             print(self)
-            print()
 
     def __repr__(self) -> str:
         return f"Plan: # of mutations = {self._generation}, # features moved = {self._features_moved}"
@@ -149,33 +147,6 @@ class Plan:
 
         return pop >= lower and pop <= upper
 
-    def _size_1_moves(self, seg_key: BorderKey) -> Tuple[List[Move], List[Move]]:
-        """Generate all size-1 moves between two districts."""
-
-        d1, d2 = seg_key
-        d1_id: DistrictID = self.district_ids[d1]
-        d2_id: DistrictID = self.district_ids[d2]
-
-        from_one: List[FeatureOffset] = []
-        for fo in self._districts[d1]["features"]:
-            for no in self._feature_graph[fo]:
-                if self._features[no].district == d2_id:
-                    from_one.append(fo)
-                    break
-        from_two: List[FeatureOffset] = []
-        for fo in self._districts[d2]["features"]:
-            for no in self._feature_graph[fo]:
-                if self._features[no].district == d1_id:
-                    from_two.append(fo)
-                    break
-
-        assert len(from_one) > 0 and len(from_two) > 0
-
-        moves_from_one: List[Move] = [Move([f], d1, d2) for f in from_one]
-        moves_from_two: List[Move] = [Move([f], d2, d1) for f in from_two]
-
-        return (moves_from_one, moves_from_two)
-
     ### PUBLIC ###
 
     def random_adjacent_districts(self) -> List[BorderKey]:
@@ -205,19 +176,19 @@ class Plan:
 
         return pairs
 
-    def random_mutations(self, seg_key: BorderKey, size: int = 1) -> List[Mutation]:
-        """Generate random mutations of two districts."""
+    def random_mutations(
+        self,
+        seg_key: BorderKey,
+        generator: Callable[[BorderKey, "Plan"], Tuple[List[Move], List[Move]]],
+    ) -> List[Mutation]:
+        """Generate random mutations of two districts, using a given generator."""
 
         d1, d2 = seg_key
 
         moves_from_one: List[Move]
         moves_from_two: List[Move]
 
-        match size:
-            case 1:
-                moves_from_one, moves_from_two = self._size_1_moves(seg_key)
-            case _:
-                raise Exception("Only size-1 moves are supported right now!")
+        moves_from_one, moves_from_two = generator(seg_key, self)
 
         random.shuffle(moves_from_one)
         random.shuffle(moves_from_two)
@@ -343,6 +314,34 @@ def segment_key(d1: DistrictOffset, d2: DistrictOffset) -> BorderKey:
     seg_key: BorderKey = (d1, d2) if d1 < d2 else (d2, d1)
 
     return seg_key
+
+
+def size_1_moves(seg_key: BorderKey, plan: Plan) -> Tuple[List[Move], List[Move]]:
+    """Generate all size-1 moves between two districts in a plan."""
+
+    d1, d2 = seg_key
+    d1_id: DistrictID = plan.district_ids[d1]
+    d2_id: DistrictID = plan.district_ids[d2]
+
+    from_one: List[FeatureOffset] = []
+    for fo in plan._districts[d1]["features"]:
+        for no in plan._feature_graph[fo]:
+            if plan._features[no].district == d2_id:
+                from_one.append(fo)
+                break
+    from_two: List[FeatureOffset] = []
+    for fo in plan._districts[d2]["features"]:
+        for no in plan._feature_graph[fo]:
+            if plan._features[no].district == d1_id:
+                from_two.append(fo)
+                break
+
+    assert len(from_one) > 0 and len(from_two) > 0
+
+    moves_from_one: List[Move] = [Move([f], d1, d2) for f in from_one]
+    moves_from_two: List[Move] = [Move([f], d2, d1) for f in from_two]
+
+    return (moves_from_one, moves_from_two)
 
 
 ### END ###

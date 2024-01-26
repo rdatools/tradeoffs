@@ -20,7 +20,7 @@ from .score import (
     cull_ratings,
 )
 from .connected import is_connected
-from .plan import Plan, segment_key
+from .plan import Plan, segment_key, size_1_moves
 from .push import *  # TODO - Be specific
 
 from .plots import *  # TODO - Be specific

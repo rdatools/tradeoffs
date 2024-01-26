@@ -17,7 +17,16 @@ from rdabase import read_json, starting_seed
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
-from tradeoffs import Plan, GeoID, DistrictID, DistrictOffset, Move, Name, Weight
+from tradeoffs import (
+    GeoID,
+    DistrictID,
+    DistrictOffset,
+    Move,
+    Name,
+    Weight,
+    Plan,
+    size_1_moves,
+)
 
 
 class Args(NamedTuple):
@@ -27,6 +36,8 @@ class Args(NamedTuple):
     data: str
     shapes: str
     graph: str
+    iterations: int
+    limit: int
     verbose: bool
 
 
@@ -38,6 +49,8 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
+        iterations=2,  # TODO
+        limit=1000,  # TODO
         verbose=True,
     )
 
@@ -75,54 +88,92 @@ def main() -> None:
         district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose, debug=True
     )
 
+    # Starting plan
     # plan.to_csv("output/test_plan.csv")
 
-    # TODO - Iterate until done.
-    done: bool = True
+    # Push the frontier point a number of times
 
-    random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
-
-    if args.verbose:
-        print(f"# pairs of adjacent districts: {len(random_adjacent_districts)}")
-        print()
-
-    for seg_key in random_adjacent_districts:
-        mutations: List[Mutation] = plan.random_mutations(seg_key)
-        tried_count: int = 0
-        valid_count: int = 0
-
+    for i in range(1, args.iterations + 1):
         if args.verbose:
-            d1, d2 = seg_key
-            d1_id: DistrictID = plan.district_ids[d1]
-            d2_id: DistrictID = plan.district_ids[d2]
             print()
-            print(f"{len(mutations)} mutations {d1}/{d1_id} <-> {d2}/{d2_id}:")
+            print(f"Iteration {i} of {args.iterations}")
 
-        for i, m in enumerate(mutations):
-            tried_count += 1
-            plan.mutate(m)
+        # Apply a sequence of swap generators
 
-            if plan.is_valid_plan(seg_key):  # TODO - And if it's better
-                valid_count += 1
-                done = False
-                print("... Success!")
-            else:
-                plan.undo()
+        generators: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]] = [
+            size_1_moves
+        ]
 
-            print()
-            print(f"... # remaining mutations: {len(mutations) - tried_count}")
+        for generator in generators:
+            if args.verbose:
+                print()
+                print(f"Generator: {generator.__name__}")
 
-        if args.verbose:
-            print(
-                f"... Summary: {valid_count} of {tried_count} mutations tried were valid."
-            )
-            print()
+            # Iterate until done.
 
-    if args.verbose:
-        print(plan)
-        print()
+            while True:
+                done: bool = True
 
-    # plan.to_csv("output/test_plan.csv")
+                random_adjacent_districts: List[
+                    BorderKey
+                ] = plan.random_adjacent_districts()
+
+                if args.verbose:
+                    print()
+                    print(
+                        f"# pairs of adjacent districts: {len(random_adjacent_districts)}"
+                    )
+
+                for seg_key in random_adjacent_districts:
+                    mutations: List[Mutation] = plan.random_mutations(
+                        seg_key, generator
+                    )
+                    tried_count: int = 0
+                    valid_count: int = 0
+
+                    if args.verbose:
+                        d1, d2 = seg_key
+                        d1_id: DistrictID = plan.district_ids[d1]
+                        d2_id: DistrictID = plan.district_ids[d2]
+
+                        print()
+                        print(
+                            f"{len(mutations)} mutations {d1}/{d1_id} <-> {d2}/{d2_id}:"
+                        )
+
+                    for m in mutations:
+                        tried_count += 1
+                        plan.mutate(m)
+
+                        if plan.is_valid_plan(seg_key):  # TODO - And if it's better
+                            valid_count += 1
+                            done = False
+
+                            if args.verbose:
+                                print("... Success!")
+                        else:
+                            plan.undo()
+
+                        if args.verbose:
+                            print()
+                            print(
+                                f"... # remaining mutations: {len(mutations) - tried_count}"
+                            )
+
+                    if args.verbose:
+                        print(
+                            f"... Summary: {valid_count} of {tried_count} mutations tried were valid."
+                        )
+                        print()
+
+                break  # TODO - One pass for debugging
+
+            # TODO - Save the modified plan
+            # plan.to_csv("output/test_plan.csv")
+
+            if args.verbose:
+                print(plan)
+                print()
 
     pass
 
