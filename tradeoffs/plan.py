@@ -280,24 +280,34 @@ class Plan:
             from_id: DistrictID = self._districts[move.from_district]["id"]
             to_id: DistrictID = self._districts[move.to_district]["id"]
 
-            self._undo_feature_offsets.extend(move.features)
-            for offset in move.features:
-                f: Feature = self._features[offset]
+            for fo in move.features:
+                self._undo_feature_offsets.append(fo)
+                f: Feature = Feature(*self._features[fo])  # Copy the feature
                 self._undo_features.append(f)
 
                 if self._verbose:
                     print(
-                        f"... Moving feature {offset}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
+                        f"... Moving feature {fo}/{f.id} from district {move.from_district}/{from_id} to {move.to_district}/{to_id}."
                     )
 
-                self._features[offset] = Feature(
-                    f.id, to_id, f.pop
-                )  # Make new features
+                self._features[fo] = Feature(f.id, to_id, f.pop)  # Update the features
 
-                self._districts[move.from_district]["features"].remove(offset)
+                print(
+                    f"... Before remove: {sum(self._districts[move.from_district]['features'])}"
+                )
+                self._districts[move.from_district]["features"].remove(fo)
+                print(
+                    f"... After remove: {sum(self._districts[move.from_district]['features'])}"
+                )
                 self._districts[move.from_district]["pop"] -= f.pop
 
-                self._districts[move.to_district]["features"].append(offset)
+                print(
+                    f"... Before append: {sum(self._districts[move.to_district]['features'])}"
+                )
+                self._districts[move.to_district]["features"].append(fo)
+                print(
+                    f"... After append: {sum(self._districts[move.to_district]['features'])}"
+                )
                 self._districts[move.to_district]["pop"] += f.pop
 
                 self._features_moved += 1
