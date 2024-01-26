@@ -15,6 +15,7 @@ from typing import (
 )
 
 import random
+import copy
 
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
@@ -270,7 +271,7 @@ class Plan:
             mutation[0].to_district,
         ]  # The pair of districts is the same for all moves in a mutation
         self._undo_districts = [
-            dict(self._districts[d]) for d in self._undo_district_offsets
+            copy.deepcopy(self._districts[d]) for d in self._undo_district_offsets
         ]  # Copy the districts
 
         self._undo_feature_offsets = []
@@ -292,22 +293,10 @@ class Plan:
 
                 self._features[fo] = Feature(f.id, to_id, f.pop)  # Update the features
 
-                print(
-                    f"... Before remove: {sum(self._districts[move.from_district]['features'])}"
-                )
                 self._districts[move.from_district]["features"].remove(fo)
-                print(
-                    f"... After remove: {sum(self._districts[move.from_district]['features'])}"
-                )
                 self._districts[move.from_district]["pop"] -= f.pop
 
-                print(
-                    f"... Before append: {sum(self._districts[move.to_district]['features'])}"
-                )
                 self._districts[move.to_district]["features"].append(fo)
-                print(
-                    f"... After append: {sum(self._districts[move.to_district]['features'])}"
-                )
                 self._districts[move.to_district]["pop"] += f.pop
 
                 self._features_moved += 1
@@ -329,14 +318,6 @@ class Plan:
             self._features_moved -= 1
 
         self._generation -= 1
-
-        print("... After undo:")
-        for do in list(segment_key(*self._undo_district_offsets)):
-            d = self._districts[do]
-            print(
-                f"... District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}/{sum(d['features'])}"
-            )
-        print()
 
         if self._debug:
             if not self.is_valid_plan(segment_key(*self._undo_district_offsets)):

@@ -95,26 +95,9 @@ def main() -> None:
             print()
             print(f"# mutations between districts {seg_key}: {len(mutations)}")
 
-            print("... Starting plan:")
-            for do in list(seg_key):
-                d = plan._districts[do]
-                print(
-                    f"... District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}/{sum(d['features'])}"
-                )
-            print()
-
         for i, m in enumerate(mutations):
-            print(f"... Trying {m}")
             tried_count += 1
             plan.mutate(m)
-
-            print("... After mutation:")
-            for do in list(seg_key):
-                d = plan._districts[do]
-                print(
-                    f"... District {do}/{d['id']}, pop: {d['pop']}, features: {len(d['features'])}/{sum(d['features'])}"
-                )
-            print()
 
             if plan.is_valid_plan(seg_key):  # TODO - And if it's better
                 valid_count += 1
@@ -128,7 +111,7 @@ def main() -> None:
 
         if args.verbose:
             print(
-                f"    Summary: {valid_count} of {tried_count} mutations tried were valid."
+                f"... Summary: {valid_count} of {tried_count} mutations tried were valid."
             )
             print()
 
