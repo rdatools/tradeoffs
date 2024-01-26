@@ -49,7 +49,7 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
-        iterations=2,  # TODO
+        iterations=1,  # TODO
         limit=1000,  # TODO
         verbose=True,
     )
@@ -84,19 +84,23 @@ def main() -> None:
 
     ##
 
-    plan: Plan = Plan(
-        district_by_geoid, pop_by_geoid, graph, seed, verbose=args.verbose, debug=True
-    )
-
-    # Starting plan
-    # plan.to_csv("output/test_plan.csv")
-
-    # Push the frontier point a number of times
+    # Push a frontier point a # of times
 
     for i in range(1, args.iterations + 1):
         if args.verbose:
             print()
             print(f"Iteration {i} of {args.iterations}")
+
+        # For each iteration, initialize a plan
+
+        plan: Plan = Plan(
+            district_by_geoid,
+            pop_by_geoid,
+            graph,
+            seed,  # TODO - Update this
+            verbose=args.verbose,
+            debug=True,
+        )
 
         # Apply a sequence of swap generators
 
@@ -109,7 +113,7 @@ def main() -> None:
                 print()
                 print(f"Generator: {generator.__name__}")
 
-            # Iterate until done.
+            # Keep mutating the plan, until no swaps are made.
 
             while True:
                 done: bool = True
@@ -168,12 +172,14 @@ def main() -> None:
 
                 break  # TODO - One pass for debugging
 
-            # TODO - Save the modified plan
-            # plan.to_csv("output/test_plan.csv")
-
             if args.verbose:
                 print(plan)
                 print()
+
+            # TODO - Finally, save the modified plan
+            # plan.to_csv("output/test_plan.csv")
+
+        seed += 1
 
     pass
 
