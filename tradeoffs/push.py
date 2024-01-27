@@ -4,10 +4,11 @@ PUSH A FRONTIER POINT
 
 from typing import Callable, Dict, List, Tuple
 
-from rdaensemble.general import ratings_dimensions, ratings_indexes
+from rdaensemble.general import ratings_dimensions, ratings_indexes, make_plan
 
-from .plan import Plan, size_1_moves
 from .datatypes import GeoID, DistrictID, DistrictOffset, BorderKey, Move, Mutation
+from .plan import Plan, size_1_moves
+from .score import Scorer, is_better
 
 
 def push_point(
@@ -21,11 +22,22 @@ def push_point(
 ) -> Dict[GeoID, DistrictID]:
     """Push a frontier point on two ratings dimensions."""
 
-    # Apply a sequence of swap generators
+    s: Scorer = Scorer(
+        data,
+        shapes,
+        graph,
+        metadata,
+        verbose=args.verbose,
+    )
+
+    prev_measures: Tuple[float, float] = s.measure_dimensions(
+        make_plan(district_by_geoid), dimensions
+    )
+    next_measures: Tuple[float, float]
 
     generators: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]] = [
         size_1_moves
-    ]
+    ]  # Swap/mutation generators
 
     for generator in generators:
         if debug:
@@ -54,8 +66,8 @@ def push_point(
 
             for seg_key in random_adjacent_districts:
                 mutations: List[Mutation] = plan.random_mutations(seg_key, generator)
-                tried_count: int = 0
-                valid_count: int = 0
+                tried: int = 0
+                valid_and_better: int = 0
 
                 if debug:
                     d1, d2 = seg_key
@@ -66,11 +78,17 @@ def push_point(
                     print(f"{len(mutations)} mutations {d1}/{d1_id} <-> {d2}/{d2_id}:")
 
                 for m in mutations:
-                    tried_count += 1
+                    tried += 1
                     plan.mutate(m)
 
-                    if plan.is_valid_plan(seg_key):  # TODO - And if it's better
-                        valid_count += 1
+                    valid: bool = plan.is_valid_plan(seg_key)
+                    next_measures = s.measure_dimensions(
+                        plan.to_assignments(), dimensions
+                    )
+                    better: bool = is_better_plan(prev_measures, next_measures)
+
+                    if valid and better:
+                        valid_and_better += 1
                         done = False
 
                         if debug:
@@ -80,13 +98,11 @@ def push_point(
 
                     if debug:
                         print()
-                        print(
-                            f"... # remaining mutations: {len(mutations) - tried_count}"
-                        )
+                        print(f"... # remaining mutations: {len(mutations) - tried}")
 
                 if debug:
                     print(
-                        f"... Summary: {valid_count} of {tried_count} mutations tried were valid."
+                        f"... Summary: {valid_and_better} of {tried} mutations tried were valid."
                     )
                     print()
 

@@ -313,6 +313,11 @@ class Plan:
 
         return self._assignments
 
+    def to_assignments(self) -> List[Assignment]:
+        """Return the plan as a list of Assignments."""
+
+        return make_plan(self._assignments)
+
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
 
