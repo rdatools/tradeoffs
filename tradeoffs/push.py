@@ -4,7 +4,7 @@ PUSH A FRONTIER POINT
 
 from typing import Callable, Dict, List, Tuple
 
-from rdaensemble.general import ratings_dimensions, ratings_indexes, make_plan
+from rdaensemble.general import ratings_dimensions, ratings_indexes
 
 from .datatypes import GeoID, DistrictID, DistrictOffset, BorderKey, Move, Mutation
 from .plan import Plan, size_1_moves
@@ -24,7 +24,7 @@ def push_point(
     """Push a frontier point on two ratings dimensions."""
 
     prev_measures: Tuple[float, float] = scorer.measure_dimensions(
-        make_plan(district_by_geoid), dimensions
+        plan.to_assignments(), dimensions
     )
     next_measures: Tuple[float, float]
 
