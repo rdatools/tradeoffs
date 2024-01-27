@@ -13,6 +13,7 @@ from .score import Scorer, is_better
 
 def push_point(
     plan: Plan,
+    scorer: Scorer,
     dimensions: Tuple[str, str],
     seed: int,
     *,
@@ -22,15 +23,7 @@ def push_point(
 ) -> Dict[GeoID, DistrictID]:
     """Push a frontier point on two ratings dimensions."""
 
-    s: Scorer = Scorer(
-        data,
-        shapes,
-        graph,
-        metadata,
-        verbose=args.verbose,
-    )
-
-    prev_measures: Tuple[float, float] = s.measure_dimensions(
+    prev_measures: Tuple[float, float] = scorer.measure_dimensions(
         make_plan(district_by_geoid), dimensions
     )
     next_measures: Tuple[float, float]
@@ -82,7 +75,7 @@ def push_point(
                     plan.mutate(m)
 
                     valid: bool = plan.is_valid_plan(seg_key)
-                    next_measures = s.measure_dimensions(
+                    next_measures = scorer.measure_dimensions(
                         plan.to_assignments(), dimensions
                     )
                     better: bool = is_better_plan(prev_measures, next_measures)

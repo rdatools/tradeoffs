@@ -28,6 +28,7 @@ from tradeoffs import (
     Plan,
     size_1_moves,
     push_point,
+    Scorer,
 )
 
 
@@ -93,6 +94,14 @@ def main() -> None:
 
     ##
 
+    scorer: Scorer = Scorer(
+        data,
+        shapes,
+        graph,
+        metadata,
+        verbose=args.verbose,
+    )
+
     # Push a frontier point one or more times
 
     for i in range(1, args.runs + 1):
@@ -107,11 +116,17 @@ def main() -> None:
                 graph,
                 seed,
                 verbose=args.verbose,
+                # debug=args.debug,
             )
 
             plan_name: str = f"{frontier_key}_{i:03d}"
             assignments: Dict[GeoID, DistrictID] = push_point(
-                plan, dimensions, seed, verbose=args.verbose
+                plan,
+                scorer,
+                dimensions,
+                seed,
+                verbose=args.verbose,
+                # debug=args.debug,
             )
             pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
         except:
