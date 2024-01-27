@@ -77,10 +77,11 @@ class Plan:
         self._features_moved = 0
         self._pop_threshold = pop_threshold
 
-        assignments: List[Assignment] = make_plan(district_by_geoid)
         self._features = [
-            Feature(a.geoid, a.district, pop_by_geoid[a.geoid]) for a in assignments
+            Feature(geoid, district, pop_by_geoid[geoid])
+            for geoid, district in district_by_geoid.items()
         ]
+
         self.feature_indexes = {f.id: i for i, f in enumerate(self._features)}
 
         self._districts = self._invert_plan()
