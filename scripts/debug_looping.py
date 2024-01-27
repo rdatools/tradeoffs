@@ -176,8 +176,12 @@ def main() -> None:
                 print(plan)
                 print()
 
+            assignments: Dict[GeoID, DistrictID] = plan.to_dict()
+
             # TODO - Finally, save the modified plan
             # plan.to_csv("output/test_plan.csv")
+
+            pass
 
         seed += 1
 

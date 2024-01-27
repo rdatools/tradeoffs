@@ -296,6 +296,13 @@ class Plan:
             if not self.is_valid_plan(segment_key(*self._undo_district_offsets)):
                 raise Exception("Plan is not valid after undo!")
 
+    # Output
+
+    def to_dict(self) -> Dict[GeoID, DistrictID]:
+        """Convert the plan to a dictionary."""
+
+        return {f.id: f.district for f in self._features}
+
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
 
