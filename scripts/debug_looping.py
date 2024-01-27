@@ -22,10 +22,12 @@ from tradeoffs import (
     DistrictID,
     DistrictOffset,
     Move,
+    Mutation,
     Name,
     Weight,
     Plan,
     size_1_moves,
+    push_point,
 )
 
 
@@ -36,9 +38,10 @@ class Args(NamedTuple):
     data: str
     shapes: str
     graph: str
-    iterations: int
+    runs: int
     limit: int
     verbose: bool
+    debug: bool
 
 
 def main() -> None:
@@ -49,9 +52,10 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
-        iterations=1,  # TODO
+        runs=1,  # TODO
         limit=1000,  # TODO
         verbose=True,
+        debug=True,
     )
 
     # Load data
@@ -70,11 +74,16 @@ def main() -> None:
     N: int = int(metadata["D"])
     seed: int = starting_seed(args.state, N)
 
+    #
+
+    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
+
     ## Get a plan and ratings for debugging ##
 
-    frontier: List[Dict[str, Any]] = frontiers["frontiers"][
-        "proportionality_compactness"
-    ]
+    frontier_key = "proportionality_compactness"  # TODO
+    frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+
+    dimensions: Tuple[str, str] = tuple(frontier_key.split("_"))
 
     # TODO - Use the offset in the frontier, to get the plan in the ensemble
 
@@ -84,104 +93,27 @@ def main() -> None:
 
     ##
 
-    # Push a frontier point a # of times
+    # Push a frontier point one or more times
 
-    for i in range(1, args.iterations + 1):
+    for i in range(1, args.runs + 1):
         if args.verbose:
             print()
-            print(f"Iteration {i} of {args.iterations}")
-
-        # For each iteration, initialize a plan
+            print(f"Iteration {i} of {args.runs}")
 
         plan: Plan = Plan(
             district_by_geoid,
             pop_by_geoid,
             graph,
-            seed,  # TODO - Update this
+            seed,
             verbose=args.verbose,
-            debug=True,
+            debug=args.debug,
         )
 
-        # Apply a sequence of swap generators
+        assignments: Dict[GeoID, DistrictID] = push_point(
+            plan, dimensions, seed, verbose=args.verbose, debug=args.debug
+        )
 
-        generators: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]] = [
-            size_1_moves
-        ]
-
-        for generator in generators:
-            if args.verbose:
-                print()
-                print(f"Generator: {generator.__name__}")
-
-            # Keep mutating the plan, until no swaps are made.
-
-            while True:
-                done: bool = True
-
-                random_adjacent_districts: List[
-                    BorderKey
-                ] = plan.random_adjacent_districts()
-
-                if args.verbose:
-                    print()
-                    print(
-                        f"# pairs of adjacent districts: {len(random_adjacent_districts)}"
-                    )
-
-                for seg_key in random_adjacent_districts:
-                    mutations: List[Mutation] = plan.random_mutations(
-                        seg_key, generator
-                    )
-                    tried_count: int = 0
-                    valid_count: int = 0
-
-                    if args.verbose:
-                        d1, d2 = seg_key
-                        d1_id: DistrictID = plan.district_ids[d1]
-                        d2_id: DistrictID = plan.district_ids[d2]
-
-                        print()
-                        print(
-                            f"{len(mutations)} mutations {d1}/{d1_id} <-> {d2}/{d2_id}:"
-                        )
-
-                    for m in mutations:
-                        tried_count += 1
-                        plan.mutate(m)
-
-                        if plan.is_valid_plan(seg_key):  # TODO - And if it's better
-                            valid_count += 1
-                            done = False
-
-                            if args.verbose:
-                                print("... Success!")
-                        else:
-                            plan.undo()
-
-                        if args.verbose:
-                            print()
-                            print(
-                                f"... # remaining mutations: {len(mutations) - tried_count}"
-                            )
-
-                    if args.verbose:
-                        print(
-                            f"... Summary: {valid_count} of {tried_count} mutations tried were valid."
-                        )
-                        print()
-
-                break  # TODO - One pass for debugging
-
-            if args.verbose:
-                print(plan)
-                print()
-
-            assignments: Dict[GeoID, DistrictID] = plan.to_dict()
-
-            # TODO - Finally, save the modified plan
-            # plan.to_csv("output/test_plan.csv")
-
-            pass
+        # TODO - Added to the ensemble
 
         seed += 1
 
