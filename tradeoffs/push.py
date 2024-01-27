@@ -75,18 +75,20 @@ def push_point(
                     plan.mutate(m)
 
                     valid: bool = plan.is_valid_plan(seg_key)
-                    next_measures = scorer.measure_dimensions(
-                        plan.to_assignments(), dimensions
-                    )
-                    better: bool = is_better_plan(prev_measures, next_measures)
+                    if valid:
+                        next_measures = scorer.measure_dimensions(
+                            plan.to_assignments(), dimensions
+                        )
+                        better: bool = is_better_plan(prev_measures, next_measures)
 
-                    if valid and better:
-                        valid_and_better += 1
-                        done = False
+                        if better:
+                            valid_and_better += 1
+                            done = False
 
-                        if debug:
-                            print("... Success!")
-                    else:
+                            if debug:
+                                print("... Success!")
+
+                    if not valid or not better:
                         plan.undo()
 
                     if debug:

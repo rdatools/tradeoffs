@@ -129,6 +129,9 @@ def main() -> None:
                 # debug=args.debug,
             )
             pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
+
+            if args.verbose:
+                print(plan)
         except:
             pass
 
