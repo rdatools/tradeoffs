@@ -46,6 +46,7 @@ class Plan:
 
     _features: List[Feature]
     _districts: List[District]
+    _assignments: Dict[GeoID, DistrictID]
 
     _generation: int
     _features_moved: int
@@ -77,11 +78,12 @@ class Plan:
         self._features_moved = 0
         self._pop_threshold = pop_threshold
 
+        self._assignments = district_by_geoid
+
         self._features = [
             Feature(geoid, district, pop_by_geoid[geoid])
             for geoid, district in district_by_geoid.items()
         ]
-
         self.feature_indexes = {f.id: i for i, f in enumerate(self._features)}
 
         self._districts = self._invert_plan()
@@ -265,7 +267,11 @@ class Plan:
                 self._undo_feature_offsets.append(fo)
                 self._undo_features.append(copy.copy(f))  # Copy the feature
 
-                self._features[fo] = Feature(f.id, to_id, f.pop)  # Update the feature
+                # Update the assignment
+                self._assignments[f.id] = to_id
+
+                # Update the feature
+                self._features[fo] = Feature(f.id, to_id, f.pop)
 
                 # Update the districts
                 self._districts[move.from_district]["features"].remove(fo)
@@ -287,7 +293,10 @@ class Plan:
             self._districts[do] = self._undo_districts[i]
 
         for j, fo in enumerate(self._undo_feature_offsets):
-            self._features[fo] = self._undo_features[j]
+            f: Feature = self._undo_features[j]
+            self._features[fo] = f
+            self._assignments[f.id] = f.district
+
             self._features_moved -= 1
 
         self._generation -= 1
@@ -299,9 +308,9 @@ class Plan:
     # Output
 
     def to_dict(self) -> Dict[GeoID, DistrictID]:
-        """Convert the plan to a dictionary."""
+        """Return the plan as a geoid:district_id dictionary of assignments."""
 
-        return {f.id: f.district for f in self._features}
+        return self._assignments
 
     def to_csv(self, plan_path: str) -> None:
         """Write the plan to a CSV."""
