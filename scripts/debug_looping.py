@@ -100,19 +100,22 @@ def main() -> None:
             print()
             print(f"Iteration {i} of {args.runs}")
 
-        plan: Plan = Plan(
-            district_by_geoid,
-            pop_by_geoid,
-            graph,
-            seed,
-            verbose=args.verbose,
-        )
+        try:
+            plan: Plan = Plan(
+                district_by_geoid,
+                pop_by_geoid,
+                graph,
+                seed,
+                verbose=args.verbose,
+            )
 
-        plan_name: str = f"{frontier_key}_{i:03d}"
-        assignments: Dict[GeoID, DistrictID] = push_point(
-            plan, dimensions, seed, verbose=args.verbose
-        )
-        pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
+            plan_name: str = f"{frontier_key}_{i:03d}"
+            assignments: Dict[GeoID, DistrictID] = push_point(
+                plan, dimensions, seed, verbose=args.verbose
+            )
+            pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
+        except:
+            pass
 
         seed += 1
 

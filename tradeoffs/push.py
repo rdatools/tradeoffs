@@ -6,8 +6,8 @@ from typing import Callable, Dict, List, Tuple
 
 from rdaensemble.general import ratings_dimensions, ratings_indexes
 
-from .plan import Plan, Mutation, Move, BorderKey, size_1_moves
-from .datatypes import GeoID, DistrictID, DistrictOffset, Move, Mutation, Name, Weight
+from .plan import Plan, size_1_moves
+from .datatypes import GeoID, DistrictID, DistrictOffset, BorderKey, Move, Mutation
 
 
 def push_point(
@@ -15,6 +15,7 @@ def push_point(
     dimensions: Tuple[str, str],
     seed: int,
     *,
+    limit: int = 1000,
     verbose: bool = False,
     debug: bool = False,
 ) -> Dict[GeoID, DistrictID]:
@@ -31,9 +32,14 @@ def push_point(
             print()
             print(f"Generator: {generator.__name__}")
 
-        # Keep mutating the plan, until no swaps are made.
-
+        iteration: int = 0
         while True:
+            iteration += 1
+            if iteration > limit:
+                raise RuntimeError(f"Iteration threshold {limit} exceeded.")
+            if debug:
+                print(f"Iteration: {iteration}")
+
             done: bool = True
 
             random_adjacent_districts: List[
