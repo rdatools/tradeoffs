@@ -106,12 +106,11 @@ def main() -> None:
             graph,
             seed,
             verbose=args.verbose,
-            debug=args.debug,
         )
 
         plan_name: str = f"{frontier_key}_{i:03d}"
         assignments: Dict[GeoID, DistrictID] = push_point(
-            plan, dimensions, seed, verbose=args.verbose, debug=args.debug
+            plan, dimensions, seed, verbose=args.verbose
         )
         pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
 

@@ -27,7 +27,7 @@ def push_point(
     ]
 
     for generator in generators:
-        if verbose:
+        if debug:
             print()
             print(f"Generator: {generator.__name__}")
 
@@ -40,7 +40,7 @@ def push_point(
                 BorderKey
             ] = plan.random_adjacent_districts()
 
-            if verbose:
+            if debug:
                 print()
                 print(
                     f"# pairs of adjacent districts: {len(random_adjacent_districts)}"
@@ -51,7 +51,7 @@ def push_point(
                 tried_count: int = 0
                 valid_count: int = 0
 
-                if verbose:
+                if debug:
                     d1, d2 = seg_key
                     d1_id: DistrictID = plan.district_ids[d1]
                     d2_id: DistrictID = plan.district_ids[d2]
@@ -67,18 +67,18 @@ def push_point(
                         valid_count += 1
                         done = False
 
-                        if verbose:
+                        if debug:
                             print("... Success!")
                     else:
                         plan.undo()
 
-                    if verbose:
+                    if debug:
                         print()
                         print(
                             f"... # remaining mutations: {len(mutations) - tried_count}"
                         )
 
-                if verbose:
+                if debug:
                     print(
                         f"... Summary: {valid_count} of {tried_count} mutations tried were valid."
                     )
