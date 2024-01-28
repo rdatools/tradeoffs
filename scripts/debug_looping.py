@@ -39,8 +39,7 @@ class Args(NamedTuple):
     data: str
     shapes: str
     graph: str
-    runs: int
-    limit: int
+    size: int
     verbose: bool
     debug: bool
 
@@ -53,8 +52,7 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
-        runs=1,  # TODO
-        limit=100,  # TODO
+        size=2,  # TODO
         verbose=True,
         debug=True,
     )
@@ -104,10 +102,10 @@ def main() -> None:
 
     # Push a frontier point one or more times
 
-    for i in range(1, args.runs + 1):
+    for i in range(1, args.size + 1):
         if args.verbose:
             print()
-            print(f"Iteration {i} of {args.runs}")
+            print(f"Search {i} of {args.size}")
 
         try:
             plan: Plan = Plan(
@@ -124,7 +122,6 @@ def main() -> None:
                 plan,
                 scorer,
                 dimensions,
-                seed,
                 verbose=args.verbose,
                 # debug=args.debug,
             )
@@ -135,6 +132,7 @@ def main() -> None:
         except:
             pass
 
+        # TODO - Add the plan to the ensemble
         seed += 1
 
     # TODO - Save the ensemble to disk

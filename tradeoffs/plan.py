@@ -101,7 +101,7 @@ class Plan:
             print(self)
 
     def __repr__(self) -> str:
-        return f"Plan {self.generation}: {self._mutations_applied} mutations applied, {self._features_moved} features moved"
+        return f"Plan: generation {self.generation} - {self._mutations_applied} mutations applied, {self._features_moved} features moved"
 
     ### PRIVATE ###
 

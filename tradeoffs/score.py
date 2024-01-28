@@ -82,7 +82,6 @@ class Scorer:
         self,
         assignments: List[Assignment],
         dimensions: Tuple[str, str],
-        eol: str = "\n",
     ) -> Tuple[float, float]:
         """Evaluate a plan on a pair of dimensions."""
 
@@ -114,9 +113,6 @@ class Scorer:
                     raise ValueError(f"Unknown dimension: {d}")
 
         measurements: Tuple[float, float] = tuple(pair)
-
-        if self._verbose:
-            print(f"Measurements: {dimensions} = {measurements}", end=eol)
 
         return measurements
 
@@ -254,17 +250,6 @@ class Scorer:
         measure: float = measure_splitting(county_measure, district_measure)
 
         return measure
-
-
-def is_better(one: Tuple[float, float], two: Tuple[float, float]) -> bool:
-    """Is the 2nd pair of measures better than the 1st?
-
-    Two must be better than one on one or the other or both dimensions.
-    """
-
-    return (one[0] < two[0] and one[1] <= two[1]) or (
-        one[0] <= two[0] and one[1] < two[1]
-    )
 
 
 ### HELPERS ###
