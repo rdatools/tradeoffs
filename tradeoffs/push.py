@@ -37,7 +37,7 @@ def push_point(
             if npass > limit:
                 raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
             if verbose:
-                print(f"Pass {npass} of {limit} ...")
+                print(f"Pass {npass} of {limit}")
 
             stable: bool = sweep_once(
                 plan,
@@ -80,9 +80,7 @@ def sweep_once(
     next_measures: Tuple[float, float]
 
     if verbose:
-        print(plan)
-        print(f"Measurements: {dimensions} = {prev_measures}", end="\n")
-        print()
+        print(f"Starting measurements: {dimensions} = {prev_measures}", end="\n")
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -124,8 +122,10 @@ def sweep_once(
                         print("... Valid mutation the plan better!")
 
                     if verbose:
-                        print(plan)
-                        print(f"Measurements: {dimensions} = {prev_measures}", end="\r")
+                        print(
+                            f"New measurements: {dimensions} = {prev_measures}",
+                            end="\r",
+                        )
                         print()
 
             if not valid or not better:
