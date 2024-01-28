@@ -39,6 +39,7 @@ def push_point(
             if npass > limit:
                 raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
             if verbose:
+                print()
                 print(f"Pass {npass} of {limit}")
 
             stable: bool = sweep_once(
