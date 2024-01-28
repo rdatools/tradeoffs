@@ -80,7 +80,7 @@ class Plan:
         self._features_moved = 0
         self._pop_threshold = pop_threshold
 
-        self._assignments = district_by_geoid
+        self._assignments = dict(district_by_geoid)
 
         self._features = [
             Feature(geoid, district, pop_by_geoid[geoid])

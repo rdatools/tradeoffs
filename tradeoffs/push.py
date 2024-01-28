@@ -40,7 +40,7 @@ def push_point(
                 raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
             if verbose:
                 print()
-                print(f"Pass {npass} of {limit}")
+                print(f"Pass {npass} of up to {limit}")
 
             stable: bool = sweep_once(
                 plan,
