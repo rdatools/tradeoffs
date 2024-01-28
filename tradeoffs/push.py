@@ -4,6 +4,7 @@ PUSH A FRONTIER POINT
 
 from typing import Callable, Dict, List, Tuple
 
+from rdabase import time_function
 from rdaensemble.general import ratings_dimensions, ratings_indexes
 
 from .datatypes import GeoID, DistrictID, DistrictOffset, BorderKey, Move, Mutation
@@ -11,6 +12,7 @@ from .plan import Plan, size_1_moves
 from .score import Scorer
 
 
+@time_function
 def push_point(
     plan: Plan,
     scorer: Scorer,
@@ -58,6 +60,7 @@ def push_point(
     return assignments
 
 
+@time_function
 def sweep_once(
     plan: Plan,
     scorer: Scorer,
@@ -80,7 +83,7 @@ def sweep_once(
     next_measures: Tuple[float, float]
 
     if verbose:
-        print(f"Starting measurements: {dimensions} = {prev_measures}", end="\n")
+        print(f"Starting #'s: {dimensions} = {prev_measures}", end="\n")
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -122,11 +125,7 @@ def sweep_once(
                         print("... Valid mutation the plan better!")
 
                     if verbose:
-                        print(
-                            f"New measurements: {dimensions} = {prev_measures}",
-                            end="\r",
-                        )
-                        print()
+                        print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\r")
 
             if not valid or not better:
                 plan.undo()
@@ -144,6 +143,7 @@ def sweep_once(
     plan.generation += 1
 
     if verbose:
+        print()
         print(plan)
         print()
 
