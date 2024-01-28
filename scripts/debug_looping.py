@@ -52,7 +52,7 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
-        size=2,  # TODO
+        size=1,
         verbose=True,
         debug=True,
     )
