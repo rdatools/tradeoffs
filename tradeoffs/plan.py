@@ -48,7 +48,8 @@ class Plan:
     _districts: List[District]
     _assignments: Dict[GeoID, DistrictID]
 
-    _generation: int
+    generation: int
+    _mutations_applied: int
     _features_moved: int
 
     _undo_feature_offsets: List[FeatureOffset]
@@ -74,7 +75,8 @@ class Plan:
         self._verbose = verbose
         self._debug = debug
 
-        self._generation = 0
+        self.generation = 0
+        self._mutations_applied = 0
         self._features_moved = 0
         self._pop_threshold = pop_threshold
 
@@ -99,9 +101,7 @@ class Plan:
             print(self)
 
     def __repr__(self) -> str:
-        return (
-            f"Plan: {self._generation} mutations, {self._features_moved} features moved"
-        )
+        return f"Plan {self.generation}: {self._mutations_applied} mutations applied, {self._features_moved} features moved"
 
     ### PRIVATE ###
 
@@ -282,7 +282,7 @@ class Plan:
 
                 self._features_moved += 1
 
-        self._generation += 1
+        self._mutations_applied += 1
 
     def undo(self):
         """Undo the last mutation applied to the plan."""
@@ -300,7 +300,7 @@ class Plan:
 
             self._features_moved -= 1
 
-        self._generation -= 1
+        self._mutations_applied -= 1
 
         if self._debug:
             if not self.is_valid_plan(segment_key(*self._undo_district_offsets)):

@@ -24,7 +24,7 @@ def push_point(
     """Push a frontier point on two ratings dimensions."""
 
     prev_measures: Tuple[float, float] = scorer.measure_dimensions(
-        plan.to_assignments(), dimensions
+        plan.to_assignments(), dimensions, "\n"
     )
     next_measures: Tuple[float, float]
 
@@ -37,9 +37,8 @@ def push_point(
             print()
             print(f"Generator: {generator.__name__}")
 
-        iteration: int = 0
+        iteration: int = 1
         while True:
-            iteration += 1
             if iteration > limit:
                 raise RuntimeError(f"Iteration threshold {limit} exceeded.")
             if debug:
@@ -77,11 +76,12 @@ def push_point(
                     valid: bool = plan.is_valid_plan(seg_key)
                     if valid:
                         next_measures = scorer.measure_dimensions(
-                            plan.to_assignments(), dimensions
+                            plan.to_assignments(), dimensions, "\r"
                         )
-                        better: bool = is_better_plan(prev_measures, next_measures)
+                        better: bool = is_better(prev_measures, next_measures)
 
                         if better:
+                            prev_measures = next_measures
                             valid_and_better += 1
                             done = False
 
@@ -101,7 +101,15 @@ def push_point(
                     )
                     print()
 
-            break  # TODO - One pass for debugging
+            if verbose:
+                print()
+                print(f"Pushed plan {iteration} of {limit}:")
+                print(plan)
+                print()
+
+            iteration += 1
+
+            plan.generation += 1
 
         if verbose:
             print(plan)

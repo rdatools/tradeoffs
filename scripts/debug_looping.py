@@ -54,7 +54,7 @@ def main() -> None:
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
         runs=1,  # TODO
-        limit=1000,  # TODO
+        limit=100,  # TODO
         verbose=True,
         debug=True,
     )
