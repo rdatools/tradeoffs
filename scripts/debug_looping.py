@@ -80,7 +80,17 @@ def main() -> None:
     N: int = int(metadata["D"])
     seed: int = starting_seed(args.state, N)
 
-    #
+    # Instantiate a scorer
+
+    scorer: Scorer = Scorer(
+        data,
+        shapes,
+        graph,
+        metadata,
+        verbose=args.verbose,
+    )
+
+    # Initialize a new ensemble for the pushed plans
 
     pushed_ensemble: Dict[str, Any] = ensemble_metadata(
         xx=args.state,
@@ -91,63 +101,69 @@ def main() -> None:
     )
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
-    ## Get a plan and ratings for debugging ##
+    # Push each frontier (pair of ratings dimensions)
 
-    frontier_key = "proportionality_compactness"  # TODO
-    frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
-    frontier_pair: List[str] = list(frontier_key.split("_"))
-    dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
-
-    # TODO - Use the offset in the frontier, to get the plan in the ensemble
-
-    p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
-    name: Name = str(p["name"])
-    district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
-
-    ##
-
-    scorer: Scorer = Scorer(
-        data,
-        shapes,
-        graph,
-        metadata,
-        verbose=args.verbose,
-    )
-
-    # Push a frontier point one or more times
-
-    for i in range(1, args.size + 1):
+    frontier_keys: List[str] = list(frontiers["frontiers"].keys())
+    for i, frontier_key in enumerate(frontier_keys):
         if args.verbose:
             print()
-            print(f"Search {i} of {args.size}")
-
-        try:
-            plan: Plan = Plan(
-                district_by_geoid,
-                pop_by_geoid,
-                graph,
-                seed,
-                verbose=args.verbose,
-                # debug=args.debug,
+            print(
+                f">>> Pushing the {frontier_key} frontier point ({i+1} of {len(frontier_keys)}) <<<"
             )
 
-            plan_name: str = f"{frontier_key}_{i:03d}"
-            assignments: Dict[GeoID, DistrictID] = push_point(
-                plan,
-                scorer,
-                dimensions,
-                verbose=args.verbose,
-                # debug=args.debug,
-            )
+        # TODO
+        # frontier_key = "proportionality_compactness"
+        # frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
 
-            pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
+        frontier_pair: List[str] = list(frontier_key.split("_"))
+        dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
 
+        # TODO - Use the offset in the frontier, to get the plan in the ensemble
+
+        p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
+        name: Name = str(p["name"])
+        district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
+
+        # Push each frontier point one or more times
+
+        for j in range(1, args.size + 1):
             if args.verbose:
-                print(plan)
-        except:
-            pass
-        finally:
-            seed += 1
+                print()
+                print(f"Search {j} of {args.size}")
+
+            try:
+                plan: Plan = Plan(
+                    district_by_geoid,
+                    pop_by_geoid,
+                    graph,
+                    seed,
+                    verbose=args.verbose,
+                    # debug=args.debug,
+                )
+
+                plan.to_csv("output/test_starting_plan.csv")  # DEBUG
+
+                plan_name: str = f"{frontier_key}_{i:03d}"
+                assignments: Dict[GeoID, DistrictID] = push_point(
+                    plan,
+                    scorer,
+                    dimensions,
+                    verbose=args.verbose,
+                    # debug=args.debug,
+                )
+
+                plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv")
+
+                pushed_plans.append(
+                    {"name": plan_name, "plan": assignments}
+                )  # No weights.
+
+                if args.verbose:
+                    print(plan)
+            except:
+                pass
+            finally:
+                seed += 1
 
     pushed_ensemble["plans"] = pushed_plans
 
