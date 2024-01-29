@@ -22,7 +22,7 @@ from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
 
 from .datatypes import *
-from .connected import is_connected
+from .connected import is_connected, is_connected_implied
 
 
 class Plan:
@@ -227,11 +227,13 @@ class Plan:
                 valid = False
                 break
 
-            # TODO - Possibly optimize this using union_find instead
             district_features: List[FeatureOffset] = self._districts[do]["features"]
-            if not is_connected(district_features, self._feature_graph):
+            if not is_connected_implied(district_features, self._feature_graph):
                 valid = False
                 break
+            # if not is_connected(district_features, self._feature_graph):
+            #     valid = False
+            #     break
 
         return valid
 

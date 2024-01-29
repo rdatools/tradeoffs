@@ -7,15 +7,15 @@ that works on feature offsets instead of geoids.
 
 from typing import Any, TypeAlias, List, Dict, Set
 
-from rdabase import OUT_OF_STATE
+from rdabase import OUT_OF_STATE, IntUnionFind
 from .datatypes import *
 
 
 def is_connected(
     ids: List[FeatureOffset], graph: Dict[FeatureOffset, List[FeatureOffset]]
 ) -> bool:
-    """Is a graph is fully connected?
-    i.e., w/o regard to the virtual state boundary "shapes".
+    """Is a collection of features fully connected?
+    i.e., w/o regard to the virtual state boundary 'shapes'.
 
     Kenshi's iterative implementation of the recursive algorithm
 
@@ -37,6 +37,28 @@ def is_connected(
         to_process.extend(neighbors_to_visit)
 
     return len(visited) == len(all_geos)
+
+
+def is_connected_implied(
+    ids: List[FeatureOffset], graph: Dict[FeatureOffset, List[FeatureOffset]]
+) -> bool:
+    """Is a collection of features fully connected?
+    i.e., w/o regard to the virtual state boundary 'shapes'.
+
+    Todd's union-find approach
+
+    ids - the list of ids for the geographies
+    graph - the connectedness (adjacency) of the geos
+    """
+
+    district: Set[FeatureOffset] = set(ids)
+    ds = IntUnionFind(district)
+    for node in district:
+        for neighbor in graph[node]:
+            if neighbor in district:
+                ds.merge(node, neighbor)
+
+    return ds.n_subsets == 1
 
 
 ### END ###
