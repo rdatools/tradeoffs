@@ -13,8 +13,13 @@ import random
 
 from typing import Any, List, Dict, NamedTuple
 
-from rdabase import read_json, starting_seed
-from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
+from rdabase import require_args, read_json, starting_seed, write_json
+from rdaensemble.general import (
+    ratings_dimensions,
+    plan_from_ensemble,
+    make_plan,
+    ensemble_metadata,
+)
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
 from tradeoffs import (
@@ -39,6 +44,7 @@ class Args(NamedTuple):
     data: str
     shapes: str
     graph: str
+    pushed: str
     size: int
     verbose: bool
     debug: bool
@@ -52,6 +58,7 @@ def main() -> None:
         data="../rdabase/data/NC/NC_2020_data.csv",
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
+        pushed="output/test_pushed_plans.json",
         size=1,
         verbose=True,
         debug=True,
@@ -75,6 +82,13 @@ def main() -> None:
 
     #
 
+    pushed_ensemble: Dict[str, Any] = ensemble_metadata(
+        xx=args.state,
+        ndistricts=N,
+        size=args.size,
+        method="Maps pushed from the frontier points",
+        repo="rdatools/tradeoffs",
+    )
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
     ## Get a plan and ratings for debugging ##
@@ -125,19 +139,19 @@ def main() -> None:
                 verbose=args.verbose,
                 # debug=args.debug,
             )
+
             pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
 
             if args.verbose:
                 print(plan)
         except:
             pass
+        finally:
+            seed += 1
 
-        # TODO - Add the plan to the ensemble
-        seed += 1
+    pushed_ensemble["plans"] = pushed_plans
 
-    # TODO - Save the ensemble to disk
-
-    pass
+    write_json(args.pushed, pushed_ensemble)
 
 
 if __name__ == "__main__":
