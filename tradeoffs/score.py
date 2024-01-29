@@ -112,7 +112,7 @@ class Scorer:
                 case _:
                     raise ValueError(f"Unknown dimension: {d}")
 
-        measurements: Tuple[float, float] = tuple(pair)
+        measurements: Tuple[float, float] = (pair[0], pair[1])
 
         return measurements
 
@@ -253,6 +253,18 @@ class Scorer:
 
 
 ### HELPERS ###
+
+
+def is_realistic(ratings: Tuple[int, int, int, int, int]) -> bool:
+    """
+    Do a set of ratings meet DRA's 'realistic' thresholds?
+
+    See 'Realistic' @ https://medium.com/dra-2020/notable-maps-66d744933a48
+    """
+
+    thresholds: Tuple[int, int, int, int, int] = (20, 10, 0, 20, 20)
+
+    return all(r >= t for r, t in zip(ratings, thresholds))
 
 
 def calc_partisan_metrics(
