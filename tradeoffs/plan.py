@@ -224,18 +224,12 @@ class Plan:
             d_id: DistrictID = self.district_ids[do]
 
             if not self._is_within_tolerance(do):
-                if self._debug:
-                    print(
-                        f"... District {do}/{d_id} is not within population tolerance!"
-                    )
                 valid = False
                 break
 
             # TODO - Possibly optimize this using union_find instead
             district_features: List[FeatureOffset] = self._districts[do]["features"]
             if not is_connected(district_features, self._feature_graph):
-                if self._debug:
-                    print(f"... District {do}/{d_id} is not connected!")
                 valid = False
                 break
 
@@ -243,9 +237,6 @@ class Plan:
 
     def mutate(self, mutation: Mutation):
         """Mutate the plan by applying a mutation. Save undo info."""
-
-        if self._debug:
-            print(f"... Applying the mutation {mutation}.")
 
         self._undo_district_offsets = [
             mutation[0].from_district,
@@ -286,9 +277,6 @@ class Plan:
 
     def undo(self):
         """Undo the last mutation applied to the plan."""
-
-        if self._debug:
-            print("... Undoing the mutation.")
 
         for i, do in enumerate(self._undo_district_offsets):
             self._districts[do] = self._undo_districts[i]
