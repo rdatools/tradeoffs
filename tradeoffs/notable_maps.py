@@ -10,10 +10,7 @@ from rdaensemble.general import ratings_dimensions, ratings_indexes, better_map
 def id_most_notable_maps(
     frontiers: Dict[str, List[Dict]]
 ) -> List[Dict[str, Dict[str, str | int]]]:
-    """Identify the *most* notable map for each dimension in the frontiers.
-
-    TODO - Hand verify these results.
-    """
+    """Identify the *most* notable map for each dimension in the frontiers."""
 
     notable_maps: List[Dict[str, Any]] = [
         {m: "None", "ratings": []} for m in ratings_dimensions
