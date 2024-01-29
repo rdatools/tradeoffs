@@ -228,10 +228,11 @@ class Plan:
                 break
 
             district_features: List[FeatureOffset] = self._districts[do]["features"]
-            if not is_connected_implied(district_features, self._feature_graph):
+            if not is_connected(district_features, self._feature_graph):
                 valid = False
                 break
-            # if not is_connected(district_features, self._feature_graph):
+            # NOTE - The union-find approach is marginally slower
+            # if not is_connected_implied(district_features, self._feature_graph):
             #     valid = False
             #     break
 
