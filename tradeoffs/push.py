@@ -12,7 +12,7 @@ from .plan import Plan, size_1_moves
 from .score import Scorer
 
 
-# @time_function
+@time_function
 def push_point(
     plan: Plan,
     scorer: Scorer,
@@ -57,7 +57,7 @@ def push_point(
     return assignments
 
 
-# @time_function
+@time_function
 def sweep_once(
     plan: Plan,
     scorer: Scorer,
