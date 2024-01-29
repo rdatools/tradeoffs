@@ -25,7 +25,7 @@ def push_point(
 
     limit: int = 1000
 
-    generators: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]] = [
+    generators: List[Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]]] = [
         size_1_moves
     ]  # Swap/mutation generators
 
@@ -95,11 +95,12 @@ def sweep_once(
             plan.mutate(m)
 
             valid: bool = plan.is_valid_plan(seg_key)
+            better: bool = False
             if valid:
                 next_measures = scorer.measure_dimensions(
                     plan.to_assignments(), dimensions
                 )
-                better: bool = is_better(prev_measures, next_measures)
+                better = is_better(prev_measures, next_measures)
 
                 if better:
                     prev_measures = next_measures

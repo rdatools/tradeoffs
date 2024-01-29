@@ -7,7 +7,7 @@ that works on feature offsets instead of geoids.
 
 from typing import Any, TypeAlias, List, Dict, Set
 
-from rdabase import OUT_OF_STATE, IntUnionFind
+from rdabase import OUT_OF_STATE  # IntUnionFind
 from .datatypes import *
 
 
@@ -39,26 +39,27 @@ def is_connected(
     return len(visited) == len(all_geos)
 
 
-def is_connected_implied(
-    ids: List[FeatureOffset], graph: Dict[FeatureOffset, List[FeatureOffset]]
-) -> bool:
-    """Is a collection of features fully connected?
-    i.e., w/o regard to the virtual state boundary 'shapes'.
+# NOTE - This union-find approach is marginally slower than is_connected() above
+# def is_connected_implied(
+#     ids: List[FeatureOffset], graph: Dict[FeatureOffset, List[FeatureOffset]]
+# ) -> bool:
+#     """Is a collection of features fully connected?
+#     i.e., w/o regard to the virtual state boundary 'shapes'.
 
-    Todd's union-find approach
+#     Todd's union-find approach
 
-    ids - the list of ids for the geographies
-    graph - the connectedness (adjacency) of the geos
-    """
+#     ids - the list of ids for the geographies
+#     graph - the connectedness (adjacency) of the geos
+#     """
 
-    district: Set[FeatureOffset] = set(ids)
-    ds = IntUnionFind(district)
-    for node in district:
-        for neighbor in graph[node]:
-            if neighbor in district:
-                ds.merge(node, neighbor)
+#     district: Set[FeatureOffset] = set(ids)
+#     ds = IntUnionFind(district)
+#     for node in district:
+#         for neighbor in graph[node]:
+#             if neighbor in district:
+#                 ds.merge(node, neighbor)
 
-    return ds.n_subsets == 1
+#     return ds.n_subsets == 1
 
 
 ### END ###

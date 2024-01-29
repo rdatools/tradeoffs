@@ -22,7 +22,7 @@ from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
 
 from .datatypes import *
-from .connected import is_connected, is_connected_implied
+from .connected import is_connected
 
 
 class Plan:
@@ -231,10 +231,6 @@ class Plan:
             if not is_connected(district_features, self._feature_graph):
                 valid = False
                 break
-            # NOTE - The union-find approach is marginally slower
-            # if not is_connected_implied(district_features, self._feature_graph):
-            #     valid = False
-            #     break
 
         return valid
 

@@ -19,7 +19,7 @@ from .score import (
     cull_splitting_metrics,
     cull_ratings,
 )
-from .connected import is_connected, is_connected_implied
+from .connected import is_connected
 from .plan import Plan, segment_key, size_1_moves
 from .push import push_point
 from .plots import *  # TODO - Be specific

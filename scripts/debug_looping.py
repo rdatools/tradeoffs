@@ -11,7 +11,7 @@ $ scripts/debug_looping.py
 
 import random
 
-from typing import Any, List, Dict, NamedTuple
+from typing import Any, List, Dict, Tuple, NamedTuple
 
 from rdabase import require_args, read_json, starting_seed, write_json
 from rdaensemble.general import (
@@ -95,8 +95,8 @@ def main() -> None:
 
     frontier_key = "proportionality_compactness"  # TODO
     frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
-
-    dimensions: Tuple[str, str] = tuple(frontier_key.split("_"))
+    frontier_pair: List[str] = list(frontier_key.split("_"))
+    dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
 
     # TODO - Use the offset in the frontier, to get the plan in the ensemble
 
