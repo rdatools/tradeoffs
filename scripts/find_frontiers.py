@@ -42,8 +42,13 @@ def main() -> None:
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    # TODO - Filter out un-realistic maps - report on the filtering
-    ratings: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
+    ratings: pd.DataFrame = scores_to_df(
+        args.scores,
+        fieldnames,
+        fieldtypes,
+        filter_for_reasonableness=True,
+        verbose=True,
+    )
     metadata: Dict[str, Any] = read_json(args.metadata)
 
     frontiers: Dict[str, Any] = find_frontiers(ratings, is_pareto_efficient_value)
