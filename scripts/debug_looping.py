@@ -152,9 +152,9 @@ def main() -> None:
 
                     if args.verbose:
                         print()
-                        print(
-                            f"Improved {dimensions} from {beg_measures} to {end_measures}."
-                        )
+                        print(f"Improved #'s: {dimensions} = {beg_measures}")
+                        print(f"          to: {dimensions} = {end_measures}")
+                        print()
 
                     pushed_plans.append(
                         {"name": plan_name, "plan": assignments}
