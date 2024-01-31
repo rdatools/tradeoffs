@@ -208,7 +208,12 @@ def sweep_once(
                 plan.undo()
                 continue
 
-            # TODO - If not is_realistic(), then undo() and continue
+            measurements: Dict[str, float] = dict(zip(dimensions, next_measures))
+            # TODO - Score the "other" dimensions
+            # TODO - If not is_realistic(),
+            # TODO - then undo() and continue
+
+            # The mutated plan is valid, better, and realistic!
 
             prev_measures = next_measures
 
