@@ -90,11 +90,10 @@ def main() -> None:
         verbose=args.verbose,
     )
 
-    # Push each frontier (pair of ratings dimensions), "push" each frontier point
+    # For each pair of ratings dimensions frontier
 
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
-    # frontier_keys: List[str] = list(frontiers["frontiers"].keys())
     for i, frontier_key in enumerate(frontiers["frontiers"].keys()):
         if args.verbose:
             print()
@@ -102,68 +101,68 @@ def main() -> None:
                 f">>> Pushing the {frontier_key} frontier point ({i+1} of {len(frontiers['frontiers'].keys())}) <<<"
             )
 
-        frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+        plan_names: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+        plan_names = ["test"]  # TODO - DEBUG
 
-        frontier_pair: List[str] = list(frontier_key.split("_"))
-        dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
+        for j, plan_name in enumerate(plan_names):
+            # TODO - Use the plan_name to get the plan from the ensemble
+            # TODO - DEBUG
+            p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
+            name: Name = str(p["name"])
+            district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
 
-        # TODO - Use the offset in the frontier, to get the plan in the ensemble
+            # Push each frontier point one or more times
 
-        p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
-        name: Name = str(p["name"])
-        district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
+            frontier_pair: List[str] = list(frontier_key.split("_"))
+            dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
 
-        # Push each frontier point one or more times
-
-        for j in range(1, args.multiplier + 1):
-            if args.verbose:
-                print()
-                print(f"Search {j} of {args.multiplier}")
-
-            try:
-                plan: Plan = Plan(
-                    district_by_geoid,
-                    pop_by_geoid,
-                    graph,
-                    seed,
-                    verbose=args.verbose,
-                    # debug=args.debug,
-                )
-
-                plan.to_csv("output/test_starting_plan.csv")  # DEBUG
-
-                plan_name: str = f"{frontier_key}_{i:03d}"
-                assignments: Dict[GeoID, DistrictID] = push_point(
-                    plan,
-                    scorer,
-                    dimensions,
-                    verbose=args.verbose,
-                    # debug=args.debug,
-                )
-
-                plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv")
-
-                pushed_plans.append(
-                    {"name": plan_name, "plan": assignments}
-                )  # No weights.
-
+            for j in range(1, args.multiplier + 1):
                 if args.verbose:
-                    print(plan)
-            except:
-                pass
-            finally:
-                seed += 1
+                    print()
+                    print(f"Search {j} of {args.multiplier}")
+
+                try:
+                    plan: Plan = Plan(
+                        district_by_geoid,
+                        pop_by_geoid,
+                        graph,
+                        seed,
+                        verbose=args.verbose,
+                        # debug=args.debug,
+                    )
+
+                    plan.to_csv("output/test_starting_plan.csv")  # DEBUG
+
+                    plan_name: str = f"{frontier_key}_{i:03d}"
+                    assignments: Dict[GeoID, DistrictID] = push_point(
+                        plan,
+                        scorer,
+                        dimensions,
+                        verbose=args.verbose,
+                        # debug=args.debug,
+                    )
+
+                    plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv")
+
+                    pushed_plans.append(
+                        {"name": plan_name, "plan": assignments}
+                    )  # No weights.
+
+                except:
+                    pass
+                finally:
+                    seed += 1
 
         break  # DEBUG
 
-    pushed_ensemble["plans"] = pushed_plans
     pushed_ensemble: Dict[str, Any] = ensemble_metadata(
         xx=args.state,
         ndistricts=N,
-        multiplier=args.multiplier,
+        size=len(pushed_plans),
         method="Maps pushed from the frontier points",
         repo="rdatools/tradeoffs",
     )
+    pushed_ensemble["plans"] = pushed_plans
 
     write_json(args.pushed, pushed_ensemble)
 
