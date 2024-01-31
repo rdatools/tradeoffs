@@ -102,11 +102,11 @@ def main() -> None:
             )
 
         plan_names: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
-        plan_names = ["test"]  # TODO - DEBUG
+        plan_names = ["test"]  # DEBUG
 
         for j, plan_name in enumerate(plan_names):
             # TODO - Use the plan_name to get the plan from the ensemble
-            # TODO - DEBUG
+            # DEBUG
             p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
             name: Name = str(p["name"])
             district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
