@@ -135,13 +135,13 @@ def push_point(
     ]  # Swap/mutation generators
 
     for generator in generators:
-        npass: int = 1
+        n_pass: int = 1
         while True:
-            if npass > limit:
+            if n_pass > limit:
                 raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
             if verbose:
                 print()
-                print(f"Pass {npass} of up to {limit}")
+                print(f"Pass {n_pass} of up to {limit}")
 
             stable: bool = sweep_once(
                 plan,
@@ -155,7 +155,7 @@ def push_point(
             if stable:
                 break
 
-            npass += 1
+            n_pass += 1
 
     assignments: Dict[GeoID, DistrictID] = plan.to_dict()
 
@@ -193,30 +193,30 @@ def sweep_once(
     for seg_key in random_adjacent_districts:
         mutations: List[Mutation] = plan.random_mutations(seg_key, generator)
         tried: int = 0
-        valid_and_better: int = 0
+        applied: int = 0
 
         for m in mutations:
             tried += 1
             plan.mutate(m)
 
-            valid: bool = plan.is_valid_plan(seg_key)
-            better: bool = False
-            if valid:
-                next_measures = scorer.measure_dimensions(
-                    plan.to_assignments(), dimensions
-                )
-                better = is_better(prev_measures, next_measures)
-
-                if better:
-                    prev_measures = next_measures
-                    valid_and_better += 1
-                    stable = False
-
-                    if verbose:
-                        print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\r")
-
-            if not valid or not better:
+            if not plan.is_valid_plan(seg_key):
                 plan.undo()
+                continue
+
+            next_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
+            if not is_better(prev_measures, next_measures):
+                plan.undo()
+                continue
+
+            # TODO - If not is_realistic(), then undo() and continue
+
+            prev_measures = next_measures
+
+            applied += 1
+            stable = False
+
+            if verbose:
+                print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\r")
 
     plan.inc_generation()
 
