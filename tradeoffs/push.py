@@ -7,7 +7,16 @@ from typing import Any, List, Dict, Tuple, Callable
 from rdabase import time_function
 from rdaensemble.general import ratings_dimensions, ratings_indexes
 
-from .datatypes import GeoID, DistrictID, DistrictOffset, BorderKey, Move, Mutation
+from .datatypes import (
+    GeoID,
+    DistrictID,
+    DistrictOffset,
+    BorderKey,
+    Move,
+    Mutation,
+    Name,
+    Weight,
+)
 from .plan import Plan, size_1_moves
 from .score import Scorer
 
@@ -16,19 +25,96 @@ from .score import Scorer
 def push_frontiers(
     ensemble: Dict[str, Any],
     frontiers: Dict[str, Any],
+    pop_by_geoid: Dict[GeoID, int],
+    graph: Dict[GeoID, List[GeoID]],
     scorer: Scorer,
+    multiplier: int,
     seed: int,
     *,
     verbose: bool = False,
     debug: bool = False,
-) -> Dict[str, Any]:
+) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
     """Push the frontiers for an ensemble of plans."""
 
-    pushed: Dict[str, Any] = {}
+    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
+    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
-    print("Pushing frontiers...")
+    # For each pair of ratings dimensions frontier
 
-    return pushed
+    for i, frontier_key in enumerate(frontiers["frontiers"].keys()):
+        if verbose:
+            print()
+            print(
+                f">>> Pushing the {frontier_key} frontier point ({i+1} of {len(frontiers['frontiers'].keys())}) <<<"
+            )
+
+        plan_names: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+        plan_names = ["test"]  # DEBUG
+
+        for j, plan_name in enumerate(plan_names):
+            # TODO - Use the plan_name to get the plan from the ensemble
+            # DEBUG
+            p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
+            name: Name = str(p["name"])
+            district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
+
+            # Push each frontier point one or more times
+
+            frontier_pair: List[str] = list(frontier_key.split("_"))
+            dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
+
+            for j in range(1, multiplier + 1):
+                if verbose:
+                    print()
+                    print(f"Search {j} of {multiplier}")
+
+                try:
+                    plan: Plan = Plan(
+                        district_by_geoid,
+                        pop_by_geoid,
+                        graph,
+                        seed,
+                        verbose=verbose,
+                        # debug=debug,
+                    )
+                    beg_measures = scorer.measure_dimensions(
+                        plan.to_assignments(), dimensions
+                    )
+
+                    # plan.to_csv("output/test_starting_plan.csv") # DEBUG
+
+                    plan_name: str = f"{frontier_key}_{i:03d}"
+                    assignments: Dict[GeoID, DistrictID] = push_point(
+                        plan,
+                        scorer,
+                        dimensions,
+                        verbose=verbose,
+                        # debug=debug,
+                    )
+                    end_measures = scorer.measure_dimensions(
+                        plan.to_assignments(), dimensions
+                    )
+
+                    # plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv") # DEBUG
+
+                    if verbose:
+                        print()
+                        print(f"Improved #'s: {dimensions} = {beg_measures}")
+                        print(f"          to: {dimensions} = {end_measures}")
+                        print()
+
+                    pushed_plans.append(
+                        {"name": plan_name, "plan": assignments}
+                    )  # No weights.
+
+                except:
+                    pass
+                finally:
+                    seed += 1
+
+        break  # DEBUG
+
+    return pushed_plans
 
 
 @time_function

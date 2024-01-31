@@ -32,7 +32,6 @@ from tradeoffs import (
     Weight,
     Plan,
     size_1_moves,
-    push_point,  # TODO - Remove this
     push_frontiers,
     Scorer,
 )
@@ -94,95 +93,19 @@ def main() -> None:
 
     # Push the ensemble frontiers
 
-    push_frontiers(
+    pushed_plans: List[
+        Dict[str, Name | Weight | Dict[GeoID, DistrictID]]
+    ] = push_frontiers(
         ensemble,
         frontiers,
+        pop_by_geoid,
+        graph,
         scorer,
+        args.multiplier,
         seed,
         verbose=args.verbose,
         # debug=args.debug,
     )
-
-    #
-
-    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
-
-    # For each pair of ratings dimensions frontier
-
-    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
-
-    for i, frontier_key in enumerate(frontiers["frontiers"].keys()):
-        if args.verbose:
-            print()
-            print(
-                f">>> Pushing the {frontier_key} frontier point ({i+1} of {len(frontiers['frontiers'].keys())}) <<<"
-            )
-
-        plan_names: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
-        plan_names = ["test"]  # DEBUG
-
-        for j, plan_name in enumerate(plan_names):
-            # TODO - Use the plan_name to get the plan from the ensemble
-            # DEBUG
-            p: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = plans[0]
-            name: Name = str(p["name"])
-            district_by_geoid: Dict[GeoID, DistrictID] = p["plan"]  # type: ignore
-
-            # Push each frontier point one or more times
-
-            frontier_pair: List[str] = list(frontier_key.split("_"))
-            dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
-
-            for j in range(1, args.multiplier + 1):
-                if args.verbose:
-                    print()
-                    print(f"Search {j} of {args.multiplier}")
-
-                try:
-                    plan: Plan = Plan(
-                        district_by_geoid,
-                        pop_by_geoid,
-                        graph,
-                        seed,
-                        verbose=args.verbose,
-                        # debug=args.debug,
-                    )
-                    beg_measures = scorer.measure_dimensions(
-                        plan.to_assignments(), dimensions
-                    )
-
-                    # plan.to_csv("output/test_starting_plan.csv") # DEBUG
-
-                    plan_name: str = f"{frontier_key}_{i:03d}"
-                    assignments: Dict[GeoID, DistrictID] = push_point(
-                        plan,
-                        scorer,
-                        dimensions,
-                        verbose=args.verbose,
-                        # debug=args.debug,
-                    )
-                    end_measures = scorer.measure_dimensions(
-                        plan.to_assignments(), dimensions
-                    )
-
-                    # plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv") # DEBUG
-
-                    if args.verbose:
-                        print()
-                        print(f"Improved #'s: {dimensions} = {beg_measures}")
-                        print(f"          to: {dimensions} = {end_measures}")
-                        print()
-
-                    pushed_plans.append(
-                        {"name": plan_name, "plan": assignments}
-                    )  # No weights.
-
-                except:
-                    pass
-                finally:
-                    seed += 1
-
-        break  # DEBUG
 
     pushed_ensemble: Dict[str, Any] = ensemble_metadata(
         xx=args.state,
