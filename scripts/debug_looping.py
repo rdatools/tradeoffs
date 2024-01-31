@@ -131,7 +131,7 @@ def main() -> None:
                         # debug=args.debug,
                     )
 
-                    plan.to_csv("output/test_starting_plan.csv")  # DEBUG
+                    # plan.to_csv("output/test_starting_plan.csv")  # DEBUG
 
                     plan_name: str = f"{frontier_key}_{i:03d}"
                     assignments: Dict[GeoID, DistrictID] = push_point(
@@ -142,7 +142,7 @@ def main() -> None:
                         # debug=args.debug,
                     )
 
-                    plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv")
+                    # plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv") # DEBUG
 
                     pushed_plans.append(
                         {"name": plan_name, "plan": assignments}
