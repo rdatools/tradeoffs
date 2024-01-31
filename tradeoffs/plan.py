@@ -48,9 +48,11 @@ class Plan:
     _districts: List[District]
     _assignments: Dict[GeoID, DistrictID]
 
-    generation: int
+    _generation: int
     _mutations_applied: int
     _features_moved: int
+    _cumulative_mutations_applied: int
+    _cumulative_features_moved: int
 
     _undo_feature_offsets: List[FeatureOffset]
     _undo_features: List[Feature]
@@ -75,9 +77,11 @@ class Plan:
         self._verbose = verbose
         self._debug = debug
 
-        self.generation = 0
+        self._generation = 0
         self._mutations_applied = 0
         self._features_moved = 0
+        self._cumulative_mutations_applied = 0
+        self._cumulative_features_moved = 0
         self._pop_threshold = pop_threshold
 
         self._assignments = dict(district_by_geoid)
@@ -101,7 +105,7 @@ class Plan:
             print(self)
 
     def __repr__(self) -> str:
-        return f"Plan: generation {self.generation} - {self._mutations_applied} mutations applied, {self._features_moved} features moved"
+        return f"Plan: generation {self._generation} - {self._mutations_applied}/{self._cumulative_mutations_applied} mutations applied, {self._features_moved}/{self._cumulative_features_moved} features moved"
 
     ### PRIVATE ###
 
@@ -292,6 +296,15 @@ class Plan:
         if self._debug:
             if not self.is_valid_plan(segment_key(*self._undo_district_offsets)):
                 raise Exception("Plan is not valid after undo!")
+
+    def inc_generation(self):
+        """Bump the generation counter and reset the mutation counters."""
+
+        self._generation += 1
+        self._cumulative_mutations_applied += self._mutations_applied
+        self._cumulative_features_moved += self._features_moved
+        self._mutations_applied = 0
+        self._features_moved = 0
 
     # Output
 

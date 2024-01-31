@@ -113,7 +113,7 @@ def sweep_once(
             if not valid or not better:
                 plan.undo()
 
-    plan.generation += 1
+    plan.inc_generation()
 
     if verbose:
         print()
