@@ -115,11 +115,6 @@ def sweep_once(
 
     plan.inc_generation()
 
-    if verbose:
-        print()
-        print(plan)
-        print()
-
     return stable
 
 
