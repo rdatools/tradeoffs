@@ -45,7 +45,7 @@ class Args(NamedTuple):
     shapes: str
     graph: str
     pushed: str
-    size: int
+    multiplier: int
     verbose: bool
     debug: bool
 
@@ -59,12 +59,12 @@ def main() -> None:
         shapes="../rdabase/data/NC/NC_2020_shapes_simplified.json",
         graph="../rdabase/data/NC/NC_2020_graph.json",
         pushed="output/test_pushed_plans.json",
-        size=1,
+        multiplier=1,
         verbose=True,
         debug=True,
     )
 
-    # Load data
+    # Load the data & shapes for scoring
 
     data: Dict[str, Dict[GeoID, DistrictID]] = load_data(args.data)
     shapes: Dict[str, Any] = load_shapes(args.shapes)
@@ -90,30 +90,19 @@ def main() -> None:
         verbose=args.verbose,
     )
 
-    # Initialize a new ensemble for the pushed plans
+    # Push each frontier (pair of ratings dimensions), "push" each frontier point
 
-    pushed_ensemble: Dict[str, Any] = ensemble_metadata(
-        xx=args.state,
-        ndistricts=N,
-        size=args.size,
-        method="Maps pushed from the frontier points",
-        repo="rdatools/tradeoffs",
-    )
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
-    # Push each frontier (pair of ratings dimensions)
-
-    frontier_keys: List[str] = list(frontiers["frontiers"].keys())
-    for i, frontier_key in enumerate(frontier_keys):
+    # frontier_keys: List[str] = list(frontiers["frontiers"].keys())
+    for i, frontier_key in enumerate(frontiers["frontiers"].keys()):
         if args.verbose:
             print()
             print(
-                f">>> Pushing the {frontier_key} frontier point ({i+1} of {len(frontier_keys)}) <<<"
+                f">>> Pushing the {frontier_key} frontier point ({i+1} of {len(frontiers['frontiers'].keys())}) <<<"
             )
 
-        # TODO
-        # frontier_key = "proportionality_compactness"
-        # frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
+        frontier: List[Dict[str, Any]] = frontiers["frontiers"][frontier_key]
 
         frontier_pair: List[str] = list(frontier_key.split("_"))
         dimensions: Tuple[str, str] = (frontier_pair[0], frontier_pair[1])
@@ -126,10 +115,10 @@ def main() -> None:
 
         # Push each frontier point one or more times
 
-        for j in range(1, args.size + 1):
+        for j in range(1, args.multiplier + 1):
             if args.verbose:
                 print()
-                print(f"Search {j} of {args.size}")
+                print(f"Search {j} of {args.multiplier}")
 
             try:
                 plan: Plan = Plan(
@@ -165,7 +154,16 @@ def main() -> None:
             finally:
                 seed += 1
 
+        break  # DEBUG
+
     pushed_ensemble["plans"] = pushed_plans
+    pushed_ensemble: Dict[str, Any] = ensemble_metadata(
+        xx=args.state,
+        ndistricts=N,
+        multiplier=args.multiplier,
+        method="Maps pushed from the frontier points",
+        repo="rdatools/tradeoffs",
+    )
 
     write_json(args.pushed, pushed_ensemble)
 
