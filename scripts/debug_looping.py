@@ -32,7 +32,8 @@ from tradeoffs import (
     Weight,
     Plan,
     size_1_moves,
-    push_point,
+    push_point,  # TODO - Remove this
+    push_frontiers,
     Scorer,
 )
 
@@ -75,7 +76,8 @@ def main() -> None:
 
     frontiers: Dict[str, Any] = read_json(args.frontier)
     ensemble: Dict[str, Any] = read_json(args.plans)
-    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
+
+    # Generate a repeatable random seed
 
     N: int = int(metadata["D"])
     seed: int = starting_seed(args.state, N)
@@ -89,6 +91,21 @@ def main() -> None:
         metadata,
         verbose=args.verbose,
     )
+
+    # Push the ensemble frontiers
+
+    push_frontiers(
+        ensemble,
+        frontiers,
+        scorer,
+        seed,
+        verbose=args.verbose,
+        # debug=args.debug,
+    )
+
+    #
+
+    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
 
     # For each pair of ratings dimensions frontier
 

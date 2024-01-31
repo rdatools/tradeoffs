@@ -2,7 +2,7 @@
 PUSH A FRONTIER POINT
 """
 
-from typing import Callable, Dict, List, Tuple
+from typing import Any, List, Dict, Tuple, Callable
 
 from rdabase import time_function
 from rdaensemble.general import ratings_dimensions, ratings_indexes
@@ -10,6 +10,25 @@ from rdaensemble.general import ratings_dimensions, ratings_indexes
 from .datatypes import GeoID, DistrictID, DistrictOffset, BorderKey, Move, Mutation
 from .plan import Plan, size_1_moves
 from .score import Scorer
+
+
+@time_function
+def push_frontiers(
+    ensemble: Dict[str, Any],
+    frontiers: Dict[str, Any],
+    scorer: Scorer,
+    seed: int,
+    *,
+    verbose: bool = False,
+    debug: bool = False,
+) -> Dict[str, Any]:
+    """Push the frontiers for an ensemble of plans."""
+
+    pushed: Dict[str, Any] = {}
+
+    print("Pushing frontiers...")
+
+    return pushed
 
 
 @time_function
