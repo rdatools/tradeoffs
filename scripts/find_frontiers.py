@@ -9,6 +9,7 @@ $ scripts/find_frontiers.py \
 --scores testdata/synthetic_ratings.csv \
 --metadata testdata/synthetic_scores_metadata.json \
 --frontier output/test_frontier.json \
+--verbose \
 --no-debug
 
 For documentation, type:
@@ -21,6 +22,7 @@ from argparse import ArgumentParser, Namespace
 from typing import Any, List, Dict, Callable
 
 import pandas as pd
+import itertools
 
 from rdabase import require_args, read_json, write_json
 from rdaensemble.general import ratings_dimensions
@@ -47,7 +49,7 @@ def main() -> None:
         fieldnames,
         fieldtypes,
         filter_for_reasonableness=True,
-        verbose=True,
+        verbose=args.verbose,
     )
     metadata: Dict[str, Any] = read_json(args.metadata)
 
@@ -57,6 +59,20 @@ def main() -> None:
     output: Dict[str, Any] = metadata
     output["frontiers"] = frontiers
     output["notable_maps"] = indices
+
+    if args.verbose:
+        ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
+
+        total_points: int = 0
+        for i, f in enumerate(ratings_pairs):
+            frontier_key: str = f"{f[0]}_{f[1]}"
+            points: int = len(frontiers[frontier_key])
+            total_points += points
+            print(f"{i+1:02d} - The {frontier_key} frontier has {points} points.")
+
+        print()
+        print(f"Altogether there are {total_points} frontier points.")
+        print()
 
     write_json(args.frontier, output)
 
