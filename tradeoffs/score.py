@@ -116,6 +116,32 @@ class Scorer:
 
         return measurements
 
+    def measure_dimension(
+        self,
+        dimension: str,
+    ) -> float:
+        """Evaluate a plan on one dimension.
+
+        NOTE - This function depends on context established by a previous call to measure_dimensions().
+        """
+
+        measure: float
+        match dimension:
+            case "proportionality":
+                measure = self._measure_proportionality()
+            case "competitiveness":
+                measure = self._measure_competitiveness()
+            case "minority":
+                measure = self._measure_minority()
+            case "compactness":
+                measure = self._measure_compactness()
+            case "splitting":
+                measure = self._measure_splitting()
+            case _:
+                raise ValueError(f"Unknown dimension: {d}")
+
+        return measure
+
     ### PRIVATE ###
 
     def _get_aggregates(self) -> Dict[str, Any]:
@@ -255,7 +281,7 @@ class Scorer:
 ### HELPERS ###
 
 
-def is_realistic(ratings: List[int]) -> bool:
+def is_realistic(ratings: List[int | float]) -> bool:
     """
     Do a set of ratings meet DRA's 'realistic' thresholds?
 

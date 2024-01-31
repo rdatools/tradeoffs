@@ -18,7 +18,7 @@ from .datatypes import (
     Weight,
 )
 from .plan import Plan, size_1_moves
-from .score import Scorer
+from .score import Scorer, is_realistic
 
 
 @time_function
@@ -77,6 +77,7 @@ def push_frontiers(
                         verbose=verbose,
                         # debug=debug,
                     )
+                    # TODO - Combine beginning & ending measures and updated assignments into a single result
                     beg_measures = scorer.measure_dimensions(
                         plan.to_assignments(), dimensions
                     )
@@ -208,10 +209,20 @@ def sweep_once(
                 plan.undo()
                 continue
 
-            measurements: Dict[str, float] = dict(zip(dimensions, next_measures))
-            # TODO - Score the "other" dimensions
-            # TODO - If not is_realistic(),
-            # TODO - then undo() and continue
+            measurements: List[float] = [0.0, 0.0, 0.0, 0.0, 0.0]
+            for i, d in enumerate(dimensions):
+                measurements[ratings_dimensions.index(d)] = next_measures[i]
+            other_dimensions: List[str] = [
+                d for d in ratings_dimensions if d not in dimensions
+            ]
+            for d in other_dimensions:
+                measure: float = scorer.measure_dimension(d) if d != "minority" else 0.0
+                measurements[ratings_dimensions.index(d)] = measure
+
+            # TODO - Enable this, when the frontier points are realistic
+            # if not is_realistic(measurements):
+            #     plan.undo()
+            #     continue
 
             # The mutated plan is valid, better, and realistic!
 
