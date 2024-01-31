@@ -130,8 +130,11 @@ def main() -> None:
                         verbose=args.verbose,
                         # debug=args.debug,
                     )
+                    beg_measures = scorer.measure_dimensions(
+                        plan.to_assignments(), dimensions
+                    )
 
-                    # plan.to_csv("output/test_starting_plan.csv")  # DEBUG
+                    # plan.to_csv("output/test_starting_plan.csv") # DEBUG
 
                     plan_name: str = f"{frontier_key}_{i:03d}"
                     assignments: Dict[GeoID, DistrictID] = push_point(
@@ -141,8 +144,17 @@ def main() -> None:
                         verbose=args.verbose,
                         # debug=args.debug,
                     )
+                    end_measures = scorer.measure_dimensions(
+                        plan.to_assignments(), dimensions
+                    )
 
                     # plan.to_csv(f"output/test_pushed_{frontier_key}_plan.csv") # DEBUG
+
+                    if args.verbose:
+                        print()
+                        print(
+                            f"Improved {dimensions} from {beg_measures} to {end_measures}."
+                        )
 
                     pushed_plans.append(
                         {"name": plan_name, "plan": assignments}
