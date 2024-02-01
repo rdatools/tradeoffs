@@ -7,7 +7,7 @@ For example:
 
 $ scripts/push_plan.py \
 --state NC \
---plan testdata/NC_2020_Congress_HB1029 \
+--plan testdata/NC_2020_Congress_HB1029.csv \
 --dimensions proportionality minority \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
