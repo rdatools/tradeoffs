@@ -211,6 +211,9 @@ def sweep_once(
             if verbose:
                 print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\r")
 
+    if verbose:
+        print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\n")
+
     plan.inc_generation()
 
     return stable

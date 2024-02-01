@@ -62,7 +62,7 @@ def main() -> None:
     graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
-    # Push the plan
+    # Push the plan one or more times on the given dimensions
 
     dimensions: Tuple[str, str] = (args.dimensions[0], args.dimensions[1])
 
@@ -80,9 +80,11 @@ def main() -> None:
         debug=args.debug,
     )
 
-    # TODO - Write the pushed plans to CSV files
+    # Write the pushed plans to CSV files
 
-    pass
+    for i, pushed_plan in enumerate(pushed_plans):
+        filename: str = pushed_plan["name"] + ".csv"
+        write_csv(args.output + filename, pushed_plan["plan"], ["GEOID", "DISTRICT"])
 
 
 def load_plan(plan_file: str) -> List[Assignment]:
