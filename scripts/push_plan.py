@@ -86,7 +86,7 @@ def main() -> None:
     for pushed_plan in pushed_plans:
         filename: str = pushed_plan["name"] + ".csv"
         plan: List[Dict[GeoID, DistrictID]] = [
-            {"GEOID": k, "DISTRICT": v} for k, v in pushed_plan["plan"]
+            {"GEOID": k, "DISTRICT": v} for k, v in pushed_plan["plan"].items()
         ]
         write_csv(
             os.path.expanduser(args.output) + filename,
