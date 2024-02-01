@@ -7,7 +7,7 @@ For example:
 
 $ scripts/push_plan.py \
 --state NC \
---plan testdata/NC_2020_Congress_HB1029.csv \
+--plan testdata/test_plan.csv \
 --dimensions proportionality minority \
 --seed 518 \
 --multiplier 1 \
@@ -170,7 +170,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "state": "NC",
-        "plan": "testdata/NC_2020_Congress_HB1029.csv",
+        "plan": "testdata/test_plan.csv",
         "dimensions": ["proportionality", "minority"],
         "seed": 518,
         "multiplier": 1,
