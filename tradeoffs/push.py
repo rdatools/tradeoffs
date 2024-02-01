@@ -20,6 +20,21 @@ from .datatypes import (
 from .plan import Plan, size_1_moves
 from .score import Scorer, is_realistic
 
+# @time_function
+# def push_plan(
+#     ensemble: Dict[str, Any],
+#     frontiers: Dict[str, Any],
+#     pop_by_geoid: Dict[GeoID, int],
+#     graph: Dict[GeoID, List[GeoID]],
+#     scorer: Scorer,
+#     multiplier: int,
+#     seed: int,
+#     *,
+#     verbose: bool = False,
+#     debug: bool = False,
+# ) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
+#     """Push the frontiers for an ensemble of plans."""
+
 
 @time_function
 def push_frontiers(
