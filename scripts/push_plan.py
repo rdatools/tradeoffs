@@ -29,6 +29,7 @@ from argparse import ArgumentParser, Namespace
 
 from typing import Any, List, Dict, Tuple
 
+import os
 import random
 
 from rdabase import (
@@ -84,7 +85,11 @@ def main() -> None:
 
     for i, pushed_plan in enumerate(pushed_plans):
         filename: str = pushed_plan["name"] + ".csv"
-        write_csv(args.output + filename, pushed_plan["plan"], ["GEOID", "DISTRICT"])
+        write_csv(
+            os.path.expanduser(args.output) + filename,
+            pushed_plan["plan"],
+            ["GEOID", "DISTRICT"],
+        )
 
 
 def load_plan(plan_file: str) -> List[Assignment]:
