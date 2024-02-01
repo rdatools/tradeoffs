@@ -9,6 +9,9 @@ $ scripts/push_plan.py \
 --state NC \
 --plan testdata/NC_2020_Congress_HB1029.csv \
 --dimensions proportionality minority \
+--seed 518 \
+--multiplier 1 \
+--prefix NC_proportionality_minority \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
@@ -40,13 +43,17 @@ from rdabase import (
 from rdaensemble.general import ratings_dimensions
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
-from tradeoffs import Scorer
+from tradeoffs import push_plan
 
 
 def main() -> None:
     """Push a plan on two ratings dimensions."""
 
     args: argparse.Namespace = parse_args()
+
+    # Load the plan to push
+
+    assignments: List[Assignment] = load_plan(args.plan)
 
     # Load the data & shapes for scoring
 
@@ -55,33 +62,25 @@ def main() -> None:
     graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
-    pop_by_geoid: Dict[GeoID, int] = {k: int(v["TOTAL_POP"]) for k, v in data.items()}
+    # Push the plan
 
-    # Load the plan to push
+    dimensions: Tuple[str, str] = (args.dimensions[0], args.dimensions[1])
 
-    assignments: List[Assignment] = load_plan(args.plan)
-
-    # Generate a repeatable random seed
-
-    N: int = int(metadata["D"])
-    seed: int = starting_seed(args.state, N)
-
-    # Instantiate a scorer
-
-    scorer: Scorer = Scorer(
+    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = push_plan(
+        assignments,
+        dimensions,
+        args.seed,
+        args.multiplier,
+        args.prefix,
         data,
         shapes,
         graph,
         metadata,
         verbose=args.verbose,
+        debug=args.debug,
     )
 
-    # TODO - Make a seg_key ...
-    print(f"Dimensions: {args.dimensions}")
-
-    # TODO - Push the plan
-
-    # TODO - Write the pushed plan to a CSV file
+    # TODO - Write the pushed plans to CSV files
 
     pass
 
@@ -123,6 +122,16 @@ def parse_args():
     parser.add_argument(
         "--dimensions", nargs="+", help="A pair of ratings dimensions", type=str
     )
+    parser.add_argument("--seed", type=int, help="Random seed")
+    parser.add_argument(
+        "--multiplier", type=int, help="How many times to push the plan"
+    )
+    parser.add_argument(
+        "--prefix",
+        type=str,
+        help="A prefix for the pushed plans' filenames",
+    )
+    #
     parser.add_argument(
         "--data",
         type=str,
@@ -138,6 +147,7 @@ def parse_args():
         type=str,
         help="Graph file",
     )
+    #
     parser.add_argument(
         "--output",
         default="~/Downloads/",
@@ -162,10 +172,14 @@ def parse_args():
         "state": "NC",
         "plan": "testdata/NC_2020_Congress_HB1029.csv",
         "dimensions": ["proportionality", "minority"],
+        "seed": 518,
+        "multiplier": 1,
+        "prefix": "NC_proportionality_minority",
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
         "output": "~/Downloads/",
+        "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
 

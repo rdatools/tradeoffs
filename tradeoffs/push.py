@@ -4,7 +4,7 @@ PUSH A FRONTIER POINT
 
 from typing import Any, List, Dict, Tuple, Callable
 
-from rdabase import time_function
+from rdabase import Assignment, time_function
 from rdaensemble.general import ratings_dimensions, ratings_indexes
 
 from .datatypes import (
@@ -20,20 +20,42 @@ from .datatypes import (
 from .plan import Plan, size_1_moves
 from .score import Scorer, is_realistic
 
-# @time_function
-# def push_plan(
-#     ensemble: Dict[str, Any],
-#     frontiers: Dict[str, Any],
-#     pop_by_geoid: Dict[GeoID, int],
-#     graph: Dict[GeoID, List[GeoID]],
-#     scorer: Scorer,
-#     multiplier: int,
-#     seed: int,
-#     *,
-#     verbose: bool = False,
-#     debug: bool = False,
-# ) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
-#     """Push the frontiers for an ensemble of plans."""
+
+@time_function
+def push_plan(
+    assignments: List[Assignment],
+    dimensions: Tuple[str, str],
+    seed: int,
+    multiplier: int,
+    prefix: str,
+    #
+    data: Dict[str, Dict[GeoID, DistrictID]],
+    shapes: Dict[str, Any],
+    graph: Dict[GeoID, List[GeoID]],
+    metadata: Dict[str, Any],
+    *,
+    verbose: bool = False,
+    debug: bool = False,
+) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
+    """Push a plan on a pair of given dimensions."""
+
+    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
+
+    # TODO
+    print("Pushing a plan on two dimensions ...")
+
+    return pushed_plans
+
+
+# # Instantiate a scorer
+
+# scorer: Scorer = Scorer(
+#     data,
+#     shapes,
+#     graph,
+#     metadata,
+#     verbose=args.verbose,
+# )
 
 
 @time_function
