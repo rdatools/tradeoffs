@@ -50,7 +50,7 @@ def push_plan(
         graph,
         metadata,
         verbose=verbose,
-    )
+    )  # Initialize a reusable scorer.
 
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
@@ -67,9 +67,7 @@ def push_plan(
                 seed,
                 verbose=verbose,
                 # debug=debug,
-            )
-            # TODO - Combine beginning & ending measures and updated assignments into a single result
-            beg_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
+            )  # Re-initialize the plan for each iteration.
 
             plan_name: str = f"{prefix}_{i:03d}"
             assignments: Dict[GeoID, DistrictID] = push_point(
@@ -79,18 +77,11 @@ def push_plan(
                 verbose=verbose,
                 # debug=debug,
             )
-            end_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
-
-            if verbose:
-                print()
-                print(f"Improved #'s: {dimensions} = {beg_measures}")
-                print(f"          to: {dimensions} = {end_measures}")
-                print()
 
             pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
 
         except:
-            pass
+            pass  # Push unsuccessful
         finally:
             seed += 1
 
@@ -114,6 +105,8 @@ def push_point(
     n_pass: int = 1
     limit: int = 1000
 
+    beg_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
+
     while True:
         if n_pass > limit:
             raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
@@ -135,55 +128,17 @@ def push_point(
 
         n_pass += 1
 
+    end_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
+
+    if verbose:
+        print()
+        print(f"Improved #'s: {dimensions} = {beg_measures}")
+        print(f"          to: {dimensions} = {end_measures}")
+        print()
+
     assignments: Dict[GeoID, DistrictID] = plan.to_dict()
 
     return assignments
-
-
-# TODO - DELETE
-# @time_function
-# def push_point(
-#     plan: Plan,
-#     scorer: Scorer,
-#     dimensions: Tuple[str, str],
-#     *,
-#     verbose: bool = False,
-#     debug: bool = False,
-# ) -> Dict[GeoID, DistrictID]:
-#     """Push a frontier point on two ratings dimensions."""
-
-#     limit: int = 1000
-
-#     generators: List[Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]]] = [
-#         size_1_moves
-#     ]  # Swap/mutation generators
-
-#     for generator in generators:
-#         n_pass: int = 1
-#         while True:
-#             if n_pass > limit:
-#                 raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
-#             if verbose:
-#                 print()
-#                 print(f"Pass {n_pass} of up to {limit}")
-
-#             stable: bool = sweep_once(
-#                 plan,
-#                 scorer,
-#                 dimensions,
-#                 generator=generator,
-#                 verbose=verbose,
-#                 debug=debug,
-#             )
-
-#             if stable:
-#                 break
-
-#             n_pass += 1
-
-#     assignments: Dict[GeoID, DistrictID] = plan.to_dict()
-
-#     return assignments
 
 
 @time_function
@@ -242,10 +197,9 @@ def sweep_once(
                 measure: float = scorer.measure_dimension(d) if d != "minority" else 0.0
                 measurements[ratings_dimensions.index(d)] = measure
 
-            # TODO - Enable this, when the frontier points are realistic
-            # if not is_realistic(measurements):
-            #     plan.undo()
-            #     continue
+            if not is_realistic(measurements):
+                plan.undo()
+                continue
 
             # The mutated plan is valid, better, and realistic!
 
