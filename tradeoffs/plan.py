@@ -99,7 +99,8 @@ class Plan:
         self._feature_graph = self._index_graph(graph)
 
         if not self.is_valid_plan():
-            raise Exception("Starting plan is not valid!")
+            print("Starting plan is not valid!")
+            raise ValueError("Starting plan is not valid!")
         elif self._verbose:
             print()
             print(self)

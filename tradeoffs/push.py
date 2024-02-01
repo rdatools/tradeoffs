@@ -39,23 +39,62 @@ def push_plan(
 ) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
     """Push a plan on a pair of given dimensions."""
 
+    district_by_geoid: Dict[GeoID, DistrictID] = {
+        a.geoid: a.district for a in assignments
+    }
+    pop_by_geoid: Dict[GeoID, int] = {k: int(v["TOTAL_POP"]) for k, v in data.items()}
+
+    scorer: Scorer = Scorer(
+        data,
+        shapes,
+        graph,
+        metadata,
+        verbose=verbose,
+    )
+
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
-    # TODO
-    print("Pushing a plan on two dimensions ...")
+    for i in range(1, multiplier + 1):
+        if verbose:
+            print()
+            print(f"Push {i} of {multiplier}")
+
+        try:
+            plan: Plan = Plan(
+                district_by_geoid,
+                pop_by_geoid,
+                graph,
+                seed,
+                verbose=verbose,
+                # debug=debug,
+            )
+            # TODO - Combine beginning & ending measures and updated assignments into a single result
+            beg_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
+
+            plan_name: str = f"{prefix}_{i:03d}"
+            assignments: Dict[GeoID, DistrictID] = push_point(
+                plan,
+                scorer,
+                dimensions,
+                verbose=verbose,
+                # debug=debug,
+            )
+            end_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
+
+            if verbose:
+                print()
+                print(f"Improved #'s: {dimensions} = {beg_measures}")
+                print(f"          to: {dimensions} = {end_measures}")
+                print()
+
+            pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
+
+        except:
+            pass
+        finally:
+            seed += 1
 
     return pushed_plans
-
-
-# # Instantiate a scorer
-
-# scorer: Scorer = Scorer(
-#     data,
-#     shapes,
-#     graph,
-#     metadata,
-#     verbose=args.verbose,
-# )
 
 
 @time_function
