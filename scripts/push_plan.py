@@ -8,6 +8,7 @@ For example:
 $ scripts/push_plan.py \
 --state NC \
 --plan testdata/NC_2020_Congress_HB1029 \
+--dimensions proportionality minority \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
@@ -23,7 +24,7 @@ $ scripts/push_plan.py
 import argparse
 from argparse import ArgumentParser, Namespace
 
-from typing import Any, List, Dict, Tuple, NamedTuple
+from typing import Any, List, Dict, Tuple
 
 import random
 
@@ -34,30 +35,12 @@ from rdabase import (
     # load_plan, # TODO - Update this
     starting_seed,
     Assignment,
-    write_json,
     write_csv,
 )
-from rdaensemble.general import (
-    ratings_dimensions,
-    plan_from_ensemble,
-    make_plan,
-    ensemble_metadata,
-)
+from rdaensemble.general import ratings_dimensions
 from rdascore import load_data, load_shapes, load_graph, load_metadata
 
-from tradeoffs import (
-    GeoID,
-    DistrictID,
-    DistrictOffset,
-    Move,
-    Mutation,
-    Name,
-    Weight,
-    Plan,
-    size_1_moves,
-    push_frontiers,
-    Scorer,
-)
+from tradeoffs import Scorer
 
 
 def main() -> None:
@@ -93,7 +76,12 @@ def main() -> None:
         verbose=args.verbose,
     )
 
-    # Push the plan
+    # TODO - Make a seg_key ...
+    print(f"Dimensions: {args.dimensions}")
+
+    # TODO - Push the plan
+
+    # TODO - Write the pushed plan to a CSV file
 
     pass
 
@@ -133,6 +121,9 @@ def parse_args():
         help="The plan CSV to push",
     )
     parser.add_argument(
+        "--dimensions", nargs="+", help="A pair of ratings dimensions", type=str
+    )
+    parser.add_argument(
         "--data",
         type=str,
         help="Data file",
@@ -170,7 +161,7 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "state": "NC",
         "plan": "testdata/NC_2020_Congress_HB1029.csv",
-        "frontier": "testdata/synthetic_frontier.json",
+        "dimensions": ["proportionality", "minority"],
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
