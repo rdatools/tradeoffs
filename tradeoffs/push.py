@@ -29,8 +29,8 @@ def echo(
 
     if console:
         print(message, end=end)
-    if logfile:
-        print(message, end=end, file=logfile)
+    if log:
+        print(message, end=end, file=log)
 
 
 # @time_function
@@ -86,6 +86,7 @@ def push_plan(
                 plan,
                 scorer,
                 dimensions,
+                logfile=logfile,
                 verbose=verbose,
                 # debug=debug,
             )
@@ -131,6 +132,7 @@ def push_point(
             scorer,
             dimensions,
             generator=generator,
+            logfile=logfile,
             verbose=verbose,
             debug=debug,
         )
