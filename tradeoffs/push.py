@@ -21,7 +21,19 @@ from .plan import Plan, size_1_moves
 from .score import Scorer, is_realistic
 
 
-@time_function
+# TODO - Move this
+def echo(
+    message: str = "", *, console: bool = False, log: Any = None, end: str = "\n"
+) -> None:
+    """Echo a message to the console and/or a logfile."""
+
+    if console:
+        print(message, end=end)
+    if logfile:
+        print(message, end=end, file=logfile)
+
+
+# @time_function
 def push_plan(
     assignments: List[Assignment],
     dimensions: Tuple[str, str],
@@ -34,6 +46,7 @@ def push_plan(
     graph: Dict[GeoID, List[GeoID]],
     metadata: Dict[str, Any],
     *,
+    logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
 ) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
@@ -55,9 +68,8 @@ def push_plan(
     pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
     for i in range(1, multiplier + 1):
-        if verbose:
-            print()
-            print(f"Push {i} of {multiplier}")
+        echo(console=verbose, log=logfile)
+        echo(f"Search {i} of {multiplier}", console=verbose, log=logfile)
 
         try:
             plan: Plan = Plan(
@@ -88,7 +100,7 @@ def push_plan(
     return pushed_plans
 
 
-@time_function
+# @time_function
 def push_point(
     plan: Plan,
     scorer: Scorer,
@@ -97,6 +109,7 @@ def push_point(
     generator: Callable[
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
+    logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
 ) -> Dict[GeoID, DistrictID]:
@@ -110,9 +123,8 @@ def push_point(
     while True:
         if n_pass > limit:
             raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
-        if verbose:
-            print()
-            print(f"Pass {n_pass} of up to {limit}")
+        echo(console=verbose, log=logfile)
+        echo(f"Pass {n_pass} of up to {limit}", console=verbose, log=logfile)
 
         stable: bool = sweep_once(
             plan,
@@ -130,26 +142,24 @@ def push_point(
 
     end_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
 
-    if verbose:
-        print()
-        print(f"Improved #'s: {dimensions} = {beg_measures}")
-        print(f"          to: {dimensions} = {end_measures}")
-        print()
+    echo(log=logfile)
+    echo(f"Improved #'s: {dimensions} = {beg_measures}", log=logfile)
+    echo(f"          to: {dimensions} = {end_measures}", log=logfile)
+    echo(log=logfile)
 
     assignments: Dict[GeoID, DistrictID] = plan.to_dict()
 
     return assignments
 
 
-@time_function
+# @time_function
 def sweep_once(
     plan: Plan,
     scorer: Scorer,
     dimensions: Tuple[str, str],
+    generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
     *,
-    generator: Callable[
-        [BorderKey, Plan], Tuple[List[Move], List[Move]]
-    ] = size_1_moves,
+    logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
 ) -> bool:
@@ -163,8 +173,11 @@ def sweep_once(
     )
     next_measures: Tuple[float, float]
 
-    if verbose:
-        print(f"Starting #'s: {dimensions} = {prev_measures}", end="\n")
+    echo(
+        f"Starting #'s: {dimensions} = {prev_measures}",
+        # end="\n", # TODO
+        log=logfile,
+    )
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -208,11 +221,9 @@ def sweep_once(
             applied += 1
             stable = False
 
-            if verbose:
-                print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\r")
+            echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile, end="\r")
 
-    if verbose:
-        print(f"Nudged #'s:   {dimensions} = {prev_measures}", end="\n")
+    echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile, end="\n")
 
     plan.inc_generation()
 

@@ -16,6 +16,7 @@ $ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ~/Downloads/ \
+--log ~/Downloads/log.txt \
 --no-debug
 
 For documentation, type:
@@ -66,20 +67,23 @@ def main() -> None:
     # Push the plan one or more times on the given dimensions
 
     dimensions: Tuple[str, str] = (args.dimensions[0], args.dimensions[1])
+    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
-    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = push_plan(
-        assignments,
-        dimensions,
-        args.seed,
-        args.multiplier,
-        args.prefix,
-        data,
-        shapes,
-        graph,
-        metadata,
-        verbose=args.verbose,
-        debug=args.debug,
-    )
+    with open(os.path.expanduser(args.log), "w") as f:
+        pushed_plans = push_plan(
+            assignments,
+            dimensions,
+            args.seed,
+            args.multiplier,
+            args.prefix,
+            data,
+            shapes,
+            graph,
+            metadata,
+            logfile=f,
+            verbose=args.verbose,
+            debug=args.debug,
+        )
 
     # Write the pushed plans to CSV files
 
@@ -164,6 +168,11 @@ def parse_args():
         help="Path to output directory",
         type=str,
     )
+    parser.add_argument(
+        "--log",
+        type=str,
+        help="Log TXT file",
+    )
 
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
@@ -189,6 +198,7 @@ def parse_args():
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
         "output": "~/Downloads/",
+        "log": "~/Downloads/log.txt",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
