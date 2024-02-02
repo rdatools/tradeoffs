@@ -17,7 +17,7 @@ $ scripts/push_plan.py \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ~/Downloads/ \
 --log ~/Downloads/log.txt \
---verbose
+--verbose \
 --no-debug
 
 For documentation, type:
