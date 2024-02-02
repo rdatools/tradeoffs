@@ -22,15 +22,13 @@ from .score import Scorer, is_realistic
 
 
 # TODO - Move this
-def echo(
-    message: str = "", *, console: bool = False, log: Any = None, end: str = "\n"
-) -> None:
+def echo(message: str = "", *, console: bool = False, log: Any = None) -> None:
     """Echo a message to the console and/or a logfile."""
 
     if console:
-        print(message, end=end)
+        print(message)
     if log:
-        print(message, end=end, file=log)
+        print(message, file=log)
 
 
 # @time_function
@@ -175,11 +173,7 @@ def sweep_once(
     )
     next_measures: Tuple[float, float]
 
-    echo(
-        f"Starting #'s: {dimensions} = {prev_measures}",
-        # end="\n", # TODO
-        log=logfile,
-    )
+    echo(f"Starting #'s: {dimensions} = {prev_measures}", log=logfile)
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -223,9 +217,7 @@ def sweep_once(
             applied += 1
             stable = False
 
-            echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile, end="\r")
-
-    echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile, end="\n")
+            echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile)
 
     plan.inc_generation()
 
