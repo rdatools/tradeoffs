@@ -1,0 +1,99 @@
+
+Search 1 of 1
+
+Pass 1 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (69.60010767361946, 37.73955461511302)
+Nudged #'s:   ('proportionality', 'competitiveness') = (69.78462802591525, 37.868392779402285)
+Nudged #'s:   ('proportionality', 'competitiveness') = (69.81730291056721, 37.8989933448423)
+Nudged #'s:   ('proportionality', 'competitiveness') = (69.81920368995154, 37.900611404784115)
+Nudged #'s:   ('proportionality', 'competitiveness') = (69.84383384308235, 37.91742550532125)
+Nudged #'s:   ('proportionality', 'competitiveness') = (69.85469391667847, 37.9255769426273)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.14524171874963, 38.20323303946532)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.1790754518139, 38.2163859887143)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.18874388166066, 38.46688203807992)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.20760599635827, 38.60309438547726)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.2363420538703, 38.613116476221734)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.27767646397118, 38.648197140836984)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.39537237093687, 38.74748043076921)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.4251865442399, 38.771876191033286)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.55950506138619, 38.88467484379742)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.60187712780824, 38.91168137593258)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.61928659959187, 38.918749684583716)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.62339229122705, 38.91923986756605)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.70327123446056, 38.94130751672424)
+
+Pass 2 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (70.70327123446056, 38.94130751672424)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.92234893032492, 39.15033427040323)
+Nudged #'s:   ('proportionality', 'competitiveness') = (70.93437737038838, 39.38924270061083)
+
+Pass 3 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (70.93437737038838, 39.38924270061083)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.03606514602139, 39.474177351286734)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.03607314120161, 39.47418587937682)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.03607555557834, 39.47418845467867)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.05826652067351, 39.5833957672323)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.06497781546256, 39.611438433236216)
+
+Pass 4 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (71.06497781546256, 39.611438433236216)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.07445384928576, 39.61709033401139)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.10011727503796, 39.63342575219927)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.10012123554257, 39.63342997668302)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.10012851542731, 39.633437741791646)
+
+Pass 5 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (71.10012851542731, 39.633437741791646)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.10261576333356, 39.63476411602669)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.400383012374, 39.826535678773055)
+
+Pass 6 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (71.400383012374, 39.826535678773055)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.41598326145775, 39.839550955421146)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.41894125055461, 39.84238962390882)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.43332043336478, 39.85455704659664)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.43499176491564, 39.856121741931936)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.43501861741943, 39.85615038419195)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.4350480835561, 39.8561818142385)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.43505311979364, 39.856187186129446)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.68432734274384, 39.92548327164271)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.73357594872331, 39.93883587335963)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.90386859656132, 39.978913110195116)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.94165797157167, 39.98007484869228)
+Nudged #'s:   ('proportionality', 'competitiveness') = (71.95635334853675, 40.127708420712)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.24636795169603, 40.20445481219228)
+
+Pass 7 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (72.24636795169603, 40.20445481219228)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.26625579190127, 40.301838173983136)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.27896557003592, 40.31399283979059)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.2875073277272, 40.3196517801754)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.33034462186777, 40.35488479854962)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.35570148593355, 40.37605056610951)
+
+Pass 8 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (72.35570148593355, 40.37605056610951)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.35572709207496, 40.37607787884794)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.35572721886543, 40.376078014084484)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.37396797405096, 40.3925173900983)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.4519539038925, 40.45796317751868)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.46297899075118, 40.460439473469755)
+
+Pass 9 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (72.46297899075118, 40.460439473469755)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.4671407367216, 40.46257278330216)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.4927667240127, 40.47744279516361)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.55101371234993, 40.525601797025004)
+
+Pass 10 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (72.55101371234993, 40.525601797025004)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.55102813750362, 40.52561718356708)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.5594791225779, 40.53070998534092)
+Nudged #'s:   ('proportionality', 'competitiveness') = (72.84066950093784, 40.60464896444722)
+
+Pass 11 of up to 1000
+Starting #'s: ('proportionality', 'competitiveness') = (72.84066950093784, 40.60464896444722)
+
+Improved #'s: ('proportionality', 'competitiveness') = (69.60010767361946, 37.73955461511302)
+          to: ('proportionality', 'competitiveness') = (72.84066950093784, 40.60464896444722)
+

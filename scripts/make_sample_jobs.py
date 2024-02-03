@@ -24,7 +24,7 @@ def main() -> None:
     data: str = "../rdabase/data/NC/NC_2020_data.csv"
     shapes: str = "../rdabase/data/NC/NC_2020_shapes_simplified.json"
     graph: str = "../rdabase/data/NC/NC_2020_graph.json"
-    output: str = "sample"
+    output: str = "sample/"
 
     ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
     for pair in ratings_pairs:

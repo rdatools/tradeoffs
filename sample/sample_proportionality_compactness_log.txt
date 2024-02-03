@@ -1,0 +1,62 @@
+
+Search 1 of 1
+
+Pass 1 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (69.60010767361946, 77.75759891050842)
+Nudged #'s:   ('proportionality', 'compactness') = (69.7505799797378, 77.77635446660081)
+Nudged #'s:   ('proportionality', 'compactness') = (69.7602920770738, 78.07467830149102)
+Nudged #'s:   ('proportionality', 'compactness') = (69.84296508864884, 78.44848493962732)
+Nudged #'s:   ('proportionality', 'compactness') = (69.96581617821725, 78.46728891553171)
+Nudged #'s:   ('proportionality', 'compactness') = (70.00405994317498, 78.73049444932649)
+Nudged #'s:   ('proportionality', 'compactness') = (70.05764326990173, 78.91959440891452)
+Nudged #'s:   ('proportionality', 'compactness') = (70.07826766772939, 80.05605725296455)
+Nudged #'s:   ('proportionality', 'compactness') = (70.09096371932746, 80.07620337653734)
+
+Pass 2 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (70.09096371932746, 80.07620337653734)
+Nudged #'s:   ('proportionality', 'compactness') = (70.11375381239584, 80.54631618549475)
+Nudged #'s:   ('proportionality', 'compactness') = (70.2188275138957, 80.74305462175298)
+Nudged #'s:   ('proportionality', 'compactness') = (70.61081927344442, 80.92406704783488)
+
+Pass 3 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (70.61081927344442, 80.92406704783488)
+Nudged #'s:   ('proportionality', 'compactness') = (70.62307586461039, 80.94646550164953)
+
+Pass 4 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (70.62307586461039, 80.94646550164953)
+Nudged #'s:   ('proportionality', 'compactness') = (70.64584714911753, 81.11349038704492)
+
+Pass 5 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (70.64584714911753, 81.11349038704492)
+Nudged #'s:   ('proportionality', 'compactness') = (70.75413150427572, 81.22310342208371)
+Nudged #'s:   ('proportionality', 'compactness') = (70.78250623955589, 81.24223107855045)
+Nudged #'s:   ('proportionality', 'compactness') = (70.79202417204318, 81.34608292537872)
+Nudged #'s:   ('proportionality', 'compactness') = (71.10785671015918, 81.43682120798054)
+
+Pass 6 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (71.10785671015918, 81.43682120798054)
+Nudged #'s:   ('proportionality', 'compactness') = (71.19309874263571, 81.51731290631659)
+Nudged #'s:   ('proportionality', 'compactness') = (71.24513054915963, 81.73071662167463)
+Nudged #'s:   ('proportionality', 'compactness') = (71.33522366267213, 81.77953854263926)
+
+Pass 7 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (71.33522366267213, 81.77953854263926)
+Nudged #'s:   ('proportionality', 'compactness') = (71.35823290895775, 82.02557638485536)
+Nudged #'s:   ('proportionality', 'compactness') = (71.36438422085891, 82.1103808378012)
+
+Pass 8 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (71.36438422085891, 82.1103808378012)
+Nudged #'s:   ('proportionality', 'compactness') = (71.47397614808001, 82.58961524688671)
+Nudged #'s:   ('proportionality', 'compactness') = (71.4843526227738, 82.81517684902381)
+Nudged #'s:   ('proportionality', 'compactness') = (71.53817432005867, 83.07578891547364)
+
+Pass 9 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (71.53817432005867, 83.07578891547364)
+Nudged #'s:   ('proportionality', 'compactness') = (71.53930378766573, 83.55500942861669)
+
+Pass 10 of up to 1000
+Starting #'s: ('proportionality', 'compactness') = (71.53930378766573, 83.55500942861669)
+
+Improved #'s: ('proportionality', 'compactness') = (69.60010767361946, 77.75759891050842)
+          to: ('proportionality', 'compactness') = (71.53930378766573, 83.55500942861669)
+
