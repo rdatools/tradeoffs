@@ -334,6 +334,7 @@ def calc_partisan_metrics(
     return partisan_metrics
 
 
+## TODO - Import these from rdascore ##
 # Definitions copied from rdascore package
 
 census_fields: List[str] = [
@@ -432,6 +433,8 @@ def calc_splitting_metrics(CxD: List[List[float]]) -> Dict[str, float]:
 
     return splitting_metrics
 
+
+## END ##
 
 ### MAKE A ONE-ROW SCORECARD FROM A DRA MAP-ANALYTICS.JSON EXPORT ###
 
