@@ -201,6 +201,7 @@ def parse_args():
         "state": "NC",
         "plan": "testdata/test_plan.csv",
         "dimensions": ["proportionality", "minority"],
+        # "pin": "proportionality",
         "seed": 518,
         "multiplier": 1,
         "prefix": "NC_proportionality_minority",

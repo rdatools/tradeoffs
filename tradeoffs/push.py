@@ -182,9 +182,14 @@ def sweep_once(
 
     echo(f"Starting #'s: {dimensions} = {prev_measures}", log=logfile)
 
-    # TODO - is_better
-
-    is_better = make_better_fn()
+    is_better: Callable[[Tuple[float, float], Tuple[float, float]], bool] = (
+        make_better_fn()
+    )
+    if pin:
+        assert pin in dimensions
+        pinned: int = dimensions.index(pin)
+        value: float = prev_measures[pinned]
+        is_better = make_better_fn(constrain=pinned, anchor=value)
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -232,6 +237,7 @@ def sweep_once(
 
     plan.inc_generation()
     echo(f"{plan}", console=verbose, log=logfile)
+    plan.reset_counters()
 
     return stable
 

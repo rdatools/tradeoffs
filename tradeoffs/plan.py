@@ -299,12 +299,13 @@ class Plan:
                 raise Exception("Plan is not valid after undo!")
 
     def inc_generation(self):
-        """Bump the generation counter and reset the mutation counters."""
+        """Bump the generation counter and accumulate counters."""
 
         self._generation += 1
         self._cumulative_mutations_applied += self._mutations_applied
         self._cumulative_features_moved += self._features_moved
 
+    def reset_counters(self):
         self._mutations_applied = 0
         self._features_moved = 0
 
