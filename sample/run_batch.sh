@@ -9,7 +9,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_proportionality_competitiveness_log.txt \
+--log sample/sample_proportionality_competitiveness_log.txt \
 --verbose \
 --no-debug
 
@@ -24,7 +24,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_proportionality_minority_log.txt \
+--log sample/sample_proportionality_minority_log.txt \
 --verbose \
 --no-debug
 
@@ -39,7 +39,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_proportionality_compactness_log.txt \
+--log sample/sample_proportionality_compactness_log.txt \
 --verbose \
 --no-debug
 
@@ -54,7 +54,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_proportionality_splitting_log.txt \
+--log sample/sample_proportionality_splitting_log.txt \
 --verbose \
 --no-debug
 
@@ -69,7 +69,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_competitiveness_minority_log.txt \
+--log sample/sample_competitiveness_minority_log.txt \
 --verbose \
 --no-debug
 
@@ -84,7 +84,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_competitiveness_compactness_log.txt \
+--log sample/sample_competitiveness_compactness_log.txt \
 --verbose \
 --no-debug
 
@@ -99,7 +99,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_competitiveness_splitting_log.txt \
+--log sample/sample_competitiveness_splitting_log.txt \
 --verbose \
 --no-debug
 
@@ -114,7 +114,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_minority_compactness_log.txt \
+--log sample/sample_minority_compactness_log.txt \
 --verbose \
 --no-debug
 
@@ -129,7 +129,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_minority_splitting_log.txt \
+--log sample/sample_minority_splitting_log.txt \
 --verbose \
 --no-debug
 
@@ -144,7 +144,7 @@ scripts/push_plan.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output sample/ \
---log sample//sample_compactness_splitting_log.txt \
+--log sample/sample_compactness_splitting_log.txt \
 --verbose \
 --no-debug
 

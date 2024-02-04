@@ -69,6 +69,8 @@ def push_plan(
     for i in range(1, multiplier + 1):
         echo(console=verbose, log=logfile)
         echo(f"Pushing plan on {dimensions} dimensions", console=verbose, log=logfile)
+        if pin:
+            echo(f"Pinned on {pin}", console=verbose, log=logfile)
         echo(console=verbose, log=logfile)
         echo(f"Search {i} of {multiplier}", console=verbose, log=logfile)
 

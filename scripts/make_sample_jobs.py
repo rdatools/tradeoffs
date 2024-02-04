@@ -30,7 +30,7 @@ def main() -> None:
     for pair in ratings_pairs:
         dimensions: str = " ".join(pair)
         prefix: str = f"sample_{'_'.join(pair)}_plan"
-        logfile: str = f"{output}/sample_{'_'.join(pair)}_log.txt"
+        logfile: str = f"{output[:-1]}/sample_{'_'.join(pair)}_log.txt"
 
         print(f"scripts/push_plan.py \\")
         print(f"--state {xx} \\")

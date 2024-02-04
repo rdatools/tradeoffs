@@ -7,11 +7,27 @@ For example:
 
 $ scripts/push_plan.py \
 --state NC \
---plan testdata/test_plan.csv \
+--plan sample/sample_plan.csv \
 --dimensions proportionality minority \
---seed 518 \
+--seed 519 \
 --multiplier 1 \
---prefix NC_proportionality_minority \
+--prefix sample_proportionality_minority_plan \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--output ~/Downloads/ \
+--log ~/Downloads/log.txt \
+--verbose \
+--no-debug
+
+$ scripts/push_plan.py \
+--state NC \
+--plan sample/sample_plan.csv \
+--dimensions proportionality minority \
+--pin proportionality \
+--seed 519 \
+--multiplier 1 \
+--prefix sample_proportionality_minority_plan \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
