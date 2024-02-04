@@ -54,6 +54,9 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
 
+    pin: str | None = args.pin if args.pin else None
+    assert pin in [None, args.dimensions[0], args.dimensions[1]]
+
     # Load the plan to push
 
     assignments: List[Assignment] = load_plan(args.plan)
@@ -81,6 +84,7 @@ def main() -> None:
             shapes,
             graph,
             metadata,
+            pin=pin,
             logfile=f,
             verbose=args.verbose,
             debug=args.debug,
@@ -136,6 +140,11 @@ def parse_args():
     )
     parser.add_argument(
         "--dimensions", nargs="+", help="A pair of ratings dimensions", type=str
+    )
+    parser.add_argument(
+        "--pin",
+        type=str,
+        help="One of the dimensions to hold constant (optional)",
     )
     parser.add_argument("--seed", type=int, help="Random seed")
     parser.add_argument(

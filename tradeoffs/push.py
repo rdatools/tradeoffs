@@ -44,6 +44,7 @@ def push_plan(
     graph: Dict[GeoID, List[GeoID]],
     metadata: Dict[str, Any],
     *,
+    pin: str = None,
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -67,6 +68,8 @@ def push_plan(
 
     for i in range(1, multiplier + 1):
         echo(console=verbose, log=logfile)
+        echo(f"Pushing plan on {dimensions} dimensions", console=verbose, log=logfile)
+        echo(console=verbose, log=logfile)
         echo(f"Search {i} of {multiplier}", console=verbose, log=logfile)
 
         try:
@@ -84,6 +87,7 @@ def push_plan(
                 plan,
                 scorer,
                 dimensions,
+                pin=pin,
                 logfile=logfile,
                 verbose=verbose,
                 # debug=debug,
@@ -108,6 +112,7 @@ def push_point(
     generator: Callable[
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
+    pin: str = None,
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -130,6 +135,7 @@ def push_point(
             scorer,
             dimensions,
             generator=generator,
+            pin=pin,
             logfile=logfile,
             verbose=verbose,
             debug=debug,
@@ -157,8 +163,9 @@ def sweep_once(
     plan: Plan,
     scorer: Scorer,
     dimensions: Tuple[str, str],
-    generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
     *,
+    pin: str = None,
+    generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -174,6 +181,10 @@ def sweep_once(
     next_measures: Tuple[float, float]
 
     echo(f"Starting #'s: {dimensions} = {prev_measures}", log=logfile)
+
+    # TODO - is_better
+
+    is_better = make_better_fn()
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -220,27 +231,15 @@ def sweep_once(
             echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile)
 
     plan.inc_generation()
+    echo(f"{plan}", console=verbose, log=logfile)
 
     return stable
-
-
-def is_better(one: Tuple[float, float], two: Tuple[float, float]) -> bool:
-    """Is the 2nd pair of measures better than the 1st?
-
-    Two must be better than one on one or the other or both dimensions.
-    """
-
-    return (one[0] < two[0] and one[1] <= two[1]) or (
-        one[0] <= two[0] and one[1] < two[1]
-    )
 
 
 def make_better_fn(
     *, constrain: int = None, anchor: float = None, threshold: float = 0.01
 ) -> Callable[[Tuple[float, float], Tuple[float, float]], bool]:
-    """
-    An initial value on the dimension to constrain
-    """
+    """Is a plan better on one or both dimensions? The value of one dimension can be 'pinned'."""
 
     assert constrain in (None, 0, 1)
 

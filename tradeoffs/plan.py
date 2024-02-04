@@ -305,9 +305,6 @@ class Plan:
         self._cumulative_mutations_applied += self._mutations_applied
         self._cumulative_features_moved += self._features_moved
 
-        if self._verbose:
-            print(self)
-
         self._mutations_applied = 0
         self._features_moved = 0
 
