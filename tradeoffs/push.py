@@ -235,4 +235,27 @@ def is_better(one: Tuple[float, float], two: Tuple[float, float]) -> bool:
     )
 
 
+def make_better_fn(
+    *, constrain: int = None, anchor: float = None, threshold: float = 0.01
+) -> Callable[[Tuple[float, float], Tuple[float, float]], bool]:
+    """
+    An initial value on the dimension to constrain
+    """
+
+    assert constrain in (None, 0, 1)
+
+    def is_better(one: Tuple[float, float], two: Tuple[float, float]) -> bool:
+        if constrain is None:
+            return (one[0] < two[0] and one[1] <= two[1]) or (
+                one[0] <= two[0] and one[1] < two[1]
+            )
+        else:
+            return (
+                one[1 - constrain] < two[1 - constrain]
+                and abs(anchor - two[constrain]) < threshold
+            )
+
+    return is_better
+
+
 ### END ###

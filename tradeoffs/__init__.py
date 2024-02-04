@@ -21,7 +21,7 @@ from .score import (
 )
 from .connected import is_connected
 from .plan import Plan, segment_key, size_1_moves
-from .push import push_plan
+from .push import push_plan, make_better_fn
 from .plots import *  # TODO - Be specific
 
 name: str = "tradeoffs"
