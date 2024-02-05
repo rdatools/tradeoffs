@@ -2,7 +2,7 @@
 PUSH A FRONTIER POINT
 """
 
-from typing import Any, List, Dict, Tuple, Callable
+from typing import Any, List, Dict, Tuple, Callable, Optional
 
 from rdabase import Assignment, time_function, echo
 from rdaensemble.general import ratings_dimensions, ratings_indexes
@@ -34,14 +34,14 @@ def push_plan(
     graph: Dict[GeoID, List[GeoID]],
     metadata: Dict[str, Any],
     *,
-    pin: str = None,
+    pin: str = "",
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
 ) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
     """Push a plan on a pair of given dimensions."""
 
-    district_by_geoid: Dict[GeoID, DistrictID] = {
+    base_district_by_geoid: Dict[GeoID, DistrictID] = {
         a.geoid: a.district for a in assignments
     }
     pop_by_geoid: Dict[GeoID, int] = {k: int(v["TOTAL_POP"]) for k, v in data.items()}
@@ -66,7 +66,7 @@ def push_plan(
 
         try:
             plan: Plan = Plan(
-                district_by_geoid,
+                base_district_by_geoid,
                 pop_by_geoid,
                 graph,
                 seed,
@@ -75,7 +75,7 @@ def push_plan(
             )  # Re-initialize the plan for each iteration.
 
             plan_name: str = f"{prefix}_{i:03d}"
-            assignments: Dict[GeoID, DistrictID] = push_point(
+            pushed_district_by_geoid: Dict[GeoID, DistrictID] = push_point(
                 plan,
                 scorer,
                 dimensions,
@@ -85,7 +85,9 @@ def push_plan(
                 # debug=debug,
             )
 
-            pushed_plans.append({"name": plan_name, "plan": assignments})  # No weights.
+            pushed_plans.append(
+                {"name": plan_name, "plan": pushed_district_by_geoid}
+            )  # No weights.
 
         except:
             pass  # Push unsuccessful
@@ -104,7 +106,7 @@ def push_point(
     generator: Callable[
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
-    pin: str = None,
+    pin: str = "",
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -156,7 +158,7 @@ def sweep_once(
     scorer: Scorer,
     dimensions: Tuple[str, str],
     *,
-    pin: str = None,
+    pin: str = "",
     generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
     logfile: Any = None,
     verbose: bool = False,
@@ -235,7 +237,10 @@ def sweep_once(
 
 
 def make_better_fn(
-    *, constrain: int = None, anchor: float = None, threshold: float = 0.01
+    *,
+    constrain: Optional[int] = None,
+    anchor: Optional[float] = None,
+    threshold: float = 0.01,
 ) -> Callable[[Tuple[float, float], Tuple[float, float]], bool]:
     """Is a plan better on one or both dimensions? The value of one dimension can be 'pinned'."""
 
@@ -247,6 +252,9 @@ def make_better_fn(
                 one[0] <= two[0] and one[1] < two[1]
             )
         else:
+            assert constrain is not None
+            assert anchor is not None
+
             return (
                 one[1 - constrain] < two[1 - constrain]
                 and abs(anchor - two[constrain]) < threshold
