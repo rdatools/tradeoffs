@@ -4,7 +4,7 @@ PUSH A FRONTIER POINT
 
 from typing import Any, List, Dict, Tuple, Callable
 
-from rdabase import Assignment, time_function
+from rdabase import Assignment, time_function, echo
 from rdaensemble.general import ratings_dimensions, ratings_indexes
 
 from .datatypes import (
@@ -19,16 +19,6 @@ from .datatypes import (
 )
 from .plan import Plan, size_1_moves
 from .score import Scorer, is_realistic
-
-
-# TODO - Move this
-def echo(message: str = "", *, console: bool = False, log: Any = None) -> None:
-    """Echo a message to the console and/or a logfile."""
-
-    if console:
-        print(message)
-    if log:
-        print(message, file=log)
 
 
 # @time_function
