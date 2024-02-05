@@ -65,7 +65,7 @@ from rdabase import (
 )
 from rdaensemble.general import ratings_dimensions
 
-from tradeoffs import push_plan
+from tradeoffs import *
 
 
 def main() -> None:
@@ -73,8 +73,8 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
 
-    pin: str | None = args.pin if args.pin else None
-    assert pin in [None, args.dimensions[0], args.dimensions[1]]
+    pin: str = args.pin if args.pin else ""
+    assert pin in ["", args.dimensions[0], args.dimensions[1]]
 
     # Load the plan to push
 
@@ -112,9 +112,12 @@ def main() -> None:
     # Write the pushed plans to CSV files
 
     for pushed_plan in pushed_plans:
-        filename: str = pushed_plan["name"] + ".csv"
+        name: str = pushed_plan["name"]  # type: ignore
+        district_by_geoid: Dict[GeoID, DistrictID] = pushed_plan["plan"]  # type: ignore
+
+        filename: str = name + ".csv"
         plan: List[Dict[GeoID, DistrictID]] = [
-            {"GEOID": k, "DISTRICT": v} for k, v in pushed_plan["plan"].items()
+            {"GEOID": k, "DISTRICT": v} for k, v in district_by_geoid.items()
         ]
         write_csv(
             os.path.expanduser(args.output) + filename,

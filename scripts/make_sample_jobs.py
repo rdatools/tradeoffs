@@ -9,6 +9,8 @@ $ scripts/make_sample_jobs.py
 
 """
 
+from typing import List
+
 import itertools
 
 from rdaensemble.general import ratings_dimensions
