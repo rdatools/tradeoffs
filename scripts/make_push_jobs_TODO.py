@@ -13,14 +13,22 @@ import random
 
 from typing import Any, List, Dict, Tuple, NamedTuple
 
-from rdabase import require_args, read_json, starting_seed, write_json
+from rdabase import (
+    require_args,
+    read_json,
+    starting_seed,
+    write_json,
+    load_data,
+    load_shapes,
+    load_graph,
+    load_metadata,
+)
 from rdaensemble.general import (
     ratings_dimensions,
     plan_from_ensemble,
     make_plan,
     ensemble_metadata,
 )
-from rdascore import load_data, load_shapes, load_graph, load_metadata
 
 from tradeoffs import (
     GeoID,
@@ -93,18 +101,18 @@ def main() -> None:
 
     # Push the ensemble frontiers
 
-    pushed_plans: List[
-        Dict[str, Name | Weight | Dict[GeoID, DistrictID]]
-    ] = push_frontiers(
-        ensemble,
-        frontiers,
-        pop_by_geoid,
-        graph,
-        scorer,
-        args.multiplier,
-        seed,
-        verbose=args.verbose,
-        # debug=args.debug,
+    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = (
+        push_frontiers(
+            ensemble,
+            frontiers,
+            pop_by_geoid,
+            graph,
+            scorer,
+            args.multiplier,
+            seed,
+            verbose=args.verbose,
+            # debug=args.debug,
+        )
     )
 
     pushed_ensemble: Dict[str, Any] = ensemble_metadata(

@@ -32,9 +32,12 @@ from rdabase import (
     Assignment,
     read_json,
     write_json,
+    load_data,
+    load_shapes,
+    load_graph,
+    load_metadata,
 )
 from rdaensemble.general import ratings_dimensions, plan_from_ensemble, make_plan
-from rdascore import load_data, load_shapes, load_graph, load_metadata
 from tradeoffs import GeoID, DistrictID, Name, Weight
 
 
@@ -69,9 +72,9 @@ def main() -> None:
 
             pt_to_push: Tuple[int, int] = (ratings[d1], ratings[d2])
 
-            plan_item: Dict[
-                str, str | float | Dict[GeoID, DistrictID]
-            ] = plan_from_ensemble(map_id, ensemble)
+            plan_item: Dict[str, str | float | Dict[GeoID, DistrictID]] = (
+                plan_from_ensemble(map_id, ensemble)
+            )
             plan_dict: Dict[GeoID, DistrictID] = plan_item["plan"]  # type: ignore
             assignments: List[Assignment] = make_plan(plan_dict)
             plan_to_push: List[Dict[GeoID, DistrictID]] = [

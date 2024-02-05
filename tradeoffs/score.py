@@ -4,10 +4,16 @@ SCORING
 
 from typing import Any, Dict, List, Tuple, Optional
 
-from rdabase import Assignment
+from rdabase import Assignment, census_fields
 
 import rdapy as rda
-from rdascore import aggregate_data_by_district, aggregate_shapes_by_district
+from rdascore import (
+    aggregate_data_by_district,
+    aggregate_shapes_by_district,
+    calc_minority_metrics,
+    calc_compactness_metrics,
+    calc_splitting_metrics,
+)
 
 from .datatypes import DistrictID, GeoID
 from .dra_ratings import (
@@ -138,7 +144,7 @@ class Scorer:
             case "splitting":
                 measure = self._measure_splitting()
             case _:
-                raise ValueError(f"Unknown dimension: {d}")
+                raise ValueError(f"Unknown dimension: {dimension}")
 
         return measure
 
@@ -288,7 +294,7 @@ def is_realistic(ratings: List[int | float]) -> bool:
     See 'Realistic' @ https://medium.com/dra-2020/notable-maps-66d744933a48
     """
 
-    thresholds: List[int] = (20, 10, 0, 20, 20)
+    thresholds: List[int] = [20, 10, 0, 20, 20]
 
     return all(r >= t for r, t in zip(ratings, thresholds))
 
@@ -334,107 +340,8 @@ def calc_partisan_metrics(
     return partisan_metrics
 
 
-## TODO - Import these from rdascore ##
-# Definitions copied from rdascore package
-
-census_fields: List[str] = [
-    "TOTAL_POP",
-    "TOTAL_VAP",
-    "WHITE_VAP",
-    "HISPANIC_VAP",
-    "BLACK_VAP",
-    "NATIVE_VAP",
-    "ASIAN_VAP",
-    "PACIFIC_VAP",
-    "MINORITY_VAP",
-]
-
 total_pop_field: str = census_fields[0]
 total_vap_field: str = census_fields[1]
-
-
-def calc_minority_metrics(
-    demos_totals: Dict[str, int],
-    demos_by_district: List[Dict[str, int]],
-    n_districts: int,
-) -> Dict[str, float]:
-    """Calculate minority metrics.
-
-    NOTE - This is a copy of the function in the rdascore package.
-    """
-
-    statewide_demos: Dict[str, float] = {}
-    for demo in census_fields[2:]:  # Skip total population & total VAP
-        simple_demo: str = demo.split("_")[0].lower()
-        statewide_demos[simple_demo] = (
-            demos_totals[demo] / demos_totals[total_vap_field]
-        )
-
-    by_district: List[Dict[str, float]] = []
-    for i in range(1, n_districts + 1):
-        district_demos: Dict[str, float] = {}
-        for demo in census_fields[2:]:  # Skip total population & total VAP
-            simple_demo: str = demo.split("_")[0].lower()
-            district_demos[simple_demo] = (
-                demos_by_district[i][demo] / demos_by_district[i][total_vap_field]
-            )
-
-        by_district.append(district_demos)
-
-    minority_metrics: Dict[str, float] = rda.calc_minority_opportunity(
-        statewide_demos, by_district
-    )
-
-    return minority_metrics
-
-
-def calc_compactness_metrics(
-    district_props: List[Dict[str, float]]
-) -> Dict[str, float]:
-    """Calculate compactness metrics using implied district props.
-
-    NOTE - This is a copy of the function in the rdascore package.
-    """
-
-    tot_reock: float = 0
-    tot_polsby: float = 0
-
-    for i, d in enumerate(district_props):
-        reock: float = rda.reock_formula(d["area"], d["diameter"] / 2)
-        polsby: float = rda.polsby_formula(d["area"], d["perimeter"])
-
-        tot_reock += reock
-        tot_polsby += polsby
-
-    avg_reock: float = tot_reock / len(district_props)
-    avg_polsby: float = tot_polsby / len(district_props)
-
-    compactness_metrics: Dict[str, float] = {}
-    compactness_metrics["reock"] = avg_reock
-    compactness_metrics["polsby_popper"] = avg_polsby
-
-    return compactness_metrics
-
-
-def calc_splitting_metrics(CxD: List[List[float]]) -> Dict[str, float]:
-    """Calculate county-district splitting metrics.
-
-    NOTE - This is a copy of the function in the rdascore package.
-    """
-
-    all_results: Dict[str, float] = rda.calc_county_district_splitting(CxD)
-
-    splitting_metrics: Dict[str, float] = {}
-    splitting_metrics["county_splitting"] = all_results["county"]
-    splitting_metrics["district_splitting"] = all_results["district"]
-
-    # NOTE - The simple # of counties split unexpectedly is computed in dra2020/district-analytics,
-    # i.e., not in dra2020/dra-analytics in the analytics proper.
-
-    return splitting_metrics
-
-
-## END ##
 
 ### MAKE A ONE-ROW SCORECARD FROM A DRA MAP-ANALYTICS.JSON EXPORT ###
 

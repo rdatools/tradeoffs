@@ -14,7 +14,7 @@ from .score import is_realistic
 def filter_scores(scores: Dict[str, str]) -> bool:
     """Filter out unrealistic maps."""
 
-    ratings: List[int] = [int(scores[d]) for d in ratings_dimensions]
+    ratings: List[int | float] = [int(scores[d]) for d in ratings_dimensions]
 
     return is_realistic(ratings)
 

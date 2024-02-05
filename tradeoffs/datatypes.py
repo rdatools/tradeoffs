@@ -30,9 +30,6 @@ class District(TypedDict):
     features: List[FeatureOffset]
     pop: int
 
-    def __repr__(self) -> str:
-        return f"District id {self.id}: {self.pop} people with {len(self.features)} features (sum: {sum(self.features)})"
-
 
 BorderKey: TypeAlias = Tuple[DistrictOffset, DistrictOffset]
 

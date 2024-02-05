@@ -58,9 +58,12 @@ from rdabase import (
     starting_seed,
     Assignment,
     write_csv,
+    load_data,
+    load_shapes,
+    load_graph,
+    load_metadata,
 )
 from rdaensemble.general import ratings_dimensions
-from rdascore import load_data, load_shapes, load_graph, load_metadata
 
 from tradeoffs import push_plan
 
