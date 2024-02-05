@@ -54,10 +54,10 @@ from rdabase import (
     require_args,
     read_json,
     read_csv,
-    # load_plan, # TODO - Update this
     starting_seed,
     Assignment,
     write_csv,
+    load_plan,
     load_data,
     load_shapes,
     load_graph,
@@ -121,25 +121,6 @@ def main() -> None:
             plan,
             ["GEOID", "DISTRICT"],
         )
-
-
-def load_plan(plan_file: str) -> List[Assignment]:
-    """Read a precinct-assignment file.
-
-    TODO - Update this in rdabase
-    """
-
-    raw_assignments: List[Dict[str, str | int]] = read_csv(plan_file, [str, int])
-
-    fields: List[str] = list(raw_assignments[0].keys())
-    geoid: str = fields[0]
-    district: str = fields[1]
-
-    assignments: List[Assignment] = [
-        Assignment(geoid=str(a[geoid]), district=a[district]) for a in raw_assignments
-    ]
-
-    return assignments
 
 
 def parse_args():
