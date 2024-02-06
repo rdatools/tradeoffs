@@ -8,7 +8,14 @@ For example:
 $ scripts/find_frontiers.py \
 --scores testdata/synthetic_ratings.csv \
 --metadata testdata/synthetic_scores_metadata.json \
---frontier output/test_frontier.json \
+--frontier output/test_frontiers.json \
+--verbose \
+--no-debug
+
+$ scripts/find_frontiers.py \
+--scores ~/iCloud/fileout/ensembles/NC20C_ReCom_1000_scores.csv \
+--metadata ~/iCloud/fileout/ensembles/NC20C_ReCom_1000_scores_metadata.json \
+--frontier ~/iCloud/fileout/ensembles/NC20C_ReCom_1000_frontiers.json \
 --verbose \
 --no-debug
 
