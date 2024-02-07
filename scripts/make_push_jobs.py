@@ -122,6 +122,16 @@ def parse_args():
         type=str,
         help="Graph file",
     )
+    parser.add_argument(
+        "--intermediate",
+        type=str,
+        help="Directory to write input plan CSV's to",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        help="Directory to write 'pushed' plan CSV's to",
+    )
     #
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
