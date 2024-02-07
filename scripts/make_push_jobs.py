@@ -13,8 +13,8 @@ $ scripts/make_push_jobs.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---intermediate ../../iCloud/fileout/intermediate/ \
---output ../../iCloud/fileout/ensembles/temp/ \
+--intermediate ../../iCloud/fileout/intermediate \
+--output ../../iCloud/fileout/ensembles/temp \
 --no-debug
 
 For documentation, type:
@@ -30,8 +30,7 @@ from typing import List, Dict, Any
 
 import itertools
 
-from rdabase import require_args, read_json
-from rdaensemble.general import ratings_dimensions
+from rdabase import require_args, load_metadata, starting_seed, read_json, write_csv
 from tradeoffs import GeoID, DistrictID, Name, Weight
 
 
@@ -40,22 +39,47 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
 
+    xx: str = args.state
+    prefix: str = f"{args.state}20C"  # TODO
+
+    metadata: Dict[str, Any] = load_metadata(args.state, args.data)
+    N: int = int(metadata["D"])
+    seed: int = starting_seed(args.state, N)
+
     ensemble: Dict[str, Any] = read_json(args.plans)
     plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
-    plans_by_name = {p["name"]: p["plan"] for p in plans}
+    plans_by_name: Dict[str, Dict[GeoID, DistrictID]] = {p["name"]: p["plan"] for p in plans}  # type: ignore
 
     frontiers_blob: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = frontiers_blob["frontiers"]
 
     for k, v in frontiers.items():
-        print(f"Frontier: {k}:")
-        for i, p in enumerate(v):
-            # name: str = p["map"]  # type: ignore
-            print(f"... point: {i}, map: {p['map']}")
+        dimensions: List[str] = k.split("_")
 
-            # TODO - Get the plan
-            # TODO - Write it to disk (intermediate)
-            # TODO - Generate the job to push the point
+        for i, p in enumerate(v):
+            name: str = p["map"]
+            plan: List[Dict] = [
+                {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
+            ]
+
+            plan_path: str = f"{args.intermediate}/{prefix}_map_{name}.csv"
+            write_csv(plan_path, plan, ["GEOID", "DISTRICT"])
+
+            print(f"scripts/push_plan.py \\")
+            print(f"--state {xx} \\")
+            print(f"--plan {plan_path} \\")
+            print(f"--dimensions {dimensions} \\")
+            print(f"--seed {seed} \\")
+            print(f"--multiplier {args.multiplier} \\")
+            print(f"--prefix {prefix} \\")
+            print(f"--data {args.data} \\")
+            print(f"--shapes {args.shapes} \\")
+            print(f"--graph {args.graph} \\")
+            print(f"--output {args.output} \\")
+            print(f"--log {args.output}/{prefix}map{name}_log.txt \\")
+            print(f"--verbose \\")
+            print(f"--no-debug")
+            print()
 
             pass
 
@@ -123,8 +147,8 @@ def parse_args():
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "intermediate": "../../iCloud/fileout/intermediate/",
-        "output": "../../iCloud/fileout/ensembles/temp/",
+        "intermediate": "../../iCloud/fileout/intermediate",
+        "output": "../../iCloud/fileout/ensembles/temp",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
