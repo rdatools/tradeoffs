@@ -120,7 +120,7 @@ def main() -> None:
             {"GEOID": k, "DISTRICT": v} for k, v in district_by_geoid.items()
         ]
         write_csv(
-            os.path.expanduser(args.output) + filename,
+            os.path.expanduser(args.output) + "/" + filename,
             plan,
             ["GEOID", "DISTRICT"],
         )
@@ -177,7 +177,7 @@ def parse_args():
     #
     parser.add_argument(
         "--output",
-        default="~/Downloads/",
+        default="~/Downloads",
         help="Path to output directory",
         type=str,
     )
