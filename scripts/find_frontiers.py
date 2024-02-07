@@ -55,7 +55,7 @@ def main() -> None:
         args.scores,
         fieldnames,
         fieldtypes,
-        filter_for_reasonableness=True,
+        filter=True,
         verbose=args.verbose,
     )
     metadata: Dict[str, Any] = read_json(args.metadata)
