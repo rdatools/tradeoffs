@@ -9,13 +9,14 @@ $ scripts/make_push_jobs.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_plans.json \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_frontiers.json \
---multiplier 1
+--multiplier 1 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --intermediate ../../iCloud/fileout/intermediate \
 --output ../../iCloud/fileout/ensembles/temp \
---no-debug
+--no-debug \
+> scripts/run_batch.sh
 
 For documentation, type:
 
@@ -80,10 +81,6 @@ def main() -> None:
             print(f"--verbose \\")
             print(f"--no-debug")
             print()
-
-            pass
-
-    pass
 
 
 def parse_args():
