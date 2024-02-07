@@ -16,7 +16,7 @@ $ scripts/make_push_jobs.py \
 --intermediate ../../iCloud/fileout/intermediate \
 --output ../../iCloud/fileout/temp \
 --no-debug \
-> scripts/run_batch.sh
+> run_batch.sh
 
 For documentation, type:
 
@@ -55,7 +55,7 @@ def main() -> None:
     frontiers: Dict[str, Any] = frontiers_blob["frontiers"]
 
     for k, v in frontiers.items():
-        dimensions: List[str] = k.split("_")
+        dimensions: str = " ".join(k.split("_"))
 
         for i, p in enumerate(v):
             name: str = p["map"]
@@ -67,6 +67,8 @@ def main() -> None:
             plan_path: str = os.path.expanduser(
                 f"{args.intermediate}/{plan_to_push}_map.csv"
             )
+
+            pushed_prefix: str = prefix + f"_{k}_{i:02d}"
             log_path: str = f"{args.output}/{plan_to_push}_log.txt"
 
             write_csv(plan_path, plan, ["GEOID", "DISTRICT"])
@@ -77,7 +79,7 @@ def main() -> None:
             print(f"--dimensions {dimensions} \\")
             print(f"--seed {seed} \\")
             print(f"--multiplier {args.multiplier} \\")
-            print(f"--prefix {prefix} \\")
+            print(f"--prefix {pushed_prefix} \\")
             print(f"--data {os.path.expanduser(args.data)} \\")
             print(f"--shapes {os.path.expanduser(args.shapes)} \\")
             print(f"--graph {os.path.expanduser(args.graph)} \\")

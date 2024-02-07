@@ -1,9 +1,0 @@
-
-Search 1 of 1
-
-Pass 1 of up to 1000
-Starting #'s: ('compactness', 'splitting') = (77.75759891050842, 66.78641882580952)
-
-Improved #'s: ('compactness', 'splitting') = (77.75759891050842, 66.78641882580952)
-          to: ('compactness', 'splitting') = (77.75759891050842, 66.78641882580952)
-
