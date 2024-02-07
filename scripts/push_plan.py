@@ -15,7 +15,7 @@ $ scripts/push_plan.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ~/Downloads/ \
+--output ~/Downloads \
 --log ~/Downloads/log.txt \
 --verbose \
 --no-debug
@@ -31,7 +31,7 @@ $ scripts/push_plan.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ~/Downloads/ \
+--output ~/Downloads \
 --log ~/Downloads/log.txt \
 --verbose \
 --no-debug
@@ -211,7 +211,7 @@ def parse_args():
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "output": "~/Downloads/",
+        "output": "~/Downloads",
         "log": "~/Downloads/log.txt",
         "verbose": True,
     }

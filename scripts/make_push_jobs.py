@@ -41,7 +41,7 @@ def main() -> None:
     args: argparse.Namespace = parse_args()
 
     xx: str = args.state
-    prefix: str = f"{args.state}20C"  # TODO
+    prefix: str = f"{args.state}20C"  # HACK
 
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
     N: int = int(metadata["D"])
