@@ -14,7 +14,7 @@ $ scripts/make_push_jobs.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --intermediate ../../iCloud/fileout/intermediate \
---output ../../iCloud/fileout/ensembles/temp \
+--output ../../iCloud/fileout/temp \
 --no-debug \
 > scripts/run_batch.sh
 
@@ -29,7 +29,7 @@ from argparse import ArgumentParser, Namespace
 
 from typing import List, Dict, Any
 
-import itertools
+import os
 
 from rdabase import require_args, load_metadata, starting_seed, read_json, write_csv
 from tradeoffs import GeoID, DistrictID, Name, Weight
@@ -63,7 +63,12 @@ def main() -> None:
                 {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
             ]
 
-            plan_path: str = f"{args.intermediate}/{prefix}_map_{name}.csv"
+            plan_to_push: str = f"{prefix}_{name}"
+            plan_path: str = os.path.expanduser(
+                f"{args.intermediate}/{plan_to_push}_map.csv"
+            )
+            log_path: str = f"{args.output}/{plan_to_push}_log.txt"
+
             write_csv(plan_path, plan, ["GEOID", "DISTRICT"])
 
             print(f"scripts/push_plan.py \\")
@@ -73,11 +78,11 @@ def main() -> None:
             print(f"--seed {seed} \\")
             print(f"--multiplier {args.multiplier} \\")
             print(f"--prefix {prefix} \\")
-            print(f"--data {args.data} \\")
-            print(f"--shapes {args.shapes} \\")
-            print(f"--graph {args.graph} \\")
-            print(f"--output {args.output} \\")
-            print(f"--log {args.output}/{prefix}map{name}_log.txt \\")
+            print(f"--data {os.path.expanduser(args.data)} \\")
+            print(f"--shapes {os.path.expanduser(args.shapes)} \\")
+            print(f"--graph {os.path.expanduser(args.graph)} \\")
+            print(f"--output {os.path.expanduser(args.output)} \\")
+            print(f"--log {os.path.expanduser(log_path)} \\")
             print(f"--verbose \\")
             print(f"--no-debug")
             print()
@@ -155,7 +160,7 @@ def parse_args():
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
         "intermediate": "../../iCloud/fileout/intermediate",
-        "output": "../../iCloud/fileout/ensembles/temp",
+        "output": "../../iCloud/fileout/temp",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
