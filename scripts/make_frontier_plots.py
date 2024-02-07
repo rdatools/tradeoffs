@@ -182,7 +182,7 @@ def main() -> None:
             # pio.kaleido.scope.default_height
             pio.kaleido.scope.default_scale = 1
 
-            plot_path: str = f"{args.output}/{args.prefix}_scatter_{pair}.png"
+            plot_path: str = f"{args.output}/{args.prefix}_{pair}_scatter.png"
 
             fig.to_image(engine="kaleido")
             fig.write_image(plot_path)
