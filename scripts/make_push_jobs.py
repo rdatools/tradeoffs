@@ -54,6 +54,20 @@ def main() -> None:
     frontiers_blob: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = frontiers_blob["frontiers"]
 
+    print(
+        f"# Command-line calls to 'push' points in {os.path.expanduser(args.frontier)}."
+    )
+    print(
+        f"# - The input plans have been written to {os.path.expanduser(args.intermediate)}/."
+    )
+    print(
+        f"# - The supporting data, shapes, & graph must be in {os.path.dirname(os.path.expanduser(args.data))}/."
+    )
+    print(
+        f"# - The output plans will be written to {os.path.expanduser(args.output)}/."
+    )
+    print()
+
     for k, v in frontiers.items():
         dimensions: str = " ".join(k.split("_"))
 
