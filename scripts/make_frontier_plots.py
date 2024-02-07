@@ -13,6 +13,13 @@ $ scripts/make_frontier_plots.py \
 --output output \
 --no-debug
 
+$ scripts/make_frontier_plots.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_frontiers.json \
+--prefix NC20C \
+--output ../../iCloud/fileout/images/ \
+--no-debug
+
 For documentation, type:
 
 $ scripts/make_frontier_plots.py
@@ -48,11 +55,12 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
+    # TODO
     # Read the focus map from a CSV file
-    focus_ratings: List[int] = []
-    if args.focus:
-        focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-        focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
+    # focus_ratings: List[int] = []
+    # if args.focus:
+    #     focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
+    #     focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
 
     # Read the frontier from a JSON file
 
@@ -87,16 +95,17 @@ def main() -> None:
         }
         scatter_traces.append(points_trace)
 
-        if args.focus:
-            focus_trace: Dict[str, Any] = {
-                "x": [focus_ratings[d2]],
-                "y": [focus_ratings[d1]],
-                "mode": "markers",
-                "marker_symbol": "star",
-                "marker_color": "red",
-                "marker_size": 9,
-            }
-            scatter_traces.append(focus_trace)
+        # TODO
+        # if args.focus:
+        #     focus_trace: Dict[str, Any] = {
+        #         "x": [focus_ratings[d2]],
+        #         "y": [focus_ratings[d1]],
+        #         "mode": "markers",
+        #         "marker_symbol": "star",
+        #         "marker_color": "red",
+        #         "marker_size": 9,
+        #     }
+        #     scatter_traces.append(focus_trace)
 
         fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
         fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
@@ -164,7 +173,7 @@ def main() -> None:
 
         fig.update_layout(scatter_layout)
 
-        if args.debug:  # Show the plot in a browser window
+        if False and args.debug:  # Show the plot in a browser window
             fig.show(config=scatter_config)
             continue
         else:  # Save the plot to a PNG file
@@ -196,11 +205,13 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
-    parser.add_argument(
-        "--focus",
-        type=str,
-        help="The flattened scores for a map to highlight",
-    )
+    # TODO
+    # parser.add_argument(
+    #     "--focus",
+    #     nargs="?",
+    #     type=str,
+    #     help="The flattened scores for a map to highlight (optional)",
+    # )
     parser.add_argument(
         "--prefix",
         type=str,
@@ -229,8 +240,8 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
-        "frontier": "output/test_frontier.json",
-        "focus": "testdata/map_scores.csv",
+        "frontier": "output/test_frontiers.json",
+        # "focus": "testdata/map_scores.csv",
         "prefix": "test",
         "output": "output",
     }

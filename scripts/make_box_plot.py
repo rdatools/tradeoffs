@@ -10,6 +10,11 @@ $ scripts/make_box_plot.py \
 --image output/test_boxplot.png \
 --no-debug
 
+$ scripts/make_box_plot.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_scores.csv \
+--image ../../iCloud/fileout/images/NC20C_ReCom_boxplot.png \
+--no-debug
+
 For documentation, type:
 
 $ scripts/make_box_plot.py
@@ -58,7 +63,7 @@ def main() -> None:
             "whiskerwidth": 0.2,
             "marker": {"size": 2, "symbol": "circle"},
             "line": {"width": 1},
-            "selectedpoints": [0],  # Highlight the first map
+            "selectedpoints": [0],  # Highlight the first map # TODO
             "selected": {"marker": {"size": 5, "color": "black"}},
         }
         boxplot_traces.append(trace)
