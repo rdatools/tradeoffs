@@ -4,6 +4,7 @@
 
 # Misc test, temp, and housekeeping files
 sandbox.py
+run_batch.sh
 TODO.md
 temp/
 logs/

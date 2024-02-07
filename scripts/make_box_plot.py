@@ -63,8 +63,8 @@ def main() -> None:
             "whiskerwidth": 0.2,
             "marker": {"size": 2, "symbol": "circle"},
             "line": {"width": 1},
-            "selectedpoints": [0],  # Highlight the first map # TODO
-            "selected": {"marker": {"size": 5, "color": "black"}},
+            # "selectedpoints": [0],  # Highlight the first map # TODO
+            # "selected": {"marker": {"size": 5, "color": "black"}},
         }
         boxplot_traces.append(trace)
 
