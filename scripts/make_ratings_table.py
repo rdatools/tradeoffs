@@ -6,7 +6,7 @@ MAKE RATINGS TABLE (CSV)
 For example:
 
 $ scripts/make_ratings_table.py \
---notables ~/iCloud/fileout/ensembles/NC20C_RMfRST_1000_notables_maps.json \
+--notables ~/iCloud/fileout/ensembles/NC20C_RMfRST_1K_notables_maps.json \
 --output output/test_ratings.csv \
 --no-debug
 

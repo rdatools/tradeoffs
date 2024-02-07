@@ -14,8 +14,8 @@ $ scripts/make_frontier_plots.py \
 --no-debug
 
 $ scripts/make_frontier_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --prefix NC20C \
 --output ../../iCloud/fileout/images/ \
 --no-debug

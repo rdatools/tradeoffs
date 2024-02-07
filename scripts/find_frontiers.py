@@ -13,9 +13,9 @@ $ scripts/find_frontiers.py \
 --no-debug
 
 $ scripts/find_frontiers.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_scores.csv \
---metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_scores_metadata.json \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
+--metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores_metadata.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --verbose \
 --no-debug
 

@@ -11,7 +11,7 @@ $ scripts/make_box_plot.py \
 --no-debug
 
 $ scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1000_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --image ../../iCloud/fileout/images/NC20C_ReCom_boxplot.png \
 --no-debug
 
