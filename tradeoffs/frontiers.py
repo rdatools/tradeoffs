@@ -2,7 +2,7 @@
 FRONTIER HELPERS
 """
 
-from typing import Any, Dict, List, Callable
+from typing import Any, Dict, List, Tuple, Callable
 
 import numpy as np
 import pandas as pd
@@ -20,16 +20,43 @@ def find_frontiers(
     frontiers: Dict[str, List[Dict]] = {}
 
     for p in pairs:
-        label: str = f"{p[0]}_{p[1]}"
-        frontiers[label] = []
+        d1: int = ratings_dimensions.index(p[0])
+        d2: int = ratings_dimensions.index(p[1])
 
-        subset: pd.DataFrame = ratings[list(p)]
+        # Find the unique pairs of ratings & the associated maps
+
+        unique_points: List[List[int]] = []
+        maps_by_point: Dict[Tuple[int, int], List[str]] = {}
+        for i, df_row in ratings.iterrows():
+            row = df_row.values.flatten().tolist()  # type: ignore
+            name: str = row.pop(0)
+            values: Tuple[int, int] = (row[d1], row[d2])
+
+            if values not in maps_by_point:
+                unique_points.append(list(values))
+                maps_by_point[values] = []
+
+            maps_by_point[values].append(name)
+
+        # Find the frontier points
+
+        subset: pd.DataFrame = pd.DataFrame(unique_points, columns=list(p))
         is_frontier: np.ndarray = fn(subset.to_numpy())
+
+        # Collect the maps associated with those frontier points
 
         maps: List[str] = []
         for i, is_efficient in enumerate(is_frontier):
             if is_efficient:
-                maps.append(ratings.iloc[i]["map"])
+                values = tuple(subset.iloc[i].values.flatten().tolist())  # type: ignore
+                unique_point: Tuple[int, int] = (values[0], values[1])
+                for m in maps_by_point[unique_point]:
+                    maps.append(m)
+
+        # Add each map to the frontier along with the ratings
+
+        label: str = f"{p[0]}_{p[1]}"
+        frontiers[label] = []
 
         for m in maps:
             row = (
@@ -41,8 +68,6 @@ def find_frontiers(
             point: List[int] = [int(r) for r in row]
             frontiers[label].append({"map": name, "ratings": point})
 
-        d1: int = ratings_dimensions.index(p[0])
-        d2: int = ratings_dimensions.index(p[1])
         frontiers[label] = sorted(
             frontiers[label],
             key=lambda d: (d["ratings"][d1], d["ratings"][d2]),

@@ -77,10 +77,10 @@ def main() -> None:
             frontier_key: str = f"{f[0]}_{f[1]}"
             points: int = len(frontiers[frontier_key])
             total_points += points
-            print(f"{i+1:02d} - The {frontier_key} frontier has {points} points.")
+            print(f"{i} - The {frontier_key} frontier involves {points} plans.")
 
         print()
-        print(f"Altogether there are {total_points} frontier points.")
+        print(f"Altogether there are {total_points} plans on frontiers.")
         print()
 
     write_json(args.frontier, output)
