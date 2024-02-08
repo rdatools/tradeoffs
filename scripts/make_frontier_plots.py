@@ -6,16 +6,16 @@ MAKE A SCATTER & LINE PLOT OF ENSEMBLE RATINGS AND FRONTIER
 For example:
 
 $ scripts/make_frontier_plots.py \
---scores testdata/synthetic_ratings.csv \
---frontier output/test_frontier.json \
---focus testdata/map_scores.csv \
---prefix test \
---output output \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
+--prefix NC20C \
+--output ../../iCloud/fileout/images/ \
 --no-debug
 
 $ scripts/make_frontier_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
+--focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --output ../../iCloud/fileout/images/ \
 --no-debug
@@ -57,10 +57,10 @@ def main() -> None:
 
     # TODO
     # Read the focus map from a CSV file
-    # focus_ratings: List[int] = []
-    # if args.focus:
-    #     focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-    #     focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
+    focus_ratings: List[int] = []
+    if args.focus:
+        focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
+        focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
 
     # Read the frontier from a JSON file
 
@@ -96,16 +96,16 @@ def main() -> None:
         scatter_traces.append(points_trace)
 
         # TODO
-        # if args.focus:
-        #     focus_trace: Dict[str, Any] = {
-        #         "x": [focus_ratings[d2]],
-        #         "y": [focus_ratings[d1]],
-        #         "mode": "markers",
-        #         "marker_symbol": "star",
-        #         "marker_color": "red",
-        #         "marker_size": 9,
-        #     }
-        #     scatter_traces.append(focus_trace)
+        if args.focus:
+            focus_trace: Dict[str, Any] = {
+                "x": [focus_ratings[d2]],
+                "y": [focus_ratings[d1]],
+                "mode": "markers",
+                "marker_symbol": "star",
+                "marker_color": "red",
+                "marker_size": 9,
+            }
+            scatter_traces.append(focus_trace)
 
         fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
         fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
@@ -205,13 +205,13 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
-    # TODO
-    # parser.add_argument(
-    #     "--focus",
-    #     nargs="?",
-    #     type=str,
-    #     help="The flattened scores for a map to highlight (optional)",
-    # )
+    parser.add_argument(
+        "--focus",
+        nargs="?",
+        type=str,
+        default="",
+        help="The flattened scores for a map to highlight (optional)",
+    )
     parser.add_argument(
         "--prefix",
         type=str,
@@ -241,7 +241,7 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
         "frontier": "output/test_frontiers.json",
-        # "focus": "testdata/map_scores.csv",
+        "focus": "testdata/map_scores.csv",
         "prefix": "test",
         "output": "output",
     }
