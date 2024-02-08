@@ -31,7 +31,15 @@ from typing import List, Dict, Any
 
 import os
 
-from rdabase import require_args, load_metadata, starting_seed, read_json, write_csv
+from rdabase import (
+    require_args,
+    cycle,
+    plan_type,
+    load_metadata,
+    starting_seed,
+    read_json,
+    write_csv,
+)
 from tradeoffs import GeoID, DistrictID, Name, Weight
 
 
@@ -41,7 +49,7 @@ def main() -> None:
     args: argparse.Namespace = parse_args()
 
     xx: str = args.state
-    prefix: str = f"{args.state}20C"  # TODO - Bind these to values in rdabase
+    prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
 
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
     N: int = int(metadata["D"])

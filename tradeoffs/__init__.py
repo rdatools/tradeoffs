@@ -22,6 +22,6 @@ from .frontiers import (
 from .notable_maps import id_most_notable_maps
 from .plan import Plan, segment_key, size_1_moves
 from .push import push_plan, make_better_fn
-from .plots import *  # TODO - Be specific
+from .plots import bgcolor, plot_width, plot_height, buttons
 
 name: str = "tradeoffs"
