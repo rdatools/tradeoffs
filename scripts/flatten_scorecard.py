@@ -11,6 +11,12 @@ $ scripts/flatten_scorecard.py \
 --scores testdata/map_scores.csv \
 --no-debug
 
+$ scripts/flatten_scorecard.py \
+--export testdata/map-analytics.json \
+--name NC_2024_Congressional \
+--scores ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--no-debug
+
 For documentation, type:
 
 $ scripts/flatten_scorecard.py
