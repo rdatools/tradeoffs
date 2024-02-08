@@ -50,6 +50,13 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
+    # If given, read ratings for a "focus map" from a CSV file
+    focus_map: List[int] = []
+    if args.focus:
+        focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
+        df = pd.concat([df, focus_df])
+        focus_map = [0]
+
     # Configure & show the box plot for the ratings
 
     boxplot_traces: List[Dict] = []
@@ -64,8 +71,8 @@ def main() -> None:
             "whiskerwidth": 0.2,
             "marker": {"size": 2, "symbol": "circle"},
             "line": {"width": 1},
-            # "selectedpoints": [0],  # Highlight the first map # TODO
-            # "selected": {"marker": {"size": 5, "color": "black"}},
+            "selectedpoints": focus_map,  # Highlight the first map
+            "selected": {"marker": {"size": 5, "color": "red"}},
         }
         boxplot_traces.append(trace)
 
@@ -130,6 +137,13 @@ def parse_args():
         help="A CSV ensemble of scores including ratings to plot",
     )
     parser.add_argument(
+        "--focus",
+        nargs="?",
+        type=str,
+        default="",
+        help="The flattened scores for a map to highlight (optional)",
+    )
+    parser.add_argument(
         "--image",
         type=str,
         help="The PNG file to download the box plot to",
@@ -150,6 +164,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
+        "focus": "testdata/map_scores.csv",
         "image": "output/test_boxplot.png",
     }
     args = require_args(args, args.debug, debug_defaults)

@@ -55,8 +55,7 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
-    # TODO
-    # Read the focus map from a CSV file
+    # If given, read ratings for a "focus map" from a CSV file
     focus_ratings: List[int] = []
     if args.focus:
         focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
@@ -95,15 +94,14 @@ def main() -> None:
         }
         scatter_traces.append(points_trace)
 
-        # TODO
+        # If given, highlight ratings for a "focus map" on the scatter plot
         if args.focus:
             focus_trace: Dict[str, Any] = {
                 "x": [focus_ratings[d2]],
                 "y": [focus_ratings[d1]],
                 "mode": "markers",
-                "marker_symbol": "star",
                 "marker_color": "red",
-                "marker_size": 9,
+                "marker_size": 5,
             }
             scatter_traces.append(focus_trace)
 
