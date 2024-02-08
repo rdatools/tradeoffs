@@ -11,7 +11,9 @@ import itertools
 from rdaensemble.general import ratings_dimensions
 
 
-def find_frontiers(ratings: pd.DataFrame, fn: Callable) -> Dict[str, List[Dict]]:
+def find_frontiers(
+    ratings: pd.DataFrame, fn: Callable, *, verbose: bool = False
+) -> Dict[str, List[Dict]]:
     """Find the frontiers for a ratings dataframe."""
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))

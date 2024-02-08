@@ -60,7 +60,9 @@ def main() -> None:
     )
     metadata: Dict[str, Any] = read_json(args.metadata)
 
-    frontiers: Dict[str, Any] = find_frontiers(ratings, is_pareto_efficient_value)
+    frontiers: Dict[str, Any] = find_frontiers(
+        ratings, is_pareto_efficient_value, verbose=args.verbose
+    )
     indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
@@ -122,6 +124,7 @@ def parse_args():
         "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
         "metadata": "testdata/synthetic_scores_metadata.json",
         "frontier": "output/test_frontier.json",
+        "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
 

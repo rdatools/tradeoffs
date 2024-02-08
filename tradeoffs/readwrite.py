@@ -14,10 +14,11 @@ from .score import is_realistic
 def filter_scores(scores: Dict[str, str]) -> bool:
     """Filter out maps that don't have 'roughly equal' population or are 'unrealistic'."""
 
-    threshold: float = 0.01  # TODO - Pull this out as a project-wide value
-    population_deviation: float = float(scores["population_deviation"])
-    if population_deviation > (threshold * 2):
-        return False
+    if "population_deviation" in scores:
+        threshold: float = 0.01  # TODO - Pull this out as a project-wide value
+        population_deviation: float = float(scores["population_deviation"])
+        if population_deviation > (threshold * 2):
+            return False
 
     ratings: List[int | float] = [int(scores[d]) for d in ratings_dimensions]
     if not is_realistic(ratings):
