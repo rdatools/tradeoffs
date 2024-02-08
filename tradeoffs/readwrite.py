@@ -8,6 +8,8 @@ from csv import DictReader
 import pandas as pd
 
 from rdaensemble.general import ratings_dimensions
+
+from .constants import *
 from .score import is_realistic
 
 
@@ -15,9 +17,8 @@ def filter_scores(scores: Dict[str, str]) -> bool:
     """Filter out maps that don't have 'roughly equal' population or are 'unrealistic'."""
 
     if "population_deviation" in scores:
-        threshold: float = 0.01  # TODO - Pull this out as a project-wide value
         population_deviation: float = float(scores["population_deviation"])
-        if population_deviation > (threshold * 2):
+        if population_deviation > (pop_threshold * 2):
             return False
 
     ratings: List[int | float] = [int(scores[d]) for d in ratings_dimensions]

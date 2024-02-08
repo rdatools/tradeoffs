@@ -21,6 +21,7 @@ import copy
 from rdabase import Assignment, OUT_OF_STATE, write_csv
 from rdaensemble.general import make_plan
 
+from .constants import *
 from .datatypes import *
 from .connected import is_connected
 
@@ -66,7 +67,6 @@ class Plan:
         graph: Dict[GeoID, List[GeoID]],
         seed: int,
         *,
-        pop_threshold: float = 0.01,
         verbose: bool = False,
         debug: bool = False,
     ) -> None:
