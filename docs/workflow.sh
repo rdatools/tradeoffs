@@ -62,6 +62,7 @@ scripts/make_frontier_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
+--suffix 1K \
 --output ../../iCloud/fileout/artifacts/ \
 --no-debug
 

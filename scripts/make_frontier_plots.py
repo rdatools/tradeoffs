@@ -9,6 +9,7 @@ $ scripts/make_frontier_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --prefix NC20C \
+--suffix 1K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
@@ -17,6 +18,7 @@ $ scripts/make_frontier_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
+--suffix 1K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
@@ -180,7 +182,9 @@ def main() -> None:
             # pio.kaleido.scope.default_height
             pio.kaleido.scope.default_scale = 1
 
-            plot_path: str = f"{args.output}/{args.prefix}_{pair}_scatter.png"
+            suffix: str = "" if args.suffix is None else f"_{args.suffix}"
+
+            plot_path: str = f"{args.output}/{args.prefix}_{pair}{suffix}_scatter.png"
 
             fig.to_image(engine="kaleido")
             fig.write_image(plot_path)
@@ -216,6 +220,12 @@ def parse_args():
         help="The plot filename prefix",
     )
     parser.add_argument(
+        "--suffix",
+        type=str,
+        default="",
+        help="The plot filename suffix",
+    )
+    parser.add_argument(
         "-o",
         "--output",
         default="~/Downloads/",
@@ -241,6 +251,7 @@ def parse_args():
         "frontier": "output/test_frontiers.json",
         "focus": "testdata/map_scores.csv",
         "prefix": "test",
+        "suffix": "",
         "output": "output",
     }
     args = require_args(args, args.debug, debug_defaults)
