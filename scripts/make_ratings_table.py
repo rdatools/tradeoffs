@@ -37,6 +37,14 @@ def main() -> None:
         "compactness",
         "splitting",
     ]
+    labels: List[str] = [
+        "Most Proportional",
+        "Most Competitive",
+        "Best Minority",
+        "Most Compact",
+        "Least Splitting",
+    ]
+    name_to_label: Dict[str, str] = dict(zip(cols, labels))
 
     rows: List[Dict[str, Any]] = []
     for m in data["notable_maps"]:
@@ -44,12 +52,13 @@ def main() -> None:
         ratings: Dict[str, int] = dict(zip([c.upper() for c in cols], m["ratings"]))
 
         row: Dict[str, Any] = {}
+        row["NOTABLE"] = name_to_label[name]
         row["MAP"] = m[name]
         row.update(ratings)
 
         rows.append(row)
 
-    write_csv(args.output, rows, ["MAP"] + [c.upper() for c in cols])
+    write_csv(args.output, rows, ["NOTABLE", "MAP"] + [c.upper() for c in cols])
 
 
 def parse_args():
