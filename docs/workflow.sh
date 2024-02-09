@@ -5,7 +5,7 @@ scripts/recom_ensemble.py \
 --size 1000 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---root ../../iCloud/fileout/rootmaps/NC20C_rootmap.csv \
+--root ../../iCloud/fileout/rootmaps/NC20C_root_map.csv \
 --plans ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_plans.json \
 --log ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_log.txt \
 --no-debug
@@ -45,15 +45,16 @@ scripts/push_plan.py \
 
 ...
 
-scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---image ../../iCloud/fileout/images/NC20C_ReCom_boxplot.png \
---no-debug
-
 scripts/flatten_scorecard.py \
---export testdata/map-analytics.json \
+--export ../../iCloud/fileout/ensembles/NC_2024_Congressional_analytics.json \
 --name NC_2024_Congressional \
 --scores ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--no-debug
+
+scripts/make_box_plot.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
+--focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--image ../../iCloud/fileout/artifacts/NC20C_ReCom_1K_boxplot.png \
 --no-debug
 
 scripts/make_frontier_plots.py \
@@ -61,7 +62,7 @@ scripts/make_frontier_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
---output ../../iCloud/fileout/images/ \
+--output ../../iCloud/fileout/artifacts/ \
 --no-debug
 
 scripts/id_notable_maps.py \
@@ -72,5 +73,5 @@ scripts/id_notable_maps.py \
 
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notables_maps.json \
---output ../../iCloud/fileout/data/NC20C_ReCom_1K_notables_maps_ratings.csv \
+--output ../../iCloud/fileout/artifacts/NC20C_ReCom_1K_notables_maps_ratings.csv \
 --no-debug
