@@ -54,7 +54,6 @@ def main() -> None:
     focus_map: List[int] = []
     if args.focus:
         focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-        # TODO - Nudge 0 & 100 ratings up and down 1 to show better in the plot?
         df = pd.concat([focus_df, df])
         focus_map = [0]
 
