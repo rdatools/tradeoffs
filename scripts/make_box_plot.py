@@ -7,13 +7,13 @@ For example:
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---image ../../iCloud/fileout/images/NC20C_ReCom_boxplot.png \
+--image ../../iCloud/fileout/images/NC20C_boxplot.png \
 --no-debug
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/images/NC20C_ReCom_boxplot.png \
+--image ../../iCloud/fileout/images/NC20C_boxplot.png \
 --no-debug
 
 For documentation, type:
