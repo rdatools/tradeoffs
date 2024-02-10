@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 """
-MAKE A SCATTER & LINE PLOT OF ENSEMBLE RATINGS AND FRONTIER
+MAKE SCATTER PLOTS OF ENSEMBLE RATINGS FOR PAIRS OF RATINGS ALONG WITH FRONTIERS
 
 For example:
 
-$ scripts/make_frontier_plots.py \
+$ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --prefix NC20C \
@@ -13,7 +13,7 @@ $ scripts/make_frontier_plots.py \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
-$ scripts/make_frontier_plots.py \
+$ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
@@ -24,7 +24,7 @@ $ scripts/make_frontier_plots.py \
 
 For documentation, type:
 
-$ scripts/make_frontier_plots.py
+$ scripts/make_scatter_plots.py
 
 """
 
