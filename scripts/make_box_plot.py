@@ -7,13 +7,13 @@ For example:
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---image ../../iCloud/fileout/images/NC20C_boxplot.png \
+--image ../../iCloud/fileout/artifacts/NC20C_boxplot.png \
 --no-debug
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/images/NC20C_boxplot.png \
+--image ../../iCloud/fileout/artifacts/NC20C_boxplot.png \
 --no-debug
 
 For documentation, type:
@@ -81,10 +81,9 @@ def main() -> None:
         "width": plot_width,
         "height": plot_height,
         "yaxis": {
-            "range": [0, 100],
             "showgrid": True,
             "zeroline": True,
-            "dtick": 5,
+            "tickvals": [i for i in range(0, 101, 5)],
             "gridcolor": "rgb(255, 255, 255)",
             "gridwidth": 1,
             "zerolinecolor": "rgb(255, 255, 255)",

@@ -10,7 +10,7 @@ $ scripts/make_scatter_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
 --prefix NC20C \
 --suffix 1K \
---output ../../iCloud/fileout/images/ \
+--output ../../iCloud/fileout/artifacts/ \
 --no-debug
 
 $ scripts/make_scatter_plots.py \
@@ -19,7 +19,7 @@ $ scripts/make_scatter_plots.py \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 1K \
---output ../../iCloud/fileout/images/ \
+--output ../../iCloud/fileout/artifacts/ \
 --no-debug
 
 For documentation, type:
