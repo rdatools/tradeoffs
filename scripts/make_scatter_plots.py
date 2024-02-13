@@ -296,10 +296,10 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
-        "frontier": "testdata/synthetic_frontiers.json",
-        "pushed": "testdata/synthetic_frontiers.json",  # TODO
-        "focus": "testdata/map_scores.csv",
+        "scores": "testdata/test_scores.csv",  # Only has map name & ratings
+        "frontier": "testdata/test_frontiers.json",
+        "pushed": "testdata/test_frontiers.json",  # TODO
+        "focus": "testdata/test_focus_scores.csv",
         "prefix": "test",
         "suffix": "",
         "output": "output",

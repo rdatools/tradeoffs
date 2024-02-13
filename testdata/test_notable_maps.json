@@ -1,0 +1,73 @@
+{
+    "username": "alecramsay",
+    "date_created": "02/13/24",
+    "time_created": "06:01:48",
+    "repository": "rdatools/rdaensemble",
+    "state": "NC",
+    "cycle": "2020",
+    "plan_type": "Congress",
+    "units": "VTD",
+    "plans": "NC20C_ReCom_100_plans.json",
+    "rdascore": "2.4.0",
+    "size": 100,
+    "filters": [
+        20,
+        10,
+        0,
+        20,
+        20
+    ],
+    "qualifying": 92,
+    "notable_maps": [
+        {
+            "proportionality": "0010",
+            "ratings": [
+                89,
+                40,
+                50,
+                74,
+                20
+            ]
+        },
+        {
+            "competitiveness": "0098",
+            "ratings": [
+                56,
+                53,
+                57,
+                50,
+                33
+            ]
+        },
+        {
+            "minority": "0098",
+            "ratings": [
+                56,
+                53,
+                57,
+                50,
+                33
+            ]
+        },
+        {
+            "compactness": "0008",
+            "ratings": [
+                87,
+                41,
+                50,
+                78,
+                20
+            ]
+        },
+        {
+            "splitting": "0088",
+            "ratings": [
+                62,
+                52,
+                50,
+                52,
+                36
+            ]
+        }
+    ]
+}

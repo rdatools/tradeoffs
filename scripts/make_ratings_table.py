@@ -6,8 +6,8 @@ MAKE RATINGS TABLE (CSV)
 For example:
 
 $ scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notables_maps.json \
---output ../../iCloud/fileout/data/NC20C_ReCom_1K_notables_maps_ratings.csv \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notable_maps.json \
+--output ../../iCloud/fileout/data/NC20C_ReCom_1K_notable_maps_ratings.csv \
 --no-debug
 
 For documentation, type:
@@ -91,7 +91,7 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "notables": "testdata/synthetic_notables_maps.json",
+        "notables": "testdata/test_notable_maps.json",
         "output": "output/test_ratings.csv",
     }
     args = require_args(args, args.debug, debug_defaults)

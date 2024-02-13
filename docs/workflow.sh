@@ -69,10 +69,10 @@ scripts/make_scatter_plots.py \
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores_metadata.json \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notables_maps.json \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notable_maps.json \
 --no-debug
 
 scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notables_maps.json \
---output ../../iCloud/fileout/artifacts/NC20C_ReCom_1K_notables_maps_ratings.csv \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notable_maps.json \
+--output ../../iCloud/fileout/artifacts/NC20C_ReCom_1K_notable_maps_ratings.csv \
 --no-debug

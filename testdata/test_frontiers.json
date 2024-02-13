@@ -1,0 +1,626 @@
+{
+    "username": "alecramsay",
+    "date_created": "02/13/24",
+    "time_created": "06:01:48",
+    "repository": "rdatools/rdaensemble",
+    "state": "NC",
+    "cycle": "2020",
+    "plan_type": "Congress",
+    "units": "VTD",
+    "plans": "NC20C_ReCom_100_plans.json",
+    "rdascore": "2.4.0",
+    "frontiers": {
+        "proportionality_competitiveness": [
+            {
+                "map": "0001",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    74,
+                    12
+                ]
+            },
+            {
+                "map": "0002",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    68,
+                    12
+                ]
+            },
+            {
+                "map": "0003",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    73,
+                    12
+                ]
+            },
+            {
+                "map": "0000",
+                "ratings": [
+                    90,
+                    53,
+                    50,
+                    76,
+                    10
+                ]
+            }
+        ],
+        "proportionality_minority": [
+            {
+                "map": "0001",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    74,
+                    12
+                ]
+            },
+            {
+                "map": "0002",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    68,
+                    12
+                ]
+            },
+            {
+                "map": "0003",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    73,
+                    12
+                ]
+            },
+            {
+                "map": "0098",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    33
+                ]
+            },
+            {
+                "map": "0099",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    30
+                ]
+            }
+        ],
+        "proportionality_compactness": [
+            {
+                "map": "0001",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    74,
+                    12
+                ]
+            },
+            {
+                "map": "0004",
+                "ratings": [
+                    93,
+                    51,
+                    50,
+                    75,
+                    13
+                ]
+            },
+            {
+                "map": "0000",
+                "ratings": [
+                    90,
+                    53,
+                    50,
+                    76,
+                    10
+                ]
+            },
+            {
+                "map": "0005",
+                "ratings": [
+                    89,
+                    53,
+                    50,
+                    77,
+                    14
+                ]
+            },
+            {
+                "map": "0008",
+                "ratings": [
+                    87,
+                    41,
+                    50,
+                    78,
+                    20
+                ]
+            }
+        ],
+        "proportionality_splitting": [
+            {
+                "map": "0001",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    74,
+                    12
+                ]
+            },
+            {
+                "map": "0002",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    68,
+                    12
+                ]
+            },
+            {
+                "map": "0003",
+                "ratings": [
+                    94,
+                    51,
+                    50,
+                    73,
+                    12
+                ]
+            },
+            {
+                "map": "0004",
+                "ratings": [
+                    93,
+                    51,
+                    50,
+                    75,
+                    13
+                ]
+            },
+            {
+                "map": "0010",
+                "ratings": [
+                    89,
+                    40,
+                    50,
+                    74,
+                    20
+                ]
+            },
+            {
+                "map": "0017",
+                "ratings": [
+                    88,
+                    38,
+                    50,
+                    71,
+                    24
+                ]
+            },
+            {
+                "map": "0050",
+                "ratings": [
+                    72,
+                    41,
+                    50,
+                    57,
+                    28
+                ]
+            },
+            {
+                "map": "0085",
+                "ratings": [
+                    71,
+                    47,
+                    50,
+                    52,
+                    32
+                ]
+            },
+            {
+                "map": "0086",
+                "ratings": [
+                    71,
+                    47,
+                    50,
+                    52,
+                    32
+                ]
+            },
+            {
+                "map": "0097",
+                "ratings": [
+                    69,
+                    51,
+                    50,
+                    51,
+                    34
+                ]
+            },
+            {
+                "map": "0088",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    52,
+                    36
+                ]
+            },
+            {
+                "map": "0089",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    49,
+                    36
+                ]
+            },
+            {
+                "map": "0090",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    49,
+                    36
+                ]
+            },
+            {
+                "map": "0091",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    50,
+                    36
+                ]
+            }
+        ],
+        "competitiveness_minority": [
+            {
+                "map": "0098",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    33
+                ]
+            },
+            {
+                "map": "0099",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    30
+                ]
+            }
+        ],
+        "competitiveness_compactness": [
+            {
+                "map": "0005",
+                "ratings": [
+                    89,
+                    53,
+                    50,
+                    77,
+                    14
+                ]
+            },
+            {
+                "map": "0008",
+                "ratings": [
+                    87,
+                    41,
+                    50,
+                    78,
+                    20
+                ]
+            }
+        ],
+        "competitiveness_splitting": [
+            {
+                "map": "0098",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    33
+                ]
+            },
+            {
+                "map": "0088",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    52,
+                    36
+                ]
+            },
+            {
+                "map": "0089",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    49,
+                    36
+                ]
+            },
+            {
+                "map": "0090",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    49,
+                    36
+                ]
+            },
+            {
+                "map": "0091",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    50,
+                    36
+                ]
+            }
+        ],
+        "minority_compactness": [
+            {
+                "map": "0098",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    33
+                ]
+            },
+            {
+                "map": "0099",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    30
+                ]
+            },
+            {
+                "map": "0008",
+                "ratings": [
+                    87,
+                    41,
+                    50,
+                    78,
+                    20
+                ]
+            }
+        ],
+        "minority_splitting": [
+            {
+                "map": "0098",
+                "ratings": [
+                    56,
+                    53,
+                    57,
+                    50,
+                    33
+                ]
+            },
+            {
+                "map": "0088",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    52,
+                    36
+                ]
+            },
+            {
+                "map": "0089",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    49,
+                    36
+                ]
+            },
+            {
+                "map": "0090",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    49,
+                    36
+                ]
+            },
+            {
+                "map": "0091",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    50,
+                    36
+                ]
+            }
+        ],
+        "compactness_splitting": [
+            {
+                "map": "0008",
+                "ratings": [
+                    87,
+                    41,
+                    50,
+                    78,
+                    20
+                ]
+            },
+            {
+                "map": "0017",
+                "ratings": [
+                    88,
+                    38,
+                    50,
+                    71,
+                    24
+                ]
+            },
+            {
+                "map": "0046",
+                "ratings": [
+                    70,
+                    44,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0047",
+                "ratings": [
+                    70,
+                    44,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0048",
+                "ratings": [
+                    70,
+                    44,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0049",
+                "ratings": [
+                    70,
+                    44,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0051",
+                "ratings": [
+                    66,
+                    43,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0052",
+                "ratings": [
+                    66,
+                    43,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0053",
+                "ratings": [
+                    64,
+                    46,
+                    50,
+                    58,
+                    28
+                ]
+            },
+            {
+                "map": "0095",
+                "ratings": [
+                    64,
+                    52,
+                    50,
+                    53,
+                    32
+                ]
+            },
+            {
+                "map": "0088",
+                "ratings": [
+                    62,
+                    52,
+                    50,
+                    52,
+                    36
+                ]
+            }
+        ]
+    },
+    "notable_maps": [
+        {
+            "proportionality": {
+                "frontier": "proportionality_competitiveness",
+                "offset": 0
+            }
+        },
+        {
+            "competitiveness": {
+                "frontier": "proportionality_compactness",
+                "offset": 3
+            }
+        },
+        {
+            "minority": {
+                "frontier": "proportionality_minority",
+                "offset": 3
+            }
+        },
+        {
+            "compactness": {
+                "frontier": "proportionality_compactness",
+                "offset": 4
+            }
+        },
+        {
+            "splitting": {
+                "frontier": "proportionality_splitting",
+                "offset": 10
+            }
+        }
+    ]
+}

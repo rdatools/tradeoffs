@@ -20,7 +20,7 @@ def main() -> None:
     """Synthesize ratings for a 1,000 plan ensemble."""
 
     scores_csv: str = "~/iCloud/fileout/ensembles/NC20C_RMfRST_100_scores.csv"
-    ratings_csv: str = "testdata/synthetic_ratings.csv"
+    ratings_csv: str = "testdata/test_scores.csv"
 
     cols: List[str] = [
         "map",

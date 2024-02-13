@@ -162,8 +162,8 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
-        "focus": "testdata/map_scores.csv",
+        "scores": "testdata/test_scores.csv",  # Only has map name & ratings
+        "focus": "testdata/test_focus_scores.csv",
         "image": "output/test_boxplot.png",
     }
     args = require_args(args, args.debug, debug_defaults)

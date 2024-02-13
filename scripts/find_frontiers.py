@@ -6,9 +6,9 @@ FIND THE RATINGS FRONTIER
 For example:
 
 $ scripts/find_frontiers.py \
---scores testdata/synthetic_ratings.csv \
---metadata testdata/synthetic_scores_metadata.json \
---frontier testdata/synthetic_frontiers.json \
+--scores testdata/test_scores.csv \
+--metadata testdata/test_scores_metadata.json \
+--frontier testdata/test_frontiers.json \
 --verbose \
 --no-debug
 
@@ -121,8 +121,8 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/synthetic_ratings.csv",  # Only has map name & ratings
-        "metadata": "testdata/synthetic_scores_metadata.json",
+        "scores": "testdata/test_scores.csv",  # Only has map name & ratings
+        "metadata": "testdata/test_scores_metadata.json",
         "frontier": "output/test_frontier.json",
         "verbose": True,
     }
