@@ -45,9 +45,7 @@ from typing import Any, List, Dict, Callable
 
 import pandas as pd
 import itertools
-import random
 
-import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 
@@ -302,7 +300,7 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/test_scores.csv",  # Only has map name & ratings
+        "scores": "testdata/test_scores.csv",
         "frontier": "testdata/test_frontiers.json",
         "pushed": "testdata/test_frontiers.json",  # TODO
         "focus": "testdata/test_focus_scores.csv",
