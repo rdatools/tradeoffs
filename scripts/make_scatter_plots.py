@@ -80,8 +80,9 @@ def main() -> None:
     data: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = data["frontiers"]
 
-    data = read_json(args.pushed)
-    pushed_frontiers: Dict[str, Any] = data["frontiers"]
+    if args.pushed:
+        data = read_json(args.pushed)
+        pushed_frontiers: Dict[str, Any] = data["frontiers"]
 
     # For each pair of ratings dimensions, make a scatter plot of the ratings
 
@@ -95,7 +96,9 @@ def main() -> None:
 
         pair: str = f"{ydim}_{xdim}"
         frontier: List[Dict] = frontiers[pair]
-        pushed_frontier: List[Dict] = pushed_frontiers[pair]
+        pushed_frontier: List[Dict] = []
+        if args.pushed:
+            pushed_frontiers[pair]
 
         # Configure & show the scatter plot for the ratings & frontier
 
@@ -137,30 +140,31 @@ def main() -> None:
         }
         scatter_traces.append(frontier_trace)
 
-        # TODO - Temporary HACK
-        for pt in pushed_frontier:
-            pt["ratings"][d1] = min(100, pt["ratings"][d1] + 3)
-            pt["ratings"][d2] = min(100, pt["ratings"][d2] + 3)
-        pushed_frontier = sorted(
-            pushed_frontier,
-            key=lambda d: (d["ratings"][d1], d["ratings"][d2]),
-            reverse=True,
-        )
-        # End HACK
-        pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
-        pfxvalues: List[int] = [f["ratings"][d2] for f in pushed_frontier]
-        pushed_frontier_trace: Dict[str, Any] = {
-            "x": pfxvalues,
-            "y": pfyvalues,
-            "mode": "lines",
-            "line_color": "lightgray",
-            # "mode": "lines+markers",
-            # "marker_color": "black",
-            # "marker_size": 3,
-            "fill": "tonexty",
-            "fillcolor": "lightgray",
-        }
-        scatter_traces.append(pushed_frontier_trace)
+        if args.pushed:
+            # TODO - Temporary HACK
+            for pt in pushed_frontier:
+                pt["ratings"][d1] = min(100, pt["ratings"][d1] + 3)
+                pt["ratings"][d2] = min(100, pt["ratings"][d2] + 3)
+            pushed_frontier = sorted(
+                pushed_frontier,
+                key=lambda d: (d["ratings"][d1], d["ratings"][d2]),
+                reverse=True,
+            )
+            # End HACK
+            pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
+            pfxvalues: List[int] = [f["ratings"][d2] for f in pushed_frontier]
+            pushed_frontier_trace: Dict[str, Any] = {
+                "x": pfxvalues,
+                "y": pfyvalues,
+                "mode": "lines",
+                "line_color": "lightgray",
+                # "mode": "lines+markers",
+                # "marker_color": "black",
+                # "marker_size": 3,
+                "fill": "tonexty",
+                "fillcolor": "lightgray",
+            }
+            scatter_traces.append(pushed_frontier_trace)
 
         xlabel: str = xdim.capitalize()
         ylabel: str = ydim.capitalize()
@@ -253,7 +257,9 @@ def parse_args():
     )
     parser.add_argument(
         "--pushed",
+        nargs="?",
         type=str,
+        default="",
         help="Pushed frontier maps JSON file",
     )
     parser.add_argument(
