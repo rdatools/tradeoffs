@@ -21,6 +21,7 @@ from argparse import ArgumentParser, Namespace
 
 from typing import List, Dict, Any, Callable
 
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
@@ -42,15 +43,18 @@ def main() -> None:
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
     for dimension in ratings_dimensions:
-        fig = px.histogram(df, x=dimension, nbins=20)
-        pio.kaleido.scope.default_format = "png"
+        counts, bins = np.histogram(df[dimension], bins=range(0, 100, 5))
+        bins = 0.5 * (bins[:-1] + bins[1:])
 
-        plot_path: str = f"{args.output}/{args.prefix}_{dimension}_histogram.png"
+        fig = px.bar(x=bins, y=counts, labels={"x": dimension, "y": "count"})
+        # fig = px.histogram(df, x=dimension, nbins=20)
 
         if args.debug:  # Show the plot in a browser window
             fig.show()
             continue
         else:  # Save the plot to a PNG file
+            plot_path: str = f"{args.output}/{args.prefix}_{dimension}_histogram.png"
+            pio.kaleido.scope.default_format = "png"
             fig.to_image(engine="kaleido")
             fig.write_image(plot_path)
 
