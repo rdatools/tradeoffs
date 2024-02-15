@@ -7,13 +7,13 @@ For example:
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.png \
+--image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.svg \
 --no-debug
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.png \
+--image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.svg \
 --no-debug
 
 For documentation, type:
@@ -96,7 +96,7 @@ def main() -> None:
 
     boxplot_config = {
         "toImageButtonOptions": {
-            "format": "png",  # one of png, svg, jpeg, webp
+            "format": "svg",  # one of png, svg, jpeg, webp
             "filename": "box-plot",
         },
         "modeBarButtonsToRemove": buttons,
@@ -114,7 +114,7 @@ def main() -> None:
     if args.debug:  # Show the plot in a browser window
         fig.show(config=boxplot_config)
     else:  # Save the plot to a PNG file
-        pio.kaleido.scope.default_format = "png"
+        pio.kaleido.scope.default_format = "svg"
         pio.kaleido.scope.default_width = plot_width
         # pio.kaleido.scope.default_height
         pio.kaleido.scope.default_scale = 1
@@ -164,7 +164,7 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/test_scores.csv",  # Only has map name & ratings
         "focus": "testdata/test_focus_scores.csv",
-        "image": "output/test_boxplot.png",
+        "image": "output/test_boxplot.svg",
     }
     args = require_args(args, args.debug, debug_defaults)
 

@@ -54,7 +54,7 @@ scripts/flatten_scorecard.py \
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.png \
+--image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.svg \
 --no-debug
 
 scripts/make_scatter_plots.py \
