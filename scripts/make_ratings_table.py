@@ -6,8 +6,8 @@ MAKE RATINGS TABLE (CSV)
 For example:
 
 $ scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notable_maps.json \
---output ../../iCloud/fileout/data/NC20C_ReCom_1K_notable_maps_ratings.csv \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
+--output ../../iCloud/fileout/data/NC20C_ReCom_10K_notable_maps_ratings.csv \
 --no-debug
 
 For documentation, type:

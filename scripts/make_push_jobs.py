@@ -7,8 +7,8 @@ For example:
 
 $ scripts/make_push_jobs.py \
 --state NC \
---plans ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_plans.json \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
+--plans ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_plans.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --multiplier 1 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
@@ -177,8 +177,8 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "state": "NC",
-        "plans": "../../iCloud/fileout/ensembles/NC20C_ReCom_1K_plans.json",
-        "frontier": "../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json",
+        "plans": "../../iCloud/fileout/ensembles/NC20C_ReCom_10K_plans.json",
+        "frontier": "../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json",
         "multiplier": 1,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",

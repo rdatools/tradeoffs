@@ -6,23 +6,23 @@ scripts/recom_ensemble.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --root ../../iCloud/fileout/rootmaps/NC20C_root_map.csv \
---plans ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_plans.json \
---log ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_log.txt \
+--plans ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_plans.json \
+--log ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_log.txt \
 --no-debug
 
 scripts/score_ensemble.py \
 --state NC \
---plans ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_plans.json \
+--plans ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_plans.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
 --no-debug
 
 scripts/find_frontiers.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores_metadata.json \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
+--metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores_metadata.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --verbose \
 --no-debug
 
@@ -52,14 +52,14 @@ scripts/flatten_scorecard.py \
 --no-debug
 
 scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/artifacts/NC20C_1K_boxplot.svg \
+--image ../../iCloud/fileout/artifacts/NC20C_10K_boxplot.svg \
 --no-debug
 
 scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 1K \
@@ -67,12 +67,12 @@ scripts/make_scatter_plots.py \
 --no-debug
 
 scripts/id_notable_maps.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores.csv \
---metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_scores_metadata.json \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notable_maps.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
+--metadata ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores_metadata.json \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
 --no-debug
 
 scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_1K_notable_maps.json \
---output ../../iCloud/fileout/artifacts/NC20C_ReCom_1K_notable_maps_ratings.csv \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
+--output ../../iCloud/fileout/artifacts/NC20C_ReCom_10K_notable_maps_ratings.csv \
 --no-debug
