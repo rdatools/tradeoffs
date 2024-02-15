@@ -102,6 +102,8 @@ def main() -> None:
 
         scatter_traces: List[Dict] = []
 
+        # print(df)
+
         yvalues: List[int] = df[ydim].tolist()
         xvalues: List[int] = df[xdim].tolist()
         points_trace: Dict[str, Any] = {
@@ -204,7 +206,7 @@ def main() -> None:
         }
         scatter_config = {
             "toImageButtonOptions": {
-                "format": "png",  # one of png, svg, jpeg, webp
+                "format": "svg",  # one of png, svg, jpeg, webp
                 "filename": "box-plot",
             },
             "modeBarButtonsToRemove": buttons,
@@ -222,15 +224,16 @@ def main() -> None:
         if False and args.debug:  # Show the plot in a browser window
             fig.show(config=scatter_config)
             continue
-        else:  # Save the plot to a PNG file
-            pio.kaleido.scope.default_format = "png"
+        else:  # Save the plot to an SVG file
+            pio.kaleido.scope.default_format = "svg"
+
             pio.kaleido.scope.default_width = plot_width
             # pio.kaleido.scope.default_height
             pio.kaleido.scope.default_scale = 1
 
             suffix: str = "" if args.suffix is None else f"_{args.suffix}"
 
-            plot_path: str = f"{args.output}/{args.prefix}_{pair}{suffix}_scatter.png"
+            plot_path: str = f"{args.output}/{args.prefix}_{pair}{suffix}_scatter.svg"
 
             fig.to_image(engine="kaleido")
             fig.write_image(plot_path)
