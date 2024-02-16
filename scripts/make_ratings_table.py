@@ -63,8 +63,8 @@ def main() -> None:
         focus_ratings: Dict[str, int] = focus_df.iloc[0].to_dict()
 
         row: Dict[str, Any] = {}
-        row["NOTABLE"] = args.label if args.label else "Focus map"
-        row["MAP"] = focus_ratings["map"]
+        row["MAP"] = args.label if args.label else "Focus map"
+        row["ID"] = focus_ratings["map"]
         for d in ratings_dimensions:
             row[d.upper()] = focus_ratings[d]
         rows.append(row)
@@ -74,13 +74,13 @@ def main() -> None:
         ratings: Dict[str, int] = dict(zip([c.upper() for c in cols], m["ratings"]))
 
         row: Dict[str, Any] = {}
-        row["NOTABLE"] = name_to_label[name]
-        row["MAP"] = m[name]
+        row["MAP"] = name_to_label[name]
+        row["ID"] = m[name]
         row.update(ratings)
 
         rows.append(row)
 
-    write_csv(args.output, rows, ["NOTABLE", "MAP"] + [c.upper() for c in cols])
+    write_csv(args.output, rows, ["MAP", "ID"] + [c.upper() for c in cols])
 
 
 def parse_args():
