@@ -4,15 +4,16 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+This project is a collaboration between Alec Ramsay and Todd Proebsting.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+### Alec Ramsay
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+His career was in tech ([bio](https://alecramsay.github.io/)).
+He's been working on redistricting since 2017.
+He wrote the analytics engine for [Dave's Redistricting](https://davesredistricting.org/) (DRA).
+
+### Todd Proebsting
+ 
+He is a computer scientist and a professor at the University of Arizona ([profile](http://proebsting.cs.arizona.edu/)).  
 
 
-[jekyll-organization]: https://github.com/jekyll
