@@ -7,7 +7,7 @@ author:
 description: >- # this means to ignore newlines until "baseurl:"
   Explores the tradeoffs for redistricting inherent in states' political geography 
 baseurl: /tradeoffs
-url: https://alecramsay.github.io
+url: https://rdatools.github.io
 twitter_username: alecramsay
 github_username:  alecramsay
 
