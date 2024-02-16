@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /about/
+permalink: about/
 ---
 
 This project is a collaboration between Alec Ramsay and Todd Proebsting.
