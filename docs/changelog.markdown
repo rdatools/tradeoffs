@@ -6,5 +6,6 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Stubbed out state page for NC
 - Activating styles
 - First snapshot
