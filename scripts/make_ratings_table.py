@@ -12,6 +12,11 @@ $ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/data/NC20C_ReCom_10K_notable_maps_ratings.csv \
 --no-debug
 
+$ scripts/make_ratings_table.py \
+--notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
+--output ../../iCloud/fileout/data/NC20C_ReCom_10K_notable_maps_ratings.csv \
+--no-debug
+
 For documentation, type:
 
 $ scripts/make_ratings_table.py
