@@ -81,7 +81,7 @@ aside {
 	// background: #fff;
 	width: 100%;
 	z-index: 2;
-	border-bottom: 1px solid lighten($light, 30%);
+	// border-bottom: 1px solid lighten($light, 30%);
 	box-shadow: 0px 1px 1px RGBA(4, 25, 54, .1);
 
 	nav {
@@ -130,3 +130,101 @@ footer {
 	padding: 0px;
 	font-size: small;
 }
+
+// For state pages
+
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th {
+	text-align: right;
+}
+
+td {
+	text-align: right;
+}
+
+th,
+td {
+	padding: 5px;
+}
+
+img {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+/* Style the map tabs */
+/* https://www.w3schools.com/howto/howto_js_tabs.asp */
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+// Tooltips
+
+.tooltip {
+	position: absolute;
+	// position: relative;
+	display: inline-block;
+	cursor: default;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	padding: 0.25em 0.5em;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 0.25em;
+	white-space: nowrap;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	margin-left: 650px;
+	margin-top: -100px;
+	transition-property: visibility;
+	transition-delay: 0s;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	transition-delay: 0.3s;
+}
+
+// End
