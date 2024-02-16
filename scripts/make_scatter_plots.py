@@ -10,7 +10,7 @@ $ scripts/make_scatter_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --prefix NC20C \
 --suffix 1K \
---output ../../iCloud/fileout/artifacts/ \
+--output ../../iCloud/fileout/images/ \
 --no-debug
 
 $ scripts/make_scatter_plots.py \
@@ -19,7 +19,7 @@ $ scripts/make_scatter_plots.py \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 1K \
---output ../../iCloud/fileout/artifacts/ \
+--output ../../iCloud/fileout/images/ \
 --no-debug
 
 # TODO - Update 'pushed' argument
@@ -30,7 +30,7 @@ $ scripts/make_scatter_plots.py \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 1K \
---output ../../iCloud/fileout/artifacts/ \
+--output ../../iCloud/fileout/images/ \
 --no-debug
 
 For documentation, type:

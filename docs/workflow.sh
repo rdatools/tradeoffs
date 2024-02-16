@@ -54,7 +54,7 @@ scripts/flatten_scorecard.py \
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/artifacts/NC20C_10K_boxplot.svg \
+--image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
 --no-debug
 
 scripts/make_scatter_plots.py \
@@ -63,7 +63,7 @@ scripts/make_scatter_plots.py \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 1K \
---output ../../iCloud/fileout/artifacts/ \
+--output ../../iCloud/fileout/images/ \
 --no-debug
 
 scripts/id_notable_maps.py \
@@ -74,5 +74,5 @@ scripts/id_notable_maps.py \
 
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
---output ../../iCloud/fileout/artifacts/NC20C_ReCom_10K_notable_maps_ratings.csv \
+--output ../../iCloud/fileout/images/NC20C_ReCom_10K_notable_maps_ratings.csv \
 --no-debug

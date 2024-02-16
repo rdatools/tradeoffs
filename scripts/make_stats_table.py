@@ -7,7 +7,7 @@ For example:
 
 $ scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
---output ../../iCloud/fileout/artifacts/NC20C_ReCom_10K_statistics.csv \
+--output ../../iCloud/fileout/images/NC20C_ReCom_10K_statistics.csv \
 --no-debug
 
 For documentation, type:
@@ -86,7 +86,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv",
-        "output": "../../iCloud/fileout/data/NC20C_ReCom_10K_statistics.csv",
+        "output": "../../iCloud/fileout/_data/NC20C_ReCom_10K_statistics.csv",
     }
     args = require_args(args, args.debug, debug_defaults)
 

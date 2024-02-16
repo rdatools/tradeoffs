@@ -8,7 +8,7 @@ For example:
 $ scripts/make_histograms.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
 --prefix NC20C \
---output ../../iCloud/fileout/artifacts/ \
+--output ../../iCloud/fileout/images/ \
 --no-debug
 
 For documentation, type:
