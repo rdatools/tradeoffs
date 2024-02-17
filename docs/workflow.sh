@@ -62,7 +62,7 @@ scripts/make_scatter_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
---suffix 1K \
+--suffix 10K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
