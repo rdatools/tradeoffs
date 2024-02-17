@@ -10,23 +10,6 @@ map-width: 700
 
 {% assign xx = page.xx %}
 
-<!-- TODO -->
-
-TODO - Box Plot
-
-TODO - Statistics Table
-
-TODO - Notable Maps Table
-
-<!-- NOTABLE MAPS RATINGS TABLE -->
-
-{% capture ratings-file %}
-{{ xx }}20C_notable_maps_ratings
-{% endcapture %}
-{% assign ratings-file = ratings-file | strip_newlines %}
-
-{% assign ratings = site.data[ratings-file] %}
-
 <!-- Common grid functionality -->
 <script src="{{ site.baseurl }}/assets/js/grid.js"></script>
 
@@ -35,32 +18,12 @@ TODO - Notable Maps Table
         width: 900px;
     }
 
+    #statistics-table {
+        width: 900px;
+    }
+
     .bold-row {
         font-weight: 900;
-    }
-
-    #official-intersections-table {
-        width: 410px;
-    }
-
-    #proportional-intersections-table {
-        width: 410px;
-    }
-
-    #competitive-intersections-table {
-        width: 410px;
-    }
-
-    #minority-intersections-table {
-        width: 410px;
-    }
-
-    #compact-intersections-table {
-        width: 410px;
-    }
-
-    #splitting-intersections-table {
-        width: 410px;
     }
 
     .ag-header-cell.text-center {
@@ -80,6 +43,76 @@ TODO - Notable Maps Table
         /* --ag-font-family: Inconsolata; */
     }
 </style>
+
+<p>TODO - Box Plot</p>
+
+<!-- STATISTICS TABLE -->
+
+{% capture statistics-file %}
+{{ xx }}20C_statistics
+{% endcapture %}
+{% assign statistics-file = statistics-file | strip_newlines %}
+
+{% assign statistics = site.data[statistics-file] %}
+
+<div id="statistics-table" class="ag-theme-alpine">
+</div>
+
+<!-- Grid -->
+<script type="text/javascript" charset="utf-8">
+    const statisticsColumns = [
+        {field: 'Dimension', width: 190, unSortIcon: true},
+        {field: 'COUNT', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
+        {field: 'MEAN', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
+        {field: 'STD', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
+        {field: 'MIN', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
+        {field: 'MAX', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
+    ];
+
+    const statisticsOptions = {
+        defaultColDef: {
+            sortable: true,
+            // resizable: true,
+        },
+        rowClassRules: {
+            'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Root";},
+            // 'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Baseline";},
+        },
+        columnDefs: statisticsColumns,
+        domLayout: 'autoHeight',
+        onGridReady: (event) => {renderRatingsTable(event.api)}
+    };
+
+    const eStatisticsGridDiv = document.getElementById('statistics-table');
+    new agGrid.Grid(eRatingsGridDiv, statisticsOptions);
+
+    const statisticsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ statistics-file }}.csv';
+
+    function renderStatisticsTable(api)
+    {
+        Papa.parse(statisticsCSV, {
+            header: true,
+            download: true,
+            complete: response =>
+            {
+                data = response.data;
+                data.pop();
+
+                api.setRowData(data);
+                api.sizeColumnsToFit();
+            }
+        })
+    }
+</script>
+
+<!-- NOTABLE MAPS RATINGS TABLE -->
+
+{% capture ratings-file %}
+{{ xx }}20C_notable_maps_ratings
+{% endcapture %}
+{% assign ratings-file = ratings-file | strip_newlines %}
+
+{% assign ratings = site.data[ratings-file] %}
 
 <div id="ratings-table" class="ag-theme-alpine">
 </div>
@@ -131,4 +164,4 @@ TODO - Notable Maps Table
     }
 </script>
 
-TODO - Scatter Plots
+<p>TODO - Scatter Plots</p>
