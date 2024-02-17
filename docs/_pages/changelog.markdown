@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Added box plot
+- Added box plot ...
 - Added statistics table
 - Added ratings table
 - Fixed States page tooltips
