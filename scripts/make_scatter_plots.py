@@ -9,7 +9,7 @@ $ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --prefix NC20C \
---suffix 1K \
+--suffix 10K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
@@ -18,7 +18,7 @@ $ scripts/make_scatter_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
---suffix 1K \
+--suffix 10K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
@@ -29,7 +29,7 @@ $ scripts/make_scatter_plots.py \
 --pushed ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
---suffix 1K \
+--suffix 10K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
@@ -96,7 +96,8 @@ def main() -> None:
         frontier: List[Dict] = frontiers[pair]
         pushed_frontier: List[Dict] = []
         if args.pushed:
-            pushed_frontiers[pair]
+            pushed_frontier = pushed_frontiers[pair]
+            # pushed_frontiers[pair]
 
         # Configure & show the scatter plot for the ratings & frontier
 
@@ -157,10 +158,11 @@ def main() -> None:
                 "x": pfxvalues,
                 "y": pfyvalues,
                 "mode": "lines",
-                "line_color": "lightgray",
-                # "mode": "lines+markers",
-                # "marker_color": "black",
-                # "marker_size": 3,
+                "line": {"color": "black", "width": 1},
+                # "line_color": "lightgray",
+                "mode": "lines+markers",
+                "marker_color": "black",
+                "marker_size": 3,
                 "fill": "tonexty",
                 "fillcolor": "lightgray",
             }
