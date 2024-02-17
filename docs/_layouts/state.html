@@ -1,8 +1,8 @@
 ---
 layout: page
 
-small-radar-width: 300
-big-radar-width: 500
+small-image-width: 300
+big-image-width: 500
 map-width: 700
 ---
 
@@ -44,9 +44,21 @@ map-width: 700
     }
 </style>
 
-<p>TODO - Box Plot</p>
+<!-- BOX PLOT -->
+
+<p>Box Plot</p>
+
+<table style="border:0px">
+    <tr>
+        <td style="border:0px">
+            <img src="{{ site.baseurl }}/assets/images/{{ xx }}20C_box_plot.svg" alt="Box Plot" title="Box Plot"
+                width="{{ page.big-image-width }}" />
+        </td>
+</table>
 
 <!-- STATISTICS TABLE -->
+
+<p>Ensemble Statistics</p>
 
 {% capture statistics-file %}
 {{ xx }}20C_statistics
@@ -107,6 +119,8 @@ map-width: 700
 
 <!-- NOTABLE MAPS RATINGS TABLE -->
 
+<p>Notable Maps</p>
+
 {% capture ratings-file %}
 {{ xx }}20C_notable_maps_ratings
 {% endcapture %}
@@ -116,6 +130,10 @@ map-width: 700
 
 <div id="ratings-table" class="ag-theme-alpine">
 </div>
+
+<!-- PAIRWISE SCATTERPLOTS -->
+
+<p>TODO - Pairwise Scatter Plots</p>
 
 <!-- Grid -->
 <script type="text/javascript" charset="utf-8">
