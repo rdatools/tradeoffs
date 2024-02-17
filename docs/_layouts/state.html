@@ -74,17 +74,17 @@ map-width: 700
             sortable: true,
             // resizable: true,
         },
-        rowClassRules: {
-            'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Root";},
-            // 'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Baseline";},
-        },
+        // rowClassRules: {
+        //     'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Root";},
+        //     // 'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Baseline";},
+        // },
         columnDefs: statisticsColumns,
         domLayout: 'autoHeight',
-        onGridReady: (event) => {renderRatingsTable(event.api)}
+        onGridReady: (event) => {renderStatisticsTable(event.api)}
     };
 
     const eStatisticsGridDiv = document.getElementById('statistics-table');
-    new agGrid.Grid(eRatingsGridDiv, statisticsOptions);
+    new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
 
     const statisticsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ statistics-file }}.csv';
 

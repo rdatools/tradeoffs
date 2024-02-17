@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Added statistics table
+- Added statistics table ...
 - Added ratings table
 - Fixed States page tooltips
 - Stubbed out state page for NC
