@@ -9,6 +9,7 @@ map-width: 700
 {{ content }}
 
 {% assign xx = page.xx %}
+{% assign suffix = "20C"}
 
 <!-- Common grid functionality -->
 <script src="{{ site.baseurl }}/assets/js/grid.js"></script>
@@ -51,7 +52,7 @@ map-width: 700
 <table style="border:0px">
     <tr>
         <td style="border:0px">
-            <img src="{{ site.baseurl }}/assets/images/{{ xx }}20C_boxplot.svg" alt="Box Plot" title="Box Plot"
+            <img src="{{ site.baseurl }}/assets/images/{{ xx }}{{ suffix }}_boxplot.svg" alt="Box Plot" title="Box Plot"
                 width="{{ page.big-image-width }}" />
         </td>
 </table>
@@ -61,7 +62,7 @@ map-width: 700
 <p>Ensemble Statistics</p>
 
 {% capture statistics-file %}
-{{ xx }}20C_statistics
+{{ xx }}{{ suffix }}_statistics
 {% endcapture %}
 {% assign statistics-file = statistics-file | strip_newlines %}
 
@@ -118,7 +119,7 @@ map-width: 700
 <p>Notable Maps</p>
 
 {% capture ratings-file %}
-{{ xx }}20C_notable_maps_ratings
+{{ xx }}{{ suffix }}_notable_maps_ratings
 {% endcapture %}
 {% assign ratings-file = ratings-file | strip_newlines %}
 

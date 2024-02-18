@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Factored out "20C" suffix
 - Tweaked table headers
 - Added box plot
 - Added statistics table
