@@ -1,10 +1,20 @@
-- label: proportionality_competitiveness
-- label: proportionlity_minority
-- label: proportionality_compactness
-- label: proportionality_splitting
-- label: competitiveness_minority
-- label: competitiveness_compactness
-- label: competitiveness_splitting
-- label: minority_compactness
-- label: minority_splitting
-- label: compactness_splitting
+- pair: proportionality_competitiveness
+  label: Proportionality x Competitiveness
+- pair: proportionlity_minority
+  label: Proportionality x Minority Opportunity
+- pair: proportionality_compactness
+  label: Proportionality x Compactness
+- pair: proportionality_splitting
+  label: Proportionality x Splitting
+- pair: competitiveness_minority
+  label: Competitiveness x Minority
+- pair: competitiveness_compactness
+  label: Competitiveness x Compactness
+- pair: competitiveness_splitting
+  label: Competitiveness x Splitting
+- pair: minority_compactness
+  label: Minority Opportunity x Compactness
+- pair: minority_splitting
+  label: Minority Opportunity x Splitting
+- pair: compactness_splitting
+  label: Compactness x Splitting
