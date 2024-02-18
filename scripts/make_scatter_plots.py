@@ -6,16 +6,16 @@ MAKE SCATTER PLOTS OF ENSEMBLE RATINGS FOR PAIRS OF RATINGS ALONG WITH FRONTIERS
 For example:
 
 $ scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --prefix NC20C \
 --suffix 10K \
 --output ../../iCloud/fileout/images/ \
 --no-debug
 
 $ scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 10K \
@@ -24,9 +24,9 @@ $ scripts/make_scatter_plots.py \
 
 # TODO - Update 'pushed' argument
 $ scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
---pushed ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_frontiers.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--pushed ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 10K \

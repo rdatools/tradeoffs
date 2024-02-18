@@ -6,15 +6,15 @@ MAKE RATINGS TABLE (CSV)
 For example:
 
 $ scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
+--notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --label Official \
---output ../../iCloud/fileout/_data/NC20C_ReCom_10K_notable_maps_ratings.csv \
+--output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
 $ scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_notable_maps.json \
---output ../../iCloud/fileout/_data/NC20C_ReCom_10K_notable_maps_ratings.csv \
+--notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
+--output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
 For documentation, type:

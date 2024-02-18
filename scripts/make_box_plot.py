@@ -6,12 +6,12 @@ MAKE A BOX PLOT FOR RATINGS
 For example:
 
 $ scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
 --no-debug
 
 $ scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
 --no-debug

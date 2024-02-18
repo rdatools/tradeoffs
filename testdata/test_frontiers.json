@@ -7,7 +7,7 @@
     "cycle": "2020",
     "plan_type": "Congress",
     "units": "VTD",
-    "plans": "NC20C_ReCom_100_plans.json",
+    "plans": "NC20C_plans.json",
     "rdascore": "2.4.0",
     "frontiers": {
         "proportionality_competitiveness": [

@@ -6,7 +6,7 @@ MAKE HISTORGRAMS
 For example:
 
 $ scripts/make_histograms.py \
---scores ../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --prefix NC20C \
 --output ../../iCloud/fileout/images/ \
 --no-debug
@@ -98,7 +98,7 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/ensembles/NC20C_ReCom_10K_scores.csv",
+        "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
         "prefix": "NC20C",
         "output": "~/Downloads/",
     }
