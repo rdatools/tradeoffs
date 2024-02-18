@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Added scatter plots
+- Added scatter plots ...
 - Factored out "20C" suffix
 - Tweaked table headers
 - Added box plot
