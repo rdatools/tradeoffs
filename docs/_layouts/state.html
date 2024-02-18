@@ -11,7 +11,8 @@ map-width: 700
 {% assign xx = page.xx %}
 {% assign suffix = "20C" %}
 
-<!-- Common grid functionality -->
+<!-- COMMON GRID FUNCTIONALITY & STYLES -->
+
 <script src="{{ site.baseurl }}/assets/js/grid.js"></script>
 
 <style>
@@ -177,4 +178,19 @@ map-width: 700
 
 <!-- PAIRWISE SCATTERPLOTS -->
 
-<p>TODO - Pairwise Scatter Plots</p>
+<p>Pairwise Scatter Plots</p>
+
+<table style="border:0px">
+    <tr>
+        <td style="border:0px">
+            <img src="{{ site.baseurl }}/assets/images/{{ xx }}{{ site.data.pairs[0].label }}_scatter.svg"
+                alt="{{ site.data.maps[0].label }}" title="{{ site.data.pairs[0].label }}"
+                width="{{ page.small-image-width }}" />
+        </td>
+        <td style="border:0px">
+            <img src="{{ site.baseurl }}/assets/images/{{ xx }}{{ site.data.pairs[1].label }}_scatter.svg"
+                alt="{{ site.data.maps[0].label }}" title="{{ site.data.pairs[1].label }}"
+                width="{{ page.small-image-width }}" />
+        </td>
+    </tr>
+</table>
