@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Copied BAF's & ratings for DRA notable maps
 - Added scatter plots
 - Factored out "20C" suffix
 - Tweaked table headers
