@@ -44,7 +44,9 @@ def main() -> None:
     packed_ensemble: Dict[str, Any] = {
         k: v for k, v in ensemble.items() if k != "plans"
     }
+    packed_ensemble["packed"] = True
     packed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
+    packed_plans.append(plans[0])
 
     prev: Dict[GeoID, DistrictID] = plans[0]["plan"]  # type: ignore
 

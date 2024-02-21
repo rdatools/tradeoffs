@@ -35,38 +35,40 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
 
-    ensemble: Dict[str, Any] = read_json(args.input)
-    plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
+    packed_ensemble: Dict[str, Any] = read_json(args.input)
+    packed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = (
+        packed_ensemble["plans"]
+    )
 
-    packed_ensemble: Dict[str, Any] = {
-        k: v for k, v in ensemble.items() if k != "plans"
+    unpacked_ensemble: Dict[str, Any] = {
+        k: v for k, v in packed_ensemble.items() if k != "plans"
     }
-    packed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
+    unpacked_ensemble["packed"] = False
+    unpacked_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
+    unpacked_plans.append(packed_plans[0])
 
-    prev: Dict[GeoID, DistrictID] = plans[0]["plan"]  # type: ignore
+    prev: Dict[GeoID, DistrictID] = packed_plans[0]["plan"]  # type: ignore
 
-    for unpacked_plan in plans[1:]:
-        name: str = unpacked_plan["name"]  # type: ignore
+    for packed_plan in packed_plans[1:]:
+        name: str = packed_plan["name"]  # type: ignore
         weight: Optional[float] = (
-            unpacked_plan["weight"] if "weight" in unpacked_plan else None
+            packed_plan["weight"] if "weight" in packed_plan else None
         )  # type: ignore
-        next: Dict[GeoID, DistrictID] = unpacked_plan["plan"]  # type: ignore
+        delta: Dict[GeoID, DistrictID] = packed_plan["plan"]  # type: ignore
 
-        delta: Dict[GeoID, DistrictID] = {
-            k: next[k] for k in next if next[k] != prev[k]
-        }  # Assumes that the set of keys are the same
-        packed_plan: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = (
-            {"name": name, "weight": weight, "plan": delta}
+        prev.update(delta)
+        next: Dict[GeoID, DistrictID] = dict(prev)
+
+        unpacked_plan: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = (
+            {"name": name, "weight": weight, "plan": next}
             if weight is not None
-            else {"name": name, "plan": delta}
+            else {"name": name, "plan": next}
         )
+        unpacked_plans.append(unpacked_plan)
 
-        packed_plans.append(packed_plan)
-        prev = next
+    unpacked_ensemble["plans"] = unpacked_plans
 
-    packed_ensemble["plans"] = packed_plans
-
-    write_json(args.output, packed_ensemble)
+    write_json(args.output, unpacked_ensemble)
 
 
 def parse_args():
