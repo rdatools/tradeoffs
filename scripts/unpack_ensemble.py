@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 
 """
-PACK ENSEMBLE PLANS
+UNPACK ENSEMBLE PLANS
 
 For example:
 
-$ scripts/pack_ensemble.py \
---input ../../iCloud/fileout/ensembles/NC20C_plans.json \
---output ensembles/NC20C_plans_packed.json \
+$ scripts/unpack_ensemble.py \
+--input ensembles/NC20C_plans_packed.json \
+--output ~/Downloads/NC20C_plans.json \
 --no-debug
 
 For documentation, type:
 
-$ scripts/pack_ensemble.py
+$ scripts/unpack_ensemble.py
 
 """
 
@@ -31,10 +31,7 @@ from tradeoffs import GeoID, DistrictID, Name, Weight
 
 
 def main() -> None:
-    """Pack the plans of an ensemble to reduce the size on disk.
-
-    NOTE - Packing depends on successive plans being mutations of previous plans!
-    """
+    """Unpack the plans of a packed ensemble."""
 
     args: argparse.Namespace = parse_args()
 
@@ -99,8 +96,8 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "input": "../../iCloud/fileout/ensembles/NC20C_plans.json",
-        "output": "~/Downloads/NC20C_plans_packed.json",
+        "input": "/ensembles/NC20C_plans_packed.json",
+        "output": "~/Downloads/NC20C_plans.json",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
