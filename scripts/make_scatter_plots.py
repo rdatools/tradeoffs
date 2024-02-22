@@ -15,6 +15,15 @@ $ scripts/make_scatter_plots.py \
 
 $ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--prefix NC20C \
+--suffix 10K \
+--output ../../iCloud/fileout/images/ \
+--no-debug
+
+$ scripts/make_scatter_plots.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
@@ -41,7 +50,7 @@ $ scripts/make_scatter_plots.py
 
 import argparse
 from argparse import ArgumentParser, Namespace
-from typing import Any, List, Dict, Callable
+from typing import Any, List, Dict, Tuple, Callable
 
 import pandas as pd
 import itertools
@@ -49,10 +58,16 @@ import itertools
 import plotly.graph_objects as go
 import plotly.io as pio
 
-from rdabase import require_args, read_json
+from rdabase import require_args, read_json, read_csv
 from rdaensemble.general import ratings_dimensions
 
-from tradeoffs import scores_to_df, bgcolor, plot_width, plot_height, buttons
+from tradeoffs import (
+    scores_to_df,
+    bgcolor,
+    plot_width,
+    plot_height,
+    buttons,
+)
 
 
 def main() -> None:
@@ -82,15 +97,57 @@ def main() -> None:
         data = read_json(args.pushed)
         pushed_frontiers: Dict[str, Any] = data["frontiers"]
 
-    # For each pair of ratings dimensions, make a scatter plot of the ratings
+    # Read the notable map ratings & convert them to scatter plot points
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
 
+    ratings_table: List[Dict[str, str | int]] = read_csv(
+        args.notables, [str, int, int, int, int, int]
+    )
+    map_to_dimension: Dict[str, str] = {
+        "Official": "official",
+        "Most Proportional": "proportionality",
+        "Most Competitive": "competitiveness",
+        "Best Minority": "minority",
+        "Most Compact": "compactness",
+        "Least Splitting": "splitting",
+    }
+    notable_ratings: Dict[str, List[int]] = {}
+    for m in ratings_table:
+        name: str = map_to_dimension[str(m["Map"])]
+        ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
+        notable_ratings[name] = ratings
+
+    # for k, v in notable_ratings.items():
+    #     print(k, v)
+    # print()
+
+    notable_points: Dict[Tuple, List[Tuple[int, int]]] = {}
     for p in pairs:
-        d1: int = ratings_dimensions.index(p[0])
-        d2: int = ratings_dimensions.index(p[1])
-        ydim: str = ratings_dimensions[d1]
-        xdim: str = ratings_dimensions[d2]
+        ydim: str = p[0]
+        xdim: str = p[1]
+        d1: int = ratings_dimensions.index(ydim)
+        d2: int = ratings_dimensions.index(xdim)
+
+        notable_points[p] = []
+        notable_points[p].append((notable_ratings[ydim][d2], notable_ratings[ydim][d1]))
+        notable_points[p].append((notable_ratings[xdim][d2], notable_ratings[xdim][d1]))
+
+    # for k, v in notable_points.items():
+    #     print(k, v)
+    # print()
+
+    # For each pair of ratings dimensions, make a scatter plot of the ratings
+
+    for p in pairs:
+        ydim: str = p[0]
+        xdim: str = p[1]
+        d1: int = ratings_dimensions.index(ydim)
+        d2: int = ratings_dimensions.index(xdim)
+        # d1: int = ratings_dimensions.index(p[0])
+        # d2: int = ratings_dimensions.index(p[1])
+        # ydim: str = ratings_dimensions[d1]
+        # xdim: str = ratings_dimensions[d2]
 
         pair: str = f"{ydim}_{xdim}"
         frontier: List[Dict] = frontiers[pair]
@@ -115,6 +172,16 @@ def main() -> None:
             "marker_size": 1,
         }
         scatter_traces.append(points_trace)
+
+        for pt in notable_points[p]:
+            notable_trace: Dict[str, Any] = {
+                "x": [pt[0]],
+                "y": [pt[1]],
+                "mode": "markers",
+                "marker_color": "black",
+                "marker_size": 3,
+            }
+            scatter_traces.append(notable_trace)
 
         # If given, highlight ratings for a "focus map" on the scatter plot
         if args.focus:
@@ -254,6 +321,11 @@ def parse_args():
         help="A CSV ensemble of scores including ratings to plot",
     )
     parser.add_argument(
+        "--notables",
+        type=str,
+        help="A CSV file of notable maps ratings",
+    )
+    parser.add_argument(
         "--frontier",
         type=str,
         help="Frontier maps JSON file",
@@ -306,12 +378,13 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/test_scores.csv",
+        "notables": "docs/_data/notable_ratings/NC_2022_Congress_ratings.csv",
         "frontier": "testdata/test_frontiers.json",
         "pushed": "testdata/test_frontiers.json",  # TODO
-        "focus": "testdata/test_focus_scores.csv",
+        "focus": "",  # "testdata/test_focus_scores.csv", # TODO
         "prefix": "test",
         "suffix": "",
-        "output": "output",
+        "output": "~/Downloads/",
     }
     args = require_args(args, args.debug, debug_defaults)
 
