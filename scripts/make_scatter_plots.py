@@ -82,11 +82,12 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
+    # TODO - Rationalize 'focus' maps
     # If given, read ratings for a "focus map" from a CSV file
-    focus_ratings: List[int] = []
-    if args.focus:
-        focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-        focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
+    # focus_ratings: List[int] = []
+    # if args.focus:
+    #     focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
+    #     focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
 
     # Read the frontier from a JSON file
 
@@ -181,17 +182,18 @@ def main() -> None:
         }
         scatter_traces.append(official_trace)
 
+        # TODO - Rationalize 'focus' maps
         # If given, highlight ratings for a "focus map" on the scatter plot
-        if args.focus:
-            focus_trace: Dict[str, Any] = {
-                "x": [focus_ratings[d2]],
-                "y": [focus_ratings[d1]],
-                "mode": "markers",
-                # "marker": {"size": 5, "symbol": "star"},
-                "marker_color": "red",
-                "marker_size": 5,
-            }
-            scatter_traces.append(focus_trace)
+        # if args.focus:
+        #     focus_trace: Dict[str, Any] = {
+        #         "x": [focus_ratings[d2]],
+        #         "y": [focus_ratings[d1]],
+        #         "mode": "markers",
+        #         # "marker": {"size": 5, "symbol": "star"},
+        #         "marker_color": "red",
+        #         "marker_size": 5,
+        #     }
+        #     scatter_traces.append(focus_trace)
 
         fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
         fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
@@ -336,13 +338,14 @@ def parse_args():
         default="",
         help="Pushed frontier maps JSON file",
     )
-    parser.add_argument(
-        "--focus",
-        nargs="?",
-        type=str,
-        default="",
-        help="The flattened scores for a map to highlight (optional)",
-    )
+    # TODO - Rationalize 'focus' maps
+    # parser.add_argument(
+    #     "--focus",
+    #     nargs="?",
+    #     type=str,
+    #     default="",
+    #     help="The flattened scores for a map to highlight (optional)",
+    # )
     parser.add_argument(
         "--prefix",
         type=str,
@@ -380,7 +383,7 @@ def parse_args():
         "notables": "docs/_data/notable_ratings/NC_2022_Congress_ratings.csv",
         "frontier": "testdata/test_frontiers.json",
         "pushed": "testdata/test_frontiers.json",  # TODO
-        "focus": "",  # "testdata/test_focus_scores.csv", # TODO
+        "focus": "",  # "testdata/test_focus_scores.csv", # TODO - Rationalize 'focus' maps
         "prefix": "test",
         "suffix": "",
         "output": "~/Downloads/",
