@@ -118,11 +118,8 @@ def main() -> None:
         ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
         notable_ratings[name] = ratings
 
-    # for k, v in notable_ratings.items():
-    #     print(k, v)
-    # print()
-
     notable_points: Dict[Tuple, List[Tuple[int, int]]] = {}
+    official_points: Dict[Tuple, Tuple[int, int]] = {}
     for p in pairs:
         ydim: str = p[0]
         xdim: str = p[1]
@@ -133,9 +130,10 @@ def main() -> None:
         notable_points[p].append((notable_ratings[ydim][d2], notable_ratings[ydim][d1]))
         notable_points[p].append((notable_ratings[xdim][d2], notable_ratings[xdim][d1]))
 
-    # for k, v in notable_points.items():
-    #     print(k, v)
-    # print()
+        official_points[p] = (
+            notable_ratings["official"][d2],
+            notable_ratings["official"][d1],
+        )
 
     # For each pair of ratings dimensions, make a scatter plot of the ratings
 
@@ -144,23 +142,16 @@ def main() -> None:
         xdim: str = p[1]
         d1: int = ratings_dimensions.index(ydim)
         d2: int = ratings_dimensions.index(xdim)
-        # d1: int = ratings_dimensions.index(p[0])
-        # d2: int = ratings_dimensions.index(p[1])
-        # ydim: str = ratings_dimensions[d1]
-        # xdim: str = ratings_dimensions[d2]
 
         pair: str = f"{ydim}_{xdim}"
         frontier: List[Dict] = frontiers[pair]
         pushed_frontier: List[Dict] = []
         if args.pushed:
             pushed_frontier = pushed_frontiers[pair]
-            # pushed_frontiers[pair]
 
         # Configure & show the scatter plot for the ratings & frontier
 
         scatter_traces: List[Dict] = []
-
-        # print(df)
 
         yvalues: List[int] = df[ydim].tolist()
         xvalues: List[int] = df[xdim].tolist()
@@ -182,6 +173,13 @@ def main() -> None:
                 "marker_size": 3,
             }
             scatter_traces.append(notable_trace)
+        official_trace: Dict[str, Any] = {
+            "x": [official_points[p][0]],
+            "y": [official_points[p][1]],
+            "mode": "markers",
+            "marker": {"size": 5, "symbol": "star"},
+        }
+        scatter_traces.append(official_trace)
 
         # If given, highlight ratings for a "focus map" on the scatter plot
         if args.focus:
@@ -189,6 +187,7 @@ def main() -> None:
                 "x": [focus_ratings[d2]],
                 "y": [focus_ratings[d1]],
                 "mode": "markers",
+                # "marker": {"size": 5, "symbol": "star"},
                 "marker_color": "red",
                 "marker_size": 5,
             }
