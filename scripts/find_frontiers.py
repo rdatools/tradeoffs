@@ -6,13 +6,6 @@ FIND THE RATINGS FRONTIER
 For example:
 
 $ scripts/find_frontiers.py \
---scores testdata/test_scores.csv \
---metadata testdata/test_scores_metadata.json \
---frontier testdata/test_frontiers.json \
---verbose \
---no-debug
-
-$ scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
