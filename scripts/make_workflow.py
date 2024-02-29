@@ -169,7 +169,7 @@ def main() -> None:
     """
 
     """
-    TODO - STEP 11 <<< Todd: Including pushed points?
+    STEP 11
 
     Make a statistics table:
 
