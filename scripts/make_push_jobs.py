@@ -13,7 +13,6 @@ $ scripts/make_push_jobs.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---intermediate ../../iCloud/fileout/intermediate \
 --output ../../iCloud/fileout/hpc_batch \
 --no-debug
 
@@ -168,11 +167,6 @@ def parse_args():
         help="Graph file",
     )
     parser.add_argument(
-        "--intermediate",
-        type=str,
-        help="Directory to write input plan CSV's to",
-    )
-    parser.add_argument(
         "--output",
         type=str,
         help="Directory to write 'pushed' plan CSV's to",
@@ -195,11 +189,10 @@ def parse_args():
         "state": "NC",
         "plans": "../../iCloud/fileout/ensembles/NC20C_plans.json",
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
-        "multiplier": 1,  # TODO
+        "multiplier": 1,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "intermediate": "../../iCloud/fileout/intermediate",  # TODO
         "output": "../../iCloud/fileout/hpc_batch",
         "verbose": True,
     }
