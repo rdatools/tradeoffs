@@ -111,7 +111,7 @@ def main() -> None:
                     pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
                     log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
-                    print(f"push_plan.py \\", file=f)
+                    print(f"push_plan \\", file=f)
                     print(f"--state {xx} \\", file=f)
                     print(f"--plan {plan_run} \\", file=f)
                     print(f"--dimensions {dimensions} \\", file=f)
