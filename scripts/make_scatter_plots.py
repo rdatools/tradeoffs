@@ -54,6 +54,8 @@ from typing import Any, List, Dict, Tuple, Callable
 
 import pandas as pd
 import itertools
+from scipy.spatial import ConvexHull
+import numpy as np
 
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -200,14 +202,32 @@ def main() -> None:
         frontier_trace: Dict[str, Any] = {
             "x": fxvalues,
             "y": fyvalues,
-            "mode": "lines",
+            "mode": "markers",
             "line_color": "lightgray",
-            # "mode": "lines+markers",
-            # "marker_color": "lightgray",
-            # "marker_size": 3,
             "fill": None,
         }
         scatter_traces.append(frontier_trace)
+
+        frontier_points = np.array([x for x in zip(fxvalues, fyvalues)])
+        hull = [[int(pt[0]), int(pt[1])] for pt in ConvexHull(frontier_points).points]
+
+        if len(hull) < len(frontier_points) and args.verbose:
+            print(
+                f"Fewer frontier_points on convex hull ({len(hull)}) than on frontier ({len(frontier_points)})."
+            )
+
+        hyvalues: List[int] = [pt[1] for pt in hull]
+        hxvalues: List[int] = [pt[0] for pt in hull]
+        hull_trace: Dict[str, Any] = {
+            "x": hxvalues,
+            "y": hyvalues,
+            "mode": "lines+markers",
+            "line_color": "lightgray",
+            "fill": None,
+        }
+        scatter_traces.append(hull_trace)
+
+        #
 
         if args.pushed:
             # TODO - Temporary HACK
@@ -387,6 +407,7 @@ def parse_args():
         "prefix": "test",
         "suffix": "",
         "output": "~/Downloads/",
+        "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
 

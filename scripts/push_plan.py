@@ -84,7 +84,7 @@ def main() -> None:
             assignments,
             dimensions,
             args.seed,
-            os.path.basename(args.pushed),  # TODO - Remove .csv
+            os.path.splitext(os.path.basename(args.pushed))[0],
             data,
             shapes,
             graph,
