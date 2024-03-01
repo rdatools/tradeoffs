@@ -26,8 +26,7 @@ def push_plan(
     assignments: List[Assignment],
     dimensions: Tuple[str, str],
     seed: int,
-    multiplier: int,
-    prefix: str,
+    pushed: str,
     #
     data: Dict[str, Dict[GeoID, DistrictID]],
     shapes: Dict[str, Any],
@@ -38,8 +37,11 @@ def push_plan(
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
-) -> List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]]:
-    """Push a plan on a pair of given dimensions."""
+) -> Dict[str, Name | Weight | Dict[GeoID, DistrictID]]:
+    """Push a plan on a pair of given dimensions *once*.
+
+    NOTE - For multiple push attempts, call this multiple times with different seeds.
+    """
 
     base_district_by_geoid: Dict[GeoID, DistrictID] = {
         a.geoid: a.district for a in assignments
@@ -54,47 +56,43 @@ def push_plan(
         verbose=verbose,
     )  # Initialize a reusable scorer.
 
-    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
+    pushed_plan: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = {}
 
-    for i in range(1, multiplier + 1):
-        echo(console=verbose, log=logfile)
-        echo(f"Pushing plan on {dimensions} dimensions", console=verbose, log=logfile)
-        if pin:
-            echo(f"Pinned on {pin}", console=verbose, log=logfile)
-        echo(console=verbose, log=logfile)
-        echo(f"Search {i} of {multiplier}", console=verbose, log=logfile)
+    echo(console=verbose, log=logfile)
+    echo(f"Pushing plan on {dimensions} dimensions", console=verbose, log=logfile)
+    if pin:
+        echo(f"Pinned on {pin}", console=verbose, log=logfile)
+    echo(console=verbose, log=logfile)
 
-        try:
-            plan: Plan = Plan(
-                base_district_by_geoid,
-                pop_by_geoid,
-                graph,
-                seed,
-                verbose=verbose,
-                # debug=debug,
-            )  # Re-initialize the plan for each iteration.
+    try:
+        plan: Plan = Plan(
+            base_district_by_geoid,
+            pop_by_geoid,
+            graph,
+            seed,
+            verbose=verbose,
+            # debug=debug,
+        )  # Re-initialize the plan for each iteration.
 
-            plan_name: str = f"{prefix}_{i:03d}"
-            pushed_district_by_geoid: Dict[GeoID, DistrictID] = push_point(
-                plan,
-                scorer,
-                dimensions,
-                pin=pin,
-                logfile=logfile,
-                verbose=verbose,
-                # debug=debug,
-            )
+        pushed_district_by_geoid: Dict[GeoID, DistrictID] = push_point(
+            plan,
+            scorer,
+            dimensions,
+            pin=pin,
+            logfile=logfile,
+            verbose=verbose,
+            # debug=debug,
+        )
 
-            pushed_plans.append(
-                {"name": plan_name, "plan": pushed_district_by_geoid}
-            )  # No weights.
+        pushed_plan = {
+            "name": pushed,
+            "plan": pushed_district_by_geoid,
+        }  # No weights.
 
-        except:
-            pass  # Push unsuccessful
-        finally:
-            seed += 1
+    except:
+        pass  # Push unsuccessful
 
-    return pushed_plans
+    return pushed_plan
 
 
 # @time_function

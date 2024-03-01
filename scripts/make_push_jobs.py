@@ -14,9 +14,8 @@ $ scripts/make_push_jobs.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --intermediate ../../iCloud/fileout/intermediate \
---output ../../iCloud/fileout/temp \
---no-debug \
-> run_batch.sh
+--output ../../iCloud/fileout/hpc_batch \
+--no-debug
 
 For documentation, type:
 
@@ -30,6 +29,7 @@ from argparse import ArgumentParser, Namespace
 from typing import List, Dict, Any
 
 import os
+import shutil
 
 from rdabase import (
     require_args,
@@ -44,12 +44,29 @@ from tradeoffs import GeoID, DistrictID, Name, Weight
 
 
 def main() -> None:
-    """Make a 'job' for each point in each frontier in an ensemble."""
+    """Copy the support files & create a push 'job' for each point in each frontier in an ensemble."""
 
     args: argparse.Namespace = parse_args()
 
     xx: str = args.state
+
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
+    copy_path: str = f"{args.output}/{xx}"
+    run_path: str = f"home/{xx}"  # TODO
+
+    # Copy the 3 state input files
+
+    shutil.copy(args.data, os.path.join(f"{copy_path}/data", "data.csv"))
+    shutil.copy(args.shapes, os.path.join(f"{copy_path}/data", "shapes.json"))
+    shutil.copy(args.graph, os.path.join(f"{copy_path}/data", "graph.json"))
+
+    # Copy the push_plan.py script
+
+    shutil.copy(
+        "scripts/push_plan.py", os.path.join(f"{copy_path}/jobs", "push_plan.py")
+    )  # TODO - Make this standalone?
+
+    # Create each push job
 
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
     N: int = int(metadata["D"])
@@ -62,54 +79,47 @@ def main() -> None:
     frontiers_blob: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = frontiers_blob["frontiers"]
 
-    print(
-        f"# Command-line calls to 'push' points in {os.path.expanduser(args.frontier)}."
-    )
-    print(
-        f"# - The input plans have been written to {os.path.expanduser(args.intermediate)}/."
-    )
-    print(
-        f"# - The supporting data, shapes, & graph must be in {os.path.dirname(os.path.expanduser(args.data))}/."
-    )
-    print(
-        f"# - The output plans will be written to {os.path.expanduser(args.output)}/."
-    )
-    print()
-
-    for k, v in frontiers.items():
+    for k, v in frontiers.items():  # for each frontier
         dimensions: str = " ".join(k.split("_"))
 
-        for i, p in enumerate(v):
+        for i, p in enumerate(v):  # for each point
             name: str = p["map"]
             plan: List[Dict] = [
                 {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
             ]
 
             plan_to_push: str = f"{prefix}_{name}"
-            plan_path: str = os.path.expanduser(
-                f"{args.intermediate}/{plan_to_push}_plan.csv"
-            )
+            plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
+            plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
 
             pushed_prefix: str = prefix + f"_{k}_{i:02d}"
-            log_path: str = f"{args.output}/{plan_to_push}_log.txt"
+            log_run: str = f"{plan_to_push}_log.txt"
 
-            write_csv(plan_path, plan, ["GEOID", "DISTRICT"])
+            write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
 
-            print(f"scripts/push_plan.py \\")
-            print(f"--state {xx} \\")
-            print(f"--plan {plan_path} \\")
-            print(f"--dimensions {dimensions} \\")
-            print(f"--seed {seed} \\")
-            print(f"--multiplier {args.multiplier} \\")
-            print(f"--prefix {pushed_prefix} \\")
-            print(f"--data {os.path.expanduser(args.data)} \\")
-            print(f"--shapes {os.path.expanduser(args.shapes)} \\")
-            print(f"--graph {os.path.expanduser(args.graph)} \\")
-            print(f"--output {os.path.expanduser(args.output)} \\")
-            print(f"--log {os.path.expanduser(log_path)} \\")
-            print(f"--verbose \\")
-            print(f"--no-debug")
-            print()
+            job_copy: str = f"{copy_path}/jobs/{plan_to_push}_job.sh"
+            with open(job_copy, "w") as f:
+                for _ in range(1, args.mutiplier + 1):  # for each multiple
+                    # TODO
+                    # pushed_plan = pair + i + seed <<< assert pt_index <= 100
+                    # pushed_file = prefix + pushed_plan
+
+                    print(f"push_plan.py \\", file=f)
+                    print(f"--state {xx} \\", file=f)
+                    print(f"--plan {plan_run} \\", file=f)
+                    print(f"--dimensions {dimensions} \\", file=f)
+                    print(f"--seed {seed} \\", file=f)
+                    print(f"--iteration {args.multiplier} \\", file=f)
+                    print(f"--prefix {pushed_prefix} \\", file=f)
+                    print(f"--data {run_path}/data/data.csv \\", file=f)
+                    print(f"--shapes {run_path}/data/shapes.json \\", file=f)
+                    print(f"--graph {run_path}/data/graph.json \\", file=f)
+                    print(f"--output {run_path}/data/pushed \\", file=f)
+                    print(f"--log {run_path}/jobs/{log_run} \\", file=f)
+                    print(f"--verbose \\", file=f)
+                    print(f"--no-debug", file=f)
+
+                    seed += 1
 
 
 def parse_args():
@@ -179,12 +189,12 @@ def parse_args():
         "state": "NC",
         "plans": "../../iCloud/fileout/ensembles/NC20C_plans.json",
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
-        "multiplier": 1,
+        "multiplier": 1,  # TODO
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "intermediate": "../../iCloud/fileout/intermediate",
-        "output": "../../iCloud/fileout/temp",
+        "intermediate": "../../iCloud/fileout/intermediate",  # TODO
+        "output": "../../iCloud/fileout/hpc_batch",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)

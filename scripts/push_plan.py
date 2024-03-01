@@ -1,38 +1,20 @@
 #!/usr/bin/env python3
 
 """
-PUSH A PLAN ON TWO RATINGS DIMENSIONS
+PUSH A PLAN ONCE ON TWO RATINGS DIMENSIONS
 
 For example:
 
 $ scripts/push_plan.py \
 --state NC \
---plan sample/sample_plan.csv \
+--plan testdata/test_plan.csv \
 --dimensions proportionality minority \
---seed 519 \
---multiplier 1 \
---prefix sample_proportionality_minority_plan \
+--pushed ~/Downloads/test_plan_pushed.csv \
+--log ~/Downloads/test_plan_pushed_log.txt \
+--seed 518 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ~/Downloads \
---log ~/Downloads/log.txt \
---verbose \
---no-debug
-
-$ scripts/push_plan.py \
---state NC \
---plan sample/sample_plan.csv \
---dimensions proportionality minority \
---pin proportionality \
---seed 519 \
---multiplier 1 \
---prefix sample_proportionality_minority_plan \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---output ~/Downloads \
---log ~/Downloads/log.txt \
 --verbose \
 --no-debug
 
@@ -48,7 +30,6 @@ from argparse import ArgumentParser, Namespace
 from typing import Any, List, Dict, Tuple
 
 import os
-import random
 
 from rdabase import (
     require_args,
@@ -76,10 +57,6 @@ def main() -> None:
     pin: str = args.pin if args.pin else ""
     assert pin in ["", args.dimensions[0], args.dimensions[1]]
 
-    # Load the plan to push
-
-    assignments: List[Assignment] = load_plan(args.plan)
-
     # Load the data & shapes for scoring
 
     data: Dict[str, Dict[GeoID, DistrictID]] = load_data(args.data)
@@ -87,18 +64,20 @@ def main() -> None:
     graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
-    # Push the plan one or more times on the given dimensions
+    # Load the plan to push
+
+    assignments: List[Assignment] = load_plan(args.plan)
+
+    # Push the plan once on the given dimensions
 
     dimensions: Tuple[str, str] = (args.dimensions[0], args.dimensions[1])
-    pushed_plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = []
 
     with open(os.path.expanduser(args.log), "w") as f:
-        pushed_plans = push_plan(
+        pushed_plan: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = push_plan(
             assignments,
             dimensions,
             args.seed,
-            args.multiplier,
-            args.prefix,
+            os.path.basename(args.pushed),  # TODO - Remove .csv
             data,
             shapes,
             graph,
@@ -109,21 +88,17 @@ def main() -> None:
             debug=args.debug,
         )
 
-    # Write the pushed plans to CSV files
+    # If the plan was successfully pushed, write it to a CSV file
 
-    for pushed_plan in pushed_plans:
-        name: str = pushed_plan["name"]  # type: ignore
+    if pushed_plan:
         district_by_geoid: Dict[GeoID, DistrictID] = pushed_plan["plan"]  # type: ignore
 
-        filename: str = name + ".csv"
         plan: List[Dict[GeoID, DistrictID]] = [
             {"GEOID": k, "DISTRICT": v} for k, v in district_by_geoid.items()
         ]
-        write_csv(
-            os.path.expanduser(args.output) + "/" + filename,
-            plan,
-            ["GEOID", "DISTRICT"],
-        )
+        write_csv(args.pushed, plan, ["GEOID", "DISTRICT"])
+    elif args.verbose:
+        print("push_plan failed.")
 
 
 def parse_args():
@@ -142,6 +117,11 @@ def parse_args():
         help="The plan CSV to push",
     )
     parser.add_argument(
+        "--pushed",
+        help="Path to pushed plan CSV file",
+        type=str,
+    )
+    parser.add_argument(
         "--dimensions", nargs="+", help="A pair of ratings dimensions", type=str
     )
     parser.add_argument(
@@ -149,16 +129,13 @@ def parse_args():
         type=str,
         help="One of the dimensions to hold constant (optional)",
     )
-    parser.add_argument("--seed", type=int, help="Random seed")
     parser.add_argument(
-        "--multiplier", type=int, help="How many times to push the plan"
-    )
-    parser.add_argument(
-        "--prefix",
+        "--log",
         type=str,
-        help="A prefix for the pushed plans' filenames",
+        help="Path to Log TXT file",
     )
     #
+    parser.add_argument("--seed", type=int, help="Random seed")
     parser.add_argument(
         "--data",
         type=str,
@@ -175,18 +152,6 @@ def parse_args():
         help="Graph file",
     )
     #
-    parser.add_argument(
-        "--output",
-        default="~/Downloads",
-        help="Path to output directory",
-        type=str,
-    )
-    parser.add_argument(
-        "--log",
-        type=str,
-        help="Log TXT file",
-    )
-
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
     )
@@ -205,14 +170,12 @@ def parse_args():
         "plan": "testdata/test_plan.csv",
         "dimensions": ["proportionality", "minority"],
         # "pin": "proportionality",
+        "pushed": "~/Downloads/test_plan_pushed.csv",
+        "log": "~/Downloads/test_plan_pushed_log.txt",
         "seed": 518,
-        "multiplier": 1,
-        "prefix": "NC_proportionality_minority",
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "output": "~/Downloads",
-        "log": "~/Downloads/log.txt",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
