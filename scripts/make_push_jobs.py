@@ -64,8 +64,8 @@ def main() -> None:
     # Copy the push_plan.py script
 
     shutil.copy(
-        "scripts/push_plan.py", os.path.join(f"{copy_path}/jobs", "push_plan.py")
-    )  # TODO - Make this standalone?
+        "scripts/dist/push_plan", os.path.join(f"{copy_path}/jobs", "push_plan")
+    )
 
     # Create each push job
 
