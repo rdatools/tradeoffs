@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Tuple, Callable
 
 import numpy as np
 import pandas as pd
+from scipy.spatial import ConvexHull
 import itertools
 
 from rdaensemble.general import ratings_dimensions
@@ -117,6 +118,35 @@ def is_pareto_efficient_dumb(costs: np.ndarray[Any, Any]) -> np.ndarray:
             np.any(costs[i + 1 :] > c, axis=1)
         )
     return is_efficient
+
+
+def line_segment_hull(
+    xvalues: List[int], yvalues: List[int], *, verbose=False
+) -> Tuple[List[int], List[int]]:
+    """
+    Given the x & y values for the points of a ratings frontier line segment,
+    return the corresponding partial convex hull.
+
+    Add 'interior' points so the hulling will 'push out' (NE) the input line segment.
+    """
+
+    xinterior: List[int] = [0, max(xvalues), 0]
+    yinterior: List[int] = [0, 0, max(yvalues)]
+
+    input_points = np.array([x for x in zip(xinterior + xvalues, yinterior + yvalues)])
+    hull = ConvexHull(input_points)
+    hull_indices = np.unique(hull.simplices.flatten())
+    hull_points = [input_points[i] for i in hull_indices]
+
+    hull = [[int(pt[0]), int(pt[1])] for pt in hull_points]
+    unzipped = list(zip(*hull[3:]))
+
+    if verbose and (len(hull) < len(input_points)):
+        print(
+            f"Fewer points on the partial convex hull ({len(hull)-3}) than on the input line segment ({len(input_points)-3})."
+        )
+
+    return unzipped[0], unzipped[1]
 
 
 ### END ###

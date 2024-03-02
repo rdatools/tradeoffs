@@ -8,7 +8,7 @@ import random
 import pandas as pd
 import numpy as np
 
-from tradeoffs.frontiers import is_pareto_efficient_value
+from tradeoffs.frontiers import is_pareto_efficient_value, line_segment_hull
 
 
 class TestFindFrontiers:
@@ -115,6 +115,31 @@ class TestFindFrontiers:
         assert len(actual) == len(expected)
         for a in actual:
             assert a in expected
+
+    def test_convex_hull(self) -> None:
+        # Concave
+
+        fyvalues: List[int] = [4, 2, 1]
+        fxvalues: List[int] = [1, 2, 4]
+
+        hyvalues: List[int]
+        hxvalues: List[int]
+        hxvalues, hyvalues = line_segment_hull(fxvalues, fyvalues, verbose=True)
+
+        assert list(hyvalues) == [4, 1]
+        assert list(hxvalues) == [1, 4]
+
+        # Convex
+
+        fyvalues: List[int] = [4, 3, 1]
+        fxvalues: List[int] = [1, 3, 4]
+
+        hyvalues: List[int]
+        hxvalues: List[int]
+        hxvalues, hyvalues = line_segment_hull(fxvalues, fyvalues, verbose=True)
+
+        assert list(hyvalues) == [4, 3, 1]
+        assert list(hxvalues) == [1, 3, 4]
 
 
 ### END ###

@@ -18,6 +18,7 @@ from .frontiers import (
     find_frontiers,
     is_pareto_efficient_cost,
     is_pareto_efficient_value,
+    line_segment_hull,
 )
 from .notable_maps import id_most_notable_maps
 from .plan import Plan, segment_key, size_1_moves
