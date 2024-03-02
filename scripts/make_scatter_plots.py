@@ -54,7 +54,6 @@ from typing import Any, List, Dict, Tuple, Callable
 
 import pandas as pd
 import itertools
-from scipy.spatial import ConvexHull
 import numpy as np
 
 import plotly.graph_objects as go
@@ -69,6 +68,7 @@ from tradeoffs import (
     plot_width,
     plot_height,
     buttons,
+    line_segment_hull,
 )
 
 
@@ -202,32 +202,11 @@ def main() -> None:
         frontier_trace: Dict[str, Any] = {
             "x": fxvalues,
             "y": fyvalues,
-            "mode": "markers",
+            "mode": "lines",
             "line_color": "lightgray",
             "fill": None,
         }
         scatter_traces.append(frontier_trace)
-
-        frontier_points = np.array([x for x in zip(fxvalues, fyvalues)])
-        hull = [[int(pt[0]), int(pt[1])] for pt in ConvexHull(frontier_points).points]
-
-        if len(hull) < len(frontier_points) and args.verbose:
-            print(
-                f"Fewer frontier_points on convex hull ({len(hull)}) than on frontier ({len(frontier_points)})."
-            )
-
-        hyvalues: List[int] = [pt[1] for pt in hull]
-        hxvalues: List[int] = [pt[0] for pt in hull]
-        hull_trace: Dict[str, Any] = {
-            "x": hxvalues,
-            "y": hyvalues,
-            "mode": "lines+markers",
-            "line_color": "lightgray",
-            "fill": None,
-        }
-        scatter_traces.append(hull_trace)
-
-        #
 
         if args.pushed:
             # TODO - Temporary HACK
@@ -251,9 +230,21 @@ def main() -> None:
                 "mode": "lines+markers",
                 "marker_color": "black",
                 "marker_size": 3,
-                "fill": "tonexty",
+                "fill": None,
                 "fillcolor": "lightgray",
             }
+
+            hyvalues: List[int]
+            hxvalues: List[int]
+            hxvalues, hyvalues = line_segment_hull(pfxvalues, pfyvalues)
+            hull_trace: Dict[str, Any] = {
+                "x": hxvalues,
+                "y": hyvalues,
+                "mode": "lines+markers",
+                "line_color": "lightgray",
+                "fill": "tonexty",
+            }
+            scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
 
         xlabel: str = xdim.capitalize()
