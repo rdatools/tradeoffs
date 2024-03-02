@@ -28,6 +28,7 @@ $ cd scripts
 $ pyinstaller push_plan.py --onefile
 
 The resulting executable will be in scripts/dist/push_plan.
+It is *not* tracked in GitHub.
 
 """
 
@@ -80,11 +81,10 @@ def main() -> None:
     dimensions: Tuple[str, str] = (args.dimensions[0], args.dimensions[1])
 
     with open(os.path.expanduser(args.log), "w") as f:
-        pushed_plan: Dict[str, Name | Weight | Dict[GeoID, DistrictID]] = push_plan(
+        pushed_plan: Dict[GeoID, DistrictID] = push_plan(
             assignments,
             dimensions,
             args.seed,
-            os.path.splitext(os.path.basename(args.pushed))[0],
             data,
             shapes,
             graph,
@@ -98,14 +98,10 @@ def main() -> None:
     # If the plan was successfully pushed, write it to a CSV file
 
     if pushed_plan:
-        district_by_geoid: Dict[GeoID, DistrictID] = pushed_plan["plan"]  # type: ignore
-
         plan: List[Dict[GeoID, DistrictID]] = [
-            {"GEOID": k, "DISTRICT": v} for k, v in district_by_geoid.items()
+            {"GEOID": k, "DISTRICT": v} for k, v in pushed_plan.items()
         ]
         write_csv(args.pushed, plan, ["GEOID", "DISTRICT"])
-    elif args.verbose:
-        print("push_plan failed.")
 
 
 def parse_args():
