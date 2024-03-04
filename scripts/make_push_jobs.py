@@ -82,8 +82,8 @@ def main() -> None:
 
     batch_copy: str = f"{copy_path}/submit_jobs.sh"
     with open(batch_copy, "w") as bf:
-        print(f"chmod +x {run_path}/{xx}/jobs/*.sh", file=bf)
-        print(f"chmod +x {run_path}/{xx}/jobs/*.slurm", file=bf)
+        print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
+        print(f"chmod +x {run_path}/jobs/*.slurm", file=bf)
 
         for k, v in frontiers.items():  # for each frontier
             dimensions: str = " ".join(k.split("_"))
