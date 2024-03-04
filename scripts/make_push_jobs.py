@@ -53,7 +53,7 @@ def main() -> None:
 
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
     copy_path: str = f"{args.output}/{xx}"
-    run_path: str = f"dropbox/{xx}"
+    run_path: str = f"$HOME/dropbox/{xx}"
 
     # Copy the 3 state input files
 
@@ -87,58 +87,63 @@ def main() -> None:
         y: str = str(ratings_dimensions.index(pair[0]) + 1)
         x: str = str(ratings_dimensions.index(pair[1]) + 1)
 
-        for i, p in enumerate(v):  # for each point
-            name: str = p["map"]
-            plan: List[Dict] = [
-                {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
-            ]
+        batch_copy: str = f"{copy_path}/submit_jobs.sh"
+        with open(batch_copy, "w") as bf:
 
-            plan_to_push: str = f"{prefix}_{name}"
-            plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
-            plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
+            for i, p in enumerate(v):  # for each point
+                name: str = p["map"]
+                plan: List[Dict] = [
+                    {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
+                ]
 
-            pushed_prefix: str = prefix + f"_{name}_{y}{x}"
+                plan_to_push: str = f"{prefix}_{name}"
+                plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
+                plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
 
-            write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
+                pushed_prefix: str = prefix + f"_{name}_{y}{x}"
 
-            job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
-            seed: int = start
-            with open(job_copy, "w") as f:
-                for j in range(1, args.multiplier + 1):  # for each multiple
-                    pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
-                    log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
+                write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
 
-                    print(f"push_plan", file=f)
-                    print(f"--state {xx}", file=f)
-                    print(f"--plan {plan_run}", file=f)
-                    print(f"--dimensions {dimensions}", file=f)
-                    print(f"--pushed {run_path}/pushed/{pushed_run}", file=f)
-                    print(f"--log {run_path}/pushed/{log_run}", file=f)
-                    print(f"--seed {seed}", file=f)
-                    print(f"--data {run_path}/data/data.csv", file=f)
-                    print(f"--shapes {run_path}/data/shapes.json", file=f)
-                    print(f"--graph {run_path}/data/graph.json", file=f)
-                    print(f"--verbose", file=f)
-                    print(f"--no-debug", file=f)
-                    print(f"###", file=f)
+                job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
+                seed: int = start
+                with open(job_copy, "w") as jf:
+                    for j in range(1, args.multiplier + 1):  # for each multiple
+                        pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
+                        log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
-                    seed += 1
+                        print(f"push_plan", file=jf)
+                        print(f"--state {xx}", file=jf)
+                        print(f"--plan {plan_run}", file=jf)
+                        print(f"--dimensions {dimensions}", file=jf)
+                        print(f"--pushed {run_path}/pushed/{pushed_run}", file=jf)
+                        print(f"--log {run_path}/pushed/{log_run}", file=jf)
+                        print(f"--seed {seed}", file=jf)
+                        print(f"--data {run_path}/data/data.csv", file=jf)
+                        print(f"--shapes {run_path}/data/shapes.json", file=jf)
+                        print(f"--graph {run_path}/data/graph.json", file=jf)
+                        print(f"--verbose", file=jf)
+                        print(f"--no-debug", file=jf)
+                        print(f"###", file=jf)
 
-            slurm_copy: str = f"{copy_path}/jobs/{plan_to_push}.slurm"
-            with open(slurm_copy, "w") as f:
-                print(f"#!/bin/bash", file=f)
-                print(file=f)
-                print(f"#SBATCH --ntasks=28", file=f)
-                print(f"#SBATCH --nodes=1", file=f)
-                print(f"#SBATCH --time=00:10:00", file=f)
-                print(f"#SBATCH --partition=standard", file=f)
-                print(f"#SBATCH --account=proebsting", file=f)
-                print(f"#SBATCH -o {plan_to_push}.out", file=f)
-                print(file=f)
-                print(f"module load parallel", file=f)
-                print(f"module load python/3.11", file=f)
-                print(file=f)
-                print(f"cat {plan_to_push}.sh | parallel -d '###'", file=f)
+                        seed += 1
+
+                slurm_copy: str = f"{copy_path}/jobs/{plan_to_push}.slurm"
+                with open(slurm_copy, "w") as sf:
+                    print(f"#!/bin/bash", file=sf)
+                    print(file=sf)
+                    print(f"#SBATCH --ntasks=28", file=sf)
+                    print(f"#SBATCH --nodes=1", file=sf)
+                    print(f"#SBATCH --time=00:10:00", file=sf)
+                    print(f"#SBATCH --partition=standard", file=sf)
+                    print(f"#SBATCH --account=proebsting", file=sf)
+                    print(f"#SBATCH -o {plan_to_push}.out", file=sf)
+                    print(file=sf)
+                    print(f"module load parallel", file=sf)
+                    print(f"module load python/3.11", file=sf)
+                    print(file=sf)
+                    print(f"cat {plan_to_push}.sh | parallel -d '###'", file=sf)
+
+                print(f"{run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
 
 def parse_args():
