@@ -120,25 +120,25 @@ def main() -> None:
                     print(f"--graph {run_path}/data/graph.json", file=f)
                     print(f"--verbose", file=f)
                     print(f"--no-debug", file=f)
-                    print(f"###")
+                    print(f"###", file=f)
 
                     seed += 1
 
             slurm_copy: str = f"{copy_path}/jobs/{plan_to_push}.slurm"
             with open(slurm_copy, "w") as f:
-                print(f"#!/bin/bash")
-                print()
-                print(f"#SBATCH --ntasks=28")
-                print(f"#SBATCH --nodes=1")
-                print(f"#SBATCH --time=00:10:00")
-                print(f"#SBATCH --partition=standard")
-                print(f"#SBATCH --account=proebsting")
-                print(f"#SBATCH -o {plan_to_push}.out")
-                print()
-                print(f"module load parallel")
-                print(f"module load python/3.11")
-                print()
-                print(f"cat {plan_to_push}.sh | parallel -d '###'")
+                print(f"#!/bin/bash", file=f)
+                print(file=f)
+                print(f"#SBATCH --ntasks=28", file=f)
+                print(f"#SBATCH --nodes=1", file=f)
+                print(f"#SBATCH --time=00:10:00", file=f)
+                print(f"#SBATCH --partition=standard", file=f)
+                print(f"#SBATCH --account=proebsting", file=f)
+                print(f"#SBATCH -o {plan_to_push}.out", file=f)
+                print(file=f)
+                print(f"module load parallel", file=f)
+                print(f"module load python/3.11", file=f)
+                print(file=f)
+                print(f"cat {plan_to_push}.sh | parallel -d '###'", file=f)
 
 
 def parse_args():
