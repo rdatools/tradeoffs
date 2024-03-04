@@ -89,7 +89,6 @@ def main() -> None:
 
         batch_copy: str = f"{copy_path}/submit_jobs.sh"
         with open(batch_copy, "w") as bf:
-
             for i, p in enumerate(v):  # for each point
                 name: str = p["map"]
                 plan: List[Dict] = [
@@ -103,6 +102,8 @@ def main() -> None:
                 pushed_prefix: str = prefix + f"_{name}_{y}{x}"
 
                 write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
+
+                print(f"{run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
                 job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
                 seed: int = start
@@ -130,20 +131,18 @@ def main() -> None:
                 slurm_copy: str = f"{copy_path}/jobs/{plan_to_push}.slurm"
                 with open(slurm_copy, "w") as sf:
                     print(f"#!/bin/bash", file=sf)
-                    print(file=sf)
+                    print(f"", file=sf)
                     print(f"#SBATCH --ntasks=28", file=sf)
                     print(f"#SBATCH --nodes=1", file=sf)
                     print(f"#SBATCH --time=00:10:00", file=sf)
                     print(f"#SBATCH --partition=standard", file=sf)
                     print(f"#SBATCH --account=proebsting", file=sf)
                     print(f"#SBATCH -o {plan_to_push}.out", file=sf)
-                    print(file=sf)
+                    print(f"", file=sf)
                     print(f"module load parallel", file=sf)
                     print(f"module load python/3.11", file=sf)
-                    print(file=sf)
+                    print(f"", file=sf)
                     print(f"cat {plan_to_push}.sh | parallel -d '###'", file=sf)
-
-                print(f"{run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
 
 def parse_args():
