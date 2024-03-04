@@ -9,11 +9,11 @@ $ scripts/make_push_jobs.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---multiplier 10 \
+--multiplier 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/hpc_batch \
+--output ../../iCloud/fileout/hpc_dropbox \
 --no-debug
 
 For documentation, type:
@@ -100,7 +100,6 @@ def main() -> None:
             plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
 
             pushed_prefix: str = prefix + f"_{name}_{y}{x}"
-            # pushed_prefix: str = prefix + f"_{y}{x}_{i:03d}"
 
             write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
 
@@ -111,18 +110,19 @@ def main() -> None:
                     pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
                     log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
-                    print(f"push_plan \\", file=f)
-                    print(f"--state {xx} \\", file=f)
-                    print(f"--plan {plan_run} \\", file=f)
-                    print(f"--dimensions {dimensions} \\", file=f)
-                    print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=f)
-                    print(f"--log {run_path}/pushed/{log_run} \\", file=f)
-                    print(f"--seed {seed} \\", file=f)
-                    print(f"--data {run_path}/data/data.csv \\", file=f)
-                    print(f"--shapes {run_path}/data/shapes.json \\", file=f)
-                    print(f"--graph {run_path}/data/graph.json \\", file=f)
-                    print(f"--verbose \\", file=f)
+                    print(f"push_plan", file=f)
+                    print(f"--state {xx}", file=f)
+                    print(f"--plan {plan_run}", file=f)
+                    print(f"--dimensions {dimensions}", file=f)
+                    print(f"--pushed {run_path}/pushed/{pushed_run}", file=f)
+                    print(f"--log {run_path}/pushed/{log_run}", file=f)
+                    print(f"--seed {seed}", file=f)
+                    print(f"--data {run_path}/data/data.csv", file=f)
+                    print(f"--shapes {run_path}/data/shapes.json", file=f)
+                    print(f"--graph {run_path}/data/graph.json", file=f)
+                    print(f"--verbose", file=f)
                     print(f"--no-debug", file=f)
+                    print(f"###")
 
                     seed += 1
 
