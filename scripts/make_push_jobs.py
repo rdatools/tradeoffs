@@ -80,15 +80,16 @@ def main() -> None:
 
     ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
 
-    for k, v in frontiers.items():  # for each frontier
-        dimensions: str = " ".join(k.split("_"))
+    batch_copy: str = f"{copy_path}/submit_jobs.sh"
+    with open(batch_copy, "w") as bf:
 
-        pair: Tuple[str, ...] = tuple(k.split("_"))
-        y: str = str(ratings_dimensions.index(pair[0]) + 1)
-        x: str = str(ratings_dimensions.index(pair[1]) + 1)
+        for k, v in frontiers.items():  # for each frontier
+            dimensions: str = " ".join(k.split("_"))
 
-        batch_copy: str = f"{copy_path}/submit_jobs.sh"
-        with open(batch_copy, "w") as bf:
+            pair: Tuple[str, ...] = tuple(k.split("_"))
+            y: str = str(ratings_dimensions.index(pair[0]) + 1)
+            x: str = str(ratings_dimensions.index(pair[1]) + 1)
+
             for i, p in enumerate(v):  # for each point
                 name: str = p["map"]
                 plan: List[Dict] = [
@@ -102,8 +103,6 @@ def main() -> None:
                 pushed_prefix: str = prefix + f"_{name}_{y}{x}"
 
                 write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
-
-                print(f"{run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
                 job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
                 seed: int = start
@@ -143,6 +142,8 @@ def main() -> None:
                     print(f"module load python/3.11", file=sf)
                     print(f"", file=sf)
                     print(f"cat {plan_to_push}.sh | parallel -d '###'", file=sf)
+
+                print(f"{run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
 
 def parse_args():
@@ -211,7 +212,7 @@ def parse_args():
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "output": "../../iCloud/fileout/hpc_batch",
+        "output": "../../iCloud/fileout/hpc_dropbox",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
