@@ -53,7 +53,7 @@ def main() -> None:
 
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
     copy_path: str = f"{args.output}/{xx}"
-    run_path: str = f"home/{xx}"  # TODO
+    run_path: str = f"dropbox/{xx}"
 
     # Copy the 3 state input files
 
@@ -63,9 +63,7 @@ def main() -> None:
 
     # Copy the standalone push_plan executable
 
-    shutil.copy(
-        "scripts/dist/push_plan", os.path.join(f"{copy_path}/jobs", "push_plan")
-    )
+    shutil.copy("scripts/push_plan", os.path.join(f"{copy_path}/jobs", "push_plan"))
 
     # Create each push job
 
@@ -103,7 +101,7 @@ def main() -> None:
 
             write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
 
-            job_copy: str = f"{copy_path}/jobs/{plan_to_push}_job.sh"
+            job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
             seed: int = start
             with open(job_copy, "w") as f:
                 for j in range(1, args.multiplier + 1):  # for each multiple
@@ -125,6 +123,22 @@ def main() -> None:
                     print(f"###")
 
                     seed += 1
+
+            slurm_copy: str = f"{copy_path}/jobs/{plan_to_push}.slurm"
+            with open(slurm_copy, "w") as f:
+                print(f"#!/bin/bash")
+                print()
+                print(f"#SBATCH --ntasks=28")
+                print(f"#SBATCH --nodes=1")
+                print(f"#SBATCH --time=00:10:00")
+                print(f"#SBATCH --partition=standard")
+                print(f"#SBATCH --account=proebsting")
+                print(f"#SBATCH -o {plan_to_push}.out")
+                print()
+                print(f"module load parallel")
+                print(f"module load python/3.11")
+                print()
+                print(f"cat {plan_to_push}.sh | parallel -d '###'")
 
 
 def parse_args():
