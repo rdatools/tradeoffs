@@ -137,7 +137,7 @@ def main() -> None:
                     print(f"", file=sf)
                     print(f"#SBATCH --ntasks=28", file=sf)
                     print(f"#SBATCH --nodes=1", file=sf)
-                    print(f"#SBATCH --time=00:10:00", file=sf)
+                    print(f"#SBATCH --time=00:20:00", file=sf)
                     print(f"#SBATCH --partition=standard", file=sf)
                     print(f"#SBATCH --account=proebsting", file=sf)
                     print(f"#SBATCH -o dropbox/{xx}/pushed/{plan_to_push}.out", file=sf)
