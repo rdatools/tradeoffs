@@ -83,7 +83,7 @@ def main() -> None:
     batch_copy: str = f"{copy_path}/submit_jobs.sh"
     with open(batch_copy, "w") as bf:
         print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
-        print(f"chmod +x {run_path}/jobs/*.slurm", file=bf)
+        # print(f"chmod +x {run_path}/jobs/*.slurm", file=bf)
 
         for k, v in frontiers.items():  # for each frontier
             dimensions: str = " ".join(k.split("_"))
@@ -113,17 +113,17 @@ def main() -> None:
                         pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
                         log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
-                        print(f"push_plan", file=jf)
-                        print(f"--state {xx}", file=jf)
-                        print(f"--plan {plan_run}", file=jf)
-                        print(f"--dimensions {dimensions}", file=jf)
-                        print(f"--pushed {run_path}/pushed/{pushed_run}", file=jf)
-                        print(f"--log {run_path}/pushed/{log_run}", file=jf)
-                        print(f"--seed {seed}", file=jf)
-                        print(f"--data {run_path}/data/data.csv", file=jf)
-                        print(f"--shapes {run_path}/data/shapes.json", file=jf)
-                        print(f"--graph {run_path}/data/graph.json", file=jf)
-                        print(f"--verbose", file=jf)
+                        print(f"push_plan \\", file=jf)
+                        print(f"--state {xx} \\", file=jf)
+                        print(f"--plan {plan_run} \\", file=jf)
+                        print(f"--dimensions {dimensions} \\", file=jf)
+                        print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
+                        print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
+                        print(f"--seed {seed} \\", file=jf)
+                        print(f"--data {run_path}/data/data.csv \\", file=jf)
+                        print(f"--shapes {run_path}/data/shapes.json \\", file=jf)
+                        print(f"--graph {run_path}/data/graph.json \\", file=jf)
+                        print(f"--verbose \\", file=jf)
                         print(f"--no-debug", file=jf)
                         print(f"###", file=jf)
 
@@ -148,7 +148,7 @@ def main() -> None:
                         file=sf,
                     )
 
-                print(f"{run_path}/jobs/{plan_to_push}.slurm", file=bf)
+                print(f"sbatch {run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
 
 def parse_args():
