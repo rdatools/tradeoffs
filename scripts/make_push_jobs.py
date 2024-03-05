@@ -53,7 +53,7 @@ def main() -> None:
 
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
     copy_path: str = f"{args.output}/{xx}"
-    run_path: str = f"$HOME/dropbox/{xx}"
+    run_path: str = f"~/dropbox/{xx}"
 
     # Copy the 3 state input files
 
@@ -63,7 +63,9 @@ def main() -> None:
 
     # Copy the standalone push_plan executable
 
-    shutil.copy("scripts/push_plan", os.path.join(f"{copy_path}/jobs", "push_plan"))
+    shutil.copy(
+        "scripts/push_plan.py", os.path.join(f"{copy_path}/jobs", "push_plan.py")
+    )
 
     # Create each push job
 
@@ -113,7 +115,7 @@ def main() -> None:
                         pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
                         log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
-                        print(f"$HOME/tradeoffs/scripts/push_plan.py \\", file=jf)
+                        print(f"~/tradeoffs/scripts/push_plan.py \\", file=jf)
                         print(f"--state {xx} \\", file=jf)
                         print(f"--plan {plan_run} \\", file=jf)
                         print(f"--dimensions {dimensions} \\", file=jf)

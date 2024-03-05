@@ -1,8 +1,8 @@
-numpy==1.26.4
-pandas==2.2.0
-plotly==5.18.0
-pytest==8.0.0
-rdabase==2.3.0
-rdaensemble==1.3.1
-rdapy==1.4.0
-rdascore==2.4.0
+numpy
+pandas
+plotly
+pytest
+rdabase
+rdaensemble
+rdapy
+rdascore
