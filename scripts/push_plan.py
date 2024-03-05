@@ -22,14 +22,6 @@ For documentation, type:
 
 $ scripts/push_plan.py
 
-To package this script as a standalone executable:
-
-$ cd scripts
-$ pyinstaller push_plan.py --onefile
-
-The resulting executable will be in scripts/dist/push_plan.
-It is *not* tracked in GitHub.
-
 """
 
 import argparse
