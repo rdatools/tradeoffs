@@ -113,7 +113,7 @@ def main() -> None:
                         pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
                         log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
-                        print(f"{run_path}/jobs/push_plan \\", file=jf)
+                        print(f"$HOME/tradeoffs/scripts/push_plan.py \\", file=jf)
                         print(f"--state {xx} \\", file=jf)
                         print(f"--plan {plan_run} \\", file=jf)
                         print(f"--dimensions {dimensions} \\", file=jf)
@@ -138,7 +138,7 @@ def main() -> None:
                     print(f"#SBATCH --time=00:10:00", file=sf)
                     print(f"#SBATCH --partition=standard", file=sf)
                     print(f"#SBATCH --account=proebsting", file=sf)
-                    print(f"#SBATCH -o {plan_to_push}.out", file=sf)
+                    print(f"#SBATCH -o {run_path}/pushed/{plan_to_push}.out", file=sf)
                     print(f"", file=sf)
                     print(f"module load parallel", file=sf)
                     print(f"module load python/3.11", file=sf)
