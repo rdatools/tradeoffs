@@ -39,7 +39,7 @@ scripts/make_push_jobs.py \
 --output ../../iCloud/fileout/hpc_dropbox \
 --no-debug
 
-# TODO - Add HPC steps
+# TODO - Add the HPC steps
 
 # From rdaensemble:
 # Collected the pushed plans into an ensemble
@@ -49,7 +49,6 @@ scripts/ensemble_from_plans.py \
 --dir ../../iCloud/fileout/hpc_dropbox/NC/pushed \
 --no-debug
 
-# From rdaensemble:
 # Score the pushed plans
 scripts/score_ensemble.py \
 --state NC \
@@ -60,9 +59,18 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv \
 --no-debug
 
-# TODO - Combine the base ensemble & pushed plans scores
+# From tradeoffs:
+# Combine the base ensemble & pushed plans scores
 
-# TODO - Find the pushed frontiers
+tail -n +2 ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv > ../../iCloud/fileout/ensembles/scores.tmp && mv ../../iCloud/fileout/ensembles/scores.tmp ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv
+cat ../../iCloud/fileout/ensembles/NC20C_scores.csv ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv > ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv
+
+# Find the pushed frontiers
+scripts/find_frontiers.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
+--metadata ../../iCloud/fileout/ensembles/NC20C_scores_pushed_metadata.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
+--no-debug
 
 ### END PUSH FRONTIER POINTS ###
 

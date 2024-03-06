@@ -21,6 +21,10 @@ import argparse
 from argparse import ArgumentParser, Namespace
 from typing import Any, List, Dict, Callable
 
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
+
 import pandas as pd
 import itertools
 
