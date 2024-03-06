@@ -1,4 +1,5 @@
-# ... approximate the root map ...
+# TODO - Rationalize file names
+# TODO - Approximate the root map
 
 scripts/recom_ensemble.py \
 --state NC \
@@ -74,34 +75,52 @@ scripts/find_frontiers.py \
 
 ### END PUSH FRONTIER POINTS ###
 
-scripts/flatten_scorecard.py \
---export ../../iCloud/fileout/ensembles/NC_2024_Congressional_analytics.json \
---name NC_2024_Congressional \
---scores ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---no-debug
-
-scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
---no-debug
-
-scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---prefix NC20C \
---suffix 10K \
---output ../../iCloud/fileout/images/ \
---no-debug
-
+# TODO - Generate artifacts to ~/Downloads & copy them once verified
+# TODO - STEP 9 - ID the notable maps in the augmented ensemble
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
 --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
 --no-debug
 
+# From tradeoffs:
+
+# TODO - ???
+# scripts/flatten_scorecard.py \
+# --export ../../iCloud/fileout/ensembles/NC_2024_Congressional_analytics.json \
+# --name NC_2024_Congressional \
+# --scores ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+# --no-debug
+
+# TODO - STEP 10 - Make a box plot <<< TODO - Rationalize the focus map
+scripts/make_box_plot.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+# --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
+--no-debug
+
+# TODO - STEP 11 - Make a statistics table
+scripts/make_stats_table.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--output ../../iCloud/fileout/images/NC20C_statistics.csv \
+--no-debug
+
+# TODO - STEP 12 - Make a notable maps ratings table
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
 --output ../../iCloud/fileout/images/NC20C_notable_maps_ratings.csv \
 --no-debug
+
+# TODO - STEP 13 - Make scatter plots w/ pre- & post-push frontiers <<< TODO - Rationalize focus map
+scripts/make_scatter_plots.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
+--notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
+--focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--prefix NC20C \
+--suffix 10K \
+--output ~/Downloads/ \
+--no-debug
+
+# TODO - STEP 14 - Copy the artifacts (to fileout & the 'docs' subdirectories)

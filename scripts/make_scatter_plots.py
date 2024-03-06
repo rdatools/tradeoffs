@@ -8,38 +8,23 @@ For example:
 $ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---prefix NC20C \
---suffix 10K \
---output ../../iCloud/fileout/images/ \
---no-debug
-
-$ scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --prefix NC20C \
 --suffix 10K \
---output ../../iCloud/fileout/images/ \
+--output ~/Downloads/ \
 --no-debug
 
+# TODO - Rationalize focus plan
 $ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
+--notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 10K \
---output ../../iCloud/fileout/images/ \
---no-debug
-
-# TODO - Update 'pushed' argument
-$ scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---pushed ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---prefix NC20C \
---suffix 10K \
---output ../../iCloud/fileout/images/ \
+--output ~/Downloads/ \
 --no-debug
 
 For documentation, type:
@@ -51,6 +36,10 @@ $ scripts/make_scatter_plots.py
 import argparse
 from argparse import ArgumentParser, Namespace
 from typing import Any, List, Dict, Tuple, Callable
+
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
 
 import pandas as pd
 import itertools
@@ -209,16 +198,6 @@ def main() -> None:
         scatter_traces.append(frontier_trace)
 
         if args.pushed:
-            # TODO - Temporary HACK
-            for pt in pushed_frontier:
-                pt["ratings"][d1] = min(100, pt["ratings"][d1] + 3)
-                pt["ratings"][d2] = min(100, pt["ratings"][d2] + 3)
-            pushed_frontier = sorted(
-                pushed_frontier,
-                key=lambda d: (d["ratings"][d1], d["ratings"][d2]),
-                reverse=True,
-            )
-            # End HACK
             pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
             pfxvalues: List[int] = [f["ratings"][d2] for f in pushed_frontier]
             pushed_frontier_trace: Dict[str, Any] = {
@@ -350,13 +329,13 @@ def parse_args():
         help="Pushed frontier maps JSON file",
     )
     # TODO - Rationalize 'focus' maps
-    # parser.add_argument(
-    #     "--focus",
-    #     nargs="?",
-    #     type=str,
-    #     default="",
-    #     help="The flattened scores for a map to highlight (optional)",
-    # )
+    parser.add_argument(
+        "--focus",
+        nargs="?",
+        type=str,
+        default="",
+        help="The flattened scores for a map to highlight (optional)",
+    )
     parser.add_argument(
         "--prefix",
         type=str,
@@ -393,7 +372,7 @@ def parse_args():
         "scores": "testdata/test_scores.csv",
         "notables": "docs/_data/notable_ratings/NC_2022_Congress_ratings.csv",
         "frontier": "testdata/test_frontiers.json",
-        "pushed": "testdata/test_frontiers.json",  # TODO
+        "pushed": "testdata/test_frontiers_pushed.json",
         "focus": "",  # "testdata/test_focus_scores.csv", # TODO - Rationalize 'focus' maps
         "prefix": "test",
         "suffix": "",
