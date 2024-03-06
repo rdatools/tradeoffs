@@ -26,24 +26,45 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-...
+### PUSH FRONTIER POINTS ###
 
-scripts/push_plan.py \
+scripts/make_push_jobs.py \
 --state NC \
---plan ../../iCloud/fileout/intermediate/NC20C_0804_map.csv \
---dimensions proportionality competitiveness \
---seed 518 \
---multiplier 1 \
---prefix NC20C_proportionality_competitiveness_00 \
+--plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--multiplier 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/temp \
---log ../../iCloud/fileout/temp/NC20C_0804_log.txt \
---verbose \
+--output ../../iCloud/fileout/hpc_dropbox \
 --no-debug
 
-...
+# TODO - Add HPC steps
+
+# From rdaensemble:
+# Collected the pushed plans into an ensemble
+scripts/ensemble_from_plans.py \
+--base ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \
+--dir ../../iCloud/fileout/hpc_dropbox/NC/pushed \
+--no-debug
+
+# From rdaensemble:
+# Score the pushed plans
+scripts/score_ensemble.py \
+--state NC \
+--plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv \
+--no-debug
+
+# TODO - Combine the base ensemble & pushed plans scores
+
+# TODO - Find the pushed frontiers
+
+### END PUSH FRONTIER POINTS ###
 
 scripts/flatten_scorecard.py \
 --export ../../iCloud/fileout/ensembles/NC_2024_Congressional_analytics.json \
