@@ -161,6 +161,7 @@ def main() -> None:
             "mode": "markers",
             "marker_color": "black",
             "marker_size": 1,
+            "showlegend": False,
         }
 
         notable_traces: List[Dict[str, Any]] = []
@@ -170,6 +171,7 @@ def main() -> None:
                 "y": [pt[1]],
                 "mode": "markers",
                 "marker": {"size": 5, "color": "red", "symbol": "diamond"},
+                "showlegend": False,
             }
             notable_traces.append(notable_trace)
         # official_trace: Dict[str, Any] = {
@@ -189,7 +191,8 @@ def main() -> None:
                     "y": [pt[1]],
                     "mode": "markers",
                     "marker": {"size": 5, "color": "black", "symbol": focus_markers[i]},
-                }  # TODO - Create a legend for focus points
+                    "showlegend": True,
+                }
                 focus_traces.append(focus_trace)
 
         fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
@@ -200,6 +203,7 @@ def main() -> None:
             "mode": "lines",
             "line_color": "lightgray",
             "fill": None,
+            "showlegend": False,
         }
 
         if args.pushed:
@@ -224,6 +228,7 @@ def main() -> None:
                 "marker_color": "black",
                 "marker_size": 3,
                 "fill": None,
+                "showlegend": False,
             }
 
             hyvalues: List[int]
@@ -239,6 +244,7 @@ def main() -> None:
                 "marker_color": "black",
                 "fill": "tonexty",
                 "fillcolor": "lightgray",
+                "showlegend": False,
             }
 
         # Add the traces in the desired order
@@ -292,7 +298,9 @@ def main() -> None:
                 "scaleratio": 1,
             },
             "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
-            "showlegend": False,
+            "legend": {"yanchor": "top", "y": 0.99, "xanchor": "left", "x": 0.01},
+            "showlegend": True,
+            # "showlegend": False,
             "paper_bgcolor": bgcolor,
             "plot_bgcolor": bgcolor,
         }
