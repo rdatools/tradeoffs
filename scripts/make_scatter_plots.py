@@ -12,7 +12,7 @@ $ scripts/make_scatter_plots.py \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --prefix NC20C \
 --suffix 10K \
---output ~/Downloads/ \
+--output ~/Downloads/tradeoffs \
 --no-debug
 
 # TODO - Rationalize focus plan
@@ -24,7 +24,7 @@ $ scripts/make_scatter_plots.py \
 --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
 --prefix NC20C \
 --suffix 10K \
---output ~/Downloads/ \
+--output ~/Downloads/tradeoffs \
 --no-debug
 
 For documentation, type:
@@ -154,24 +154,22 @@ def main() -> None:
             "marker_color": "black",
             "marker_size": 1,
         }
-        scatter_traces.append(points_trace)
 
+        notable_traces: List[Dict[str, Any]] = []
         for pt in notable_points[p]:
             notable_trace: Dict[str, Any] = {
                 "x": [pt[0]],
                 "y": [pt[1]],
                 "mode": "markers",
-                "marker_color": "black",
-                "marker_size": 3,
+                "marker": {"size": 3, "color": "red", "symbol": "diamond"},
             }
-            scatter_traces.append(notable_trace)
+            notable_traces.append(notable_trace)
         official_trace: Dict[str, Any] = {
             "x": [official_points[p][0]],
             "y": [official_points[p][1]],
             "mode": "markers",
             "marker": {"size": 5, "symbol": "star"},
         }
-        scatter_traces.append(official_trace)
 
         # TODO - Rationalize 'focus' maps
         # If given, highlight ratings for a "focus map" on the scatter plot
@@ -195,7 +193,6 @@ def main() -> None:
             "line_color": "lightgray",
             "fill": None,
         }
-        scatter_traces.append(frontier_trace)
 
         if args.pushed:
             pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
@@ -215,7 +212,9 @@ def main() -> None:
 
             hyvalues: List[int]
             hxvalues: List[int]
-            hxvalues, hyvalues = line_segment_hull(pfxvalues, pfyvalues)
+            # TODO - Verify the hull values
+            # hxvalues, hyvalues = line_segment_hull(pfxvalues, pfyvalues)
+            hxvalues, hyvalues = pfxvalues, pfyvalues
             hull_trace: Dict[str, Any] = {
                 "x": hxvalues,
                 "y": hyvalues,
@@ -223,8 +222,17 @@ def main() -> None:
                 "line_color": "lightgray",
                 "fill": "tonexty",
             }
+
+        #
+
+        scatter_traces.append(points_trace)
+        # scatter_traces.append(official_trace)
+        scatter_traces.append(frontier_trace)
+        if args.pushed:
             scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
+        for notable_trace in notable_traces:
+            scatter_traces.append(notable_trace)
 
         xlabel: str = xdim.capitalize()
         ylabel: str = ydim.capitalize()
