@@ -16,13 +16,12 @@ $ scripts/make_scatter_plots.py \
 --verbose \
 --no-debug
 
-# TODO - Rationalize focus plan
 $ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
---focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
 --suffix 10K \
 --output ~/Downloads/tradeoffs \
@@ -75,25 +74,42 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
-    # TODO - Rationalize 'focus' maps
-    # If given, read ratings for a "focus map" from a CSV file
-    # focus_ratings: List[int] = []
-    # if args.focus:
-    #     focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-    #     focus_ratings = focus_df.iloc[0][ratings_dimensions].to_list()
-
     # Read the frontier from a JSON file
 
     data: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = data["frontiers"]
 
+    pairs: List = list(itertools.combinations(ratings_dimensions, 2))
+
     if args.pushed:
         data = read_json(args.pushed)
         pushed_frontiers: Dict[str, Any] = data["frontiers"]
 
-    # Read the notable map ratings & convert them to scatter plot points
+    # Read the focus map ratings & convert them to scatter plot points
 
-    pairs: List = list(itertools.combinations(ratings_dimensions, 2))
+    ratings_table: List[Dict[str, str | int]] = read_csv(
+        args.focus, [str, int, int, int, int, int]
+    )
+
+    focus_ratings: Dict[str, List[int]] = {}
+    for m in ratings_table:
+        name: str = str(m["Map"])
+        ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
+        focus_ratings[name] = ratings
+
+    focus_points: Dict[Tuple, List[Tuple[int, int]]] = {}
+    for p in pairs:
+        ydim: str = p[0]
+        xdim: str = p[1]
+        d1: int = ratings_dimensions.index(ydim)
+        d2: int = ratings_dimensions.index(xdim)
+
+        focus_points[p] = []
+        for name, ratings in focus_ratings.items():
+            focus_points[p].append((focus_ratings[name][d2], focus_ratings[name][d1]))
+            # TODO - Create legend info
+
+    # Read the notable map ratings & convert them to scatter plot points
 
     ratings_table: List[Dict[str, str | int]] = read_csv(
         args.notables, [str, int, int, int, int, int]
@@ -173,18 +189,15 @@ def main() -> None:
             "marker": {"size": 5, "symbol": "star"},
         }
 
-        # TODO - Rationalize 'focus' maps
-        # If given, highlight ratings for a "focus map" on the scatter plot
-        # if args.focus:
-        #     focus_trace: Dict[str, Any] = {
-        #         "x": [focus_ratings[d2]],
-        #         "y": [focus_ratings[d1]],
-        #         "mode": "markers",
-        #         # "marker": {"size": 5, "symbol": "star"},
-        #         "marker_color": "red",
-        #         "marker_size": 5,
-        #     }
-        #     scatter_traces.append(focus_trace)
+        focus_traces: List[Dict[str, Any]] = []
+        for pt in focus_points[p]:
+            focus_trace: Dict[str, Any] = {
+                "x": [pt[0]],
+                "y": [pt[1]],
+                "mode": "markers",
+                "marker": {"size": 3, "color": "black", "symbol": "cross"},
+            }  # TODO - Create a legend for focus points
+            focus_traces.append(focus_trace)
 
         fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
         fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
@@ -242,6 +255,8 @@ def main() -> None:
             scatter_traces.append(pushed_frontier_trace)
         for notable_trace in notable_traces:
             scatter_traces.append(notable_trace)
+        for focus_trace in focus_traces:
+            scatter_traces.append(focus_trace)
 
         xlabel: str = xdim.capitalize()
         ylabel: str = ydim.capitalize()
@@ -345,13 +360,12 @@ def parse_args():
         default="",
         help="Pushed frontier maps JSON file",
     )
-    # TODO - Rationalize 'focus' maps
     parser.add_argument(
         "--focus",
         nargs="?",
         type=str,
         default="",
-        help="The flattened scores for a map to highlight (optional)",
+        help="The ratings for maps to highlight (optional)",
     )
     parser.add_argument(
         "--prefix",
@@ -390,7 +404,7 @@ def parse_args():
         "notables": "docs/_data/notable_ratings/NC_2022_Congress_ratings.csv",
         "frontier": "testdata/test_frontiers.json",
         "pushed": "testdata/test_frontiers_pushed.json",
-        "focus": "",  # "testdata/test_focus_scores.csv", # TODO - Rationalize 'focus' maps
+        "focus": "testdata/test_focus_scores.csv",
         "prefix": "test",
         "suffix": "",
         "output": "~/Downloads/",
