@@ -218,6 +218,10 @@ def main() -> None:
                 (f["ratings"][d2], f["ratings"][d1]) for f in pushed_frontier
             ]
             pfpts = list(set(pfpts))  # Remove duplicates
+            pfpts = sorted(
+                pfpts, key=lambda pt: (pt[1], pt[0]), reverse=True
+            )  # Re-sort the remaining points
+
             pfyvalues: List[int] = [pt[1] for pt in pfpts]
             pfxvalues: List[int] = [pt[0] for pt in pfpts]
             if args.verbose and len(pfxvalues) == 1:
