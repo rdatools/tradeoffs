@@ -13,6 +13,7 @@ $ scripts/make_scatter_plots.py \
 --prefix NC20C \
 --suffix 10K \
 --output ~/Downloads/tradeoffs \
+--verbose \
 --no-debug
 
 # TODO - Rationalize focus plan
@@ -25,6 +26,7 @@ $ scripts/make_scatter_plots.py \
 --prefix NC20C \
 --suffix 10K \
 --output ~/Downloads/tradeoffs \
+--verbose \
 --no-debug
 
 For documentation, type:
@@ -197,6 +199,14 @@ def main() -> None:
         if args.pushed:
             pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
             pfxvalues: List[int] = [f["ratings"][d2] for f in pushed_frontier]
+            if args.verbose:
+                if d1 == 0 and d2 == 3:
+                    print(f"y: {pfyvalues}")
+                    print(f"x: {pfxvalues}")
+                if len(pfxvalues) == 1:
+                    print(
+                        f"Pushed frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) only has one point ({pfyvalues[0]}, {pfxvalues[0]})."
+                    )
             pushed_frontier_trace: Dict[str, Any] = {
                 "x": pfxvalues,
                 "y": pfyvalues,
@@ -212,9 +222,8 @@ def main() -> None:
 
             hyvalues: List[int]
             hxvalues: List[int]
-            # TODO - Verify the hull values
-            # hxvalues, hyvalues = line_segment_hull(pfxvalues, pfyvalues)
-            hxvalues, hyvalues = pfxvalues, pfyvalues
+            hxvalues, hyvalues = line_segment_hull(pfxvalues, pfyvalues)
+            # hxvalues, hyvalues = pfxvalues, pfyvalues
             hull_trace: Dict[str, Any] = {
                 "x": hxvalues,
                 "y": hyvalues,
