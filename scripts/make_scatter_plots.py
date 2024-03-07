@@ -169,7 +169,7 @@ def main() -> None:
                 "x": [pt[0]],
                 "y": [pt[1]],
                 "mode": "markers",
-                "marker": {"size": 3, "color": "red", "symbol": "diamond"},
+                "marker": {"size": 5, "color": "red", "symbol": "diamond"},
             }
             notable_traces.append(notable_trace)
         official_trace: Dict[str, Any] = {
@@ -179,14 +179,16 @@ def main() -> None:
             "marker": {"size": 5, "symbol": "star"},
         }
 
+        focus_markers: List[str] = ["cross", "triangle-up"]
         focus_traces: List[Dict[str, Any]] = []
+        focus_legend: Dict[str, str] = {}
         if args.focus:
-            for pt in focus_points[p]:
+            for i, pt in enumerate(focus_points[p]):
                 focus_trace: Dict[str, Any] = {
                     "x": [pt[0]],
                     "y": [pt[1]],
                     "mode": "markers",
-                    "marker": {"size": 3, "color": "black", "symbol": "cross"},
+                    "marker": {"size": 5, "color": "black", "symbol": focus_markers[i]},
                 }  # TODO - Create a legend for focus points
                 focus_traces.append(focus_trace)
 
