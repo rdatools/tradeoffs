@@ -81,33 +81,38 @@ def main() -> None:
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
 
+    # If given, read the pushed frontier
+
     if args.pushed:
         data = read_json(args.pushed)
         pushed_frontiers: Dict[str, Any] = data["frontiers"]
 
-    # Read the focus map ratings & convert them to scatter plot points
+    # If given, read the focus map ratings & convert them to scatter plot points
 
-    ratings_table: List[Dict[str, str | int]] = read_csv(
-        args.focus, [str, int, int, int, int, int]
-    )
+    if args.focus:
+        ratings_table: List[Dict[str, str | int]] = read_csv(
+            args.focus, [str, int, int, int, int, int]
+        )
 
-    focus_ratings: Dict[str, List[int]] = {}
-    for m in ratings_table:
-        name: str = str(m["Map"])
-        ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
-        focus_ratings[name] = ratings
+        focus_ratings: Dict[str, List[int]] = {}
+        for m in ratings_table:
+            name: str = str(m["Map"])
+            ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
+            focus_ratings[name] = ratings
 
-    focus_points: Dict[Tuple, List[Tuple[int, int]]] = {}
-    for p in pairs:
-        ydim: str = p[0]
-        xdim: str = p[1]
-        d1: int = ratings_dimensions.index(ydim)
-        d2: int = ratings_dimensions.index(xdim)
+        focus_points: Dict[Tuple, List[Tuple[int, int]]] = {}
+        for p in pairs:
+            ydim: str = p[0]
+            xdim: str = p[1]
+            d1: int = ratings_dimensions.index(ydim)
+            d2: int = ratings_dimensions.index(xdim)
 
-        focus_points[p] = []
-        for name, ratings in focus_ratings.items():
-            focus_points[p].append((focus_ratings[name][d2], focus_ratings[name][d1]))
-            # TODO - Create legend info
+            focus_points[p] = []
+            for name, ratings in focus_ratings.items():
+                focus_points[p].append(
+                    (focus_ratings[name][d2], focus_ratings[name][d1])
+                )
+                # TODO - Create legend info
 
     # Read the notable map ratings & convert them to scatter plot points
 
@@ -161,8 +166,6 @@ def main() -> None:
 
         # Configure & show the scatter plot for the ratings & frontier
 
-        scatter_traces: List[Dict] = []
-
         yvalues: List[int] = df[ydim].tolist()
         xvalues: List[int] = df[xdim].tolist()
         points_trace: Dict[str, Any] = {
@@ -190,24 +193,25 @@ def main() -> None:
         }
 
         focus_traces: List[Dict[str, Any]] = []
-        for pt in focus_points[p]:
-            focus_trace: Dict[str, Any] = {
-                "x": [pt[0]],
-                "y": [pt[1]],
-                "mode": "markers",
-                "marker": {"size": 3, "color": "black", "symbol": "cross"},
-            }  # TODO - Create a legend for focus points
-            focus_traces.append(focus_trace)
+        if args.focus:
+            for pt in focus_points[p]:
+                focus_trace: Dict[str, Any] = {
+                    "x": [pt[0]],
+                    "y": [pt[1]],
+                    "mode": "markers",
+                    "marker": {"size": 3, "color": "black", "symbol": "cross"},
+                }  # TODO - Create a legend for focus points
+                focus_traces.append(focus_trace)
 
-        fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
-        fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
-        frontier_trace: Dict[str, Any] = {
-            "x": fxvalues,
-            "y": fyvalues,
-            "mode": "lines",
-            "line_color": "lightgray",
-            "fill": None,
-        }
+            fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
+            fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
+            frontier_trace: Dict[str, Any] = {
+                "x": fxvalues,
+                "y": fyvalues,
+                "mode": "lines",
+                "line_color": "lightgray",
+                "fill": None,
+            }
 
         if args.pushed:
             pfpts: List[Tuple[int, int]] = [
@@ -245,8 +249,9 @@ def main() -> None:
                 "fill": "tonexty",
             }
 
-        #
+        # Add the traces in the desired order
 
+        scatter_traces: List[Dict] = []
         scatter_traces.append(points_trace)
         # scatter_traces.append(official_trace)
         scatter_traces.append(frontier_trace)
@@ -255,8 +260,11 @@ def main() -> None:
             scatter_traces.append(pushed_frontier_trace)
         for notable_trace in notable_traces:
             scatter_traces.append(notable_trace)
-        for focus_trace in focus_traces:
-            scatter_traces.append(focus_trace)
+        if args.focus:
+            for focus_trace in focus_traces:
+                scatter_traces.append(focus_trace)
+
+        # Configure & show the scatter plot for the ratings & frontier
 
         xlabel: str = xdim.capitalize()
         ylabel: str = ydim.capitalize()
