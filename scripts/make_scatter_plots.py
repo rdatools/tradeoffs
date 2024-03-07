@@ -10,22 +10,9 @@ $ scripts/make_scatter_plots.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
---prefix NC20C \
---suffix 10K \
---output ~/Downloads/tradeoffs \
---verbose \
---no-debug
-
-$ scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
---notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
---suffix 10K \
 --output ~/Downloads/tradeoffs \
---verbose \
 --no-debug
 
 For documentation, type:
@@ -224,20 +211,17 @@ def main() -> None:
 
             pfyvalues: List[int] = [pt[1] for pt in pfpts]
             pfxvalues: List[int] = [pt[0] for pt in pfpts]
-            if args.verbose and len(pfxvalues) == 1:
+            if args.verbose:
                 print(
-                    f"Pushed frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) only has one point ({pfyvalues[0]}, {pfxvalues[0]})."
+                    f"Pushed frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) has {len(pfyvalues)} points."
                 )
             pushed_frontier_trace: Dict[str, Any] = {
                 "x": pfxvalues,
                 "y": pfyvalues,
-                # "mode": "lines",
-                # "line": {"color": "black", "width": 1},
                 "mode": "markers",
                 "marker_color": "black",
                 "marker_size": 3,
                 "fill": None,
-                # "fillcolor": "lightgray",
             }
 
             hyvalues: List[int]
@@ -337,7 +321,7 @@ def main() -> None:
             # pio.kaleido.scope.default_height
             pio.kaleido.scope.default_scale = 1
 
-            suffix: str = "" if args.suffix is None else f"_{args.suffix}"
+            suffix: str = "" if len(args.suffix) == 0 else f"_{args.suffix}"
 
             plot_path: str = f"{args.output}/{args.prefix}_{pair}{suffix}_scatter.svg"
 
