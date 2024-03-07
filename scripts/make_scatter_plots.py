@@ -231,14 +231,13 @@ def main() -> None:
             pushed_frontier_trace: Dict[str, Any] = {
                 "x": pfxvalues,
                 "y": pfyvalues,
-                "mode": "lines",
-                "line": {"color": "black", "width": 1},
-                # "line_color": "lightgray",
-                "mode": "lines+markers",
+                # "mode": "lines",
+                # "line": {"color": "black", "width": 1},
+                "mode": "markers",
                 "marker_color": "black",
                 "marker_size": 3,
                 "fill": None,
-                "fillcolor": "lightgray",
+                # "fillcolor": "lightgray",
             }
 
             hyvalues: List[int]
@@ -249,8 +248,11 @@ def main() -> None:
                 "x": hxvalues,
                 "y": hyvalues,
                 "mode": "lines+markers",
-                "line_color": "lightgray",
+                "line_color": "black",
+                "marker_size": 3,
+                "marker_color": "black",
                 "fill": "tonexty",
+                "fillcolor": "lightgray",
             }
 
         # Add the traces in the desired order
