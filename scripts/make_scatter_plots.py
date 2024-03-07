@@ -197,8 +197,13 @@ def main() -> None:
         }
 
         if args.pushed:
-            pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
-            pfxvalues: List[int] = [f["ratings"][d2] for f in pushed_frontier]
+            pfpts: List[Tuple[int, int]] = [
+                (f["ratings"][d2], f["ratings"][d1]) for f in pushed_frontier
+            ]
+            pfyvalues: List[int] = [pt[1] for pt in pfpts]
+            pfxvalues: List[int] = [pt[0] for pt in pfpts]
+            # pfyvalues: List[int] = [f["ratings"][d1] for f in pushed_frontier]
+            # pfxvalues: List[int] = [f["ratings"][d2] for f in pushed_frontier]
             if args.verbose:
                 if d1 == 0 and d2 == 3:
                     print(f"y: {pfyvalues}")
