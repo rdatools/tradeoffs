@@ -203,15 +203,15 @@ def main() -> None:
                 }  # TODO - Create a legend for focus points
                 focus_traces.append(focus_trace)
 
-            fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
-            fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
-            frontier_trace: Dict[str, Any] = {
-                "x": fxvalues,
-                "y": fyvalues,
-                "mode": "lines",
-                "line_color": "lightgray",
-                "fill": None,
-            }
+        fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
+        fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
+        frontier_trace: Dict[str, Any] = {
+            "x": fxvalues,
+            "y": fyvalues,
+            "mode": "lines",
+            "line_color": "lightgray",
+            "fill": None,
+        }
 
         if args.pushed:
             pfpts: List[Tuple[int, int]] = [
