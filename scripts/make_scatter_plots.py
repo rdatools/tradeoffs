@@ -80,13 +80,22 @@ def main() -> None:
         ratings_table: List[Dict[str, str | int]] = read_csv(
             args.focus, [str, int, int, int, int, int]
         )
+        focus_markers: List[str] = ["cross", "circle", "x", "square", "star"]
+
+        if len(ratings_table) > len(focus_markers):
+            raise Exception(
+                f"More focus maps than focus markers ({len(focus_markers)})."
+            )
 
         focus_ratings: Dict[str, List[int]] = {}
-        for m in ratings_table:
+        for i, m in enumerate(ratings_table):
             name: str = str(m["Map"])
             ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
             focus_ratings[name] = ratings
+            print(f"Black {focus_markers[i]} = {name}")
+        print(f"Red diamonds = DRA notable maps")
 
+        focus_names: List[str] = []
         focus_points: Dict[Tuple, List[Tuple[int, int]]] = {}
         for p in pairs:
             ydim: str = p[0]
@@ -99,7 +108,7 @@ def main() -> None:
                 focus_points[p].append(
                     (focus_ratings[name][d2], focus_ratings[name][d1])
                 )
-                # TODO - Create legend info
+                focus_names.append(name)
 
     # Read the notable map ratings & convert them to scatter plot points
 
@@ -181,17 +190,16 @@ def main() -> None:
         #     "marker": {"size": 5, "symbol": "star"},
         # }
 
-        focus_markers: List[str] = ["cross", "circle", "x", "square", "star"]
         focus_traces: List[Dict[str, Any]] = []
-        focus_legend: Dict[str, str] = {}
         if args.focus:
             for i, pt in enumerate(focus_points[p]):
                 focus_trace: Dict[str, Any] = {
+                    "name": focus_names[i],
                     "x": [pt[0]],
                     "y": [pt[1]],
                     "mode": "markers",
                     "marker": {"size": 5, "color": "black", "symbol": focus_markers[i]},
-                    "showlegend": True,
+                    "showlegend": False,
                 }
                 focus_traces.append(focus_trace)
 
@@ -298,8 +306,8 @@ def main() -> None:
                 "scaleratio": 1,
             },
             "margin": {"l": 40, "r": 30, "b": 80, "t": 100},
-            "legend": {"yanchor": "top", "y": 0.99, "xanchor": "left", "x": 0.01},
-            "showlegend": True,
+            # "legend": {"yanchor": "top", "y": 0.99, "xanchor": "left", "x": 0.01},
+            "showlegend": False,
             # "showlegend": False,
             "paper_bgcolor": bgcolor,
             "plot_bgcolor": bgcolor,
