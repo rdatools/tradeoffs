@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Added scatter plot legend CSV
 - Updated scatter plots
 - Fleshed out the end-to-end process somewhat
 - Copied BAF's & ratings for DRA notable maps

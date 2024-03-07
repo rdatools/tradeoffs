@@ -36,7 +36,7 @@ import numpy as np
 import plotly.graph_objects as go
 import plotly.io as pio
 
-from rdabase import require_args, read_json, read_csv
+from rdabase import require_args, read_json, read_csv, write_csv
 from rdaensemble.general import ratings_dimensions
 
 from tradeoffs import (
@@ -76,6 +76,7 @@ def main() -> None:
 
     # If given, read the focus map ratings & convert them to scatter plot points
 
+    legend: List[Dict[str, str]] = []
     if args.focus:
         ratings_table: List[Dict[str, str | int]] = read_csv(
             args.focus, [str, int, int, int, int, int]
@@ -92,8 +93,8 @@ def main() -> None:
             name: str = str(m["Map"])
             ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
             focus_ratings[name] = ratings
-            print(f"Black {focus_markers[i]} = {name}")
-        print(f"Red diamonds = DRA notable maps")
+            legend.append({"MARKER": f"Black {focus_markers[i]}", "PLAN": f"{name}"})
+        legend.append({"MARKER": f"Red diamond", "PLAN": "DRA notable map"})
 
         focus_names: List[str] = []
         focus_points: Dict[Tuple, List[Tuple[int, int]]] = {}
@@ -345,6 +346,10 @@ def main() -> None:
 
             fig.to_image(engine="kaleido")
             fig.write_image(plot_path)
+
+            if args.focus:
+                legend_path: str = f"{args.output}/{args.prefix}_legend.csv"
+                write_csv(legend_path, legend, ["MARKER", "PLAN"])
 
         continue
 
