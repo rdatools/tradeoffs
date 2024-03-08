@@ -75,7 +75,7 @@ scripts/find_frontiers.py \
 
 ### END PUSH FRONTIER POINTS ###
 
-# TODO - Generate artifacts to ~/Downloads & copy them once verified
+# From rdaensemble:
 # TODO - STEP 9 - ID the notable maps in the augmented ensemble
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
@@ -111,16 +111,15 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/images/NC20C_notable_maps_ratings.csv \
 --no-debug
 
-# TODO - STEP 13 - Make scatter plots w/ pre- & post-push frontiers <<< TODO - Rationalize focus map
+# - STEP 13 - Make scatter plots w/ pre- & post-push frontiers
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
---focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+--focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
---suffix 10K \
---output ~/Downloads/ \
+--output ~/Downloads/tradeoffs \
 --no-debug
 
-# TODO - STEP 14 - Copy the artifacts (to fileout & the 'docs' subdirectories)
+# TODO - STEP 14 - Copy the artifacts to the fileout & then 'docs' subdirectories
