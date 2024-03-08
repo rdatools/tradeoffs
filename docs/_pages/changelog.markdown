@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Annotated the state page template
 - Updated the backend of the pipeline
 - ...
 - First snapshot
