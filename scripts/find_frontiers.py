@@ -66,6 +66,14 @@ def main() -> None:
     output["frontiers"] = frontiers
     # output["notable_maps"] = indices
 
+    zones: Dict[str, List[str]] = {}
+    for k, v in frontiers.items():
+        zones[k] = []
+        for m in v:
+            zones[k].append(m["map"])
+
+    output["zones"] = zones
+
     if args.verbose:
         ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
 
