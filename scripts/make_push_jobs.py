@@ -61,11 +61,12 @@ def main() -> None:
     shutil.copy(args.shapes, os.path.join(f"{copy_path}/data", "shapes.json"))
     shutil.copy(args.graph, os.path.join(f"{copy_path}/data", "graph.json"))
 
-    # Copy the standalone push_plan executable
+    # TODO - DELETE
+    # # Copy the standalone push_plan executable
 
-    shutil.copy(
-        "scripts/push_plan.py", os.path.join(f"{copy_path}/jobs", "push_plan.py")
-    )
+    # shutil.copy(
+    #     "scripts/push_plan.py", os.path.join(f"{copy_path}/jobs", "push_plan.py")
+    # )
 
     # Create each push job
 
