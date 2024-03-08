@@ -92,10 +92,10 @@ scripts/make_box_plot.py \
 --image ~/Downloads/NC20C_boxplot.svg \
 --no-debug
 
-# TODO - STEP 11 - Make a statistics table
+# STEP 11 - Make a statistics table
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---output ../../iCloud/fileout/images/NC20C_statistics.csv \
+--output ~/Downloads/NC20C_statistics.csv \
 --no-debug
 
 # TODO - STEP 12 - Make a notable maps ratings table

@@ -7,7 +7,7 @@ For example:
 
 $ scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---output ../../iCloud/fileout/images/NC20C_statistics.csv \
+--output ~/Downloads/NC20C_statistics.csv \
 --no-debug
 
 For documentation, type:
@@ -19,6 +19,10 @@ import argparse
 from argparse import ArgumentParser, Namespace
 
 from typing import List, Dict, Any, Callable
+
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
 
 import pandas as pd
 
