@@ -6,14 +6,8 @@ MAKE A BOX PLOT FOR RATINGS
 For example:
 
 $ scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
---no-debug
-
-$ scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
+--image ~/Downloads/NC20C_boxplot.svg \
 --no-debug
 
 For documentation, type:
@@ -25,6 +19,10 @@ $ scripts/make_box_plot.py
 import argparse
 from argparse import ArgumentParser, Namespace
 from typing import Any, List, Dict, Callable
+
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
 
 import pandas as pd
 
@@ -51,11 +49,11 @@ def main() -> None:
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
     # If given, read ratings for a "focus map" from a CSV file
-    focus_map: List[int] = []
-    if args.focus:
-        focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-        df = pd.concat([focus_df, df])
-        focus_map = [0]
+    # focus_map: List[int] = []
+    # if args.focus:
+    #     focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
+    #     df = pd.concat([focus_df, df])
+    #     focus_map = [0]
 
     # Configure & show the box plot for the ratings
 
@@ -71,8 +69,8 @@ def main() -> None:
             "whiskerwidth": 0.2,
             "marker": {"size": 2, "symbol": "circle"},
             "line": {"width": 1},
-            "selectedpoints": focus_map,  # Highlight the first map
-            "selected": {"marker": {"size": 5, "color": "red"}},
+            # "selectedpoints": focus_map,  # Highlight the first map
+            # "selected": {"marker": {"size": 5, "color": "red"}},
         }
         boxplot_traces.append(trace)
 
@@ -163,7 +161,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/test_scores.csv",  # Only has map name & ratings
-        "focus": "testdata/test_focus_scores.csv",
+        # "focus": "testdata/test_focus_scores.csv",
         "image": "output/test_boxplot.svg",
     }
     args = require_args(args, args.debug, debug_defaults)
