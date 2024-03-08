@@ -96,6 +96,8 @@ def main() -> None:
     #     For each frontier (pair of dimensions:
     #         Get the pair of ratings
     #         If they are "near" any frontier point, add it to that zone
+    # Print # of frontier points
+    # Print # of zone points
 
     #
 
@@ -153,8 +155,8 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/test_scores.csv",
-        "metadata": "testdata/test_scores_metadata.json",
+        "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
+        "metadata": "../../iCloud/fileout/ensembles/NC20C_scores_metadata.json",
         "frontier": "~/Downloads/test_frontier.json",
         "verbose": True,
     }

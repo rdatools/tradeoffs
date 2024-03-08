@@ -2320,37 +2320,5 @@
                 ]
             }
         ]
-    },
-    "notable_maps": [
-        {
-            "proportionality": {
-                "frontier": "compactness_splitting",
-                "offset": 3
-            }
-        },
-        {
-            "competitiveness": {
-                "frontier": "proportionality_competitiveness",
-                "offset": 0
-            }
-        },
-        {
-            "minority": {
-                "frontier": "minority_compactness",
-                "offset": 0
-            }
-        },
-        {
-            "compactness": {
-                "frontier": "proportionality_compactness",
-                "offset": 2
-            }
-        },
-        {
-            "splitting": {
-                "frontier": "competitiveness_splitting",
-                "offset": 17
-            }
-        }
-    ]
+    }
 }
