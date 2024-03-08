@@ -7,7 +7,7 @@ For example:
 
 $ scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---output ~/Downloads/NC20C_statistics.csv \
+--output ../../iCloud/fileout/_data/NC20C_statistics.csv \
 --no-debug
 
 For documentation, type:

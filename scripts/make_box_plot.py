@@ -7,7 +7,7 @@ For example:
 
 $ scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
---image ~/Downloads/NC20C_boxplot.svg \
+--image ../../iCloud/fileout/images/NC20C_boxplot.svg \
 --no-debug
 
 For documentation, type:

@@ -81,7 +81,7 @@ scripts/find_frontiers.py \
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
---notables ~/Downloads/NC20C_notable_maps.json \
+--notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
 --no-debug
 
 # From tradeoffs:
@@ -89,22 +89,22 @@ scripts/id_notable_maps.py \
 # STEP 10 - Make a box plot
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
---image ~/Downloads/NC20C_boxplot.svg \
+--image ../../iCloud/fileout/images/NC20C_boxplot.svg \
 --no-debug
 
 # STEP 11 - Make a statistics table
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---output ~/Downloads/NC20C_statistics.csv \
+--output ../../iCloud/fileout/_data/NC20C_statistics.csv \
 --no-debug
 
-# TODO - STEP 12 - Make a notable maps ratings table
+# STEP 12 - Make a notable maps ratings table
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
---output ../../iCloud/fileout/images/NC20C_notable_maps_ratings.csv \
+--output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
-# - STEP 13 - Make scatter plots w/ pre- & post-push frontiers
+# STEP 13 - Make scatter plots w/ pre- & post-push frontiers
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
@@ -112,7 +112,7 @@ scripts/make_scatter_plots.py \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
---output ~/Downloads \
+--output ../../iCloud/fileout/images \
 --no-debug
 
 # TODO - STEP 14 - Copy the artifacts to the fileout & then 'docs' subdirectories
