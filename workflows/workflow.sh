@@ -76,21 +76,15 @@ scripts/find_frontiers.py \
 ### END PUSH FRONTIER POINTS ###
 
 # From rdaensemble:
-# TODO - STEP 9 - ID the notable maps in the augmented ensemble
+
+# STEP 9 - ID the notable maps in the augmented ensemble
 scripts/id_notable_maps.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
---notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
+--notables ~/Downloads/NC20C_notable_maps.json \
 --no-debug
 
 # From tradeoffs:
-
-# TODO - ???
-# scripts/flatten_scorecard.py \
-# --export ../../iCloud/fileout/ensembles/NC_2024_Congressional_analytics.json \
-# --name NC_2024_Congressional \
-# --scores ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
-# --no-debug
 
 # TODO - STEP 10 - Make a box plot <<< TODO - Rationalize the focus map
 scripts/make_box_plot.py \
@@ -119,7 +113,7 @@ scripts/make_scatter_plots.py \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
---output ~/Downloads/tradeoffs \
+--output ~/Downloads \
 --no-debug
 
 # TODO - STEP 14 - Copy the artifacts to the fileout & then 'docs' subdirectories

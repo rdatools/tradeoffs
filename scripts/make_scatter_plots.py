@@ -12,7 +12,7 @@ $ scripts/make_scatter_plots.py \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
---output ~/Downloads/tradeoffs \
+--output ~/Downloads \
 --no-debug
 
 For documentation, type:
