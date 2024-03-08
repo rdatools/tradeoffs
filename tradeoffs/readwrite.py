@@ -47,9 +47,10 @@ def scores_to_df(
         )
         for row in reader:
             total += 1
-            if filter and filter_scores(row):
-                filtered += 1
-                scores.append(row)
+            if filter:
+                if filter_scores(row):
+                    filtered += 1
+                    scores.append(row)
             else:
                 scores.append(row)
 
@@ -67,6 +68,41 @@ def scores_to_df(
     df: pd.DataFrame = pd.DataFrame(data, columns=fieldnames)
 
     return df
+
+
+def read_ratings(
+    scores_csv: str,
+    *,
+    verbose=False,
+) -> List[Dict]:
+    """Read a scores CSV file & filter out the unrealistic plans."""
+
+    ratings: List[Dict] = []
+    total: int = 0
+    filtered: int = 0
+    with open(scores_csv, "r", encoding="utf-8-sig") as f:
+        reader: DictReader[str] = DictReader(
+            f, fieldnames=None, restkey=None, restval=None, dialect="excel"
+        )
+        for row in reader:
+            total += 1
+            if filter_scores(row):
+                filtered += 1
+
+                name: str = row["map"]
+                plan_ratings: List[int | float] = [
+                    int(row[d]) for d in ratings_dimensions
+                ]
+                ratings.append({"name": name, "ratings": plan_ratings})
+
+    if verbose:
+        print()
+        print(
+            f"Note: Only {filtered} of {total} plans had 'roughly equal' population and were 'realistic'."  # per the DRA Notable Maps criteria.
+        )
+        print()
+
+    return ratings
 
 
 ### END ###

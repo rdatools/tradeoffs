@@ -19,7 +19,7 @@ $ scripts/find_frontiers.py
 
 import argparse
 from argparse import ArgumentParser, Namespace
-from typing import Any, List, Dict, Callable
+from typing import Any, List, Dict, Tuple, Set, Callable
 
 import warnings
 
@@ -32,6 +32,7 @@ from rdabase import require_args, read_json, write_json
 from rdaensemble.general import ratings_dimensions
 from tradeoffs import (
     scores_to_df,
+    read_ratings,
     find_frontiers,
     is_pareto_efficient_value,
     id_most_notable_maps,
@@ -48,17 +49,21 @@ def main() -> None:
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    ratings: pd.DataFrame = scores_to_df(
+    ratings_df: pd.DataFrame = scores_to_df(
         args.scores,
         fieldnames,
         fieldtypes,
         filter=True,
         verbose=args.verbose,
     )
+    ratings: List[Dict] = read_ratings(
+        args.scores,
+        verbose=args.verbose,
+    )
     metadata: Dict[str, Any] = read_json(args.metadata)
 
     frontiers: Dict[str, Any] = find_frontiers(
-        ratings, is_pareto_efficient_value, verbose=args.verbose
+        ratings_df, is_pareto_efficient_value, verbose=args.verbose
     )
     # indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
@@ -67,10 +72,24 @@ def main() -> None:
     # output["notable_maps"] = indices
 
     zones: Dict[str, List[str]] = {}
+    zones_points: Dict[str, Set[Tuple[int, int]]] = {}
     for k, v in frontiers.items():
         zones[k] = []
+        zones_points[k] = set()
+
+        pair: List[str] = k.split("_")
+        ydim: str = pair[0]
+        xdim: str = pair[1]
+        d1: int = ratings_dimensions.index(ydim)
+        d2: int = ratings_dimensions.index(xdim)
+
         for m in v:
             zones[k].append(m["map"])
+            x: int = m["ratings"][d2]
+            y: int = m["ratings"][d1]
+            zones_points[k].add((x, y))
+
+    # TODO - Find the plans in the zone
 
     output["zones"] = zones
 
