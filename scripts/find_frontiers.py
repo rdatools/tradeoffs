@@ -71,11 +71,13 @@ def main() -> None:
     output["frontiers"] = frontiers
     # output["notable_maps"] = indices
 
+    #
+
     zones: Dict[str, List[str]] = {}
-    zones_points: Dict[str, Set[Tuple[int, int]]] = {}
+    frontier_points: Dict[str, Set[Tuple[int, int]]] = {}
     for k, v in frontiers.items():
         zones[k] = []
-        zones_points[k] = set()
+        frontier_points[k] = set()
 
         pair: List[str] = k.split("_")
         ydim: str = pair[0]
@@ -84,12 +86,18 @@ def main() -> None:
         d2: int = ratings_dimensions.index(xdim)
 
         for m in v:
-            zones[k].append(m["map"])
+            # zones[k].append(m["map"])
             x: int = m["ratings"][d2]
             y: int = m["ratings"][d1]
-            zones_points[k].add((x, y))
+            frontier_points[k].add((x, y))
 
     # TODO - Find the plans in the zone
+    # For each plan in ratings:
+    #     For each frontier (pair of dimensions:
+    #         Get the pair of ratings
+    #         If they are "near" any frontier point, add it to that zone
+
+    #
 
     output["zones"] = zones
 
