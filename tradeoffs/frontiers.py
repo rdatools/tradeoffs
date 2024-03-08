@@ -11,6 +11,8 @@ import itertools
 
 from rdaensemble.general import ratings_dimensions
 
+### PARETO FRONTIERS ###
+
 
 def find_frontiers(
     ratings: pd.DataFrame, fn: Callable, *, verbose: bool = False
@@ -120,6 +122,9 @@ def is_pareto_efficient_dumb(costs: np.ndarray[Any, Any]) -> np.ndarray:
     return is_efficient
 
 
+### CONVEX HULL ###
+
+
 def line_segment_hull(
     xvalues: List[int], yvalues: List[int], *, verbose=False
 ) -> Tuple[List[int], List[int]]:
@@ -147,6 +152,19 @@ def line_segment_hull(
         )
 
     return unzipped[0], unzipped[1]
+
+
+### ZONES NEAR FRONTIERS ###
+
+
+def is_near(pt: Tuple[int, int], f_pt: Tuple[int, int], *, delta: int = 5) -> bool:
+    """Is a pair ratings 'near' a given frontier point?"""
+
+    assert not (pt[0] > f_pt[0] and pt[1] > f_pt[1])
+
+    result: bool = ((f_pt[0] - pt[0]) <= delta) and ((f_pt[1] - pt[1]) <= delta)
+
+    return result
 
 
 ### END ###

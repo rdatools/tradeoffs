@@ -8,7 +8,7 @@ import random
 import pandas as pd
 import numpy as np
 
-from tradeoffs.frontiers import is_pareto_efficient_value, line_segment_hull
+from tradeoffs.frontiers import is_pareto_efficient_value, line_segment_hull, is_near
 
 
 class TestFindFrontiers:
@@ -140,6 +140,18 @@ class TestFindFrontiers:
 
         assert list(hyvalues) == [4, 3, 1]
         assert list(hxvalues) == [1, 3, 4]
+
+    def test_is_near(self):
+        assert is_near((5, 2), (10, 7))
+        assert not is_near((5, 1), (10, 7))
+        assert not is_near((4, 2), (10, 7))
+        assert is_near((6, 3), (10, 7))
+        assert is_near((10, 7), (10, 7))
+        try:
+            is_near((11, 7), (10, 7))
+            assert False
+        except:
+            assert True
 
 
 ### END ###

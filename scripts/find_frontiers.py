@@ -72,6 +72,7 @@ def main() -> None:
     # output["notable_maps"] = indices
 
     #
+    print(args.zone)
 
     zones: Dict[str, List[str]] = {}
     frontier_points: Dict[str, Set[Tuple[int, int]]] = {}
@@ -140,6 +141,7 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
+    parser.add_argument("--zone", type=int, default=0, help="How wide a 'zone' to find")
 
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
@@ -158,6 +160,7 @@ def parse_args():
         "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
         "metadata": "../../iCloud/fileout/ensembles/NC20C_scores_metadata.json",
         "frontier": "~/Downloads/test_frontier.json",
+        "zone": 5,
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
