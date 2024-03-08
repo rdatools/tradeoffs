@@ -60,11 +60,11 @@ def main() -> None:
     frontiers: Dict[str, Any] = find_frontiers(
         ratings, is_pareto_efficient_value, verbose=args.verbose
     )
-    indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
+    # indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
     output["frontiers"] = frontiers
-    output["notable_maps"] = indices
+    # output["notable_maps"] = indices
 
     if args.verbose:
         ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
@@ -118,9 +118,9 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/test_scores.csv",  # Only has map name & ratings
+        "scores": "testdata/test_scores.csv",
         "metadata": "testdata/test_scores_metadata.json",
-        "frontier": "output/test_frontier.json",
+        "frontier": "~/Downloads/test_frontier.json",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
