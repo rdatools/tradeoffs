@@ -6,17 +6,6 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Added scatter plot legend CSV
-- Updated scatter plots
-- Fleshed out the end-to-end process somewhat
-- Copied BAF's & ratings for DRA notable maps
-- Added scatter plots
-- Factored out "20C" suffix
-- Tweaked table headers
-- Added box plot
-- Added statistics table
-- Added ratings table
-- Fixed States page tooltips
-- Stubbed out state page for NC
-- Activated styles
+- Updated the backend of the pipeline
+- ...
 - First snapshot
