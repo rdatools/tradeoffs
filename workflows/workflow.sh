@@ -43,6 +43,7 @@ scripts/make_push_jobs.py \
 # TODO - Add the HPC steps
 
 # From rdaensemble:
+
 # Collected the pushed plans into an ensemble
 scripts/ensemble_from_plans.py \
 --base ../../iCloud/fileout/ensembles/NC20C_plans.json \
@@ -61,6 +62,7 @@ scripts/score_ensemble.py \
 --no-debug
 
 # From tradeoffs:
+
 # Combine the base ensemble & pushed plans scores
 
 tail -n +2 ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv > ../../iCloud/fileout/ensembles/scores.tmp && mv ../../iCloud/fileout/ensembles/scores.tmp ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv
@@ -115,4 +117,6 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/images \
 --no-debug
 
-# TODO - STEP 14 - Copy the artifacts to the fileout & then 'docs' subdirectories
+# STEP 14 - Copy the artifacts to the fileout & then 'docs' subdirectories
+
+scripts/deploy.sh NC
