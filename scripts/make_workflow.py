@@ -28,8 +28,8 @@ def main() -> None:
     """Generate the workflow for a state.
 
     Note, I copied some V1 artifacts from the 'pg' repo en masse on 02/20/24:
-    - DRA notable map BAF's from pg/data, and
-    - DRA notable maps ratings tables from pg/docs/_data
+    - DRA notable map BAF's from pg/data to notable_maps/xx, and
+    - DRA notable maps ratings tables from pg/docs/_data to docs/_data/notable_ratings
 
     """
 
