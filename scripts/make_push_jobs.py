@@ -8,6 +8,7 @@ For example:
 $ scripts/make_push_jobs.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
@@ -19,6 +20,7 @@ $ scripts/make_push_jobs.py \
 $ scripts/make_push_jobs.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --zone \
 --data ../rdabase/data/NC/NC_2020_data.csv \
@@ -31,6 +33,7 @@ $ scripts/make_push_jobs.py \
 $ scripts/make_push_jobs.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --random \
 --data ../rdabase/data/NC/NC_2020_data.csv \
@@ -69,7 +72,7 @@ from rdabase import (
     write_csv,
 )
 from rdaensemble.general import ratings_dimensions
-from tradeoffs import GeoID, DistrictID, Name, Weight
+from tradeoffs import GeoID, DistrictID, Name, Weight, read_ratings
 
 
 def main() -> None:
@@ -111,11 +114,13 @@ def main() -> None:
     plans_to_push: Dict[str, List[str]] = {k: [] for k, v in frontiers.items()}
 
     if args.zone:
-        print("TODO: Zone points")
+        also_push_zone_points(
+            frontiers, plans_to_push, args.scores, verbose=args.verbose
+        )
     elif args.random:
         print("TODO: Random points")
     else:
-        just_frontier_points(frontiers, plans_to_push)
+        push_frontier_points(frontiers, plans_to_push)
 
     # Generate the jobs
 
@@ -193,7 +198,7 @@ def main() -> None:
                 print(f"sbatch {run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
 
-def just_frontier_points(
+def push_frontier_points(
     frontiers: Dict[str, Any], plans_to_push: Dict[str, List[str]]
 ):
     """Just push the frontier points"""
@@ -202,6 +207,19 @@ def just_frontier_points(
         for p in v:  # for each point
             name: str = p["map"]
             plans_to_push[k].append(name)
+
+
+def also_push_zone_points(
+    frontiers: Dict[str, Any],
+    plans_to_push: Dict[str, List[str]],
+    scores_path,
+    *,
+    verbose: bool = False,
+):
+    """In addition to the frontier points, push points 'near' the frontier"""
+
+    ratings: List[Dict] = read_ratings(scores_path, verbose=verbose)
+    pass
 
 
 def parse_args():
@@ -218,6 +236,11 @@ def parse_args():
         "--plans",
         type=str,
         help="Ensemble of plans to score in a JSON file",
+    )
+    parser.add_argument(
+        "--scores",
+        type=str,
+        help="A CSV ensemble of scores including ratings to plot",
     )
     parser.add_argument(
         "--frontier",
@@ -278,13 +301,14 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "state": "NC",
         "plans": "../../iCloud/fileout/ensembles/NC20C_plans.json",
+        "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
         "cores": 1,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
         "output": "../../iCloud/fileout/hpc_dropbox",
-        "zone": False,
+        "zone": True,
         "random": False,
         "verbose": True,
     }
