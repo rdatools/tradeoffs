@@ -9,11 +9,35 @@ $ scripts/make_push_jobs.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---multiplier 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ../../iCloud/fileout/hpc_dropbox \
+--cores 28 \
+--no-debug
+
+$ scripts/make_push_jobs.py \
+--state NC \
+--plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--zone \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--output ../../iCloud/fileout/hpc_dropbox \
+--cores 28 \
+--no-debug
+
+$ scripts/make_push_jobs.py \
+--state NC \
+--plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--random \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--output ../../iCloud/fileout/hpc_dropbox \
+--cores 28 \
 --no-debug
 
 For documentation, type:
@@ -86,6 +110,8 @@ def main() -> None:
 
     plans_to_push: Dict[str, List[str]] = {k: [] for k, v in frontiers.items()}
 
+    print(f"zone: {args.zone}, random: {args.random}")
+
     # Just push the frontier points
     for k, v in frontiers.items():  # for each frontier
         for p in v:  # for each point
@@ -124,7 +150,7 @@ def main() -> None:
                 job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
                 seed: int = start
                 with open(job_copy, "w") as jf:
-                    for j in range(1, args.multiplier + 1):  # for each multiple
+                    for j in range(1, args.cores + 1):  # for each multiple
                         pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
                         log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
 
@@ -188,9 +214,7 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
-    parser.add_argument(
-        "--multiplier", type=int, help="How many times to push each point"
-    )
+    parser.add_argument("--cores", type=int, help="How many times to push each point")
     #
     parser.add_argument(
         "--data",
@@ -212,6 +236,21 @@ def parse_args():
         type=str,
         help="Directory to write 'pushed' plan CSV's to",
     )
+    # NOTE - These are mutually exclusive options, but I'm not defining them as such
+    parser.add_argument(
+        "-z",
+        "--zone",
+        dest="zone",
+        action="store_true",
+        help="Push a 'zone' of points near the frontier and the frontier",
+    )
+    parser.add_argument(
+        "-r",
+        "--random",
+        dest="random",
+        action="store_true",
+        help="Push a selection of random plans and the frontier",
+    )
     #
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
@@ -230,11 +269,13 @@ def parse_args():
         "state": "NC",
         "plans": "../../iCloud/fileout/ensembles/NC20C_plans.json",
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
-        "multiplier": 1,
+        "cores": 1,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
         "output": "../../iCloud/fileout/hpc_dropbox",
+        "zone": False,
+        "random": False,
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
