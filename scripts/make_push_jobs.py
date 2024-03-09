@@ -82,11 +82,12 @@ def main() -> None:
 
     # Make a list of plans to push by pair of ratings dimensions
 
-    ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
+    # ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2)) TODO
 
-    plans_to_push: Dict[str, List[str]] = {}
+    plans_to_push: Dict[str, List[str]] = {k: [] for k, v in frontiers.items()}
+
+    # Just push the frontier points
     for k, v in frontiers.items():  # for each frontier
-        plans_to_push[k] = []
         for p in v:  # for each point
             name: str = p["map"]
             plans_to_push[k].append(name)
