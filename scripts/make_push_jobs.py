@@ -110,13 +110,12 @@ def main() -> None:
 
     plans_to_push: Dict[str, List[str]] = {k: [] for k, v in frontiers.items()}
 
-    print(f"zone: {args.zone}, random: {args.random}")
-
-    # Just push the frontier points
-    for k, v in frontiers.items():  # for each frontier
-        for p in v:  # for each point
-            name: str = p["map"]
-            plans_to_push[k].append(name)
+    if args.zone:
+        print("TODO: Zone points")
+    elif args.random:
+        print("TODO: Random points")
+    else:
+        just_frontier_points(frontiers, plans_to_push)
 
     # Generate the jobs
 
@@ -192,6 +191,17 @@ def main() -> None:
                     )
 
                 print(f"sbatch {run_path}/jobs/{plan_to_push}.slurm", file=bf)
+
+
+def just_frontier_points(
+    frontiers: Dict[str, Any], plans_to_push: Dict[str, List[str]]
+):
+    """Just push the frontier points"""
+
+    for k, v in frontiers.items():  # for each frontier
+        for p in v:  # for each point
+            name: str = p["map"]
+            plans_to_push[k].append(name)
 
 
 def parse_args():
