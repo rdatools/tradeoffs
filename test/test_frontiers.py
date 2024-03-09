@@ -4,6 +4,10 @@ TEST FIND FRONTIERS
 
 from typing import Any, Dict, List
 
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
+
 import random
 import pandas as pd
 import numpy as np

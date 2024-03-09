@@ -27,6 +27,10 @@ from argparse import ArgumentParser, Namespace
 
 from typing import List, Dict, Tuple, Any
 
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
+
 import os
 import shutil
 import itertools
@@ -61,42 +65,49 @@ def main() -> None:
     shutil.copy(args.shapes, os.path.join(f"{copy_path}/data", "shapes.json"))
     shutil.copy(args.graph, os.path.join(f"{copy_path}/data", "graph.json"))
 
-    # TODO - DELETE
-    # # Copy the standalone push_plan executable
-
-    # shutil.copy(
-    #     "scripts/push_plan.py", os.path.join(f"{copy_path}/jobs", "push_plan.py")
-    # )
-
-    # Create each push job
-
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
     N: int = int(metadata["D"])
     start: int = starting_seed(args.state, N)
+
+    # Load the ensemble of plans
 
     ensemble: Dict[str, Any] = read_json(args.plans)
     plans: List[Dict[str, Name | Weight | Dict[GeoID, DistrictID]]] = ensemble["plans"]
     plans_by_name: Dict[str, Dict[GeoID, DistrictID]] = {p["name"]: p["plan"] for p in plans}  # type: ignore
 
+    # Load the frontier points
+
     frontiers_blob: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = frontiers_blob["frontiers"]
 
+    # Make a list of plans to push by pair of ratings dimensions
+
     ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))
+
+    plans_to_push: Dict[str, List[str]] = {}
+    for k, v in frontiers.items():  # for each frontier
+        plans_to_push[k] = []
+        for p in v:  # for each point
+            name: str = p["map"]
+            plans_to_push[k].append(name)
+
+    # Generate the jobs
 
     batch_copy: str = f"{copy_path}/submit_jobs.sh"
     with open(batch_copy, "w") as bf:
         print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
-        # print(f"chmod +x {run_path}/jobs/*.slurm", file=bf)
 
-        for k, v in frontiers.items():  # for each frontier
+        # for k, v in frontiers.items():  # for each frontier
+        for k, v in plans_to_push.items():  # for each frontier
             dimensions: str = " ".join(k.split("_"))
 
             pair: Tuple[str, ...] = tuple(k.split("_"))
             y: str = str(ratings_dimensions.index(pair[0]) + 1)
             x: str = str(ratings_dimensions.index(pair[1]) + 1)
 
-            for i, p in enumerate(v):  # for each point
-                name: str = p["map"]
+            # for i, p in enumerate(v):  # for each point
+            for i, name in enumerate(v):  # for each plan
+                # name: str = p["map"]
                 plan: List[Dict] = [
                     {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
                 ]
