@@ -167,4 +167,16 @@ def is_near(pt: Tuple[int, int], f_pt: Tuple[int, int], *, delta: int = 5) -> bo
     return result
 
 
+def is_near_any(
+    pt: Tuple[int, int], f_pts: List[Tuple[int, int]], *, delta: int = 5
+) -> bool:
+    """Is a pair ratings 'near' any given frontier point?"""
+
+    for f_pt in f_pts:
+        if is_near(pt, f_pt, delta=delta):
+            return True
+
+    return False
+
+
 ### END ###

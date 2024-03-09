@@ -20,6 +20,7 @@ from .frontiers import (
     is_pareto_efficient_value,
     line_segment_hull,
     is_near,
+    is_near_any,
 )
 from .notable_maps import id_most_notable_maps
 from .plan import Plan, segment_key, size_1_moves

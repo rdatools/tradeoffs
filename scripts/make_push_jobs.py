@@ -72,7 +72,7 @@ from rdabase import (
     write_csv,
 )
 from rdaensemble.general import ratings_dimensions
-from tradeoffs import GeoID, DistrictID, Name, Weight, read_ratings
+from tradeoffs import GeoID, DistrictID, Name, Weight, read_ratings, is_near_any
 
 
 def main() -> None:
@@ -122,13 +122,25 @@ def main() -> None:
     else:
         push_frontier_points(frontiers, plans_to_push)
 
+    if args.verbose:
+        tf: int = 0
+        tp: int = 0
+        for k, v in frontiers.items():
+            nf: int = len(v)
+            np: int = len(plans_to_push[k])
+
+            tf += nf
+            tp += np
+
+            print(f"{k}: {nf} -> {np}")
+        print(f"{k}: {tf} -> {tp}")
+
     # Generate the jobs
 
     batch_copy: str = f"{copy_path}/submit_jobs.sh"
     with open(batch_copy, "w") as bf:
         print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
 
-        # for k, v in frontiers.items():  # for each frontier
         for k, v in plans_to_push.items():  # for each frontier
             dimensions: str = " ".join(k.split("_"))
 
@@ -218,8 +230,24 @@ def also_push_zone_points(
 ):
     """In addition to the frontier points, push points 'near' the frontier"""
 
-    ratings: List[Dict] = read_ratings(scores_path, verbose=verbose)
-    pass
+    plans: List[Dict] = read_ratings(scores_path, verbose=verbose)
+    for k, v in frontiers.items():
+        pair: Tuple[str, ...] = tuple(k.split("_"))
+        ydim: str = pair[0]
+        xdim: str = pair[1]
+        d1: int = ratings_dimensions.index(ydim)
+        d2: int = ratings_dimensions.index(xdim)
+
+        frontier_points: List[Tuple[int, int]] = list(
+            set([(p["ratings"][d2], p["ratings"][d1]) for p in v])
+        )
+
+        for plan in plans:
+            name: str = plan["name"]
+            pt: Tuple[int, int] = (plan["ratings"][d2], plan["ratings"][d1])
+
+            if is_near_any(pt, frontier_points, delta=2):
+                plans_to_push[k].append(name)
 
 
 def parse_args():
