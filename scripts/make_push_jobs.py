@@ -160,27 +160,35 @@ def main() -> None:
             tp += np
 
             print(f"{k}: {nf} -> {np}")
-        print(f"{k}: {tf} -> {tp}")
+        print(f"{tf} -> {tp}")
 
     # 'Chunk' the points to push into groups for a single node job
 
-    plans_to_push: Dict[str, Tuple[str, ...]] = {}
+    plans_to_push: List[Tuple[str, Tuple[str, ...]]] = []
     for k, v in plans_by_pair.items():
         pair: Tuple[str, ...] = tuple(k.split("_"))
         for n in v:
-            plans_to_push[n] = pair
+            plans_to_push.append((n, pair))
+
+    if args.verbose:
+        print(f"# of plans to push: {len(plans_to_push)}")
 
     pushes_per_job: List[List[Tuple[str, Tuple[str, ...]]]] = []
     count: int = 0
     commands: List[Tuple[str, Tuple[str, ...]]] = []
-    for k, v in plans_to_push.items():
-        commands.append((k, v))
+    for push in plans_to_push:
+        name: str = push[0]
+        pair: Tuple[str, ...] = push[1]
+        commands.append((name, pair))
         count += 1
         if count % args.cores == 0:
             pushes_per_job.append(commands)
             commands = []
     if len(commands) > 0:
         pushes_per_job.append(commands)
+
+    if args.verbose:
+        print(f"# of jobs: {len(pushes_per_job)}")
 
     # Generate the jobs
 
@@ -194,7 +202,7 @@ def main() -> None:
             job_name: str = f"job_{j:04d}"
             job_copy: str = f"{copy_path}/jobs/{job_name}.sh"
             with open(job_copy, "w") as jf:
-                for command in commands:  # for each plan
+                for command in commands:  # for each plan/command in the job
                     name: str = command[0]
                     plan: List[Dict] = [
                         {"GEOID": k, "DISTRICT": v}
