@@ -116,12 +116,12 @@ def main() -> None:
     # Make a list of plans to push for each pair of ratings dimensions
     # Always push all the points on the frontiers
 
-    plans_to_push: Dict[str, List[str]] = {}
+    plans_by_pair: Dict[str, List[str]] = {}
     for k, v in frontiers.items():  # for each frontier
-        plans_to_push[k] = []
+        plans_by_pair[k] = []
         for p in v:  # for each point
             name: str = p["map"]
-            plans_to_push[k].append(name)
+            plans_by_pair[k].append(name)
 
     # Also optionally push additional random plans up to a limit
 
@@ -134,19 +134,19 @@ def main() -> None:
                 frontiers, plan_ratings, args.delta
             )
             for k, _ in frontiers.items():
-                while len(plans_to_push[k]) < args.points and len(zone_plans[k]) > 0:
+                while len(plans_by_pair[k]) < args.points and len(zone_plans[k]) > 0:
                     name: str = random.choice(zone_plans[k])
                     zone_plans[k].remove(name)
-                    if name not in plans_to_push[k]:
-                        plans_to_push[k].append(name)
+                    if name not in plans_by_pair[k]:
+                        plans_by_pair[k].append(name)
 
         # -or- push random plans
         if args.random:
             for k, _ in frontiers.items():
-                while len(plans_to_push[k]) < args.points:
+                while len(plans_by_pair[k]) < args.points:
                     name: str = random.choice(plan_ratings)["name"]
-                    if name not in plans_to_push[k]:
-                        plans_to_push[k].append(name)
+                    if name not in plans_by_pair[k]:
+                        plans_by_pair[k].append(name)
 
     if args.verbose:
         print("Points to push by pair of ratings dimensions:")
@@ -154,13 +154,21 @@ def main() -> None:
         tp: int = 0
         for k, v in frontiers.items():
             nf: int = len(v)
-            np: int = len(plans_to_push[k])
+            np: int = len(plans_by_pair[k])
 
             tf += nf
             tp += np
 
             print(f"{k}: {nf} -> {np}")
         print(f"{k}: {tf} -> {tp}")
+
+    # Flatten the points to push into a single list
+
+    plans_to_push: List[Dict] = []
+    for k, v in plans_by_pair.items():
+        pair: Tuple[str, ...] = tuple(k.split("_"))
+        for n in v:
+            plans_to_push.append({n: pair})
 
     # Generate the jobs
 
