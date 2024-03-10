@@ -190,53 +190,60 @@ def main() -> None:
         job: int = 0
         seed: int = start
 
-        for name, pair in plans_to_push.items():  # for each plan
-            # name: str = p["map"]
-            plan: List[Dict] = [
-                {"GEOID": k, "DISTRICT": v} for k, v in plans_by_name[name].items()
-            ]
-
-            plan_to_push: str = f"{prefix}_{name}"
-            plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
-            plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
-
-            pushed_prefix: str = prefix + f"_{name}_{y}{x}"
-
-            write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
-
-            job_copy: str = f"{copy_path}/jobs/{plan_to_push}.sh"
-
+        for j, commands in enumerate(pushes_per_job):  # for each job
+            job_name: str = f"job_{j:04d}"
+            job_copy: str = f"{copy_path}/jobs/{job_name}.sh"
             with open(job_copy, "w") as jf:
-                for j in range(1, args.cores + 1):  # for each multiple
-                    pushed_run: str = pushed_prefix + f"_{j:03d}_plan.csv"
-                    log_run: str = pushed_prefix + f"_{j:03d}_log.txt"
+                for command in commands:  # for each plan
+                    name: str = command[0]
+                    plan: List[Dict] = [
+                        {"GEOID": k, "DISTRICT": v}
+                        for k, v in plans_by_name[name].items()
+                    ]
 
-                    print(f"~/tradeoffs/scripts/push_plan.py \\", file=jf)
-                    print(f"--state {xx} \\", file=jf)
-                    print(f"--plan {plan_run} \\", file=jf)
-                    print(f"--dimensions {dimensions} \\", file=jf)
-                    print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
-                    print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
-                    print(f"--seed {seed} \\", file=jf)
-                    print(f"--data {run_path}/data/data.csv \\", file=jf)
-                    print(f"--shapes {run_path}/data/shapes.json \\", file=jf)
-                    print(f"--graph {run_path}/data/graph.json \\", file=jf)
-                    print(f"--verbose \\", file=jf)
-                    print(f"--no-debug", file=jf)
-                    print(f"###", file=jf)
+                    pair: Tuple[str, ...] = command[1]
+                    dimensions: str = " ".join(pair)
+                    y: str = str(ratings_dimensions.index(pair[0]) + 1)
+                    x: str = str(ratings_dimensions.index(pair[1]) + 1)
 
-                    seed += 1
+                    plan_to_push: str = f"{prefix}_{name}"
+                    plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
+                    plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
 
-            slurm_copy: str = f"{copy_path}/jobs/{plan_to_push}.slurm"
+                    pushed_prefix: str = prefix + f"_{name}_{y}{x}"
+
+                    write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
+
+                    for i in range(1, args.pushes + 1):
+                        pushed_run: str = pushed_prefix + f"_{i:02d}_plan.csv"
+                        log_run: str = pushed_prefix + f"_{i:02d}_log.txt"
+
+                        print(f"~/tradeoffs/scripts/push_plan.py \\", file=jf)
+                        print(f"--state {xx} \\", file=jf)
+                        print(f"--plan {plan_run} \\", file=jf)
+                        print(f"--dimensions {dimensions} \\", file=jf)
+                        print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
+                        print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
+                        print(f"--seed {seed} \\", file=jf)
+                        print(f"--data {run_path}/data/data.csv \\", file=jf)
+                        print(f"--shapes {run_path}/data/shapes.json \\", file=jf)
+                        print(f"--graph {run_path}/data/graph.json \\", file=jf)
+                        print(f"--verbose \\", file=jf)
+                        print(f"--no-debug", file=jf)
+                        print(f"###", file=jf)
+
+                        seed += 1
+
+            slurm_copy: str = f"{copy_path}/jobs/{job_name}.slurm"
             with open(slurm_copy, "w") as sf:
                 print(f"#!/bin/bash", file=sf)
                 print(f"", file=sf)
-                print(f"#SBATCH --ntasks=28", file=sf)
+                print(f"#SBATCH --ntasks={args.cores}", file=sf)
                 print(f"#SBATCH --nodes=1", file=sf)
                 print(f"#SBATCH --time=00:20:00", file=sf)
                 print(f"#SBATCH --partition=standard", file=sf)
                 print(f"#SBATCH --account=proebsting", file=sf)
-                print(f"#SBATCH -o dropbox/{xx}/pushed/{plan_to_push}.out", file=sf)
+                print(f"#SBATCH -o dropbox/{xx}/pushed/{job_name}.out", file=sf)
                 print(f"", file=sf)
                 print(f"module load parallel", file=sf)
                 print(f"module load python/3.11", file=sf)
@@ -244,11 +251,11 @@ def main() -> None:
                 print(f'export PYTHONPATH="$PYTHONPATH":~/tradeoffs', file=sf)
                 print(f"", file=sf)
                 print(
-                    f"cat {run_path}/jobs/{plan_to_push}.sh | parallel -d '###'",
+                    f"cat {run_path}/jobs/{job_name}.sh | parallel -d '###'",
                     file=sf,
                 )
 
-            print(f"sbatch {run_path}/jobs/{plan_to_push}.slurm", file=bf)
+            print(f"sbatch {run_path}/jobs/{job_name}.slurm", file=bf)
 
 
 def get_zone_plans(
