@@ -27,6 +27,7 @@ $ scripts/make_push_jobs.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ../../iCloud/fileout/hpc_dropbox \
+--points 100 \
 --cores 28 \
 --no-debug
 
@@ -60,7 +61,7 @@ warnings.warn = lambda *args, **kwargs: None
 
 import os
 import shutil
-import itertools
+import random
 
 from rdabase import (
     require_args,
@@ -109,18 +110,28 @@ def main() -> None:
 
     # Make a list of plans to push by pair of ratings dimensions
 
-    # ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2)) TODO
+    plans_to_push: Dict[str, List[str]] = {}
+    for k, v in frontiers.items():  # for each frontier
+        plans_to_push[k] = []
+        for p in v:  # for each point
+            name: str = p["map"]
+            plans_to_push[k].append(name)
 
-    plans_to_push: Dict[str, List[str]] = {k: [] for k, v in frontiers.items()}
+    if args.zone or args.random:
+        plan_ratings: List[Dict] = read_ratings(args.scores, verbose=args.verbose)
 
-    if args.zone:
-        also_push_zone_points(
-            frontiers, plans_to_push, args.scores, verbose=args.verbose
-        )
-    elif args.random:
-        print("TODO: Random points")
-    else:
-        push_frontier_points(frontiers, plans_to_push)
+        if args.zone:
+            zone_plans: Dict[str, List[str]] = get_zone_plans(frontiers, plan_ratings)
+            for k, _ in frontiers.items():
+                while len(plans_to_push[k]) < args.points and len(zone_plans[k]) > 0:
+                    print(f"{k}: {len(plans_to_push[k])}")
+                    name: str = random.choice(zone_plans[k])
+                    zone_plans[k].remove(name)
+                    if name not in plans_to_push[k]:
+                        plans_to_push[k].append(name)
+
+        if args.random:
+            print("TODO: Random points")
 
     if args.verbose:
         tf: int = 0
@@ -210,27 +221,12 @@ def main() -> None:
                 print(f"sbatch {run_path}/jobs/{plan_to_push}.slurm", file=bf)
 
 
-def push_frontier_points(
-    frontiers: Dict[str, Any], plans_to_push: Dict[str, List[str]]
-):
-    """Just push the frontier points"""
+def get_zone_plans(
+    frontiers: Dict[str, Any], plan_ratings: List[Dict]
+) -> Dict[str, List[str]]:
+    """Get the plans in the 'zone' near the frontiers."""
 
-    for k, v in frontiers.items():  # for each frontier
-        for p in v:  # for each point
-            name: str = p["map"]
-            plans_to_push[k].append(name)
-
-
-def also_push_zone_points(
-    frontiers: Dict[str, Any],
-    plans_to_push: Dict[str, List[str]],
-    scores_path,
-    *,
-    verbose: bool = False,
-):
-    """In addition to the frontier points, push points 'near' the frontier"""
-
-    plans: List[Dict] = read_ratings(scores_path, verbose=verbose)
+    zone_plans: Dict[str, List[str]] = {}
     for k, v in frontiers.items():
         pair: Tuple[str, ...] = tuple(k.split("_"))
         ydim: str = pair[0]
@@ -238,16 +234,19 @@ def also_push_zone_points(
         d1: int = ratings_dimensions.index(ydim)
         d2: int = ratings_dimensions.index(xdim)
 
+        zone_plans[k] = []
         frontier_points: List[Tuple[int, int]] = list(
             set([(p["ratings"][d2], p["ratings"][d1]) for p in v])
         )
 
-        for plan in plans:
+        for plan in plan_ratings:
             name: str = plan["name"]
             pt: Tuple[int, int] = (plan["ratings"][d2], plan["ratings"][d1])
 
             if is_near_any(pt, frontier_points, delta=2):
-                plans_to_push[k].append(name)
+                zone_plans[k].append(name)
+
+    return zone_plans
 
 
 def parse_args():
@@ -274,6 +273,12 @@ def parse_args():
         "--frontier",
         type=str,
         help="Frontier maps JSON file",
+    )
+    parser.add_argument(
+        "--points",
+        type=int,
+        default=100,
+        help="The *maximum* number of points to push for each frontier.",
     )
     parser.add_argument("--cores", type=int, help="How many times to push each point")
     #
@@ -331,7 +336,8 @@ def parse_args():
         "plans": "../../iCloud/fileout/ensembles/NC20C_plans.json",
         "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
-        "cores": 1,
+        "points": 100,
+        "cores": 28,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
