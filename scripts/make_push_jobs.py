@@ -10,11 +10,11 @@ $ scripts/make_push_jobs.py \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--cores 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ../../iCloud/fileout/hpc_dropbox \
---cores 28 \
 --no-debug
 
 $ scripts/make_push_jobs.py \
@@ -23,12 +23,12 @@ $ scripts/make_push_jobs.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --zone \
+--points 100 \
+--cores 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ../../iCloud/fileout/hpc_dropbox \
---points 100 \
---cores 28 \
 --no-debug
 
 $ scripts/make_push_jobs.py \
@@ -37,11 +37,12 @@ $ scripts/make_push_jobs.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --random \
+--points 100 \
+--cores 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --output ../../iCloud/fileout/hpc_dropbox \
---cores 28 \
 --no-debug
 
 For documentation, type:
@@ -108,7 +109,8 @@ def main() -> None:
     frontiers_blob: Dict[str, Any] = read_json(args.frontier)
     frontiers: Dict[str, Any] = frontiers_blob["frontiers"]
 
-    # Make a list of plans to push by pair of ratings dimensions
+    # Make a list of plans to push for each pair of ratings dimensions
+    # Push all the points on the frontiers
 
     plans_to_push: Dict[str, List[str]] = {}
     for k, v in frontiers.items():  # for each frontier
@@ -117,21 +119,28 @@ def main() -> None:
             name: str = p["map"]
             plans_to_push[k].append(name)
 
+    # Also optionally push additional random plans up to a limit
+
     if args.zone or args.random:
         plan_ratings: List[Dict] = read_ratings(args.scores, verbose=args.verbose)
 
+        # Push random plans in a 'zone' near the frontier
         if args.zone:
             zone_plans: Dict[str, List[str]] = get_zone_plans(frontiers, plan_ratings)
             for k, _ in frontiers.items():
                 while len(plans_to_push[k]) < args.points and len(zone_plans[k]) > 0:
-                    print(f"{k}: {len(plans_to_push[k])}")
                     name: str = random.choice(zone_plans[k])
                     zone_plans[k].remove(name)
                     if name not in plans_to_push[k]:
                         plans_to_push[k].append(name)
 
+        # Push random plans
         if args.random:
-            print("TODO: Random points")
+            for k, _ in frontiers.items():
+                while len(plans_to_push[k]) < args.points:
+                    name: str = random.choice(plan_ratings)["name"]
+                    if name not in plans_to_push[k]:
+                        plans_to_push[k].append(name)
 
     if args.verbose:
         tf: int = 0
@@ -302,7 +311,7 @@ def parse_args():
         type=str,
         help="Directory to write 'pushed' plan CSV's to",
     )
-    # NOTE - These are mutually exclusive options, but I'm not defining them as such
+    # TODO - These are mutually exclusive options, but I'm not defining them as such yet.
     parser.add_argument(
         "-z",
         "--zone",
@@ -342,8 +351,8 @@ def parse_args():
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
         "output": "../../iCloud/fileout/hpc_dropbox",
-        "zone": True,
-        "random": False,
+        "zone": False,
+        "random": True,
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
