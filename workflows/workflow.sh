@@ -75,10 +75,9 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv \
 --no-debug
 
-# Combine the original ensemble & pushed plans scores <<< TODO - Make a script for this
+# Combine the original ensemble & pushed plans scores (from 'tradeoffs')
 
-tail -n +2 ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv > ../../iCloud/fileout/ensembles/scores.tmp && mv ../../iCloud/fileout/ensembles/scores.tmp ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv
-cat ../../iCloud/fileout/ensembles/NC20C_scores.csv ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv > ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv
+scripts/COMBINE_SCORES.sh NC
 
 # Find the pushed frontiers (from 'tradeoffs')
 
