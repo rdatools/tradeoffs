@@ -40,6 +40,7 @@ scripts/recom_ensemble.py \
 --no-debug
 
 # Score the ensemble (from 'rdaensemble')
+
 scripts/score_ensemble.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
@@ -50,6 +51,7 @@ scripts/score_ensemble.py \
 --no-debug
 
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
+
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
@@ -89,6 +91,7 @@ scripts/ensemble_from_plans.py \
 --no-debug
 
 # Score the pushed plans (from 'rdaensemble')
+
 scripts/score_ensemble.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \

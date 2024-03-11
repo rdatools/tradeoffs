@@ -149,7 +149,7 @@ def main() -> None:
     """
 
     print(f"# Score the ensemble (from 'rdaensemble')")
-
+    print()
     print(f"scripts/score_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--plans {output_dir}/{xx}20C_plans.json \\")
@@ -173,7 +173,7 @@ def main() -> None:
     """
 
     print(f"# Find the ratings frontiers in the ensemble (from 'tradeoffs')")
-
+    print()
     print(f"scripts/find_frontiers.py \\")
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
     print(f"--metadata {output_dir}/{xx}20C_scores_metadata.json \\")
@@ -271,7 +271,7 @@ def main() -> None:
     """
 
     print(f"# Score the pushed plans (from 'rdaensemble')")
-
+    print()
     print(f"scripts/score_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
