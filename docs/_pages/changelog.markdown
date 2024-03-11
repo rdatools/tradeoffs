@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Pushing the frontier and random points in the 'zone'
 - Added deploy script
 - Annotated the state page template
 - Updated the backend of the pipeline
