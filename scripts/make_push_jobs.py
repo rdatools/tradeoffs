@@ -168,7 +168,7 @@ def main() -> None:
     for k, v in plans_by_pair.items():
         pair: Tuple[str, ...] = tuple(k.split("_"))
         for n in v:
-            for i in range(1, args.pushes + 1):
+            for i in range(args.pushes):
                 push_commands.append((n, pair, i))
 
     if args.verbose:

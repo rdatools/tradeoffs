@@ -94,9 +94,9 @@ def main() -> None:
             {"GEOID": k, "DISTRICT": v} for k, v in pushed_plan.items()
         ]
         write_csv(args.pushed, plan, ["GEOID", "DISTRICT"])
-        print(f"Success: {os.path.basename(args.pushed)}")
+        print(f"Status: Success for {os.path.basename(args.pushed)}")
     else:
-        print(f"Failure: {os.path.basename(args.pushed)}")
+        print(f"Status: Failure for {os.path.basename(args.pushed)}")
 
 
 def parse_args():

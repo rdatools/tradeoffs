@@ -8,9 +8,6 @@ from typing import (
     Dict,
     Set,
     Tuple,
-    TypeAlias,
-    NamedTuple,
-    TypedDict,
     Optional,
     Callable,
 )
@@ -101,9 +98,9 @@ class Plan:
         if not self.is_valid_plan():
             print("Starting plan is not valid!")
             raise ValueError("Starting plan is not valid!")
-        elif self._verbose:
-            print()
-            print(self)
+        # elif self._verbose:
+        #     print()
+        #     print(self)
 
     def __repr__(self) -> str:
         return f"Plan: generation {self._generation} - {self._mutations_applied}/{self._cumulative_mutations_applied} mutations applied, {self._features_moved}/{self._cumulative_features_moved} features moved"

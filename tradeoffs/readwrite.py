@@ -4,6 +4,10 @@ READ/WRITE UTILITIES
 
 from typing import List, Dict, Callable
 
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
+
 from csv import DictReader
 import pandas as pd
 
