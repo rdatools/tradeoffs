@@ -1,4 +1,4 @@
-# NC workflow
+# Sample NC workflow
 
 # Use the root map in root_maps or
 # Approximate a new root map:
@@ -29,8 +29,6 @@ scripts/approx_root_map.py \
 
 # Copy the result to the root_maps directory as NC20C_root_map.csv
 
-# Generate an ensemble (from 'rdaensemble')
-
 scripts/recom_ensemble.py \
 --state NC \
 --size 10000 \
@@ -42,7 +40,6 @@ scripts/recom_ensemble.py \
 --no-debug
 
 # Score the ensemble (from 'rdaensemble')
-
 scripts/score_ensemble.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
@@ -53,7 +50,6 @@ scripts/score_ensemble.py \
 --no-debug
 
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
-
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
@@ -93,7 +89,6 @@ scripts/ensemble_from_plans.py \
 --no-debug
 
 # Score the pushed plans (from 'rdaensemble')
-
 scripts/score_ensemble.py \
 --state NC \
 --plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \
@@ -159,3 +154,5 @@ scripts/make_scatter_plots.py \
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC
+
+# END

@@ -7,7 +7,6 @@ For example:
 
 $ scripts/make_workflow.py \
 --state NC \
---no-debug \
 > workflows/NC.sh
 
 For documentation, type:
@@ -32,18 +31,27 @@ def main() -> None:
     - DRA notable maps ratings tables from pg/docs/_data to docs/_data/notable_ratings
 
     Also the root maps from the 'baseline' repo en masse on 03/11/24.
-
     """
+
+    args: argparse.Namespace = parse_args()
+
+    xx: str = args.state
+    data_dir: str = "../rdabase/data"
+    output_dir: str = "../../iCloud/fileout/ensembles"
 
     """
     # NC workflow
+
     """
+
+    print(f"# {xx} workflow")
+    print()
 
     """
     # Use the root map in root_maps or
     # Approximate a new root map:
     # Generate an ensemble of 100 random plans (from 'rdaensemble')
-
+  
     scripts/rmfrsp_ensemble.py \
     --state NC \
     --size 100 \
@@ -68,7 +76,38 @@ def main() -> None:
     --no-debug
 
     # Copy the result to the root_maps directory as NC20C_root_map.csv
+
     """
+
+    print(f"# Use the root map in root_maps or")
+    print(f"# Approximate a new root map:")
+    print(f"# Generate an ensemble of 100 random plans (from 'rdaensemble')")
+    print()
+    print(f"scripts/rmfrsp_ensemble.py \\")
+    print(f"--state {xx} \\")
+    print(f"--size 100 \\")
+    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--plans {output_dir}/{xx}20C_RMfRSP_100_plans.json \\")
+    print(f"--log {output_dir}/{xx}20C_RMfRSP_100_log.txt \\")
+    print(f"--no-debug")
+    print()
+    print(f"# Approximate a root map with them (from 'rdaroot')")
+    print()
+    print(f"scripts/approx_root_map.py \\")
+    print(f"--state {xx} \\")
+    print(f"--plans {output_dir}/{xx}20C_RMfRST_100_plans.json \\")
+    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--map ../../iCloud/fileout/rootmaps/{xx}20C_rootmap.csv \\")
+    print(f"--candidates ../../iCloud/fileout/rootmaps/{xx}20C_rootcandidates.json \\")
+    print(f"--log ../../iCloud/fileout/rootmaps/{xx}20C_rootlog.txt \\")
+    print(f"--no-debug")
+    print()
+    print(f"# Copy the result to the root_maps directory as {xx}20C_root_map.csv")
+    print()
 
     """
     # Generate an ensemble (from 'rdaensemble')
@@ -84,6 +123,17 @@ def main() -> None:
     --no-debug
     """
 
+    print(f"scripts/recom_ensemble.py \\")
+    print(f"--state {xx} \\")
+    print(f"--size 10000 \\")
+    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--root root_maps/{xx}20C_root_map.csv \\")
+    print(f"--plans {output_dir}/{xx}20C_plans.json \\")
+    print(f"--log {output_dir}/{xx}20C_log.txt \\")
+    print(f"--no-debug")
+    print()
+
     """
     # Score the ensemble (from 'rdaensemble')
 
@@ -95,7 +145,20 @@ def main() -> None:
     --graph ../rdabase/data/NC/NC_2020_graph.json \
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
     --no-debug
+
     """
+
+    print(f"# Score the ensemble (from 'rdaensemble')")
+
+    print(f"scripts/score_ensemble.py \\")
+    print(f"--state {xx} \\")
+    print(f"--plans {output_dir}/{xx}20C_plans.json \\")
+    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Find the ratings frontiers in the ensemble (from 'tradeoffs')
@@ -106,7 +169,18 @@ def main() -> None:
     --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
     --verbose \
     --no-debug
+
     """
+
+    print(f"# Find the ratings frontiers in the ensemble (from 'tradeoffs')")
+
+    print(f"scripts/find_frontiers.py \\")
+    print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
+    print(f"--metadata {output_dir}/{xx}20C_scores_metadata.json \\")
+    print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
+    print(f"--verbose \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Generate 'push' jobs (from 'tradeoffs')
@@ -127,13 +201,40 @@ def main() -> None:
     --graph ../rdabase/data/NC/NC_2020_graph.json \
     --output ../../iCloud/fileout/hpc_dropbox \
     --no-debug
+
     """
+
+    print(f"# Generate 'push' jobs (from 'tradeoffs')")
+    print()
+    print(f"scripts/SETUP.sh {xx}")
+    print()
+    print(f"scripts/make_push_jobs.py \\")
+    print(f"--state {xx} \\")
+    print(f"--plans {output_dir}/{xx}20C_plans.json \\")
+    print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
+    print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
+    print(f"--zone \\")
+    print(f"--points 100 \\")
+    print(f"--pushes 3 \\")
+    print(f"--cores 28 \\")
+    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--output ../../iCloud/fileout/hpc_dropbox \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Push the jobs to the cluster (from 'tradeoffs')
     # Submit the jobs (on the UA cluster)
-    # Pull the pushed plans from the cluster (from 'tradeoffs')    
+    # Pull the pushed plans from the cluster (from 'tradeoffs')
+
     """
+
+    print(f"# Push the jobs to the cluster (from 'tradeoffs')")
+    print(f"# Submit the jobs (on the UA cluster)")
+    print(f"# Pull the pushed plans from the cluster (from 'tradeoffs')")
+    print()
 
     """
     # Collect the pushed plans into an ensemble (from 'rdaensemble')
@@ -143,7 +244,17 @@ def main() -> None:
     --plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \
     --dir ../../iCloud/fileout/hpc_dropbox/NC/pushed \
     --no-debug
+
     """
+
+    print(f"# Collect the pushed plans into an ensemble (from 'rdaensemble')")
+    print()
+    print(f"scripts/ensemble_from_plans.py \\")
+    print(f"--base {output_dir}/{xx}20C_plans.json \\")
+    print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
+    print(f"--dir ../../iCloud/fileout/hpc_dropbox/{xx}/pushed \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Score the pushed plans (from 'rdaensemble')
@@ -156,13 +267,32 @@ def main() -> None:
     --graph ../rdabase/data/NC/NC_2020_graph.json \
     --scores ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv \
     --no-debug
+
     """
+
+    print(f"# Score the pushed plans (from 'rdaensemble')")
+
+    print(f"scripts/score_ensemble.py \\")
+    print(f"--state {xx} \\")
+    print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
+    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--scores {output_dir}/{xx}20C_scores_pushed.csv \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Combine the original ensemble & pushed plans scores (from 'tradeoffs')
 
     scripts/COMBINE_SCORES.sh NC
+
     """
+
+    print(f"# Combine the original ensemble & pushed plans scores (from 'tradeoffs')")
+    print()
+    print(f"scripts/COMBINE_SCORES.sh {xx}")
+    print()
 
     """
     # Find the pushed frontiers (from 'tradeoffs')
@@ -172,7 +302,17 @@ def main() -> None:
     --metadata ../../iCloud/fileout/ensembles/NC20C_scores_pushed_metadata.json \
     --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
     --no-debug
+
     """
+
+    print(f"# Find the pushed frontiers (from 'tradeoffs')")
+    print()
+    print(f"scripts/find_frontiers.py \\")
+    print(f"--scores {output_dir}/{xx}20C_scores_augmented.csv \\")
+    print(f"--metadata {output_dir}/{xx}20C_scores_pushed_metadata.json \\")
+    print(f"--frontier {output_dir}/{xx}20C_frontiers_pushed.json \\")
+    print(f"--no-debug")
+    print()
 
     """
     # ID the notable maps in the augmented ensemble (from 'rdaensemble')
@@ -182,7 +322,17 @@ def main() -> None:
     --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
     --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
     --no-debug
+
     """
+
+    print(f"# ID the notable maps in the augmented ensemble (from 'rdaensemble')")
+    print()
+    print(f"scripts/id_notable_maps.py \\")
+    print(f"--scores {output_dir}/{xx}20C_scores_augmented.csv \\")
+    print(f"--metadata {output_dir}/{xx}20C_scores_metadata.json \\")
+    print(f"--notables {output_dir}/{xx}20C_notable_maps.json \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Make a box plot (from 'tradeoffs')
@@ -191,7 +341,16 @@ def main() -> None:
     --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
     --image ../../iCloud/fileout/images/NC20C_boxplot.svg \
     --no-debug
+
     """
+
+    print(f"# Make a box plot (from 'tradeoffs')")
+    print()
+    print(f"scripts/make_box_plot.py \\")
+    print(f"--scores {output_dir}/{xx}20C_scores_augmented.csv \\")
+    print(f"--image ../../iCloud/fileout/images/{xx}20C_boxplot.svg \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Make a statistics table (from 'tradeoffs')
@@ -200,7 +359,16 @@ def main() -> None:
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
     --output ../../iCloud/fileout/_data/NC20C_statistics.csv \
     --no-debug
+
     """
+
+    print(f"# Make a statistics table (from 'tradeoffs')")
+    print()
+    print(f"scripts/make_stats_table.py \\")
+    print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
+    print(f"--output ../../iCloud/fileout/_data/{xx}20C_statistics.csv \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Make a notable maps ratings table (from 'tradeoffs')
@@ -209,7 +377,16 @@ def main() -> None:
     --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
     --output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
     --no-debug
+
     """
+
+    print(f"# Make a notable maps ratings table (from 'tradeoffs')")
+    print()
+    print(f"scripts/make_ratings_table.py \\")
+    print(f"--notables {output_dir}/{xx}20C_notable_maps.json \\")
+    print(f"--output ../../iCloud/fileout/_data/{xx}20C_notable_maps_ratings.csv \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Make scatter plots (from 'tradeoffs')
@@ -223,19 +400,41 @@ def main() -> None:
     --prefix NC20C \
     --output ../../iCloud/fileout/images \
     --no-debug
+
     """
+
+    print(f"# Make scatter plots (from 'tradeoffs')")
+    print()
+    print(f"scripts/make_scatter_plots.py \\")
+    print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
+    print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
+    print(f"--pushed {output_dir}/{xx}20C_frontiers_pushed.json \\")
+    print(f"--notables docs/_data/notable_ratings/{xx}_2022_Congress_ratings.csv \\")
+    print(f"--focus {output_dir}/{xx}20C_focus_scores.csv \\")
+    print(f"--prefix {xx}20C \\")
+    print(f"--output ../../iCloud/fileout/images \\")
+    print(f"--no-debug")
+    print()
 
     """
     # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
     scripts/DEPLOY.sh NC
+
     """
 
-    args: argparse.Namespace = parse_args()
+    print(
+        f"# Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')"
+    )
+    print()
+    print(f"scripts/DEPLOY.sh {xx}")
+    print()
 
-    xx: str = args.state
+    """
+    # END
+    """
 
-    pass  # TODO
+    print(f"# END")
 
 
 def parse_args():
@@ -245,27 +444,12 @@ def parse_args():
 
     parser.add_argument(
         "--state",
+        default="NC",
         help="The two-character state code (e.g., NC)",
         type=str,
     )
-    parser.add_argument(
-        "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
-    )
-
-    # Enable debug/explicit mode
-    parser.add_argument("--debug", default=True, action="store_true", help="Debug mode")
-    parser.add_argument(
-        "--no-debug", dest="debug", action="store_false", help="Explicit mode"
-    )
 
     args: Namespace = parser.parse_args()
-
-    # Default values for args in debug mode
-    debug_defaults: Dict[str, Any] = {
-        "state": "NC",
-        "verbose": True,
-    }
-    args = require_args(args, args.debug, debug_defaults)
 
     return args
 
