@@ -4,7 +4,7 @@
 #
 # For example:
 #
-# scripts/deploy.sh NC
+# scripts/DEPLOY.sh NC
 
 XX=$1
 FROM_DIR=../../iCloud/fileout

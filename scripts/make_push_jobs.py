@@ -58,7 +58,7 @@ $ scripts/make_push_jobs.py
 import argparse
 from argparse import ArgumentParser, Namespace
 
-from typing import List, Dict, Tuple, Any
+from typing import List, Dict, Tuple, Set, Any
 
 import warnings
 
@@ -164,22 +164,24 @@ def main() -> None:
 
     # 'Chunk' the points to push into groups for a single node job
 
-    plans_to_push: List[Tuple[str, Tuple[str, ...]]] = []
+    push_commands: List[Tuple[str, Tuple[str, ...], int]] = []
     for k, v in plans_by_pair.items():
         pair: Tuple[str, ...] = tuple(k.split("_"))
         for n in v:
-            plans_to_push.append((n, pair))
+            for i in range(1, args.pushes + 1):
+                push_commands.append((n, pair, i))
 
     if args.verbose:
-        print(f"# of plans to push: {len(plans_to_push)}")
+        print(f"# of push commands: {len(push_commands)}")
 
-    pushes_per_job: List[List[Tuple[str, Tuple[str, ...]]]] = []
+    pushes_per_job: List[List[Tuple[str, Tuple[str, ...], int]]] = []
     count: int = 0
-    commands: List[Tuple[str, Tuple[str, ...]]] = []
-    for push in plans_to_push:
+    commands: List[Tuple[str, Tuple[str, ...], int]] = []
+    for push in push_commands:
         name: str = push[0]
         pair: Tuple[str, ...] = push[1]
-        commands.append((name, pair))
+        i: int = push[2]
+        commands.append((name, pair, i))
         count += 1
         if count % args.cores == 0:
             pushes_per_job.append(commands)
@@ -197,6 +199,7 @@ def main() -> None:
         print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
         job: int = 0
         seed: int = start
+        plan_csv: Set[str] = set()
 
         for j, commands in enumerate(pushes_per_job):  # for each job
             job_name: str = f"job_{j:04d}"
@@ -204,12 +207,9 @@ def main() -> None:
             with open(job_copy, "w") as jf:
                 for command in commands:  # for each plan/command in the job
                     name: str = command[0]
-                    plan: List[Dict] = [
-                        {"GEOID": k, "DISTRICT": v}
-                        for k, v in plans_by_name[name].items()
-                    ]
-
                     pair: Tuple[str, ...] = command[1]
+                    i: int = command[2]
+
                     dimensions: str = " ".join(pair)
                     y: str = str(ratings_dimensions.index(pair[0]) + 1)
                     x: str = str(ratings_dimensions.index(pair[1]) + 1)
@@ -220,27 +220,32 @@ def main() -> None:
 
                     pushed_prefix: str = prefix + f"_{name}_{y}{x}"
 
-                    write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
+                    if name not in plan_csv:
+                        plan: List[Dict] = [
+                            {"GEOID": k, "DISTRICT": v}
+                            for k, v in plans_by_name[name].items()
+                        ]
 
-                    for i in range(1, args.pushes + 1):
-                        pushed_run: str = pushed_prefix + f"_{i:02d}_plan.csv"
-                        log_run: str = pushed_prefix + f"_{i:02d}_log.txt"
+                        write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
 
-                        print(f"~/tradeoffs/scripts/push_plan.py \\", file=jf)
-                        print(f"--state {xx} \\", file=jf)
-                        print(f"--plan {plan_run} \\", file=jf)
-                        print(f"--dimensions {dimensions} \\", file=jf)
-                        print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
-                        print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
-                        print(f"--seed {seed} \\", file=jf)
-                        print(f"--data {run_path}/data/data.csv \\", file=jf)
-                        print(f"--shapes {run_path}/data/shapes.json \\", file=jf)
-                        print(f"--graph {run_path}/data/graph.json \\", file=jf)
-                        print(f"--verbose \\", file=jf)
-                        print(f"--no-debug", file=jf)
-                        print(f"###", file=jf)
+                    pushed_run: str = pushed_prefix + f"_{i:02d}_plan.csv"
+                    log_run: str = pushed_prefix + f"_{i:02d}_log.txt"
 
-                        seed += 1
+                    print(f"~/tradeoffs/scripts/push_plan.py \\", file=jf)
+                    print(f"--state {xx} \\", file=jf)
+                    print(f"--plan {plan_run} \\", file=jf)
+                    print(f"--dimensions {dimensions} \\", file=jf)
+                    print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
+                    print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
+                    print(f"--seed {seed} \\", file=jf)
+                    print(f"--data {run_path}/data/data.csv \\", file=jf)
+                    print(f"--shapes {run_path}/data/shapes.json \\", file=jf)
+                    print(f"--graph {run_path}/data/graph.json \\", file=jf)
+                    print(f"--verbose \\", file=jf)
+                    print(f"--no-debug", file=jf)
+                    print(f"###", file=jf)
+
+                    seed += 1
 
             slurm_copy: str = f"{copy_path}/jobs/{job_name}.slurm"
             with open(slurm_copy, "w") as sf:
