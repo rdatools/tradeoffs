@@ -1,16 +1,13 @@
 #!/bin/bash
 #
-# Create the directories in fileout for a state
+# Push a tree of jobs to the UA cluster
 #
 # For example:
 #
 # scripts/SETUP.sh NC
 
 XX=$1
-ROOT_DIR=../../iCloud/fileout/hpc_dropbox
+FROM_DIR=/Users/alecramsay/iCloud/fileout/hpc_dropbox
+TO_DIR=alecr@filexfer.hpc.arizona.edu:./dropbox
 
-mkdir $ROOT_DIR/$XX
-mkdir $ROOT_DIR/$XX/data
-mkdir $ROOT_DIR/$XX/plans
-mkdir $ROOT_DIR/$XX/jobs
-mkdir $ROOT_DIR/$XX/pushed
+rsync -avz $FROM_DIR/$XX/ $TO_DIR/$XX
