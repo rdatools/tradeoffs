@@ -31,12 +31,18 @@ def main() -> None:
     - DRA notable map BAF's from pg/data to notable_maps/xx, and
     - DRA notable maps ratings tables from pg/docs/_data to docs/_data/notable_ratings
 
+    Also the root maps from the 'baseline' repo en masse on 03/11/24.
+
     """
 
     """
-    STEP 1
+    # NC workflow
+    """
 
-    Generate an ensemble of 100 random plans:
+    """
+    # Use the root map in root_maps or
+    # Approximate a new root map:
+    # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
     scripts/rmfrsp_ensemble.py \
     --state NC \
@@ -48,7 +54,7 @@ def main() -> None:
     --log ../../iCloud/fileout/ensembles/NC20C_RMfRSP_100_log.txt \
     --no-debug
     
-    Approximate a root map with them:
+    # Approximate a root map with them (from 'rdaroot')
 
     scripts/approx_root_map.py \
     --state NC \
@@ -61,31 +67,27 @@ def main() -> None:
     --log ../../iCloud/fileout/rootmaps/NC20C_rootlog.txt \
     --no-debug
 
+    # Copy the result to the root_maps directory as NC20C_root_map.csv
     """
 
     """
-    STEP 2
-
-    Generate 10K random plans, using ReCom and the root map as the starting plan:
+    # Generate an ensemble (from 'rdaensemble')
 
     scripts/recom_ensemble.py \
     --state NC \
-    --size 1000 \
+    --size 10000 \
     --data ../rdabase/data/NC/NC_2020_data.csv \
     --graph ../rdabase/data/NC/NC_2020_graph.json \
-    --root ../../iCloud/fileout/rootmaps/NC20C_root_map.csv \
+    --root root_maps/NC20C_root_map.csv \
     --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
     --log ../../iCloud/fileout/ensembles/NC20C_log.txt \
     --no-debug
-
     """
 
     """
-    STEP 3
+    # Score the ensemble (from 'rdaensemble')
 
-    Score the plans in the ensemble:
-
-    $ scripts/score_ensemble.py \
+    scripts/score_ensemble.py \
     --state NC \
     --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
     --data ../rdabase/data/NC/NC_2020_data.csv \
@@ -93,13 +95,10 @@ def main() -> None:
     --graph ../rdabase/data/NC/NC_2020_graph.json \
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
     --no-debug
-
     """
 
     """
-    STEP 4
-
-    Find the frontiers:
+    # Find the ratings frontiers in the ensemble (from 'tradeoffs')
 
     scripts/find_frontiers.py \
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
@@ -107,112 +106,129 @@ def main() -> None:
     --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
     --verbose \
     --no-debug
-
     """
 
     """
-    TODO - STEP 5 
-    
-    Generate push_plan jobs:
+    # Generate 'push' jobs (from 'tradeoffs')
 
-    and run them to push the frontiers. 
-    
-    Collect the results:
+    scripts/SETUP.sh NC
 
+    scripts/make_push_jobs.py \
+    --state NC \
+    --plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+    --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+    --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+    --zone \
+    --points 100 \
+    --pushes 3 \
+    --cores 28 \
+    --data ../rdabase/data/NC/NC_2020_data.csv \
+    --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+    --graph ../rdabase/data/NC/NC_2020_graph.json \
+    --output ../../iCloud/fileout/hpc_dropbox \
+    --no-debug
     """
 
     """
-    TODO - STEP 6
-
-    Append the pushed plans to a copy of the original ensemble:
-
+    # Push the jobs to the cluster (from 'tradeoffs')
+    # Submit the jobs (on the UA cluster)
+    # Pull the pushed plans from the cluster (from 'tradeoffs')    
     """
 
     """
-    TODO - STEP 7
+    # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
-    Find the new frontiers:
-
+    scripts/ensemble_from_plans.py \
+    --base ../../iCloud/fileout/ensembles/NC20C_plans.json \
+    --plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \
+    --dir ../../iCloud/fileout/hpc_dropbox/NC/pushed \
+    --no-debug
     """
 
     """
-    TODO - STEP 8 <<< Todd?
+    # Score the pushed plans (from 'rdaensemble')
 
-    Add the plans for any new frontier points to the original ensemble:
-
+    scripts/score_ensemble.py \
+    --state NC \
+    --plans ../../iCloud/fileout/ensembles/NC20C_plans_pushed.json \
+    --data ../rdabase/data/NC/NC_2020_data.csv \
+    --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+    --graph ../rdabase/data/NC/NC_2020_graph.json \
+    --scores ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv \
+    --no-debug
     """
 
     """
-    TODO - STEP 9
+    # Combine the original ensemble & pushed plans scores (from 'tradeoffs')
 
-    ID the notable maps in the augmented ensemble:
+    scripts/COMBINE_SCORES.sh NC
+    """
+
+    """
+    # Find the pushed frontiers (from 'tradeoffs')
+
+    scripts/find_frontiers.py \
+    --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
+    --metadata ../../iCloud/fileout/ensembles/NC20C_scores_pushed_metadata.json \
+    --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
+    --no-debug
+    """
+
+    """
+    # ID the notable maps in the augmented ensemble (from 'rdaensemble')
 
     scripts/id_notable_maps.py \
-    --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+    --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
     --metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
     --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
     --no-debug
-
     """
 
     """
-    STEP 10
-
-    Make a box plot:
+    # Make a box plot (from 'tradeoffs')
 
     scripts/make_box_plot.py \
-    --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
-    --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
-    --image ../../iCloud/fileout/images/NC20C_10K_boxplot.svg \
+    --scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
+    --image ../../iCloud/fileout/images/NC20C_boxplot.svg \
     --no-debug
-
     """
 
     """
-    STEP 11
-
-    Make a statistics table:
+    # Make a statistics table (from 'tradeoffs')
 
     scripts/make_stats_table.py \
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
-    --output ../../iCloud/fileout/images/NC20C_statistics.csv \
+    --output ../../iCloud/fileout/_data/NC20C_statistics.csv \
     --no-debug
-
     """
 
     """
-    STEP 12
-
-    Make a notable maps ratings table:
+    # Make a notable maps ratings table (from 'tradeoffs')
 
     scripts/make_ratings_table.py \
     --notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
-    --output ../../iCloud/fileout/images/NC20C_notable_maps_ratings.csv \
+    --output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
     --no-debug
-
     """
 
     """
-    STEP 13
-
-    Make scatter plots w/ pre- & post-push frontiers:
+    # Make scatter plots (from 'tradeoffs')
 
     scripts/make_scatter_plots.py \
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
     --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
-    --focus ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
+    --pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
+    --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
+    --focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
     --prefix NC20C \
-    --suffix 10K \
-    --output ../../iCloud/fileout/images/ \
+    --output ../../iCloud/fileout/images \
     --no-debug
-
     """
 
     """
-    TODO - STEP 14 
+    # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
-    Copy the artifacts to 'docs' subdirectories:
-
+    scripts/DEPLOY.sh NC
     """
 
     args: argparse.Namespace = parse_args()

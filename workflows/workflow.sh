@@ -1,11 +1,39 @@
-# TODO - Rationalize file names
-# TODO - Approximate the root map
+# NC workflow
+
+# Use the root map in root_maps or
+# Approximate a new root map:
+# Generate an ensemble of 100 random plans (from 'rdaensemble')
+
+scripts/rmfrsp_ensemble.py \
+--state NC \
+--size 100 \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/ensembles/NC20C_RMfRSP_100_plans.json \
+--log ../../iCloud/fileout/ensembles/NC20C_RMfRSP_100_log.txt \
+--no-debug
+
+# Approximate a root map with them (from 'rdaroot')
+
+scripts/approx_root_map.py \
+--state NC \
+--plans ../../iCloud/fileout/ensembles/NC20C_RMfRST_100_plans.json \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--map ../../iCloud/fileout/rootmaps/NC20C_rootmap.csv \
+--candidates ../../iCloud/fileout/rootmaps/NC20C_rootcandidates.json \
+--log ../../iCloud/fileout/rootmaps/NC20C_rootlog.txt \
+--no-debug
+
+# Copy the result to the root_maps directory as NC20C_root_map.csv
 
 # Generate an ensemble (from 'rdaensemble')
 
 scripts/recom_ensemble.py \
 --state NC \
---size 1000 \
+--size 10000 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --root root_maps/NC20C_root_map.csv \
@@ -56,7 +84,7 @@ scripts/make_push_jobs.py \
 # Submit the jobs (on the UA cluster)
 # Pull the pushed plans from the cluster (from 'tradeoffs')
 
-# Collected the pushed plans into an ensemble (from 'rdaensemble')
+# Collect the pushed plans into an ensemble (from 'rdaensemble')
 
 scripts/ensemble_from_plans.py \
 --base ../../iCloud/fileout/ensembles/NC20C_plans.json \
@@ -116,7 +144,7 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
-# Make scatter plots w/ pre- & post-push frontiers (from 'tradeoffs')
+# Make scatter plots (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
