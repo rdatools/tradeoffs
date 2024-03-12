@@ -235,7 +235,7 @@ def main() -> None:
                 "y": pfyvalues,
                 "mode": "markers",
                 "marker_color": "black",
-                "marker_size": 3,
+                "marker_size": 2,
                 "fill": None,
                 "showlegend": False,
             }
