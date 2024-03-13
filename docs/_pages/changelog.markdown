@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Rationalize state page script
 - Updating state page template
 - Pushing the frontier and random points in the 'zone'
 - Added deploy script

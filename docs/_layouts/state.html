@@ -133,6 +133,18 @@ map-width: 700
 <div id="ensemble-ratings-table" class="ag-theme-alpine">
 </div>
 
+<p>DRA Notable Maps</p>
+
+{% capture dra-ratings-file %}
+{{ xx }}_2022_Congress_ratings
+{% endcapture %}
+{% assign dra-ratings-file = dra-ratings-file | strip_newlines %}
+
+<!-- {% assign dra-ratings = site.data[dra-ratings-file] %} -->
+
+<div id="dra-ratings-table" class="ag-theme-alpine">
+</div>
+
 <!-- Grid -->
 <script type="text/javascript" charset="utf-8">
     const ratingsColumns = [
@@ -144,7 +156,7 @@ map-width: 700
         {field: 'SPLITTING', width: 125, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
     ];
 
-    const ratingsOptionsEnsemble = {
+    const ratingsOptions = {
         defaultColDef: {
             sortable: true,
             // resizable: true,
@@ -155,7 +167,12 @@ map-width: 700
         },
         columnDefs: ratingsColumns,
         domLayout: 'autoHeight',
-        onGridReady: (event) => {renderEnsembleRatingsTable(event.api)}
+    };
+    let ratingsOptionsEnsemble = {
+        ...ratingsOptions, onGridReady: (event) => {renderEnsembleRatingsTable(event.api)}
+    };
+    let ratingsOptionsDRA = {
+        ...ratingsOptions, onGridReady: (event) => {renderDRARatingsTable(event.api)}
     };
 
     const eEnsembleRatingsGridDiv = document.getElementById('ensemble-ratings-table');
@@ -171,51 +188,13 @@ map-width: 700
             complete: response =>
             {
                 data = response.data;
-                data.pop();
+                data.pop(); // Remove trailing empty row
 
                 api.setRowData(data);
                 api.sizeColumnsToFit();
             }
         })
     }
-</script>
-
-<p>DRA Notable Maps</p>
-
-{% capture dra-ratings-file %}
-{{ xx }}_2022_Congress_ratings
-{% endcapture %}
-{% assign dra-ratings-file = dra-ratings-file | strip_newlines %}
-
-<!-- {% assign dra-ratings = site.data[dra-ratings-file] %} -->
-
-<div id="dra-ratings-table" class="ag-theme-alpine">
-</div>
-
-<!-- Grid -->
-<script type="text/javascript" charset="utf-8">
-    // const ratingsColumns = [
-    //     {field: 'MAP', width: 190, unSortIcon: true},
-    //     {field: 'PROPORTIONALITY', width: 165, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
-    //     {field: 'COMPETITIVENESS', width: 165, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
-    //     {field: 'MINORITY', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
-    //     {field: 'COMPACTNESS', width: 130, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
-    //     {field: 'SPLITTING', width: 125, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
-    // ];
-
-    const ratingsOptionsDRA = {
-        defaultColDef: {
-            sortable: true,
-            // resizable: true,
-        },
-        rowClassRules: {
-            'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Root";},
-            // 'bold-row': function (params) {return params.data.Map === "Official" || params.data.Map === "Baseline";},
-        },
-        columnDefs: ratingsColumns,
-        domLayout: 'autoHeight',
-        onGridReady: (event) => {renderDRARatingsTable(event.api)}
-    };
 
     const eDRARatingsGridDiv = document.getElementById('dra-ratings-table');
     new agGrid.Grid(eDRARatingsGridDiv, ratingsOptionsDRA);
@@ -230,9 +209,7 @@ map-width: 700
             complete: response =>
             {
                 data = response.data;
-                // data.pop();
-                data.shift();
-                console.log(data);
+                data.shift(); // Remove 'Official' row
 
                 api.setRowData(data);
                 api.sizeColumnsToFit();
