@@ -289,11 +289,14 @@ map-width: 700
 {{ xx }}{{ suffix }}_legend
 {% endcapture %}
 {% assign legend-file = legend-file | strip_newlines %}
+{% assign markers = site.data[ratings-file] %}
 
 <p>Legend</p>
 
+{{ legend-file }}
+
 <ul>
-    {% for marker in site.data.{{ legend-file }} %}
+    {% for marker in markers %}
     <li>{{ marker.MARKER }}: {{ marker.PLAN }}</li>
     {% endfor %}
 </ul>
