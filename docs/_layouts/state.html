@@ -128,7 +128,7 @@ map-width: 700
 {% endcapture %}
 {% assign ensemble-ratings-file = ensemble-ratings-file | strip_newlines %}
 
-{% assign ratings = site.data[ensemble-ratings-file] %}
+<!-- {% assign ensemble-ratings = site.data[ensemble-ratings-file] %} -->
 
 <div id="ensemble-ratings-table" class="ag-theme-alpine">
 </div>
@@ -187,7 +187,7 @@ notable_ratings/{{ xx }}_2022_Congress_ratings
 {% endcapture %}
 {% assign dra-ratings-file = dra-ratings-file | strip_newlines %}
 
-{% assign ratings = site.data[dra-ratings-file] %}
+<!-- {% assign dra-ratings = site.data[dra-ratings-file] %} -->
 
 <div id="dra-ratings-table" class="ag-theme-alpine">
 </div>
@@ -220,7 +220,7 @@ notable_ratings/{{ xx }}_2022_Congress_ratings
     const eDRARatingsGridDiv = document.getElementById('dra-ratings-table');
     new agGrid.Grid(eDRARatingsGridDiv, ratingsOptionsDRA);
 
-    const DRARatingsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ dra-ratings-file }}.csv';
+    const DRARatingsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/notable_ratings/{{ dra-ratings-file }}.csv';
 
     function renderDRARatingsTable(api)
     {
