@@ -94,7 +94,7 @@ def main() -> None:
             ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
             focus_ratings[name] = ratings
             legend.append({"MARKER": f"Black {focus_markers[i]}", "PLAN": f"{name}"})
-        legend.append({"MARKER": f"Red diamond", "PLAN": "DRA notable map"})
+        legend.append({"MARKER": f"Red diamonds", "PLAN": "DRA notable maps"})
 
         focus_names: List[str] = []
         focus_points: Dict[Tuple, List[Tuple[int, int]]] = {}
