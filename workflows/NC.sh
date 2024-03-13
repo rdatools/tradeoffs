@@ -1,4 +1,10 @@
-# NC workflow
+# NC workflow:
+# --zone: True
+# --random: False
+# --points: 100
+# --pushes: 3
+# --delta: 5
+# --cores: 28
 
 # Use the root map in root_maps or
 # Approximate a new root map:
@@ -71,6 +77,7 @@ scripts/make_push_jobs.py \
 --zone \
 --points 100 \
 --pushes 3 \
+--delta 5 \
 --cores 28 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \

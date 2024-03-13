@@ -7,6 +7,11 @@ For example:
 
 $ scripts/make_workflow.py \
 --state NC \
+--zone \
+--points 100 \
+--pushes 3 \
+--delta 5 \
+--cores 28 \
 > workflows/NC.sh
 
 For documentation, type:
@@ -44,7 +49,13 @@ def main() -> None:
 
     """
 
-    print(f"# {xx} workflow")
+    print(f"# {xx} workflow:")
+    print(f"# --zone: {args.zone}")
+    print(f"# --random: {args.random}")
+    print(f"# --points: {args.points}")
+    print(f"# --pushes: {args.pushes}")
+    print(f"# --delta: {args.delta}")
+    print(f"# --cores: {args.cores}")
     print()
 
     """
@@ -213,10 +224,14 @@ def main() -> None:
     print(f"--plans {output_dir}/{xx}20C_plans.json \\")
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
     print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
-    print(f"--zone \\")
-    print(f"--points 100 \\")
-    print(f"--pushes 3 \\")
-    print(f"--cores 28 \\")
+    if args.zone:
+        print(f"--zone \\")
+    if args.random:
+        print(f"--random \\")
+    print(f"--points {args.points} \\")
+    print(f"--pushes {args.pushes} \\")
+    print(f"--delta {args.delta} \\")
+    print(f"--cores {args.cores} \\")
     print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
@@ -444,9 +459,42 @@ def parse_args():
 
     parser.add_argument(
         "--state",
-        default="NC",
         help="The two-character state code (e.g., NC)",
         type=str,
+    )
+    # TODO - These are mutually exclusive options, but I'm not defining them as such yet.
+    parser.add_argument(
+        "-z",
+        "--zone",
+        dest="zone",
+        action="store_true",
+        help="Push a 'zone' of points near the frontier and the frontier",
+    )
+    parser.add_argument(
+        "-r",
+        "--random",
+        dest="random",
+        action="store_true",
+        help="Push a selection of random plans and the frontier",
+    )
+    parser.add_argument(
+        "--points",
+        type=int,
+        default=100,
+        help="The *maximum* number of points to push for each frontier.",
+    )
+    parser.add_argument(
+        "--pushes",
+        type=int,
+        default=3,
+        help="How many times to push each point.",
+    )
+    parser.add_argument("--cores", type=int, help="The number of core per node.")
+    parser.add_argument(
+        "--delta",
+        type=int,
+        default=5,
+        help="How much ratings can differ for a point to be considered 'near' a frontier point",
     )
 
     args: Namespace = parser.parse_args()
