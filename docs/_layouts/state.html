@@ -220,11 +220,6 @@ map-width: 700
 
 <!-- PAIRWISE SCATTERPLOTS -->
 
-{% capture legend-file %}
-{{ xx }}{{ suffix }}_legend
-{% endcapture %}
-{% assign legend-file = legend-file | strip_newlines %}
-
 <p>Pairwise Scatter Plots</p>
 
 <table style="border:0px">
@@ -290,14 +285,17 @@ map-width: 700
     </tr>
 </table>
 
+{% capture legend-file %}
+{{ xx }}{{ suffix }}_legend
+{% endcapture %}
+{% assign legend-file = legend-file | strip_newlines %}
+
 <p>Legend</p>
 
 <ul>
     {% for marker in site.data.{{ legend-file }} %}
-    <li>marker.MARKER: marker.PLAN</li>
+    <li>{{ marker.MARKER }}: {{ marker.PLAN }}</li>
     {% endfor %}
 </ul>
 
-<!-- <script type="text/javascript" charset="utf-8">
-    const LegendCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ legend-file }}.csv';
-</script> -->
+<!-- END -->
