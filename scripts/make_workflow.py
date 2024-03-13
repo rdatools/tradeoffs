@@ -56,6 +56,7 @@ def main() -> None:
     print(f"# --pushes: {args.pushes}")
     print(f"# --delta: {args.delta}")
     print(f"# --cores: {args.cores}")
+    print(f"# --windfall: {args.windfall}")
     print()
 
     """
@@ -232,6 +233,8 @@ def main() -> None:
     print(f"--pushes {args.pushes} \\")
     print(f"--delta {args.delta} \\")
     print(f"--cores {args.cores} \\")
+    if args.windfall:
+        print(f"--windfall \\")
     print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
@@ -495,6 +498,9 @@ def parse_args():
         type=int,
         default=5,
         help="How much ratings can differ for a point to be considered 'near' a frontier point",
+    )
+    parser.add_argument(
+        "-w", "--windfall", dest="windfall", action="store_true", help="Windfall mode"
     )
 
     args: Namespace = parser.parse_args()

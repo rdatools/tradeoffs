@@ -247,6 +247,7 @@ def main() -> None:
 
                     seed += 1
 
+            run_mode: str = "windall" if args.windfall else "standard"
             slurm_copy: str = f"{copy_path}/jobs/{job_name}.slurm"
             with open(slurm_copy, "w") as sf:
                 print(f"#!/bin/bash", file=sf)
@@ -254,7 +255,7 @@ def main() -> None:
                 print(f"#SBATCH --ntasks={args.cores}", file=sf)
                 print(f"#SBATCH --nodes=1", file=sf)
                 print(f"#SBATCH --time=00:20:00", file=sf)
-                print(f"#SBATCH --partition=standard", file=sf)
+                print(f"#SBATCH --partition={run_mode}", file=sf)
                 print(f"#SBATCH --account=proebsting", file=sf)
                 print(f"#SBATCH -o dropbox/{xx}/pushed/{job_name}.out", file=sf)
                 print(f"", file=sf)
@@ -358,6 +359,9 @@ def parse_args():
         default=5,
         help="How much ratings can differ for a point to be considered 'near' a frontier point",
     )
+    parser.add_argument(
+        "-w", "--windfall", dest="windfall", action="store_true", help="Windfall mode"
+    )
     #
     parser.add_argument(
         "--data",
@@ -404,6 +408,7 @@ def parse_args():
         "pushes": 3,
         "cores": 28,
         "delta": 5,
+        "windfall": False,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
