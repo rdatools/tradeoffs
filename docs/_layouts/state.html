@@ -291,9 +291,7 @@ map-width: 700
 {% assign legend-file = legend-file | strip_newlines %}
 {% assign markers = site.data[legend-file] %}
 
-<p>Legend</p>
-
-{{ legend-file }}
+<p>Legend:</p>
 
 <ul>
     {% for marker in markers %}
