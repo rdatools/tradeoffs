@@ -230,7 +230,8 @@ map-width: 700
             complete: response =>
             {
                 data = response.data;
-                data.pop();
+                data.pop(); // Remove the header row
+                data.pop(); // Remove the Official map?
 
                 api.setRowData(data);
                 api.sizeColumnsToFit();
