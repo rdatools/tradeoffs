@@ -60,6 +60,8 @@ def main() -> None:
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
+    if args.more:
+        more_df: pd.DataFrame = scores_to_df(args.more, fieldnames, fieldtypes)
 
     # Read the frontier from a JSON file
 
@@ -362,7 +364,14 @@ def parse_args():
     parser.add_argument(
         "--scores",
         type=str,
-        help="A CSV ensemble of scores including ratings to plot",
+        help="A CSV of scores including ratings to plot",
+    )
+    parser.add_argument(
+        "--more",
+        nargs="?",
+        type=str,
+        default="",
+        help="Another CSV of scores including ratings to plot",
     )
     parser.add_argument(
         "--notables",
@@ -421,12 +430,13 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/test_scores.csv",
+        "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
+        "more": "../../iCloud/fileout/ensembles/NC20C_scores_more.csv",
+        "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
+        "pushed": "../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json",
         "notables": "docs/_data/notable_ratings/NC_2022_Congress_ratings.csv",
-        "frontier": "testdata/test_frontiers.json",
-        "pushed": "testdata/test_frontiers_pushed.json",
-        "focus": "testdata/test_focus_scores.csv",
-        "prefix": "test",
+        "focus": "../../iCloud/fileout/ensembles/NC20C_focus_scores.csv",
+        "prefix": "NC20C",
         "suffix": "",
         "output": "~/Downloads/",
         "verbose": True,
