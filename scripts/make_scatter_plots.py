@@ -15,6 +15,17 @@ $ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/images \
 --no-debug
 
+scripts/make_scatter_plots.py \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--more ../../iCloud/fileout/ensembles/NC20C_scores_more.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
+--notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
+--focus ../../iCloud/fileout/ensembles/NC20C_focus_scores.csv \
+--prefix NC20C \
+--output ~/Downloads \
+--no-debug
+
 For documentation, type:
 
 $ scripts/make_scatter_plots.py
