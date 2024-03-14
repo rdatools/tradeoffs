@@ -92,6 +92,10 @@ def main() -> None:
     copy_path: str = f"{args.output}/{xx}"
     run_path: str = f"~/dropbox/{xx}"
 
+    # Push mode -- frontiers only, zone, or random
+
+    assert not (args.zone and args.random), "Cannot use both --zone and --random"
+
     # Copy the 3 state input files
 
     shutil.copy(args.data, os.path.join(f"{copy_path}/data", "data.csv"))
@@ -325,7 +329,7 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
-    # TODO - These are mutually exclusive options, but I'm not defining them as such yet.
+    # --zone and --randome are mutually exclusive options, enforced after parse_args
     parser.add_argument(
         "-z",
         "--zone",

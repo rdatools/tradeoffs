@@ -44,6 +44,10 @@ def main() -> None:
     data_dir: str = "../rdabase/data"
     output_dir: str = "../../iCloud/fileout/ensembles"
 
+    # Push mode -- frontiers only, zone, or random
+
+    assert not (args.zone and args.random), "Cannot use both --zone and --random"
+
     """
     # NC workflow
 
@@ -465,7 +469,7 @@ def parse_args():
         help="The two-character state code (e.g., NC)",
         type=str,
     )
-    # TODO - These are mutually exclusive options, but I'm not defining them as such yet.
+    # --zone and --randome are mutually exclusive options, enforced after parse_args
     parser.add_argument(
         "-z",
         "--zone",
