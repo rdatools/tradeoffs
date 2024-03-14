@@ -128,8 +128,8 @@ def main() -> None:
     }
     notable_ratings: Dict[str, List[int]] = {}
     for m in ratings_table:
-        name: str = map_to_dimension[str(m["Map"])]
-        ratings: List[int] = [int(v) for k, v in m.items() if k != "Map"]
+        name: str = map_to_dimension[str(m["MAP"])]
+        ratings: List[int] = [int(v) for k, v in m.items() if k != "MAP"]
         notable_ratings[name] = ratings
 
     notable_points: Dict[Tuple, List[Tuple[int, int]]] = {}
@@ -175,6 +175,18 @@ def main() -> None:
             "marker_size": 1,
             "showlegend": False,
         }
+
+        if args.more:
+            myvalues: List[int] = more_df[ydim].tolist()
+            mxvalues: List[int] = more_df[xdim].tolist()
+            more_points_trace: Dict[str, Any] = {
+                "x": mxvalues,
+                "y": myvalues,
+                "mode": "markers",
+                "marker_color": "green",
+                "marker_size": 1,
+                "showlegend": False,
+            }
 
         notable_traces: List[Dict[str, Any]] = []
         for pt in notable_points[p]:
@@ -267,6 +279,8 @@ def main() -> None:
         if args.pushed:
             scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
+        if args.more:
+            scatter_traces.append(more_points_trace)
         for notable_trace in notable_traces:
             scatter_traces.append(notable_trace)
         if args.focus:
