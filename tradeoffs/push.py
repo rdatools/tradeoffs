@@ -27,7 +27,7 @@ def push_plan(
     dimensions: Tuple[str, str],
     seed: int,
     #
-    data: Dict[str, Dict[GeoID, DistrictID]],
+    data: Dict[str, Dict[str, str | int]],
     shapes: Dict[str, Any],
     graph: Dict[GeoID, List[GeoID]],
     metadata: Dict[str, Any],

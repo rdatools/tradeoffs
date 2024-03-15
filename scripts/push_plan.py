@@ -60,8 +60,8 @@ def main() -> None:
 
     # Load the data & shapes for scoring
 
-    data: Dict[str, Dict[GeoID, DistrictID]] = load_data(args.data)
-    shapes: Dict[str, Any] = load_shapes(args.shapes)
+    data: Dict[str, Dict[str, str | int]] = load_data(args.data)
+    shapes: Dict[GeoID, Any] = load_shapes(args.shapes)
     graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
