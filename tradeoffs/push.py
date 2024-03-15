@@ -5,7 +5,7 @@ PUSH A FRONTIER POINT
 from typing import Any, List, Dict, Tuple, Callable, Optional
 
 from rdabase import Assignment, time_function, echo
-from rdaensemble.general import ratings_dimensions, ratings_indexes
+from rdaensemble.general import ratings_dimensions  # , ratings_indexes
 
 from .datatypes import (
     GeoID,
