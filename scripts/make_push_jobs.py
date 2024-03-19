@@ -201,19 +201,19 @@ def main() -> None:
 
     pushes_per_job: List[List[Tuple[str, Tuple[str, ...], str, int]]] = []
     count: int = 0
-    commands: List[Tuple[str, Tuple[str, ...], str, int]] = []
+    chunk: List[Tuple[str, Tuple[str, ...], str, int]] = []
     for push_command in push_commands:
         plan_name: str = push_command[0]
         pair: Tuple[str, ...] = push_command[1]
         pin_mode: str = push_command[2]
         i: int = push_command[3]
-        commands.append((plan_name, pair, pin_mode, i))
+        chunk.append((plan_name, pair, pin_mode, i))
         count += 1
         if count % args.cores == 0:
-            pushes_per_job.append(commands)
-            commands = []
-    if len(commands) > 0:
-        pushes_per_job.append(commands)
+            pushes_per_job.append(chunk)
+            chunk = []
+    if len(chunk) > 0:
+        pushes_per_job.append(chunk)
 
     if args.verbose:
         print(f"# of jobs: {len(pushes_per_job)}")
@@ -227,15 +227,15 @@ def main() -> None:
         seed: int = start
         plan_csv: Set[str] = set()
 
-        for j, commands in enumerate(pushes_per_job):  # for each job
+        for j, chunk in enumerate(pushes_per_job):  # for each job
             job_name: str = f"job_{j:04d}"
             job_copy: str = f"{copy_path}/jobs/{job_name}.sh"
             with open(job_copy, "w") as jf:
-                for command in commands:  # for each plan/command in the job
-                    plan_name: str = command[0]
-                    pair: Tuple[str, ...] = command[1]
+                for push_command in chunk:  # for each plan/command in the job
+                    plan_name: str = push_command[0]
+                    pair: Tuple[str, ...] = push_command[1]
                     pin_mode: str = push_command[2]
-                    i: int = command[3]
+                    i: int = push_command[3]
 
                     dimensions: str = " ".join(pair)
                     y: str = str(ratings_dimensions.index(pair[0]) + 1)
