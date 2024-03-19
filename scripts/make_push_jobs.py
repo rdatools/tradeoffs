@@ -62,7 +62,7 @@ scripts/make_push_jobs.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ~/Downloads \
+--output ../../iCloud/fileout/hpc_dropbox \
 --no-debug
 
 For documentation, type:
