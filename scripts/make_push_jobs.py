@@ -223,7 +223,6 @@ def main() -> None:
     batch_copy: str = f"{copy_path}/submit_jobs.sh"
     with open(batch_copy, "w") as bf:
         print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
-        # job: int = 0 TODO - DELETE
         seed: int = start
         plan_csv: Set[str] = set()
 
