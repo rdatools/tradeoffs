@@ -49,6 +49,22 @@ $ scripts/make_push_jobs.py \
 --output ../../iCloud/fileout/hpc_dropbox \
 --no-debug
 
+scripts/make_push_jobs.py \
+--state NC \
+--plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
+--scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
+--zone \
+--pin \
+--points 100 \
+--pushes 3 \
+--cores 28 \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--output ~/Downloads \
+--no-debug
+
 For documentation, type:
 
 $ scripts/make_push_jobs.py
@@ -98,9 +114,10 @@ def main() -> None:
 
     # Copy the 3 state input files
 
-    shutil.copy(args.data, os.path.join(f"{copy_path}/data", "data.csv"))
-    shutil.copy(args.shapes, os.path.join(f"{copy_path}/data", "shapes.json"))
-    shutil.copy(args.graph, os.path.join(f"{copy_path}/data", "graph.json"))
+    data_path: str = os.path.expanduser(f"{copy_path}/data")
+    shutil.copy(args.data, os.path.join(data_path, "data.csv"))
+    shutil.copy(args.shapes, os.path.join(data_path, "shapes.json"))
+    shutil.copy(args.graph, os.path.join(data_path, "graph.json"))
 
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
     N: int = int(metadata["D"])
@@ -166,26 +183,31 @@ def main() -> None:
             print(f"{k}: {nf} -> {np}")
         print(f"{tf} -> {tp}")
 
-    # 'Chunk' the points to push into groups for a single node job
+    # Generate all the push commands
 
-    push_commands: List[Tuple[str, Tuple[str, ...], int]] = []
+    push_commands: List[Tuple[str, Tuple[str, ...], str, int]] = []
     for k, v in plans_by_pair.items():
         pair: Tuple[str, ...] = tuple(k.split("_"))
-        for n in v:
-            for i in range(args.pushes):
-                push_commands.append((n, pair, i))
+        pin_modes: List[str] = ["", pair[0], pair[1]] if args.pin else [""]
+        for plan_name in v:
+            for pin_mode in pin_modes:
+                for i in range(args.pushes):
+                    push_commands.append((plan_name, pair, pin_mode, i))
 
     if args.verbose:
         print(f"# of push commands: {len(push_commands)}")
 
-    pushes_per_job: List[List[Tuple[str, Tuple[str, ...], int]]] = []
+    # 'Chunk' the push commands into groups for a single node job
+
+    pushes_per_job: List[List[Tuple[str, Tuple[str, ...], str, int]]] = []
     count: int = 0
-    commands: List[Tuple[str, Tuple[str, ...], int]] = []
-    for push in push_commands:
-        name: str = push[0]
-        pair: Tuple[str, ...] = push[1]
-        i: int = push[2]
-        commands.append((name, pair, i))
+    commands: List[Tuple[str, Tuple[str, ...], str, int]] = []
+    for push_command in push_commands:
+        plan_name: str = push_command[0]
+        pair: Tuple[str, ...] = push_command[1]
+        pin_mode: str = push_command[2]
+        i: int = push_command[3]
+        commands.append((plan_name, pair, pin_mode, i))
         count += 1
         if count % args.cores == 0:
             pushes_per_job.append(commands)
@@ -201,7 +223,7 @@ def main() -> None:
     batch_copy: str = f"{copy_path}/submit_jobs.sh"
     with open(batch_copy, "w") as bf:
         print(f"chmod +x {run_path}/jobs/*.sh", file=bf)
-        job: int = 0
+        # job: int = 0 TODO - DELETE
         seed: int = start
         plan_csv: Set[str] = set()
 
@@ -210,24 +232,25 @@ def main() -> None:
             job_copy: str = f"{copy_path}/jobs/{job_name}.sh"
             with open(job_copy, "w") as jf:
                 for command in commands:  # for each plan/command in the job
-                    name: str = command[0]
+                    plan_name: str = command[0]
                     pair: Tuple[str, ...] = command[1]
-                    i: int = command[2]
+                    pin_mode: str = push_command[2]
+                    i: int = command[3]
 
                     dimensions: str = " ".join(pair)
                     y: str = str(ratings_dimensions.index(pair[0]) + 1)
                     x: str = str(ratings_dimensions.index(pair[1]) + 1)
 
-                    plan_to_push: str = f"{prefix}_{name}"
+                    plan_to_push: str = f"{prefix}_{plan_name}"
                     plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
                     plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
 
-                    pushed_prefix: str = prefix + f"_{name}_{y}{x}"
+                    pushed_prefix: str = prefix + f"_{plan_name}_{y}{x}"
 
-                    if name not in plan_csv:
+                    if plan_name not in plan_csv:
                         plan: List[Dict] = [
                             {"GEOID": k, "DISTRICT": v}
-                            for k, v in plans_by_name[name].items()
+                            for k, v in plans_by_name[plan_name].items()
                         ]
 
                         write_csv(plan_copy, plan, ["GEOID", "DISTRICT"])
@@ -239,6 +262,8 @@ def main() -> None:
                     print(f"--state {xx} \\", file=jf)
                     print(f"--plan {plan_run} \\", file=jf)
                     print(f"--dimensions {dimensions} \\", file=jf)
+                    if pin_mode:
+                        print(f"--pin {pin_mode} \\", file=jf)
                     print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
                     print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
                     print(f"--seed {seed} \\", file=jf)
@@ -331,14 +356,12 @@ def parse_args():
     )
     # --zone and --randome are mutually exclusive options, enforced after parse_args
     parser.add_argument(
-        "-z",
         "--zone",
         dest="zone",
         action="store_true",
         help="Push a 'zone' of points near the frontier and the frontier",
     )
     parser.add_argument(
-        "-r",
         "--random",
         dest="random",
         action="store_true",
@@ -350,6 +373,7 @@ def parse_args():
         default=100,
         help="The *maximum* number of points to push for each frontier.",
     )
+    parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
     parser.add_argument(
         "--pushes",
         type=int,
@@ -408,6 +432,7 @@ def parse_args():
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
         "zone": True,
         "random": False,
+        "pin": True,  # TODO - change to False?
         "points": 100,
         "pushes": 3,
         "cores": 28,
@@ -416,7 +441,7 @@ def parse_args():
         "data": "../rdabase/data/NC/NC_2020_data.csv",
         "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
         "graph": "../rdabase/data/NC/NC_2020_graph.json",
-        "output": "../../iCloud/fileout/hpc_dropbox",
+        "output": "~/Downloads",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
