@@ -196,8 +196,8 @@ def sweep_once(
         #     print(f"dimensions: {dimensions}, seg_key: {seg_key}")
 
         for m in mutations:
-            if debug:
-                print(f"... mutation = {m}")
+            # if debug:
+            #     print(f"... mutation = {m}")
 
             tried += 1
 
@@ -215,8 +215,8 @@ def sweep_once(
 
                 plan.undo()
 
-                if debug:
-                    print(f"... After plan-not-valid undo ...")
+                # if debug:
+                #     print(f"... After plan-not-valid undo ...")
 
                 continue
 
