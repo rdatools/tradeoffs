@@ -55,9 +55,9 @@ def main() -> None:
 
     # Load the data & shapes for scoring
 
-    data: Dict[str, Dict[str, str | int]] = load_data(args.data)
-    shapes: Dict[GeoID, Any] = load_shapes(args.shapes)
-    graph: Dict[GeoID, List[GeoID]] = load_graph(args.graph)
+    data: Dict[str, Dict[str, str | int]] = load_data(os.path.expanduser(args.data))
+    shapes: Dict[GeoID, Any] = load_shapes(os.path.expanduser(args.shapes))
+    graph: Dict[GeoID, List[GeoID]] = load_graph(os.path.expanduser(args.graph))
     metadata: Dict[str, Any] = load_metadata(args.state, args.data)
 
     # Load the plan to push
@@ -167,19 +167,33 @@ def parse_args():
     args: Namespace = parser.parse_args()
 
     # Default values for args in debug mode
+    # debug_defaults: Dict[str, Any] = {
+    #     "state": "NC",
+    #     "plan": "testdata/test_plan.csv",
+    #     "dimensions": ["proportionality", "minority"],
+    #     "pin": "",
+    #     # "pin": "proportionality",
+    #     "saveatlimit": True,
+    #     "pushed": "~/Downloads/test_plan_pushed.csv",
+    #     "log": "~/Downloads/test_plan_pushed_log.txt",
+    #     "seed": 518,
+    #     "data": "../rdabase/data/NC/NC_2020_data.csv",
+    #     "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
+    #     "graph": "../rdabase/data/NC/NC_2020_graph.json",
+    #     "verbose": True,
+    # }
     debug_defaults: Dict[str, Any] = {
         "state": "NC",
-        "plan": "testdata/test_plan.csv",
-        "dimensions": ["proportionality", "minority"],
-        "pin": "",
-        # "pin": "proportionality",
+        "plan": "~/Downloads/NC/plans/NC20C_9612_plan.csv",
+        "dimensions": ["proportionality", "competitiveness"],
+        "pin": "proportionality",
         "saveatlimit": True,
-        "pushed": "~/Downloads/test_plan_pushed.csv",
-        "log": "~/Downloads/test_plan_pushed_log.txt",
+        "pushed": "~/Downloads/NC/NC20C_9612_12_00_plan.csv",
+        "log": "~/Downloads/NC/pushed/NC20C_9612_12_00_log.txt",
         "seed": 518,
-        "data": "../rdabase/data/NC/NC_2020_data.csv",
-        "shapes": "../rdabase/data/NC/NC_2020_shapes_simplified.json",
-        "graph": "../rdabase/data/NC/NC_2020_graph.json",
+        "data": "~/Downloads/NC/data/data.csv",
+        "shapes": "~/Downloads/NC/data/shapes.json",
+        "graph": "~/Downloads/NC/data/graph.json",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
