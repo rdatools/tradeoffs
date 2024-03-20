@@ -78,7 +78,7 @@ def main() -> None:
             graph,
             metadata,
             pin=pin,
-            save_at_limit=args.savatlimit,
+            save_at_limit=args.saveatlimit,
             logfile=f,
             verbose=args.verbose,
             debug=args.debug,
