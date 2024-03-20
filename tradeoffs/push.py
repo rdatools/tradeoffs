@@ -85,7 +85,8 @@ def push_plan(
             debug=debug,
         )
 
-    except:
+    except Exception as e:
+        print(e)
         echo(f"FAIL: Push unsuccessful.", console=verbose, log=logfile)
 
     return pushed_district_by_geoid
@@ -195,6 +196,9 @@ def sweep_once(
         #     print(f"dimensions: {dimensions}, seg_key: {seg_key}")
 
         for m in mutations:
+            if debug:
+                print(f"... mutation = {m}")
+
             tried += 1
 
             # if debug:
@@ -211,8 +215,8 @@ def sweep_once(
 
                 plan.undo()
 
-                # if debug:
-                #     print(f"... After plan-not-valid undo ...")
+                if debug:
+                    print(f"... After plan-not-valid undo ...")
 
                 continue
 
