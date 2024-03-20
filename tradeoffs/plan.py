@@ -359,9 +359,9 @@ def size_1_moves(seg_key: BorderKey, plan: Plan) -> Tuple[List[Move], List[Move]
                 from_two.append(fo)
                 break
 
-    # TODO - How can this assert fail?!?
-    # assert len(from_one) > 0 and len(from_two) > 0
     if not (len(from_one) > 0 and len(from_two) > 0):
+        # NOTE - Random mutations are generated *after* random adjacent districts are selected
+        # and other mutations are applied which can disconnected previously connected districts.
         print(f"Warning: No size 1 moves! {from_one}, {from_two}")
 
     moves_from_one: List[Move] = []
