@@ -71,7 +71,7 @@ def push_plan(
             graph,
             seed,
             verbose=verbose,
-            # debug=debug,
+            debug=debug,
         )
 
         pushed_district_by_geoid = push_point(
@@ -194,11 +194,11 @@ def sweep_once(
         if debug:
             print(f"dimensions: {dimensions}, seg_key: {seg_key}")
 
-        for j, m in enumerate(mutations):
+        for m in mutations:
             tried += 1
 
             if debug:
-                print(f"... {j}: {tried} = mutation: {m}")
+                print(f"... mutation {tried} = {m}")
 
             plan.mutate(m)
 
@@ -206,7 +206,11 @@ def sweep_once(
                 print(f"... After mutation ...")
 
             if not plan.is_valid_plan(seg_key):
+                if debug:
+                    print(f"... Plan is not valid ...")
                 plan.undo()
+                if debug:
+                    print(f"... After undo ...")
                 continue
 
             if debug:
