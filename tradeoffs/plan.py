@@ -359,9 +359,10 @@ def size_1_moves(seg_key: BorderKey, plan: Plan) -> Tuple[List[Move], List[Move]
                 from_two.append(fo)
                 break
 
-    if not (len(from_one) > 0 and len(from_two) > 0):
-        print(f"Warning: size_1_moves = from_one: {from_one}, from_two: {from_two}")
+    # TODO - How can this assert fail?!?
     # assert len(from_one) > 0 and len(from_two) > 0
+    if not (len(from_one) > 0 and len(from_two) > 0):
+        print(f"Warning: No size 1 moves! {from_one}, {from_two}")
 
     moves_from_one: List[Move] = []
     moves_from_two: List[Move] = []
