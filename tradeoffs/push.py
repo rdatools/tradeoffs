@@ -227,7 +227,9 @@ def sweep_once(
                 d for d in ratings_dimensions if d not in dimensions
             ]
             for d in other_dimensions:
-                measure: float = scorer.measure_dimension(d) if d != "minority" else 0.0
+                measure: float = (
+                    scorer.measure_dimension(d) if d != "minority" else 0.0
+                )  # NOTE: Don't need to measure minority
                 measurements[ratings_dimensions.index(d)] = measure
 
             if not is_realistic(measurements):
