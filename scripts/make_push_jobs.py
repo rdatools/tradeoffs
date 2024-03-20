@@ -56,6 +56,7 @@ scripts/make_push_jobs.py \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --zone \
 --pin \
+--save-at-limit \
 --points 100 \
 --pushes 3 \
 --cores 28 \
@@ -376,7 +377,7 @@ def parse_args():
     )
     parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
     parser.add_argument(
-        "--saveatlimit",
+        "--save-at-limit",
         dest="saveatlimit",
         action="store_true",
         help="Save the in-progress plan at the limit",
