@@ -87,9 +87,9 @@ def push_plan(
             debug=debug,
         )
 
-    except Exception as e:
-        print(e)
-        traceback.print_stack()
+    except Exception as err:
+        traceback.print_tb(err.__traceback__)
+        # traceback.print_stack()
         echo(f"FAIL: Push unsuccessful.", console=verbose, log=logfile)
 
     return pushed_district_by_geoid
