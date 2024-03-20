@@ -33,6 +33,7 @@ def push_plan(
     metadata: Dict[str, Any],
     *,
     pin: str = "",
+    save_at_limit: bool = False,
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -71,13 +72,14 @@ def push_plan(
             seed,
             verbose=verbose,
             # debug=debug,
-        )  # Re-initialize the plan for each iteration.
+        )
 
         pushed_district_by_geoid = push_point(
             plan,
             scorer,
             dimensions,
             pin=pin,
+            save_at_limit=save_at_limit,
             logfile=logfile,
             verbose=verbose,
             # debug=debug,
@@ -99,6 +101,7 @@ def push_point(
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
     pin: str = "",
+    save_at_limit: bool = False,
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -112,7 +115,10 @@ def push_point(
 
     while True:
         if n_pass > limit:
-            raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
+            if save_at_limit:
+                break
+            else:
+                raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
         echo(console=verbose, log=logfile)
         echo(f"Pass {n_pass} of up to {limit}", console=verbose, log=logfile)
 

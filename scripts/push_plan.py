@@ -42,7 +42,7 @@ from rdabase import (
     load_metadata,
 )
 
-# from rdaensemble.general import ratings_dimensions
+# from rdaensemble.general import ratings_dimensions TODO - DELETE
 
 from tradeoffs import *
 
@@ -80,6 +80,7 @@ def main() -> None:
             graph,
             metadata,
             pin=pin,
+            save_at_limit=args.saveatlimit,
             logfile=f,
             verbose=args.verbose,
             debug=args.debug,
@@ -126,6 +127,12 @@ def parse_args():
         help="One of the dimensions to hold constant (optional)",
     )
     parser.add_argument(
+        "--saveatlimit",
+        dest="saveatlimit",
+        action="store_true",
+        help="Save the in-progress plan at the limit",
+    )
+    parser.add_argument(
         "--log",
         type=str,
         help="Path to Log TXT file",
@@ -165,7 +172,9 @@ def parse_args():
         "state": "NC",
         "plan": "testdata/test_plan.csv",
         "dimensions": ["proportionality", "minority"],
+        "pin": "",
         # "pin": "proportionality",
+        "saveatlimit": True,  # TODO - COMMENT OUT
         "pushed": "~/Downloads/test_plan_pushed.csv",
         "log": "~/Downloads/test_plan_pushed_log.txt",
         "seed": 518,
