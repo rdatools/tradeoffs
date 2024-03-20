@@ -266,7 +266,7 @@ def make_better_fn(
     *,
     constrain: Optional[int] = None,
     anchor: Optional[float] = None,
-    threshold: float = 0.05,  # 0.01,
+    threshold: float = 0.01,  # 0.01,
 ) -> Callable[[Tuple[float, float], Tuple[float, float]], bool]:
     """Is a plan better on one or both dimensions? The value of one dimension can be 'pinned'."""
 

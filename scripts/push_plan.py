@@ -78,7 +78,7 @@ def main() -> None:
             graph,
             metadata,
             pin=pin,
-            save_at_limit=args.saveatlimit,
+            save_at_limit=args.savatlimit,
             logfile=f,
             verbose=args.verbose,
             debug=args.debug,
@@ -126,7 +126,7 @@ def parse_args():
         help="One of the dimensions to hold constant (optional)",
     )
     parser.add_argument(
-        "--saveatlimit",
+        "--save-at-limit",
         dest="saveatlimit",
         action="store_true",
         help="Save the in-progress plan at the limit",
@@ -187,7 +187,7 @@ def parse_args():
         "plan": "~/Downloads/NC/plans/NC20C_9612_plan.csv",
         "dimensions": ["proportionality", "competitiveness"],
         "pin": "proportionality",
-        "saveatlimit": True,
+        "save-at-limit": True,
         "pushed": "~/Downloads/NC/NC20C_9612_12_00_plan.csv",
         "log": "~/Downloads/NC/pushed/NC20C_9612_12_00_log.txt",
         "seed": 518,
