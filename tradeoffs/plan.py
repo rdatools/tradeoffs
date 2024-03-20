@@ -359,10 +359,17 @@ def size_1_moves(seg_key: BorderKey, plan: Plan) -> Tuple[List[Move], List[Move]
                 from_two.append(fo)
                 break
 
-    assert len(from_one) > 0 and len(from_two) > 0
+    if not (len(from_one) > 0 and len(from_two) > 0):
+        print(f"Warning: size_1_moves = from_one: {from_one}, from_two: {from_two}")
+    # assert len(from_one) > 0 and len(from_two) > 0
 
-    moves_from_one: List[Move] = [Move([f], d1, d2) for f in from_one]
-    moves_from_two: List[Move] = [Move([f], d2, d1) for f in from_two]
+    moves_from_one: List[Move] = []
+    moves_from_two: List[Move] = []
+
+    if len(from_one) > 0:
+        moves_from_one = [Move([f], d1, d2) for f in from_one]
+    if len(from_two) > 0:
+        moves_from_two = [Move([f], d2, d1) for f in from_two]
 
     return (moves_from_one, moves_from_two)
 

@@ -195,44 +195,18 @@ def sweep_once(
         tried: int = 0
         applied: int = 0
 
-        # if debug:
-        #     print(f"dimensions: {dimensions}, seg_key: {seg_key}")
-
         for m in mutations:
-            # if debug:
-            #     print(f"... mutation = {m}")
-
             tried += 1
-
-            # if debug:
-            #     print(f"... mutation {tried} = {m}")
-
             plan.mutate(m)
 
-            # if debug:
-            #     print(f"... After mutation ...")
-
             if not plan.is_valid_plan(seg_key):
-                # if debug:
-                #     print(f"... Plan is not valid ...")
-
                 plan.undo()
-
-                # if debug:
-                #     print(f"... After plan-not-valid undo ...")
-
                 continue
-
-            # if debug:
-            #     print(f"... Plan is valid ...")
 
             next_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
             if not is_better(prev_measures, next_measures):
                 plan.undo()
                 continue
-
-            # if debug:
-            #     print(f"... Plan is better ...")
 
             measurements: List[float] = [0.0, 0.0, 0.0, 0.0, 0.0]
             for i, d in enumerate(dimensions):
@@ -250,9 +224,6 @@ def sweep_once(
                 plan.undo()
                 continue
 
-            # if debug:
-            #     print(f"... Plan is realistic ...")
-
             # The mutated plan is valid, better, and realistic!
 
             prev_measures = next_measures
@@ -262,13 +233,7 @@ def sweep_once(
 
             echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile)
 
-    # if debug:
-    #     print(f"... Incrementing generataton -- tried: {tried}, applied: {applied}")
-
     plan.inc_generation()
-
-    # if debug:
-    #     print(f"... After incrementing generation ...")
 
     echo(f"{plan}", console=verbose, log=logfile)
     plan.reset_counters()
