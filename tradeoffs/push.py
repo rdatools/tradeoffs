@@ -197,8 +197,8 @@ def sweep_once(
         for m in mutations:
             tried += 1
 
-            if debug:
-                print(f"... mutation {tried} = {m}")
+            # if debug:
+            #     print(f"... mutation {tried} = {m}")
 
             plan.mutate(m)
 
@@ -211,8 +211,8 @@ def sweep_once(
 
                 plan.undo()
 
-                if debug:
-                    print(f"... After plan-not-valid undo ...")
+                # if debug:
+                #     print(f"... After plan-not-valid undo ...")
 
                 continue
 
@@ -255,7 +255,14 @@ def sweep_once(
 
             echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile)
 
+    # if debug:
+    #     print(f"... Incrementing generataton -- tried: {tried}, applied: {applied}")
+
     plan.inc_generation()
+
+    # if debug:
+    #     print(f"... After incrementing generation ...")
+
     echo(f"{plan}", console=verbose, log=logfile)
     plan.reset_counters()
 
