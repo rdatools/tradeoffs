@@ -265,7 +265,7 @@ def main() -> None:
                     if pin_mode:
                         print(f"--pin {pin_mode} \\", file=jf)
                     if args.saveatlimit:
-                        print(f"--saveatlimit \\", file=jf)
+                        print(f"--save-at-limit \\", file=jf)
                     print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
                     print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
                     print(f"--seed {seed} \\", file=jf)
