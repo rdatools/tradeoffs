@@ -181,6 +181,7 @@ def sweep_once(
         assert pin in dimensions
         pinned: int = dimensions.index(pin)
         value: float = prev_measures[pinned]
+        # TODO - Decide on how to pin a dimension
         is_better = make_better_fn(constrain=pinned, anchor=value)
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()

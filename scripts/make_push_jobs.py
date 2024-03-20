@@ -263,6 +263,8 @@ def main() -> None:
                     print(f"--dimensions {dimensions} \\", file=jf)
                     if pin_mode:
                         print(f"--pin {pin_mode} \\", file=jf)
+                    if args.saveatlimit:
+                        print(f"--saveatlimit \\", file=jf)
                     print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
                     print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
                     print(f"--seed {seed} \\", file=jf)
@@ -374,6 +376,12 @@ def parse_args():
     )
     parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
     parser.add_argument(
+        "--saveatlimit",
+        dest="saveatlimit",
+        action="store_true",
+        help="Save the in-progress plan at the limit",
+    )
+    parser.add_argument(
         "--pushes",
         type=int,
         default=3,
@@ -432,6 +440,7 @@ def parse_args():
         "zone": True,
         "random": False,
         "pin": True,
+        "saveatlimit": True,
         "points": 100,
         "pushes": 3,
         "cores": 28,
