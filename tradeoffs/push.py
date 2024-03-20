@@ -2,6 +2,8 @@
 PUSH A FRONTIER POINT
 """
 
+import traceback
+
 from typing import Any, List, Dict, Tuple, Callable, Optional
 
 from rdabase import Assignment, time_function, echo
@@ -87,6 +89,7 @@ def push_plan(
 
     except Exception as e:
         print(e)
+        traceback.print_stack()
         echo(f"FAIL: Push unsuccessful.", console=verbose, log=logfile)
 
     return pushed_district_by_geoid
