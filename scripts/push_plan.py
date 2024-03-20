@@ -90,7 +90,7 @@ def main() -> None:
         plan: List[Dict[GeoID, DistrictID]] = [
             {"GEOID": k, "DISTRICT": v} for k, v in pushed_plan.items()
         ]
-        write_csv(args.pushed, plan, ["GEOID", "DISTRICT"])
+        write_csv(os.path.expanduser(args.pushed), plan, ["GEOID", "DISTRICT"])
         print(f"Status: Success for {os.path.basename(args.pushed)}")
     else:
         print(f"Status: Failure for {os.path.basename(args.pushed)}")
