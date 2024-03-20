@@ -82,7 +82,7 @@ def push_plan(
             save_at_limit=save_at_limit,
             logfile=logfile,
             verbose=verbose,
-            # debug=debug,
+            debug=debug,
         )
 
     except:
