@@ -431,7 +431,7 @@ def parse_args():
         "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
         "zone": True,
         "random": False,
-        "pin": True,  # TODO - change to False?
+        "pin": True,
         "points": 100,
         "pushes": 3,
         "cores": 28,

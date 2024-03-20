@@ -42,8 +42,6 @@ from rdabase import (
     load_metadata,
 )
 
-# from rdaensemble.general import ratings_dimensions TODO - DELETE
-
 from tradeoffs import *
 
 
@@ -124,6 +122,7 @@ def parse_args():
     parser.add_argument(
         "--pin",
         type=str,
+        default="",
         help="One of the dimensions to hold constant (optional)",
     )
     parser.add_argument(
@@ -174,7 +173,7 @@ def parse_args():
         "dimensions": ["proportionality", "minority"],
         "pin": "",
         # "pin": "proportionality",
-        "saveatlimit": True,  # TODO - COMMENT OUT
+        "saveatlimit": True,
         "pushed": "~/Downloads/test_plan_pushed.csv",
         "log": "~/Downloads/test_plan_pushed_log.txt",
         "seed": 518,
