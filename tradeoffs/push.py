@@ -191,18 +191,34 @@ def sweep_once(
         tried: int = 0
         applied: int = 0
 
-        for m in mutations:
+        if debug:
+            print(f"dimensions: {dimensions}, seg_key: {seg_key}")
+
+        for j, m in enumerate(mutations):
             tried += 1
+
+            if debug:
+                print(f"... {j}: {tried} = mutation: {m}")
+
             plan.mutate(m)
+
+            if debug:
+                print(f"... After mutation ...")
 
             if not plan.is_valid_plan(seg_key):
                 plan.undo()
                 continue
 
+            if debug:
+                print(f"... Plan is valid ...")
+
             next_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
             if not is_better(prev_measures, next_measures):
                 plan.undo()
                 continue
+
+            if debug:
+                print(f"... Plan is better ...")
 
             measurements: List[float] = [0.0, 0.0, 0.0, 0.0, 0.0]
             for i, d in enumerate(dimensions):
@@ -217,6 +233,9 @@ def sweep_once(
             if not is_realistic(measurements):
                 plan.undo()
                 continue
+
+            if debug:
+                print(f"... Plan is realistic ...")
 
             # The mutated plan is valid, better, and realistic!
 

@@ -58,11 +58,11 @@ def main() -> None:
     data: Dict[str, Dict[str, str | int]] = load_data(os.path.expanduser(args.data))
     shapes: Dict[GeoID, Any] = load_shapes(os.path.expanduser(args.shapes))
     graph: Dict[GeoID, List[GeoID]] = load_graph(os.path.expanduser(args.graph))
-    metadata: Dict[str, Any] = load_metadata(args.state, args.data)
+    metadata: Dict[str, Any] = load_metadata(args.state, os.path.expanduser(args.data))
 
     # Load the plan to push
 
-    assignments: List[Assignment] = load_plan(args.plan)
+    assignments: List[Assignment] = load_plan(os.path.expanduser(args.plan))
 
     # Push the plan once on the given dimensions
 
