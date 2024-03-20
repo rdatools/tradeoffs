@@ -187,7 +187,7 @@ def parse_args():
         "plan": "~/Downloads/NC/plans/NC20C_9612_plan.csv",
         "dimensions": ["proportionality", "competitiveness"],
         "pin": "proportionality",
-        "save-at-limit": True,
+        "saveatlimit": True,
         "pushed": "~/Downloads/NC/NC20C_9612_12_00_plan.csv",
         "log": "~/Downloads/NC/pushed/NC20C_9612_12_00_log.txt",
         "seed": 518,

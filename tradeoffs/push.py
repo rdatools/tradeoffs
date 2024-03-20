@@ -197,8 +197,8 @@ def sweep_once(
         for m in mutations:
             tried += 1
 
-            # if debug:
-            #     print(f"... mutation {tried} = {m}")
+            if debug:
+                print(f"... mutation {tried} = {m}")
 
             plan.mutate(m)
 
