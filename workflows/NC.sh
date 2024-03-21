@@ -112,6 +112,7 @@ scripts/score_ensemble.py \
 --no-debug
 
 # Combine the original ensemble & pushed plans scores (from 'tradeoffs')
+# TODO - Something here wrto the header
 
 scripts/COMBINE_SCORES.sh NC
 
@@ -156,6 +157,7 @@ scripts/make_ratings_table.py \
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--more ../../iCloud/fileout/ensembles/NC20C_scores_pushed.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --pushed ../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
