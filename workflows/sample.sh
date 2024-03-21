@@ -5,6 +5,7 @@
 # --pushes: 3
 # --delta: 5
 # --cores: 28
+# --windfall: False
 
 # Use the root map in root_maps or
 # Approximate a new root map:
@@ -75,6 +76,8 @@ scripts/make_push_jobs.py \
 --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
 --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
 --zone \
+--pin \
+--save-at-limit \
 --points 100 \
 --pushes 3 \
 --delta 5 \

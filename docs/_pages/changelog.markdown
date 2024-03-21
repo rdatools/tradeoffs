@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Added pin mode to make_push_jobs.py
+- Revised workflows for changes -- pinmode, saveatlimit, 10K passes, etc.
 - Added pushed points on to scatter plots
 - Adding a legend to the state page
 - Rationalize state page script
