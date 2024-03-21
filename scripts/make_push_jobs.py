@@ -238,14 +238,17 @@ def main() -> None:
                     i: int = push_command[3]
 
                     dimensions: str = " ".join(pair)
-                    y: str = str(ratings_dimensions.index(pair[0]) + 1)
                     x: str = str(ratings_dimensions.index(pair[1]) + 1)
+                    y: str = str(ratings_dimensions.index(pair[0]) + 1)
+                    z: str = (
+                        str(ratings_dimensions.index(pin_mode) + 1) if pin_mode else "0"
+                    )
 
                     plan_to_push: str = f"{prefix}_{plan_name}"
                     plan_copy: str = f"{copy_path}/plans/{plan_to_push}_plan.csv"
                     plan_run: str = f"{run_path}/plans/{plan_to_push}_plan.csv"
 
-                    pushed_prefix: str = prefix + f"_{plan_name}_{y}{x}"
+                    pushed_prefix: str = prefix + f"_{plan_name}_{y}{x}{z}"
 
                     if plan_name not in plan_csv:
                         plan: List[Dict] = [
@@ -296,7 +299,7 @@ def main() -> None:
                 print(f'export PYTHONPATH="$PYTHONPATH":~/tradeoffs', file=sf)
                 print(f"", file=sf)
                 print(
-                    f"cat {run_path}/jobs/{job_name}.sh | parallel -d '###'",
+                    f"cat {run_path}/jobs/{job_name}.sh | parallel -d '###' --joblog dropbox/{xx}/pushed/{job_name}.log",
                     file=sf,
                 )
 

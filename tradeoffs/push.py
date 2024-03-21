@@ -105,6 +105,7 @@ def push_point(
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
     pin: str = "",
+    limit: int = 10000,
     save_at_limit: bool = False,
     logfile: Any = None,
     verbose: bool = False,
@@ -113,7 +114,6 @@ def push_point(
     """Push a frontier point on two ratings dimensions."""
 
     n_pass: int = 1
-    limit: int = 1000
 
     beg_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
 
