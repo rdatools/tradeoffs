@@ -8,6 +8,8 @@ For example:
 $ scripts/make_workflow.py \
 --state NC \
 --zone \
+--pin \
+--save-at-limit \
 --points 100 \
 --pushes 3 \
 --delta 5 \
@@ -209,6 +211,8 @@ def main() -> None:
     --scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
     --frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
     --zone \
+    --pin \
+    --save-at-limit \
     --points 100 \
     --pushes 3 \
     --cores 28 \
@@ -233,6 +237,10 @@ def main() -> None:
         print(f"--zone \\")
     if args.random:
         print(f"--random \\")
+    if args.pin:
+        print(f"--pin \\")
+    if args.saveatlimit:
+        print(f"--save-at-limit \\")
     print(f"--points {args.points} \\")
     print(f"--pushes {args.pushes} \\")
     print(f"--delta {args.delta} \\")
@@ -483,6 +491,13 @@ def parse_args():
         dest="random",
         action="store_true",
         help="Push a selection of random plans and the frontier",
+    )
+    parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
+    parser.add_argument(
+        "--save-at-limit",
+        dest="saveatlimit",
+        action="store_true",
+        help="Save the in-progress plan at the limit",
     )
     parser.add_argument(
         "--points",
