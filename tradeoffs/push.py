@@ -2,10 +2,12 @@
 PUSH A FRONTIER POINT
 """
 
+import traceback
+
 from typing import Any, List, Dict, Tuple, Callable, Optional
 
 from rdabase import Assignment, time_function, echo
-from rdaensemble.general import ratings_dimensions, ratings_indexes
+from rdaensemble.general import ratings_dimensions  # , ratings_indexes
 
 from .datatypes import (
     GeoID,
@@ -27,12 +29,13 @@ def push_plan(
     dimensions: Tuple[str, str],
     seed: int,
     #
-    data: Dict[str, Dict[GeoID, DistrictID]],
+    data: Dict[str, Dict[str, str | int]],
     shapes: Dict[str, Any],
     graph: Dict[GeoID, List[GeoID]],
     metadata: Dict[str, Any],
     *,
     pin: str = "",
+    save_at_limit: bool = False,
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -70,20 +73,23 @@ def push_plan(
             graph,
             seed,
             verbose=verbose,
-            # debug=debug,
-        )  # Re-initialize the plan for each iteration.
+            debug=debug,
+        )
 
         pushed_district_by_geoid = push_point(
             plan,
             scorer,
             dimensions,
             pin=pin,
+            save_at_limit=save_at_limit,
             logfile=logfile,
             verbose=verbose,
-            # debug=debug,
+            debug=debug,
         )
 
-    except:
+    except Exception as err:
+        traceback.print_tb(err.__traceback__)
+        # traceback.print_stack()
         echo(f"FAIL: Push unsuccessful.", console=verbose, log=logfile)
 
     return pushed_district_by_geoid
@@ -99,6 +105,8 @@ def push_point(
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
     pin: str = "",
+    limit: int = 10000,
+    save_at_limit: bool = False,
     logfile: Any = None,
     verbose: bool = False,
     debug: bool = False,
@@ -106,13 +114,15 @@ def push_point(
     """Push a frontier point on two ratings dimensions."""
 
     n_pass: int = 1
-    limit: int = 1000
 
     beg_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
 
     while True:
         if n_pass > limit:
-            raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
+            if save_at_limit:
+                break
+            else:
+                raise RuntimeError(f"Iteration threshold ({limit}) exceeded.")
         echo(console=verbose, log=logfile)
         echo(f"Pass {n_pass} of up to {limit}", console=verbose, log=logfile)
 
@@ -205,7 +215,9 @@ def sweep_once(
                 d for d in ratings_dimensions if d not in dimensions
             ]
             for d in other_dimensions:
-                measure: float = scorer.measure_dimension(d) if d != "minority" else 0.0
+                measure: float = (
+                    scorer.measure_dimension(d) if d != "minority" else 0.0
+                )  # NOTE: Don't need to measure minority
                 measurements[ratings_dimensions.index(d)] = measure
 
             if not is_realistic(measurements):
@@ -222,6 +234,7 @@ def sweep_once(
             echo(f"Nudged #'s:   {dimensions} = {prev_measures}", log=logfile)
 
     plan.inc_generation()
+
     echo(f"{plan}", console=verbose, log=logfile)
     plan.reset_counters()
 
@@ -232,7 +245,7 @@ def make_better_fn(
     *,
     constrain: Optional[int] = None,
     anchor: Optional[float] = None,
-    threshold: float = 0.01,
+    threshold: float = 0.05,  # 0.01,
 ) -> Callable[[Tuple[float, float], Tuple[float, float]], bool]:
     """Is a plan better on one or both dimensions? The value of one dimension can be 'pinned'."""
 
