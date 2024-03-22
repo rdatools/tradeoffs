@@ -38,7 +38,7 @@ scripts/approx_root_map.py \
 --log ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_rootlog.txt \
 --no-debug
 
-# Copy the result to the root_maps directory as MD20C_root_map.csv
+# NOTE - Copy the result to the tradeoffs/root_maps directory as MD20C_root_map.csv
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
@@ -47,7 +47,7 @@ scripts/recom_ensemble.py \
 --size 10000 \
 --data ../rdabase/data/MD/MD_2020_data.csv \
 --graph ../rdabase/data/MD/MD_2020_graph.json \
---root root_maps/MD20C_root_map.csv \
+--root ../tradeoffs/root_maps/MD20C_root_map.csv \
 --plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans.json \
 --log ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_log.txt \
 --no-debug
