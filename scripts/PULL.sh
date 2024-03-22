@@ -8,6 +8,6 @@
 
 XX=$1
 FROM_DIR=alecr@filexfer.hpc.arizona.edu:./dropbox
-TO_DIR=/Users/alecramsay/iCloud/fileout/hpc_dropbox
+TO_DIR=/Users/alecramsay/iCloud/fileout/tradeoffs
 
 rsync -avz $FROM_DIR/$XX/pushed $TO_DIR/$XX

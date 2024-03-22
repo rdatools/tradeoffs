@@ -3,7 +3,7 @@
 """
 MAKE "PUSH" JOBS FOR EACH POINT IN THE FRONTIERS FOR AN ENSEMBLE
 
-For example:
+For example: TODO
 
 $ scripts/make_push_jobs.py \
 --state NC \
