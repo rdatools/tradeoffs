@@ -7,6 +7,10 @@
 # --cores: 28
 # --windfall: False
 
+# Set up the state (from 'tradeoffs')
+
+scripts/SETUP.sh MD
+
 # Use the root map in root_maps or
 # Approximate a new root map:
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
@@ -67,8 +71,6 @@ scripts/find_frontiers.py \
 --no-debug
 
 # Generate 'push' jobs (from 'tradeoffs')
-
-scripts/SETUP.sh MD
 
 scripts/make_push_jobs.py \
 --state MD \
