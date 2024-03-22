@@ -58,9 +58,6 @@ scripts/recom_ensemble.py \
 
 # Score the ensemble (from 'rdaensemble')
 
-# TODO - HERE
-# TODO - Should ensemble plans be 0 or 1 indexed?
-
 scripts/score_ensemble.py \
 --state MD \
 --plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans.json \
@@ -96,7 +93,7 @@ scripts/make_push_jobs.py \
 --data ../rdabase/data/MD/MD_2020_data.csv \
 --shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
 --graph ../rdabase/data/MD/MD_2020_graph.json \
---output ../../iCloud/fileout/hpc_dropbox \
+--output ../../iCloud/fileout/tradeoffs \
 --no-debug
 
 # Push the jobs to the cluster (from 'tradeoffs')
