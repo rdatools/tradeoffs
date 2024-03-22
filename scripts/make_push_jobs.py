@@ -3,68 +3,7 @@
 """
 MAKE "PUSH" JOBS FOR EACH POINT IN THE FRONTIERS FOR AN ENSEMBLE
 
-For example: TODO
-
-$ scripts/make_push_jobs.py \
---state NC \
---plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---points 100 \
---pushes 3 \
---cores 28 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/hpc_dropbox \
---no-debug
-
-$ scripts/make_push_jobs.py \
---state NC \
---plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---zone \
---points 100 \
---pushes 3 \
---cores 28 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/hpc_dropbox \
---no-debug
-
-$ scripts/make_push_jobs.py \
---state NC \
---plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---random \
---points 100 \
---pushes 3 \
---cores 28 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/hpc_dropbox \
---no-debug
-
-scripts/make_push_jobs.py \
---state NC \
---plans ../../iCloud/fileout/ensembles/NC20C_plans.json \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---zone \
---pin \
---save-at-limit \
---points 100 \
---pushes 3 \
---cores 28 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/hpc_dropbox \
---no-debug
+For example, see the workflows in that directory.
 
 For documentation, type:
 
