@@ -7,6 +7,10 @@
 # --cores: 28
 # --windfall: False
 
+# Generate the data (from 'rdabase')
+
+# TODO - Flesh out the commands for doing this
+
 # Set up the state (from 'tradeoffs')
 
 scripts/SETUP.sh MD
@@ -53,6 +57,9 @@ scripts/recom_ensemble.py \
 --no-debug
 
 # Score the ensemble (from 'rdaensemble')
+
+# TODO - HERE
+# TODO - Should ensemble plans be 0 or 1 indexed?
 
 scripts/score_ensemble.py \
 --state MD \
