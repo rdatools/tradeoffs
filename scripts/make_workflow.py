@@ -444,6 +444,7 @@ def main() -> None:
     print()
     print(f"scripts/make_scatter_plots.py \\")
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
+    print(f"--more {output_dir}/{xx}20C_scores_augmented.csv \\")
     print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
     print(f"--pushed {output_dir}/{xx}20C_frontiers_pushed.json \\")
     print(f"--notables docs/_data/notable_ratings/{xx}_2022_Congress_ratings.csv \\")

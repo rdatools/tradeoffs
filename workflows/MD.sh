@@ -162,6 +162,7 @@ scripts/make_ratings_table.py \
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
+--more ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/MD_2022_Congress_ratings.csv \

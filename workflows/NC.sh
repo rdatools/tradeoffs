@@ -156,10 +156,13 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
+# NOTE - Created focus scores by hand
+
 # Make scatter plots (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
+--more ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
@@ -168,6 +171,7 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
+# TODO - All but DEPLOY
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC

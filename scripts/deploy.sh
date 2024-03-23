@@ -5,6 +5,8 @@
 # For example:
 #
 # scripts/DEPLOY.sh NC
+#
+# TODO - Update the copy commands for the new directory structure
 
 XX=$1
 FROM_DIR=../../iCloud/fileout
