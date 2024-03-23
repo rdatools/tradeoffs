@@ -141,21 +141,21 @@ scripts/id_notable_maps.py \
 
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv \
---image ../../iCloud/fileout/images/MD20C_boxplot.svg \
+--image ../../iCloud/fileout/tradeoffs/MD/docs/assets/images/MD20C_boxplot.svg \
 --no-debug
 
 # Make a statistics table (from 'tradeoffs')
 
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
---output ../../iCloud/fileout/_data/MD20C_statistics.csv \
+--output ../../iCloud/fileout/tradeoffs/MD/docs/_data/MD20C_statistics.csv \
 --no-debug
 
 # Make a notable maps ratings table (from 'tradeoffs')
 
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_notable_maps.json \
---output ../../iCloud/fileout/_data/MD20C_notable_maps_ratings.csv \
+--output ../../iCloud/fileout/tradeoffs/MD/docs/_data/MD20C_notable_maps_ratings.csv \
 --no-debug
 
 # Make scatter plots (from 'tradeoffs')
@@ -167,7 +167,7 @@ scripts/make_scatter_plots.py \
 --notables docs/_data/notable_ratings/MD_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_focus_scores.csv \
 --prefix MD20C \
---output ../../iCloud/fileout/images \
+--output ../../iCloud/tradeoffs/MD/docs/assets/ \
 --no-debug
 
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')

@@ -38,7 +38,7 @@ scripts/approx_root_map.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootlog.txt \
 --no-debug
 
-# NOTE - Copy the result to the tradeoffs/root_maps directory as MD20C_root_map.csv
+# NOTE - Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
@@ -139,21 +139,21 @@ scripts/id_notable_maps.py \
 
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
---image ../../iCloud/fileout/images/NC20C_boxplot.svg \
+--image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20C_boxplot.svg \
 --no-debug
 
 # Make a statistics table (from 'tradeoffs')
 
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
---output ../../iCloud/fileout/_data/NC20C_statistics.csv \
+--output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_statistics.csv \
 --no-debug
 
 # Make a notable maps ratings table (from 'tradeoffs')
 
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_notable_maps.json \
---output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
+--output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
 # Make scatter plots (from 'tradeoffs')
@@ -164,8 +164,8 @@ scripts/make_scatter_plots.py \
 --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv \
---prefix MD20C \
---output ../../iCloud/fileout/images \
+--prefix NC20C \
+--output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
