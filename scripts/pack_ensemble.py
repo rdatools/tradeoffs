@@ -6,8 +6,8 @@ PACK ENSEMBLE PLANS
 For example:
 
 $ scripts/pack_ensemble.py \
---input ../../iCloud/fileout/ensembles/NC20C_plans.json \
---output ensembles/NC20C_plans_packed.json \
+--input ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
+--output ~/Downloads/NC20C_plans_packed.json \
 --no-debug
 
 For documentation, type:

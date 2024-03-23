@@ -3,7 +3,7 @@
 """
 MAKE "PUSH" JOBS FOR EACH POINT IN THE FRONTIERS FOR AN ENSEMBLE
 
-For example, see the workflows in that directory.
+For example, see the workflows directory.
 
 For documentation, type:
 

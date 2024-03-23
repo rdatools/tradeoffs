@@ -3,12 +3,7 @@
 """
 MAKE A BOX PLOT FOR RATINGS
 
-For example:
-
-$ scripts/make_box_plot.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores_augmented.csv \
---image ../../iCloud/fileout/images/NC20C_boxplot.svg \
---no-debug
+For example, see the workflows directory.
 
 For documentation, type:
 

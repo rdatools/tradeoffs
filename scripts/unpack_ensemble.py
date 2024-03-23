@@ -6,7 +6,7 @@ UNPACK ENSEMBLE PLANS
 For example:
 
 $ scripts/unpack_ensemble.py \
---input ensembles/NC20C_plans_packed.json \
+--input ~/Downloads/NC20C_plans_packed.json \
 --output ~/Downloads/NC20C_plans.json \
 --no-debug
 

@@ -6,9 +6,9 @@ MAKE HISTORGRAMS
 For example:
 
 $ scripts/make_histograms.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --prefix NC20C \
---output ../../iCloud/fileout/images/ \
+--output ../../iCloud/fileout/tradeoffs/NC/assets/images/ \
 --no-debug
 
 For documentation, type:

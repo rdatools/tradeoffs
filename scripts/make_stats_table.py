@@ -3,12 +3,7 @@
 """
 MAKE STATISTICS TABLE
 
-For example:
-
-$ scripts/make_stats_table.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---output ../../iCloud/fileout/_data/NC20C_statistics.csv \
---no-debug
+For example, see the workflows directory.
 
 For documentation, type:
 

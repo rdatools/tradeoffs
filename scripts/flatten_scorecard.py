@@ -3,13 +3,7 @@
 """
 FLATTEN THE map-analytics.json SCORECARD FROM DRA INTO A ONE ROW CSV
 
-For example:
-
-$ scripts/flatten_scorecard.py \
---export testdata/test_focus_analytics.json \
---name NC_2024_Congressional \
---scores ../../iCloud/fileout/ensembles/NC_2024_Congressional_scores.csv \
---no-debug
+For example, see the workflows directory.
 
 For documentation, type:
 

@@ -3,14 +3,7 @@
 """
 FIND THE RATINGS FRONTIER
 
-For example:
-
-$ scripts/find_frontiers.py \
---scores ../../iCloud/fileout/ensembles/NC20C_scores.csv \
---metadata ../../iCloud/fileout/ensembles/NC20C_scores_metadata.json \
---frontier ../../iCloud/fileout/ensembles/NC20C_frontiers.json \
---verbose \
---no-debug
+For example, see the workflows directory.
 
 For documentation, type:
 

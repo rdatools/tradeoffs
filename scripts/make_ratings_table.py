@@ -3,12 +3,7 @@
 """
 MAKE RATINGS TABLE (CSV)
 
-For example:
-
-$ scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/ensembles/NC20C_notable_maps.json \
---output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
---no-debug
+For example, see the workflows directory.
 
 For documentation, type:
 

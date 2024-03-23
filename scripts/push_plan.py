@@ -3,20 +3,7 @@
 """
 PUSH A PLAN ONCE ON TWO RATINGS DIMENSIONS
 
-For example:
-
-$ scripts/push_plan.py \
---state NC \
---plan testdata/test_plan.csv \
---dimensions proportionality minority \
---pushed ~/Downloads/test_plan_pushed.csv \
---log ~/Downloads/test_plan_pushed_log.txt \
---seed 518 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---verbose \
---no-debug
+For example, see the workflows directory.
 
 For documentation, type:
 
