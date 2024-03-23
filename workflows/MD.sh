@@ -7,10 +7,6 @@
 # --cores: 28
 # --windfall: False
 
-# Generate the data (from 'rdabase')
-
-# TODO - Flesh out the commands for doing this
-
 # Set up the state (from 'tradeoffs')
 
 scripts/SETUP.sh MD
