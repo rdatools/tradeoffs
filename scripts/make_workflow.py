@@ -43,8 +43,11 @@ def main() -> None:
     args: argparse.Namespace = parse_args()
 
     xx: str = args.state
-    data_dir: str = "../rdabase/data"
+    input_dir: str = "../rdabase/data"
     output_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/ensembles"
+    pushed_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/pushed"
+    image_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/docs/assets/images"
+    data_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/docs/_data"
 
     # Push mode -- frontiers only, zone, or random
 
@@ -73,10 +76,20 @@ def main() -> None:
     """
 
     """
+    # Set up the state (from 'tradeoffs')
+
+    scripts/SETUP.sh NC
+
+    """
+
+    print(f"scripts/SETUP.sh {xx}")
+    print()
+
+    """
     # Use the root map in root_maps or
     # Approximate a new root map:
     # Generate an ensemble of 100 random plans (from 'rdaensemble')
-  
+
     scripts/rmfrsp_ensemble.py \
     --state NC \
     --size 100 \
@@ -86,7 +99,7 @@ def main() -> None:
     --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_RMfRSP_100_plans.json \
     --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_RMfRSP_100_log.txt \
     --no-debug
-    
+
     # Approximate a root map with them (from 'rdaroot')
 
     scripts/approx_root_map.py \
@@ -95,12 +108,12 @@ def main() -> None:
     --data ../rdabase/data/NC/NC_2020_data.csv \
     --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
     --graph ../rdabase/data/NC/NC_2020_graph.json \
-    --map ../../iCloud/fileout/rootmaps/NC20C_rootmap.csv \
-    --candidates ../../iCloud/fileout/rootmaps/NC20C_rootcandidates.json \
-    --log ../../iCloud/fileout/rootmaps/NC20C_rootlog.txt \
+    --map ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootmap.csv \
+    --candidates ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootcandidates.json \
+    --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootlog.txt \
     --no-debug
 
-    # Copy the result to the root_maps directory as NC20C_root_map.csv
+    # NOTE - Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
 
     """
 
@@ -111,9 +124,9 @@ def main() -> None:
     print(f"scripts/rmfrsp_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--size 100 \\")
-    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
-    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
-    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
     print(f"--plans {output_dir}/{xx}20C_RMfRSP_100_plans.json \\")
     print(f"--log {output_dir}/{xx}20C_RMfRSP_100_log.txt \\")
     print(f"--no-debug")
@@ -123,12 +136,12 @@ def main() -> None:
     print(f"scripts/approx_root_map.py \\")
     print(f"--state {xx} \\")
     print(f"--plans {output_dir}/{xx}20C_RMfRST_100_plans.json \\")
-    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
-    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
-    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(f"--map ../../iCloud/fileout/rootmaps/{xx}20C_rootmap.csv \\")
-    print(f"--candidates ../../iCloud/fileout/rootmaps/{xx}20C_rootcandidates.json \\")
-    print(f"--log ../../iCloud/fileout/rootmaps/{xx}20C_rootlog.txt \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--map {output_dir}/{xx}20C_rootmap.csv \\")
+    print(f"--candidates {output_dir}/{xx}20C_rootcandidates.json \\")
+    print(f"--log {output_dir}/{xx}20C_rootlog.txt \\")
     print(f"--no-debug")
     print()
     print(f"# Copy the result to the root_maps directory as {xx}20C_root_map.csv")
@@ -142,18 +155,19 @@ def main() -> None:
     --size 10000 \
     --data ../rdabase/data/NC/NC_2020_data.csv \
     --graph ../rdabase/data/NC/NC_2020_graph.json \
-    --root root_maps/NC20C_root_map.csv \
+    --root ../tradeoffs/root_maps/NC20C_root_map.csv \
     --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
     --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_log.txt \
     --no-debug
+
     """
 
     print(f"scripts/recom_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--size 10000 \\")
-    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
-    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(f"--root root_maps/{xx}20C_root_map.csv \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--root ../tradeoffs/root_maps/{xx}20C_root_map.csv \\")
     print(f"--plans {output_dir}/{xx}20C_plans.json \\")
     print(f"--log {output_dir}/{xx}20C_log.txt \\")
     print(f"--no-debug")
@@ -178,9 +192,9 @@ def main() -> None:
     print(f"scripts/score_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--plans {output_dir}/{xx}20C_plans.json \\")
-    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
-    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
-    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
     print(f"--no-debug")
     print()
@@ -210,8 +224,6 @@ def main() -> None:
     """
     # Generate 'push' jobs (from 'tradeoffs')
 
-    scripts/SETUP.sh NC
-
     scripts/make_push_jobs.py \
     --state NC \
     --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
@@ -222,6 +234,7 @@ def main() -> None:
     --save-at-limit \
     --points 100 \
     --pushes 3 \
+    --delta 5 \
     --cores 28 \
     --data ../rdabase/data/NC/NC_2020_data.csv \
     --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
@@ -233,8 +246,6 @@ def main() -> None:
 
     print(f"# Generate 'push' jobs (from 'tradeoffs')")
     print()
-    print(f"scripts/SETUP.sh {xx}")
-    print()
     print(f"scripts/make_push_jobs.py \\")
     print(f"--state {xx} \\")
     print(f"--plans {output_dir}/{xx}20C_plans.json \\")
@@ -242,6 +253,7 @@ def main() -> None:
     print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
     if args.zone:
         print(f"--zone \\")
+        print(f"--delta 5 \\")
     if args.random:
         print(f"--random \\")
     if args.pin:
@@ -250,13 +262,12 @@ def main() -> None:
         print(f"--save-at-limit \\")
     print(f"--points {args.points} \\")
     print(f"--pushes {args.pushes} \\")
-    print(f"--delta {args.delta} \\")
     print(f"--cores {args.cores} \\")
     if args.windfall:
         print(f"--windfall \\")
-    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
-    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
-    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
     print(f"--output ../../iCloud/fileout/tradeoffs \\")
     print(f"--no-debug")
     print()
@@ -289,13 +300,13 @@ def main() -> None:
     print(f"scripts/ensemble_from_plans.py \\")
     print(f"--base {output_dir}/{xx}20C_plans.json \\")
     print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
-    print(f"--dir ../../iCloud/fileout/tradeoffs/{xx}/pushed \\")
+    print(f"--dir {pushed_dir} \\")
     print(f"--no-debug")
     print()
 
     """
     # Score the pushed plans (from 'rdaensemble')
-
+    
     scripts/score_ensemble.py \
     --state NC \
     --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
@@ -312,9 +323,9 @@ def main() -> None:
     print(f"scripts/score_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
-    print(f"--data {data_dir}/{xx}/{xx}_2020_data.csv \\")
-    print(f"--shapes {data_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
-    print(f"--graph {data_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
     print(f"--scores {output_dir}/{xx}20C_scores_pushed.csv \\")
     print(f"--no-debug")
     print()
@@ -376,7 +387,7 @@ def main() -> None:
 
     scripts/make_box_plot.py \
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
-    --image ../../iCloud/fileout/images/NC20C_boxplot.svg \
+    --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20C_boxplot.svg \
     --no-debug
 
     """
@@ -385,7 +396,7 @@ def main() -> None:
     print()
     print(f"scripts/make_box_plot.py \\")
     print(f"--scores {output_dir}/{xx}20C_scores_augmented.csv \\")
-    print(f"--image ../../iCloud/fileout/images/{xx}20C_boxplot.svg \\")
+    print(f"--image {image_dir}/{xx}20C_boxplot.svg \\")
     print(f"--no-debug")
     print()
 
@@ -394,7 +405,7 @@ def main() -> None:
 
     scripts/make_stats_table.py \
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
-    --output ../../iCloud/fileout/_data/NC20C_statistics.csv \
+    --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_statistics.csv \
     --no-debug
 
     """
@@ -403,7 +414,7 @@ def main() -> None:
     print()
     print(f"scripts/make_stats_table.py \\")
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
-    print(f"--output ../../iCloud/fileout/_data/{xx}20C_statistics.csv \\")
+    print(f"--output {data_dir}/{xx}20C_statistics.csv \\")
     print(f"--no-debug")
     print()
 
@@ -412,7 +423,7 @@ def main() -> None:
 
     scripts/make_ratings_table.py \
     --notables ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_notable_maps.json \
-    --output ../../iCloud/fileout/_data/NC20C_notable_maps_ratings.csv \
+    --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_notable_maps_ratings.csv \
     --no-debug
 
     """
@@ -421,7 +432,7 @@ def main() -> None:
     print()
     print(f"scripts/make_ratings_table.py \\")
     print(f"--notables {output_dir}/{xx}20C_notable_maps.json \\")
-    print(f"--output ../../iCloud/fileout/_data/{xx}20C_notable_maps_ratings.csv \\")
+    print(f"--output {data_dir}/{xx}20C_notable_maps_ratings.csv \\")
     print(f"--no-debug")
     print()
 
@@ -430,12 +441,13 @@ def main() -> None:
 
     scripts/make_scatter_plots.py \
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
+    --more ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
     --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
     --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
     --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
     --focus ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv \
     --prefix NC20C \
-    --output ../../iCloud/fileout/images \
+    --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
     --no-debug
 
     """
@@ -450,7 +462,7 @@ def main() -> None:
     print(f"--notables docs/_data/notable_ratings/{xx}_2022_Congress_ratings.csv \\")
     print(f"--focus {output_dir}/{xx}20C_focus_scores.csv \\")
     print(f"--prefix {xx}20C \\")
-    print(f"--output ../../iCloud/fileout/images \\")
+    print(f"--output {image_dir} \\")
     print(f"--no-debug")
     print()
 
