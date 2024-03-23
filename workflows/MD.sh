@@ -96,8 +96,6 @@ scripts/make_push_jobs.py \
 # Submit the jobs (on the UA cluster)
 # Pull the pushed plans from the cluster (from 'tradeoffs')
 
-# TODO - HERE
-
 # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
 scripts/ensemble_from_plans.py \
@@ -106,6 +104,7 @@ scripts/ensemble_from_plans.py \
 --dir ../../iCloud/fileout/tradeoffs/MD/pushed \
 --no-debug
 
+# TODO - Some failures scoring. Need to debug them & re-run from here.
 # Score the pushed plans (from 'rdaensemble')
 
 scripts/score_ensemble.py \
@@ -168,7 +167,7 @@ scripts/make_scatter_plots.py \
 --notables docs/_data/notable_ratings/MD_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_focus_scores.csv \
 --prefix MD20C \
---output ../../iCloud/tradeoffs/MD/docs/assets/ \
+--output ../../iCloud/fileout/tradeoffs/MD/docs/assets/images \
 --no-debug
 
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
