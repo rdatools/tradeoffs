@@ -7,6 +7,8 @@
 # --cores: 28
 # --windfall: False
 
+# Set up the state (from 'tradeoffs')
+
 scripts/SETUP.sh SC
 
 # Use the root map in root_maps or

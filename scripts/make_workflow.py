@@ -82,6 +82,8 @@ def main() -> None:
 
     """
 
+    print(f"# Set up the state (from 'tradeoffs')")
+    print()
     print(f"scripts/SETUP.sh {xx}")
     print()
 
