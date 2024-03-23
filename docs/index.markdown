@@ -9,4 +9,5 @@ This is second major iteration of ["Trade-offs in Redistricting"](https://alecra
 It's still a work in progress. 
 We're not ready for feedback yet.
 
-<a href="{{ site.baseurl }}/states/NC">NC Sample</a>
+<a href="{{ site.baseurl }}/states/NC">NC</a>
+<a href="{{ site.baseurl }}/states/MD">MD</a>
