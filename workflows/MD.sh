@@ -107,7 +107,7 @@ scripts/make_push_jobs.py \
 scripts/ensemble_from_plans.py \
 --base ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans.json \
 --plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_pushed.json \
---dir ../../iCloud/fileout/hpc_dropbox/MD/pushed \
+--dir ../../iCloud/fileout/tradeoffs/MD/pushed \
 --no-debug
 
 # Score the pushed plans (from 'rdaensemble')

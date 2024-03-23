@@ -100,14 +100,12 @@ scripts/make_push_jobs.py \
 # Submit the jobs (on the UA cluster)
 # Pull the pushed plans from the cluster (from 'tradeoffs')
 
-# TODO - HERE
-
 # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
 scripts/ensemble_from_plans.py \
 --base ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
---dir ../../iCloud/fileout/hpc_dropbox/NC/pushed \
+--dir ../../iCloud/fileout/tradeoffs/NC/pushed \
 --no-debug
 
 # Score the pushed plans (from 'rdaensemble')
