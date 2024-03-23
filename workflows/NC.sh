@@ -171,7 +171,6 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
-# TODO - All but DEPLOY
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC

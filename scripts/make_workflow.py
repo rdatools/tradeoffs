@@ -164,6 +164,8 @@ def main() -> None:
 
     """
 
+    print(f"# Generate an ensemble (from 'rdaensemble')")
+    print()
     print(f"scripts/recom_ensemble.py \\")
     print(f"--state {xx} \\")
     print(f"--size 10000 \\")

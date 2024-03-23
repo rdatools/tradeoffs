@@ -40,6 +40,8 @@ scripts/approx_root_map.py \
 
 # Copy the result to the root_maps directory as SC20C_root_map.csv
 
+# Generate an ensemble (from 'rdaensemble')
+
 scripts/recom_ensemble.py \
 --state SC \
 --size 10000 \
@@ -50,6 +52,7 @@ scripts/recom_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_log.txt \
 --no-debug
 
+# TODO - HERE: Scoring fails for SC.
 # Score the ensemble (from 'rdaensemble')
 
 scripts/score_ensemble.py \

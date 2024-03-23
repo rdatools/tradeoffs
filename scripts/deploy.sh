@@ -9,8 +9,10 @@
 # TODO - Update the copy commands for the new directory structure
 
 XX=$1
-FROM_DIR=../../iCloud/fileout
+FROM_DIR=../../iCloud/fileout/tradeoffs/${XX}
 TO_DIR=docs
 
-cp $FROM_DIR/images/$XX*.svg $TO_DIR/assets/images
-cp $FROM_DIR/_data/$XX*.csv $TO_DIR/_data
+mv $FROM_DIR/docs/assets/images/*.csv $FROM_DIR/docs/_data
+
+cp $FROM_DIR/docs/assets/images/*.svg $TO_DIR/assets/images
+cp $FROM_DIR/docs/_data/*.csv $TO_DIR/_data
