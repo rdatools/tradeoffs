@@ -66,6 +66,13 @@ def main() -> None:
     print()
 
     """
+    # Generate the data (from 'rdabase')
+
+    # TODO - Flesh out the commands for doing this
+    
+    """
+
+    """
     # Use the root map in root_maps or
     # Approximate a new root map:
     # Generate an ensemble of 100 random plans (from 'rdaensemble')
