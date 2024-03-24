@@ -71,9 +71,14 @@ def main() -> None:
     """
     # Generate the data (from 'rdabase')
 
-    # TODO - Flesh out the commands for doing this
+    scripts/preprocess_state.py -s NC
     
     """
+
+    print(f"# Generate the data (from 'rdabase')")
+    print()
+    print(f"scripts/preprocess_state.py -s {xx}")
+    print()
 
     """
     # Set up the state (from 'tradeoffs')
