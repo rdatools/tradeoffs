@@ -96,6 +96,8 @@ scripts/make_push_jobs.py \
 # Submit the jobs (on the UA cluster)
 # Pull the pushed plans from the cluster (from 'tradeoffs')
 
+# HERE
+
 # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
 scripts/ensemble_from_plans.py \
@@ -104,7 +106,6 @@ scripts/ensemble_from_plans.py \
 --dir ../../iCloud/fileout/tradeoffs/MD/pushed \
 --no-debug
 
-# TODO - Some failures scoring. Need to debug them & re-run from here.
 # Score the pushed plans (from 'rdaensemble')
 
 scripts/score_ensemble.py \

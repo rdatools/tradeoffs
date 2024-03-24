@@ -52,7 +52,6 @@ scripts/recom_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_log.txt \
 --no-debug
 
-# TODO - HERE: Scoring fails for SC.
 # Score the ensemble (from 'rdaensemble')
 
 scripts/score_ensemble.py \
@@ -96,6 +95,8 @@ scripts/make_push_jobs.py \
 # Push the jobs to the cluster (from 'tradeoffs')
 # Submit the jobs (on the UA cluster)
 # Pull the pushed plans from the cluster (from 'tradeoffs')
+
+# HERE
 
 # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
