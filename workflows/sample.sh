@@ -160,6 +160,32 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/XX/docs/_data/XX20C_notable_maps_ratings.csv \
 --no-debug
 
+# If you want to highlight a map or a few on the scatter plots,
+# use this process which lets the maps split precincts.
+
+# For each focus map:
+# - Open the map in DRA
+# - Verify the choices in Data Selector (2020 Census, 2016-2020 Election Composite)
+# - Export the Map Analytics JSON
+# - Rename it, e.g., NC-2022-Congressional-map-analytics.json
+# - Move it to fileout/tradeoffs/NC/ensembles
+# - Use backslashes to escape spaces in the name
+
+scripts/flatten_scorecard.py \
+--export ../../iCloud/fileout/tradeoffs/NC/ensembles/NC-2022-Congressional-map-analytics.json \
+--name Official \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC-2022-Congressional_scores.csv \
+--no-debug
+
+# Combine the names & ratings into a CSV that looks like this:
+
+Map,Proportionality,Competitiveness,Minority,Compactness,Splitting
+2024 Official,0,24,65,43,41
+2020 Official,94,30,60,61,57
+
+# and save it in ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv
+# Use the --focus flag when making the scatter plots.
+
 # Make scatter plots (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \

@@ -446,6 +446,71 @@ def main() -> None:
     print()
 
     """
+    # If you want to highlight a map or a few on the scatter plots,
+    # use this process which lets the maps split precincts.
+    
+    # For each focus map:
+    # - Open the map in DRA
+    # - Verify the choices in Data Selector (2020 Census, 2016-2020 Election Composite)
+    # - Export the Map Analytics JSON
+    # - Rename it, e.g., NC-2022-Congressional-map-analytics.json
+    # - Move it to fileout/tradeoffs/NC/ensembles
+    # - Use backslashes to escape spaces in the name
+
+    scripts/flatten_scorecard.py \
+    --export ../../iCloud/fileout/tradeoffs/NC/ensembles/NC-2022-Congressional-map-analytics.json \
+    --name Official \
+    --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC-2022-Congressional_scores.csv \
+    --no-debug
+
+    # Combine the names & ratings into a CSV that looks like this:
+
+    Map,Proportionality,Competitiveness,Minority,Compactness,Splitting
+    2024 Official,0,24,65,43,41
+    2020 Official,94,30,60,61,57
+
+    # and save it in ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv
+    # Use the --focus flag when making the scatter plots.
+
+    """
+
+    print("# If you want to highlight a map or a few on the scatter plots,")
+    print("# use this process which lets the maps split precincts.")
+    print()
+
+    print(f"# For each focus map:")
+    print(f"# - Open the map in DRA")
+    print(
+        f"# - Verify the choices in Data Selector (2020 Census, 2016-2020 Election Composite)"
+    )
+    print(f"# - Export the Map Analytics JSON")
+    print(f"# - Rename it, e.g., NC-2022-Congressional-map-analytics.json")
+    print(f"# - Move it to fileout/tradeoffs/NC/ensembles")
+    print(f"# - Use backslashes to escape spaces in the name")
+    print()
+    print(f"scripts/flatten_scorecard.py \\")
+    print(
+        f"--export ../../iCloud/fileout/tradeoffs/NC/ensembles/NC-2022-Congressional-map-analytics.json \\"
+    )
+    print(f"--name Official \\")
+    print(
+        f"--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC-2022-Congressional_scores.csv \\"
+    )
+    print(f"--no-debug")
+    print()
+    print(f"# Combine the names & ratings into a CSV that looks like this:")
+    print()
+    print(f"Map,Proportionality,Competitiveness,Minority,Compactness,Splitting")
+    print(f"2024 Official,0,24,65,43,41")
+    print(f"2020 Official,94,30,60,61,57")
+    print()
+    print(
+        f"# and save it in ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv"
+    )
+    print(f"# Use the --focus flag when making the scatter plots.")
+    print()
+
+    """
     # Make scatter plots (from 'tradeoffs')
 
     scripts/make_scatter_plots.py \
