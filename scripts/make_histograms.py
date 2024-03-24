@@ -13,7 +13,7 @@ $ scripts/make_histograms.py \
 
 For documentation, type:
 
-$ scripts/make_histograms.py
+$ scripts/make_histograms.py -h
 """
 
 import argparse

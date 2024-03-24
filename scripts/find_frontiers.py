@@ -7,7 +7,8 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/find_frontiers.py
+$ scripts/find_frontiers.py -h
+
 """
 
 import argparse

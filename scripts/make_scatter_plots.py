@@ -7,7 +7,7 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/make_scatter_plots.py
+$ scripts/make_scatter_plots.py -h
 
 """
 

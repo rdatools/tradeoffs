@@ -7,7 +7,7 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/make_box_plot.py
+$ scripts/make_box_plot.py -h
 
 """
 

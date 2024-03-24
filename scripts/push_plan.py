@@ -7,7 +7,7 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/push_plan.py
+$ scripts/push_plan.py -h
 
 """
 

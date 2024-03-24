@@ -7,7 +7,7 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/flatten_scorecard.py
+$ scripts/flatten_scorecard.py -h
 
 """
 

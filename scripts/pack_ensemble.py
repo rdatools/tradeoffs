@@ -12,7 +12,7 @@ $ scripts/pack_ensemble.py \
 
 For documentation, type:
 
-$ scripts/pack_ensemble.py
+$ scripts/pack_ensemble.py -h
 
 """
 

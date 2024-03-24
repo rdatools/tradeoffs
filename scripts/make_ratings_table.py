@@ -7,7 +7,7 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/make_ratings_table.py
+$ scripts/make_ratings_table.py -h
 
 """
 

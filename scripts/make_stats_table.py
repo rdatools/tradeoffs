@@ -7,7 +7,8 @@ For example, see the workflows directory.
 
 For documentation, type:
 
-$ scripts/make_stats_table.py
+$ scripts/make_stats_table.py -h
+
 """
 
 import argparse

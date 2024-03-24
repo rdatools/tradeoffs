@@ -18,7 +18,7 @@ $ scripts/make_workflow.py \
 
 For documentation, type:
 
-$ scripts/make_workflow.py
+$ scripts/make_workflow.py -h
 
 """
 
