@@ -7,7 +7,7 @@ permalink: states/
  <img src="{{ site.baseurl }}/assets/images/us_map.png" alt="USA" usemap="#usmap" style="border:none;">
 
 <map name="usmap">
-  <div class="tooltip">
+  <!-- <div class="tooltip">
     <area shape="circle" coords="477,383,30" alt="Alabama" href="{{ site.baseurl }}/states/AL">
     <span class="tooltiptext">Alabama</span>
   </div>
@@ -62,12 +62,12 @@ permalink: states/
   <div class="tooltip">
     <area shape="circle" coords="360,383,30" alt="Louisiana" href="{{ site.baseurl }}/states/LA">
     <span class="tooltiptext">Louisiana</span>
-  </div>
+  </div> -->
   <div class="tooltip">
     <area shape="circle" coords="595,279,30" alt="Maryland" href="{{ site.baseurl }}/states/MD">
     <span class="tooltiptext">Maryland</span>
   </div>
-  <div class="tooltip">
+  <!-- <div class="tooltip">
     <area shape="circle" coords="654,174,30" alt="Massachusetts" href="{{ site.baseurl }}/states/MA">
     <span class="tooltiptext">Massachusetts</span>
   </div>
@@ -106,12 +106,12 @@ permalink: states/
   <div class="tooltip">
     <area shape="circle" coords="595,174,30" alt="New York" href="{{ site.baseurl }}/states/NY">
     <span class="tooltiptext">New York</span>
-  </div>
+  </div> -->
   <div class="tooltip">
     <area shape="circle" coords="504,330,30" alt="North Carolina" href="{{ site.baseurl }}/states/NC">
     <span class="tooltiptext">North Carolina</span>
   </div>
-  <div class="tooltip">
+  <!-- <div class="tooltip">
     <area shape="circle" coords="504,223,30" alt="Ohio" href="{{ site.baseurl }}/states/OH">
     <span class="tooltiptext">Ohio</span>
   </div>
@@ -126,12 +126,12 @@ permalink: states/
   <div class="tooltip">
     <area shape="circle" coords="564,223,30" alt="Pennsylvania" href="{{ site.baseurl }}/states/PA">
     <span class="tooltiptext">Pennsylvania</span>
-  </div>
+  </div> -->
   <div class="tooltip">
     <area shape="circle" coords="564,330,30" alt="South Carolina" href="{{ site.baseurl }}/states/SC">
     <span class="tooltiptext">South Carolina</span>
   </div>
-  <div class="tooltip">
+  <!-- <div class="tooltip">
     <area shape="circle" coords="444,330,30" alt="Tennessee" href="{{ site.baseurl }}/states/TN">
     <span class="tooltiptext">Tennessee</span>
   </div>
@@ -154,9 +154,9 @@ permalink: states/
   <div class="tooltip">
     <area shape="circle" coords="444,118,30" alt="Wisconsin" href="{{ site.baseurl }}/states/WI">
     <span class="tooltiptext">Wisconsin</span>
-  </div>
+  </div> -->
   <!-- States w/ just two congressional districts -->
-  <div class="tooltip">
+  <!-- <div class="tooltip">
     <area shape="circle" coords="181,174,30" alt="Idaho" href="{{ site.baseurl }}/states/ID">
     <span class="tooltiptext">Idaho</span>
   </div>
@@ -175,7 +175,7 @@ permalink: states/
   <div class="tooltip">
     <area shape="circle" coords="477,279,30" alt="West Virginia" href="{{ site.baseurl }}/states/WV">
     <span class="tooltiptext">West Virginia</span>
-  </div>
+  </div> -->
 </map> 
 
 
