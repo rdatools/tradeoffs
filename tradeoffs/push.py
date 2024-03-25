@@ -35,6 +35,7 @@ def push_plan(
     metadata: Dict[str, Any],
     *,
     pin: str = "",
+    pin_tolerance: float = 0.05,
     save_at_limit: bool = False,
     logfile: Any = None,
     verbose: bool = False,
@@ -81,6 +82,7 @@ def push_plan(
             scorer,
             dimensions,
             pin=pin,
+            pin_tolerance=pin_tolerance,
             save_at_limit=save_at_limit,
             logfile=logfile,
             verbose=verbose,
@@ -105,6 +107,7 @@ def push_point(
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
     pin: str = "",
+    pin_tolerance: float = 0.05,
     limit: int = 10000,
     save_at_limit: bool = False,
     logfile: Any = None,
@@ -132,6 +135,7 @@ def push_point(
             dimensions,
             generator=generator,
             pin=pin,
+            pin_tolerance=pin_tolerance,
             logfile=logfile,
             verbose=verbose,
             debug=debug,
@@ -161,6 +165,7 @@ def sweep_once(
     dimensions: Tuple[str, str],
     *,
     pin: str = "",
+    pin_tolerance: float = 0.05,
     generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
     logfile: Any = None,
     verbose: bool = False,
@@ -185,7 +190,9 @@ def sweep_once(
         assert pin in dimensions
         pinned: int = dimensions.index(pin)
         value: float = prev_measures[pinned]
-        is_better = make_better_fn(constrain=pinned, anchor=value)
+        is_better = make_better_fn(
+            constrain=pinned, anchor=value, tolerance=pin_tolerance
+        )
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
 
@@ -245,7 +252,7 @@ def make_better_fn(
     *,
     constrain: Optional[int] = None,
     anchor: Optional[float] = None,
-    threshold: float = 0.05,  # 0.01,
+    tolerance: float = 0.05,  # 0.01,
 ) -> Callable[[Tuple[float, float], Tuple[float, float]], bool]:
     """Is a plan better on one or both dimensions? The value of one dimension can be 'pinned'."""
 
@@ -260,9 +267,15 @@ def make_better_fn(
             assert constrain is not None
             assert anchor is not None
 
+            difference: float = abs(anchor - two[constrain])
+            wiggle: float = tolerance * 100  # Ratings = [0,100]
+
             return (
                 one[1 - constrain] < two[1 - constrain]
-                and abs(anchor - two[constrain]) < threshold
+                and difference < wiggle
+                # Simple 'tolerance' wasn't relative to the initial rating
+                # or the [0-100] rating scale. That was a bug.
+                # and abs(anchor - two[constrain]) < tolerance
             )
 
     return is_better

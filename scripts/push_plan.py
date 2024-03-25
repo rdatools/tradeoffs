@@ -65,6 +65,7 @@ def main() -> None:
             graph,
             metadata,
             pin=pin,
+            pin_tolerance=args.tolerance,
             save_at_limit=args.saveatlimit,
             logfile=f,
             verbose=args.verbose,
@@ -111,6 +112,12 @@ def parse_args():
         type=str,
         default="",
         help="One of the dimensions to hold constant (optional)",
+    )
+    parser.add_argument(
+        "--tolerance",
+        type=float,
+        default=0.05,
+        help="How much the pinned dimension can vary (optional)",
     )
     parser.add_argument(
         "--save-at-limit",
@@ -169,18 +176,34 @@ def parse_args():
     #     "graph": "../rdabase/data/NC/NC_2020_graph.json",
     #     "verbose": True,
     # }
+    # debug_defaults: Dict[str, Any] = {
+    #     "state": "NC",
+    #     "plan": "~/Downloads/NC/plans/NC20C_9612_plan.csv",
+    #     "dimensions": ["proportionality", "competitiveness"],
+    #     "pin": "proportionality",
+    #     "tolerance": 0.05,
+    #     "saveatlimit": True,
+    #     "pushed": "~/Downloads/NC/NC20C_9612_12_00_plan.csv",
+    #     "log": "~/Downloads/NC/pushed/NC20C_9612_12_00_log.txt",
+    #     "seed": 518,
+    #     "data": "~/Downloads/NC/data/data.csv",
+    #     "shapes": "~/Downloads/NC/data/shapes.json",
+    #     "graph": "~/Downloads/NC/data/graph.json",
+    #     "verbose": True,
+    # }
     debug_defaults: Dict[str, Any] = {
-        "state": "NC",
-        "plan": "~/Downloads/NC/plans/NC20C_9612_plan.csv",
-        "dimensions": ["proportionality", "competitiveness"],
+        "state": "SC",
+        "plan": "../../iCloud/fileout/tradeoffs/SC-alt/plans/SC_2022_Congressional_NO_SPLITS.csv",
+        "dimensions": ["proportionality", "minority"],
         "pin": "proportionality",
+        "tolerance": 0.01,
         "saveatlimit": True,
-        "pushed": "~/Downloads/NC/NC20C_9612_12_00_plan.csv",
-        "log": "~/Downloads/NC/pushed/NC20C_9612_12_00_log.txt",
-        "seed": 518,
-        "data": "~/Downloads/NC/data/data.csv",
-        "shapes": "~/Downloads/NC/data/shapes.json",
-        "graph": "~/Downloads/NC/data/graph.json",
+        "pushed": "../../iCloud/fileout/tradeoffs/SC-alt/pushed/SC_2022_Congressional_NO_SPLITS_push_test.csv",
+        "log": "../../iCloud/fileout/tradeoffs/SC-alt/pushed/SC_2022_Congressional_NO_SPLITS_push_test_log.txt",
+        "seed": 315,
+        "data": "../../iCloud/fileout/tradeoffs/SC/data/data.csv",
+        "shapes": "../../iCloud/fileout/tradeoffs/SC/data/shapes.json",
+        "graph": "../../iCloud/fileout/tradeoffs/SC/data/graph.json",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
