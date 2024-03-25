@@ -203,4 +203,8 @@ scripts/make_scatter_plots.py \
 
 scripts/DEPLOY.sh XX
 
+# Finally:
+# - Add a state page in the docs/_pages/pages directory, and
+# - Add a link to the state page in docs/_pages/pages/states.markdown.
+
 # END
