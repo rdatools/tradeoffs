@@ -211,7 +211,7 @@ class Scorer:
     def _measure_proportionality(self) -> float:
         """Measure a plan's proportionality."""
 
-        aggregates: Dict[str, Any] = self._get_aggregates()
+        self._get_aggregates()
 
         partisan_metrics: Dict[str, float] = self._get_partisan_metrics()
         raw_disproportionality: float = partisan_metrics["pr_deviation"]
@@ -225,7 +225,8 @@ class Scorer:
     def _measure_competitiveness(self) -> float:
         """Measure a plan's competitiveness."""
 
-        aggregates: Dict[str, Any] = self._get_aggregates()
+        self._get_aggregates()
+
         partisan_metrics: Dict[str, float] = self._get_partisan_metrics()
 
         raw_cdf: float = partisan_metrics["competitive_district_pct"]
@@ -237,7 +238,7 @@ class Scorer:
     def _measure_minority(self) -> float:
         """Rate a plan on minority representation."""
 
-        aggregates: Dict[str, Any] = self._get_aggregates()
+        self._get_aggregates()
 
         minority_metrics: Dict[str, float] = self._get_minority_metrics()
         od: float = minority_metrics["opportunity_districts"]
@@ -268,7 +269,7 @@ class Scorer:
     def _measure_splitting(self) -> float:
         """Rate a plan on county-district splitting."""
 
-        aggregates: Dict[str, Any] = self._get_aggregates()
+        self._get_aggregates()
 
         splitting_metrics: Dict[str, float] = self._get_splitting_metrics()
 
