@@ -297,8 +297,8 @@ class TestRatings:
 
         # * Opportunity districts = (12.56 / 18) * 100 <<< 69.7777
         # * Coalition districts = (22.92 / 18) * 100 <<< 127.3333
-        # * Combined = 69.7777 + [0.5 * 127.3333]
-        correct: float = 133.4444
+        # * Combined = 69.7777 + [0.5 * (127.3333 - 69.7777)]
+        correct: float = 98.55555  # BUG = 133.4444
         assert approx_equal(
             measure_minority_opportunity(12.56, 18, 22.92, 18), correct, 4
         )
@@ -696,7 +696,7 @@ class TestRatings:
         assert rate_district_splitting(1.4200, nC, nLD) == 44
         assert abs(rate_splitting(0, 44) - 22) <= 1
 
-    def test_rate_splitting(self) -> None:
+    def test_rate_splitting2(self) -> None:
         # Combine splitting ratings
 
         # Some county- & district splitting
