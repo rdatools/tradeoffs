@@ -96,8 +96,6 @@ scripts/make_push_jobs.py \
 # Submit the jobs (on the UA cluster)
 # Pull the pushed plans from the cluster (from 'tradeoffs')
 
-# HERE
-
 # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
 scripts/ensemble_from_plans.py \
