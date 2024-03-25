@@ -160,7 +160,10 @@ def measure_minority_opportunity(od: float, pod: float, cd: float, pcd: float) -
     opportunity_score: float = (od / pod) * 100.0 if (pod > 0.0) else 0.0
     coalition_score: float = (cd / pcd) * 100.0 if (pcd > 0.0) else 0.0
 
-    measurement: float = opportunity_score + (cd_weight * coalition_score)
+    measurement: float = opportunity_score + (
+        cd_weight * max(coalition_score - opportunity_score, 0)
+    )
+    # measurement: float = opportunity_score + (cd_weight * coalition_score) BUG!
 
     return measurement
 

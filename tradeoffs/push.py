@@ -273,6 +273,7 @@ def make_better_fn(
             return (
                 one[1 - constrain] < two[1 - constrain]
                 and difference < wiggle
+                # Below was a BUG
                 # Simple 'tolerance' wasn't relative to the initial rating
                 # or the [0-100] rating scale. That was a bug.
                 # and abs(anchor - two[constrain]) < tolerance
