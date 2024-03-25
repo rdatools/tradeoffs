@@ -555,9 +555,17 @@ def main() -> None:
     print()
 
     """
+    # Finally:
+    # - Add a state page in the docs/_pages/pages directory, and
+    # - Add a link to the state page in docs/_pages/pages/states.markdown.
+
     # END
     """
 
+    print(f"# Finally:")
+    print(f"# - Add a state page in the docs/_pages/pages directory, and")
+    print(f"# - Add a link to the state page in docs/_pages/pages/states.markdown.")
+    print()
     print(f"# END")
 
 
