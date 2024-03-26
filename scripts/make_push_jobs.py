@@ -393,7 +393,7 @@ def parse_args():
         "points": 100,
         "pushes": 3,
         "cores": 28,
-        "batchsize": 50,
+        "batch_size": 50,
         "delta": 5,
         "windfall": False,
         "data": "../rdabase/data/NC/NC_2020_data.csv",
