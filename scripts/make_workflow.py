@@ -249,6 +249,7 @@ def main() -> None:
     --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
     --graph ../rdabase/data/NC/NC_2020_graph.json \
     --output ../../iCloud/fileout/tradeoffs \
+    --verbose \
     --no-debug
 
     """
@@ -278,6 +279,7 @@ def main() -> None:
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
     print(f"--output ../../iCloud/fileout/tradeoffs \\")
+    print(f"--verbose \\")
     print(f"--no-debug")
     print()
 
