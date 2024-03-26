@@ -86,6 +86,7 @@ scripts/make_push_jobs.py \
 --points 100 \
 --pushes 3 \
 --cores 28 \
+--batch-size 50 \
 --data ../rdabase/data/SC/SC_2020_data.csv \
 --shapes ../rdabase/data/SC/SC_2020_shapes_simplified.json \
 --graph ../rdabase/data/SC/SC_2020_graph.json \
