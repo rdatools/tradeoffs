@@ -14,6 +14,7 @@ $ scripts/make_workflow.py \
 --pushes 3 \
 --delta 5 \
 --cores 28 \
+--batch-size 50 \
 > workflows/NC.sh
 
 For documentation, type:
@@ -268,11 +269,12 @@ def main() -> None:
         print(f"--random \\")
     if args.pin:
         print(f"--pin \\")
-    if args.saveatlimit:
+    if args.save_at_limit:
         print(f"--save-at-limit \\")
     print(f"--points {args.points} \\")
     print(f"--pushes {args.pushes} \\")
     print(f"--cores {args.cores} \\")
+    print(f"--batch-size {args.batch_size} \\")
     if args.windfall:
         print(f"--windfall \\")
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
@@ -599,7 +601,7 @@ def parse_args():
     parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
     parser.add_argument(
         "--save-at-limit",
-        dest="saveatlimit",
+        dest="save_at_limit",
         action="store_true",
         help="Save the in-progress plan at the limit",
     )
@@ -616,6 +618,12 @@ def parse_args():
         help="How many times to push each point.",
     )
     parser.add_argument("--cores", type=int, help="The number of core per node.")
+    parser.add_argument(
+        "--batch-size",
+        dest="batch_size",
+        type=int,
+        help="The number of commands per job.",
+    )
     parser.add_argument(
         "--delta",
         type=int,
