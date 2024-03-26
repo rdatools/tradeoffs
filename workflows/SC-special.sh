@@ -1,4 +1,5 @@
-# SC special push workflow:
+# SC special push workflow
+# Disproportionality for the contested 2022 Official map is 27.17%.
 
 # After setting up & running SC ...
 
