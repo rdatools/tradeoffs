@@ -149,7 +149,7 @@ def main() -> None:
         i: int = push_command[3]
         chunk.append((plan_name, pair, pin_mode, i))
         count += 1
-        if count % args.cores == 0:
+        if count % args.batch_size == 0:
             pushes_per_job.append(chunk)
             chunk = []
     if len(chunk) > 0:
@@ -206,7 +206,7 @@ def main() -> None:
                     print(f"--dimensions {dimensions} \\", file=jf)
                     if pin_mode:
                         print(f"--pin {pin_mode} \\", file=jf)
-                    if args.saveatlimit:
+                    if args.save_at_limit:
                         print(f"--save-at-limit \\", file=jf)
                     print(f"--pushed {run_path}/pushed/{pushed_run} \\", file=jf)
                     print(f"--log {run_path}/pushed/{log_run} \\", file=jf)
@@ -227,7 +227,7 @@ def main() -> None:
                 print(f"", file=sf)
                 print(f"#SBATCH --ntasks={args.cores}", file=sf)
                 print(f"#SBATCH --nodes=1", file=sf)
-                print(f"#SBATCH --time=00:20:00", file=sf)
+                print(f"#SBATCH --time=00:60:00", file=sf)
                 print(f"#SBATCH --partition={run_mode}", file=sf)
                 print(f"#SBATCH --account=proebsting", file=sf)
                 print(f"#SBATCH -o dropbox/{xx}/pushed/{job_name}.out", file=sf)
@@ -320,7 +320,7 @@ def parse_args():
     parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
     parser.add_argument(
         "--save-at-limit",
-        dest="saveatlimit",
+        dest="save_at_limit",
         action="store_true",
         help="Save the in-progress plan at the limit",
     )
@@ -331,6 +331,12 @@ def parse_args():
         help="How many times to push each point.",
     )
     parser.add_argument("--cores", type=int, help="The number of core per node.")
+    parser.add_argument(
+        "--batch-size",
+        dest="batch_size",
+        type=int,
+        help="The number of commands per job.",
+    )
     parser.add_argument(
         "--delta",
         type=int,
@@ -383,10 +389,11 @@ def parse_args():
         "zone": True,
         "random": False,
         "pin": True,
-        "saveatlimit": True,
+        "save_at_limit": True,
         "points": 100,
         "pushes": 3,
         "cores": 28,
+        "batchsize": 50,
         "delta": 5,
         "windfall": False,
         "data": "../rdabase/data/NC/NC_2020_data.csv",

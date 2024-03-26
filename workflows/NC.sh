@@ -86,6 +86,7 @@ scripts/make_push_jobs.py \
 --pushes 3 \
 --delta 5 \
 --cores 28 \
+--batch-size 50 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
