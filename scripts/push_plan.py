@@ -108,6 +108,12 @@ def parse_args():
         "--dimensions", nargs="+", help="A pair of ratings dimensions", type=str
     )
     parser.add_argument(
+        "--no-realistic-filter",
+        dest="norealisticfilter",
+        action="store_true",
+        help="Disable the 'realistic' filter",
+    )
+    parser.add_argument(
         "--pin",
         type=str,
         default="",
@@ -193,13 +199,14 @@ def parse_args():
     # }
     debug_defaults: Dict[str, Any] = {
         "state": "SC",
-        "plan": "../../iCloud/fileout/tradeoffs/SC-alt/plans/SC_2022_Congressional_NO_SPLITS.csv",
+        "plan": "../../iCloud/fileout/tradeoffs/SC-alt/plans/SC22C_official_plan.csv",
         "dimensions": ["proportionality", "minority"],
+        "norealisticfilter": True,
         "pin": "proportionality",
         "tolerance": 0.01,
         "saveatlimit": True,
-        "pushed": "../../iCloud/fileout/tradeoffs/SC-alt/pushed/SC_2022_Congressional_NO_SPLITS_push_test.csv",
-        "log": "../../iCloud/fileout/tradeoffs/SC-alt/pushed/SC_2022_Congressional_NO_SPLITS_push_test_log.txt",
+        "pushed": "../../iCloud/fileout/tradeoffs/SC-alt/pushed/SC22C_official_plan_push_test.csv",
+        "log": "../../iCloud/fileout/tradeoffs/SC-alt/pushed/SC22C_official_plan_push_test_log.txt",
         "seed": 315,
         "data": "../../iCloud/fileout/tradeoffs/SC/data/data.csv",
         "shapes": "../../iCloud/fileout/tradeoffs/SC/data/shapes.json",

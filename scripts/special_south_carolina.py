@@ -192,6 +192,8 @@ def main() -> None:
                     print(f"--state {xx} \\", file=jf)
                     print(f"--plan {plan_run} \\", file=jf)
                     print(f"--dimensions {dimensions} \\", file=jf)
+                    ### CUSTOM SC CODE ###
+                    print(f"--no-realistic-filter \\", file=jf)
                     if pin_mode:
                         print(f"--pin {pin_mode} \\", file=jf)
                         ### CUSTOM SC CODE ###

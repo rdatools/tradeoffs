@@ -106,6 +106,7 @@ def push_point(
     generator: Callable[
         [BorderKey, Plan], Tuple[List[Move], List[Move]]
     ] = size_1_moves,
+    realistic_filter: bool = True,
     pin: str = "",
     pin_tolerance: float = 0.05,
     limit: int = 10000,
@@ -134,6 +135,7 @@ def push_point(
             scorer,
             dimensions,
             generator=generator,
+            realistic_filter=realistic_filter,
             pin=pin,
             pin_tolerance=pin_tolerance,
             logfile=logfile,
@@ -164,6 +166,7 @@ def sweep_once(
     scorer: Scorer,
     dimensions: Tuple[str, str],
     *,
+    realistic_filter: bool = True,
     pin: str = "",
     pin_tolerance: float = 0.05,
     generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
@@ -215,21 +218,22 @@ def sweep_once(
                 plan.undo()
                 continue
 
-            measurements: List[float] = [0.0, 0.0, 0.0, 0.0, 0.0]
-            for i, d in enumerate(dimensions):
-                measurements[ratings_dimensions.index(d)] = next_measures[i]
-            other_dimensions: List[str] = [
-                d for d in ratings_dimensions if d not in dimensions
-            ]
-            for d in other_dimensions:
-                measure: float = (
-                    scorer.measure_dimension(d) if d != "minority" else 0.0
-                )  # NOTE: Don't need to measure minority
-                measurements[ratings_dimensions.index(d)] = measure
+            if realistic_filter:
+                measurements: List[float] = [0.0, 0.0, 0.0, 0.0, 0.0]
+                for i, d in enumerate(dimensions):
+                    measurements[ratings_dimensions.index(d)] = next_measures[i]
+                other_dimensions: List[str] = [
+                    d for d in ratings_dimensions if d not in dimensions
+                ]
+                for d in other_dimensions:
+                    measure: float = (
+                        scorer.measure_dimension(d) if d != "minority" else 0.0
+                    )  # NOTE: Don't need to measure minority
+                    measurements[ratings_dimensions.index(d)] = measure
 
-            if not is_realistic(measurements):
-                plan.undo()
-                continue
+                if not is_realistic(measurements):
+                    plan.undo()
+                    continue
 
             # The mutated plan is valid, better, and realistic!
 
