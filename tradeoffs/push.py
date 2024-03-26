@@ -123,6 +123,12 @@ def push_point(
 
     beg_measures = scorer.measure_dimensions(plan.to_assignments(), dimensions)
 
+    anchor: float = 0.0
+    if pin:
+        assert pin in dimensions
+        pinned: int = dimensions.index(pin)
+        anchor = beg_measures[pinned]
+
     while True:
         if n_pass > limit:
             if save_at_limit:
@@ -139,6 +145,7 @@ def push_point(
             generator=generator,
             realistic_filter=realistic_filter,
             pin=pin,
+            anchor=anchor,
             pin_tolerance=pin_tolerance,
             logfile=logfile,
             verbose=verbose,
@@ -170,6 +177,7 @@ def sweep_once(
     *,
     realistic_filter: bool = True,
     pin: str = "",
+    anchor: float = 0.0,
     pin_tolerance: float = 0.05,
     generator: Callable[[BorderKey, Plan], Tuple[List[Move], List[Move]]],
     logfile: Any = None,
@@ -194,9 +202,10 @@ def sweep_once(
     if pin:
         assert pin in dimensions
         pinned: int = dimensions.index(pin)
-        value: float = prev_measures[pinned]
+        # BUG! The anchor should be the initial rating, not the rating at the start of the sweep.
+        # anchor: float = prev_measures[pinned]
         is_better = make_better_fn(
-            constrain=pinned, anchor=value, tolerance=pin_tolerance
+            constrain=pinned, anchor=anchor, tolerance=pin_tolerance
         )
 
     random_adjacent_districts: List[BorderKey] = plan.random_adjacent_districts()
