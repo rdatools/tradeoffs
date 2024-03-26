@@ -64,6 +64,7 @@ def main() -> None:
             shapes,
             graph,
             metadata,
+            realistic_filter=not args.norealisticfilter,
             pin=pin,
             pin_tolerance=args.tolerance,
             save_at_limit=args.saveatlimit,
