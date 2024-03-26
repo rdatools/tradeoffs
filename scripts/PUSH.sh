@@ -4,7 +4,7 @@
 #
 # For example:
 #
-# scripts/SETUP.sh NC
+# scripts/PUSH.sh NC
 
 XX=$1
 FROM_DIR=/Users/alecramsay/iCloud/fileout/tradeoffs

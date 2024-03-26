@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# Pull a director of pushed plans from the UA cluster
+# Pull a directory of pushed plans from the UA cluster
 #
 # For example:
 #
-# scripts/SETUP.sh NC
+# scripts/PULL.sh NC
 
 XX=$1
 FROM_DIR=alecr@filexfer.hpc.arizona.edu:./dropbox
