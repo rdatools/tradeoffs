@@ -95,6 +95,7 @@ scripts/make_push_jobs.py \
 --shapes ../rdabase/data/XX/XX_2020_shapes_simplified.json \
 --graph ../rdabase/data/XX/XX_2020_graph.json \
 --output ../../iCloud/fileout/tradeoffs \
+--verbose \
 --no-debug
 
 # Push the jobs to the cluster (from 'tradeoffs')
