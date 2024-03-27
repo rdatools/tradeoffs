@@ -5,6 +5,8 @@
 # For example:
 #
 # scripts/PUSH.sh NC
+#
+# TODO - Limit what directories are pushed to the cluster somehow
 
 XX=$1
 FROM_DIR=/Users/alecramsay/iCloud/fileout/tradeoffs
