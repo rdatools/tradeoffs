@@ -290,11 +290,17 @@ def main() -> None:
     # Submit the jobs (on the UA cluster)
     # Pull the pushed plans from the cluster (from 'tradeoffs')
 
+    scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/NC/pushed/*.log > ../../iCloud/fileout/tradeoffs/NC/jobs_logs.csv
+
     """
 
     print(f"# Push the jobs to the cluster (from 'tradeoffs')")
     print(f"# Submit the jobs (on the UA cluster)")
     print(f"# Pull the pushed plans from the cluster (from 'tradeoffs')")
+    print()
+    print(
+        f"scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/{xx}/pushed/*.log > ../../iCloud/fileout/tradeoffs/{xx}/jobs_logs.csv"
+    )
     print()
 
     """

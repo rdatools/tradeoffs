@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Added COMBINE_LOGS script
 - Re-ran NC, MD, and SC
 - ...
 - First snapshot
