@@ -6,8 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Made, ran, and scored custom SC push jobs.
-- Refreshe MD and added SC.
+- Re-ran NC.
 - Updated US map links for NC, MD, and SC
 - Refreshed NC and added preliminary MD
 - Revised workflows for changes -- pinmode, saveatlimit, 10K passes, etc.
