@@ -58,13 +58,18 @@ def main() -> None:
     ### BEGIN CUSTOM SC CODE ###
 
     args.state = "SC"
-    args.plans = "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_plans.json"
-    args.scores = "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores.csv"
+    args.plans = (
+        "../../iCloud/fileout/tradeoffs/SC-alt/ensembles/SC20C_plans_special.json"
+    )
+    args.scores = (
+        "../../iCloud/fileout/tradeoffs/SC-alt/ensembles/SC20C_scores_special.csv"
+    )
     args.pin = True
     args.tolerance = 0.01
     args.saveatlimit = True
     args.pushes = 10
     args.cores = 28
+    args.batch_size = 50
     args.windfall = False
     args.data = "../rdabase/data/SC/SC_2020_data.csv"
     args.shapes = "../rdabase/data/SC/SC_2020_shapes_simplified.json"
@@ -75,7 +80,7 @@ def main() -> None:
     #
 
     xx: str = args.state
-    xx_alt: str = "SC-alt"
+    xx_alt: str = "SC-alt2"
 
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
     copy_path: str = f"{args.output}/{xx_alt}"
@@ -106,14 +111,18 @@ def main() -> None:
 
     plans_to_push: List[str] = []
     proportionality_index: int = ratings_dimensions.index("proportionality")
+    minority_index: int = ratings_dimensions.index("minority")
     for p in plan_ratings:
-        if p["ratings"][proportionality_index] == 0:
+        if (
+            p["ratings"][proportionality_index] == 0
+            and p["ratings"][minority_index] > 50
+        ):
             plans_to_push.append(p["name"])
 
     # Generate all the push commands
 
-    pair: Tuple[str, ...] = ("proportionality", "minority")
-    pin_mode: str = "proportionality"
+    pair: Tuple[str, ...] = ("minority", "compactness")
+    pin_mode: str = "minority"
     push_commands: List[Tuple[str, Tuple[str, ...], str, int]] = []
 
     for plan_name in plans_to_push:
@@ -137,7 +146,7 @@ def main() -> None:
         i: int = push_command[3]
         chunk.append((plan_name, pair, pin_mode, i))
         count += 1
-        if count % args.cores == 0:
+        if count % args.batch_size == 0:
             pushes_per_job.append(chunk)
             chunk = []
     if len(chunk) > 0:
@@ -219,7 +228,7 @@ def main() -> None:
                 print(f"", file=sf)
                 print(f"#SBATCH --ntasks={args.cores}", file=sf)
                 print(f"#SBATCH --nodes=1", file=sf)
-                print(f"#SBATCH --time=00:20:00", file=sf)
+                print(f"#SBATCH --time=00:60:00", file=sf)
                 print(f"#SBATCH --partition={run_mode}", file=sf)
                 print(f"#SBATCH --account=proebsting", file=sf)
                 print(f"#SBATCH -o dropbox/{xx_alt}/pushed/{job_name}.out", file=sf)
