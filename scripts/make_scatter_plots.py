@@ -434,13 +434,13 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
-        "more": "../../iCloud/fileout/ensembles/NC20C_scores_more.csv",
-        "frontier": "../../iCloud/fileout/ensembles/NC20C_frontiers.json",
-        "pushed": "../../iCloud/fileout/ensembles/NC20C_frontiers_pushed.json",
-        "notables": "docs/_data/notable_ratings/NC_2022_Congress_ratings.csv",
-        "focus": "../../iCloud/fileout/ensembles/NC20C_focus_scores.csv",
-        "prefix": "NC20C",
+        "scores": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores.csv",
+        "more": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores_augmented.csv",
+        "frontier": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_frontiers.json",
+        "pushed": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_frontiers_pushed.json",
+        "notables": "docs/_data/notable_ratings/SC_2022_Congress_ratings.csv",
+        "focus": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_focus_scores.csv",
+        "prefix": "SC20C",
         "suffix": "",
         "output": "~/Downloads/",
         "verbose": True,

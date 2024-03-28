@@ -50,6 +50,8 @@ scripts/score_ensemble.py \
 
 scripts/special_south_carolina_2.py
 
+scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/SC-alt2/pushed/*.log > ../../iCloud/fileout/tradeoffs/SC-alt2/jobs_logs.csv
+
 # Collect the pushed plans into an ensemble (from 'rdaensemble')
 
 scripts/ensemble_from_plans.py \
