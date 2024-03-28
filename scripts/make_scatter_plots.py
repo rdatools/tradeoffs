@@ -214,7 +214,8 @@ def main() -> None:
             "x": fxvalues,
             "y": fyvalues,
             "mode": "lines",
-            "line_color": "lightgray",
+            "line_width": 1,
+            "line_color": "black",
             "fill": None,
             "showlegend": False,
         }
