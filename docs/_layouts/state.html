@@ -88,6 +88,10 @@ map-width: 700
         {field: 'MAX', width: 120, comparator: numericComparator, sortingOrder: ['desc', 'asc'], ...centeredColumn},
     ];
 
+    const eStatisticsGridDiv = document.getElementById('statistics-table');
+    // DEPRECATED: new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
+    const statisticsGridAPI = agGrid.createGrid(eStatisticsGridDiv, statisticsOptions);
+
     const statisticsOptions = {
         defaultColDef: {
             sortable: true,
@@ -95,12 +99,9 @@ map-width: 700
         },
         columnDefs: statisticsColumns,
         domLayout: 'autoHeight',
-        onGridReady: (event) => {renderStatisticsTable(event.api)}
+        // onGridReady: (event) => {renderStatisticsTable(event.api)}
+        onGridReady: (event) => {renderStatisticsTable(statisticsGridAPI)}
     };
-
-    const eStatisticsGridDiv = document.getElementById('statistics-table');
-    // DEPRECATED: new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
-    agGrid.createGrid(eStatisticsGridDiv, statisticsOptions);
 
     const statisticsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ statistics-file }}.csv';
     console.log(statisticsCSV);
@@ -115,8 +116,10 @@ map-width: 700
                 data = response.data;
                 data.pop();
 
-                // TODO: api.setRowData(data);
-                // TODO: api.sizeColumnsToFit();
+                // DEPRECATED api.setRowData(data);
+                // DEPRECATED: api.sizeColumnsToFit();
+                api.setRowData(data);
+                api.sizeColumnsToFit();
             }
         })
     }

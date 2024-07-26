@@ -6,5 +6,5 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Fixing ratings tables ..
+- Fixing ratings tables ...
 - First snapshot
