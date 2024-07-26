@@ -71,6 +71,7 @@ map-width: 700
 {% endcapture %}
 {% assign statistics-file = statistics-file | strip_newlines %}
 
+{% assign statistics = site.data[statistics-file] %}
 <!-- {% assign statistics = site.data[statistics-file] %} -->
 
 <div id="statistics-table" class="ag-theme-alpine">
