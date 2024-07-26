@@ -99,7 +99,8 @@ map-width: 700
     };
 
     const eStatisticsGridDiv = document.getElementById('statistics-table');
-    new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
+    // new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
+    agGrid.createGrid(eStatisticsGridDiv, statisticsOptions);
 
     const statisticsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ statistics-file }}.csv';
     console.log(statisticsCSV);
