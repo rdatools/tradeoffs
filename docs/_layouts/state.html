@@ -102,6 +102,7 @@ map-width: 700
     new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
 
     const statisticsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ statistics-file }}.csv';
+    console.log(statisticsCSV);
 
     function renderStatisticsTable(api)
     {
@@ -131,7 +132,7 @@ map-width: 700
 
 <!-- {% assign ensemble-ratings = site.data[ensemble-ratings-file] %} -->
 
-<!-- <div id="ensemble-ratings-table" class="ag-theme-alpine">
+<!-- TODO: <div id="ensemble-ratings-table" class="ag-theme-alpine">
 </div> -->
 
 <p>DRA Notable Maps</p>
@@ -143,7 +144,7 @@ map-width: 700
 
 <!-- {% assign dra-ratings = site.data[dra-ratings-file] %} -->
 
-<!-- <div id="dra-ratings-table" class="ag-theme-alpine">
+<!-- TODO: <div id="dra-ratings-table" class="ag-theme-alpine">
 </div> -->
 
 <!-- Grid -->
