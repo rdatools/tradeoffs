@@ -99,7 +99,7 @@ map-width: 700
     };
 
     const eStatisticsGridDiv = document.getElementById('statistics-table');
-    // new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
+    // DEPRECATED: new agGrid.Grid(eStatisticsGridDiv, statisticsOptions);
     agGrid.createGrid(eStatisticsGridDiv, statisticsOptions);
 
     const statisticsCSV = 'https://raw.githubusercontent.com/rdatools/tradeoffs/main/docs/_data/{{ statistics-file }}.csv';
@@ -115,8 +115,8 @@ map-width: 700
                 data = response.data;
                 data.pop();
 
-                api.setRowData(data);
-                api.sizeColumnsToFit();
+                // TODO: api.setRowData(data);
+                // TODO: api.sizeColumnsToFit();
             }
         })
     }
