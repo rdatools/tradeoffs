@@ -175,6 +175,13 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
+# For debugging
+scripts/make_scatter_plots_BASIC.py \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
+--prefix NC20C \
+--output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
+--no-debug
+
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC

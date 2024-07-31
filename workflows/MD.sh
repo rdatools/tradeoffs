@@ -173,6 +173,13 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/MD/docs/assets/images \
 --no-debug
 
+# For debugging
+scripts/make_scatter_plots_BASIC.py \
+--scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
+--prefix MD20C \
+--output ../../iCloud/fileout/tradeoffs/MD/docs/assets/images \
+--no-debug
+
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh MD

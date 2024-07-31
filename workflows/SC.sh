@@ -173,6 +173,13 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/SC/docs/assets/images \
 --no-debug
 
+# For debugging
+scripts/make_scatter_plots_BASIC.py \
+--scores ../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores.csv \
+--prefix SC20C \
+--output ../../iCloud/fileout/tradeoffs/SC/docs/assets/images \
+--no-debug
+
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh SC
