@@ -219,10 +219,10 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores.csv",
-        "prefix": "SC20C",
+        "scores": "temp/NC20C_optimized_scores.csv",
+        "prefix": "NC20C",
         "suffix": "",
-        "output": "~/Downloads/",
+        "output": "temp/docs/assets/images",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
