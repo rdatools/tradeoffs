@@ -1,4 +1,4 @@
-# NC workflow - TODO: a work in progress
+# NC workflow -- revised for new strategy for approximating the ratings trade-off frontiers
 
 # Set up the state (from 'tradeoffs')
 
@@ -65,46 +65,7 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-# TODO - This is the beginning of the old 'push' workflow
-# Generate 'push' jobs (from 'tradeoffs')
-
-scripts/make_push_jobs.py \
---state NC \
---plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
---zone \
---pin \
---save-at-limit \
---points 100 \
---pushes 3 \
---delta 5 \
---cores 28 \
---batch-size 50 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/tradeoffs \
---verbose \
---no-debug
-
-# Push the jobs to the cluster (from 'tradeoffs')
-# Submit the jobs (on the UA cluster)
-# Pull the pushed plans from the cluster (from 'tradeoffs')
-
-scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/NC/pushed/*.log > ../../iCloud/fileout/tradeoffs/NC/jobs_logs.csv
-
-# Collect the pushed plans into an ensemble (from 'rdaensemble')
-
-scripts/ensemble_from_plans.py \
---base ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
---plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
---dir ../../iCloud/fileout/tradeoffs/NC/pushed \
---no-debug
-
-# This is the end of the old 'push' workflow.
-
-# TODO - Create ensembles optimizing each ratings dimension
+# Create ensembles optimizing each ratings dimension
 
 scripts/recom_ensemble_optimized.py \
 --state NC \
@@ -115,10 +76,10 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_compactness_optimized.json \
 --no-debug
 
-# Etc.
+# TODO - Repeat for the other ratings dimensions
 
 # TODO - Combine the optimized ensembles, e.g., NC20C_plans_optimized.json
-#        Copy the compactness one for now
+#        For now, just copy the compactness one.
 
 # Score the optimized plans (from 'rdaensemble')
 
@@ -136,7 +97,7 @@ scripts/score_ensemble.py \
 scripts/COMBINE_SCORES.sh NC
 
 # Find the optimized frontiers (from 'tradeoffs')
-# HERE
+
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json \
@@ -181,16 +142,9 @@ scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
---pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
+--pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv \
---prefix NC20C \
---output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
---no-debug
-
-# For debugging
-scripts/make_scatter_plots_BASIC.py \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --prefix NC20C \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
