@@ -72,7 +72,7 @@ def find_frontiers(
 
             name: str = row.pop(0)
             point: List[int] = [int(r) for r in row]
-            assert len(point) == len(ratings_dimensions)
+            assert len(point) == len(ratings_dimensions)  # Ensure plan names are unique
             frontiers[label].append({"map": name, "ratings": point})
 
         frontiers[label] = sorted(

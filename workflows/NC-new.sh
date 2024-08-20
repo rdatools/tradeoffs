@@ -65,15 +65,56 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-# Create ensembles optimizing each ratings dimension
+# TODO - Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
+--optimize proportionality \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_proportionality_optimized.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize competitiveness \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_competitiveness_optimized.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize minority \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_minority_optimized.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize compactness \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_compactness_optimized.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize splitting \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_splitting_optimized.json \
 --no-debug
 
 # TODO - Repeat for the other ratings dimensions
