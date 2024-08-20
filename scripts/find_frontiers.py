@@ -54,7 +54,7 @@ def main() -> None:
     frontiers: Dict[str, Any] = find_frontiers(
         ratings, is_pareto_efficient_value, verbose=args.verbose
     )
-    indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
+    # indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
     output["frontiers"] = frontiers
@@ -112,9 +112,9 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "testdata/test_scores.csv",  # Only has map name & ratings
-        "metadata": "testdata/test_scores_metadata.json",
-        "frontier": "~/Downloads/test_frontier.json",
+        "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv",
+        "metadata": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json",
+        "frontier": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json",
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)

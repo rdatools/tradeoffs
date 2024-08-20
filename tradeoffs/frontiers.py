@@ -19,6 +19,8 @@ def find_frontiers(
 ) -> Dict[str, List[Dict]]:
     """Find the frontiers for a ratings dataframe."""
 
+    assert len(ratings.columns) == len(ratings_dimensions) + 1
+
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
     frontiers: Dict[str, List[Dict]] = {}
 
@@ -67,8 +69,10 @@ def find_frontiers(
                 .values.flatten()
                 .tolist()
             )
+
             name: str = row.pop(0)
             point: List[int] = [int(r) for r in row]
+            assert len(point) == len(ratings_dimensions)
             frontiers[label].append({"map": name, "ratings": point})
 
         frontiers[label] = sorted(
