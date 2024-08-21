@@ -46,7 +46,7 @@ def main() -> None:
         args.scores,
         fieldnames,
         fieldtypes,
-        filter=True,
+        filter=False,  # NOTE - Don't filter plans out of the ensembles at this juncture!
         verbose=args.verbose,
     )
     metadata: Dict[str, Any] = read_json(args.metadata)
