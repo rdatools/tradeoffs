@@ -18,7 +18,7 @@ scripts/rmfrsp_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_RMfRSP_100_log.txt \
 --no-debug
 
-# Approximate a root map with them (from 'rdaroot')
+# Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
 
 scripts/approx_root_map.py \
 --state NC \
@@ -67,6 +67,7 @@ scripts/find_frontiers.py \
 
 # TODO - Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
+# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -77,6 +78,7 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_proportionality_optimized.json \
 --no-debug
 
+# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -87,6 +89,7 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_competitiveness_optimized.json \
 --no-debug
 
+# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -107,6 +110,7 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_compactness_optimized.json \
 --no-debug
 
+# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -116,8 +120,6 @@ scripts/recom_ensemble_optimized.py \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_splitting_optimized.json \
 --no-debug
-
-# TODO - Repeat for the other ratings dimensions
 
 # TODO - Combine the optimized ensembles, e.g., NC20C_plans_optimized.json
 #        For now, just copy the compactness one.
@@ -177,7 +179,7 @@ scripts/make_ratings_table.py \
 
 # NOTE - Created focus scores by hand
 
-# Make scatter plots (from 'tradeoffs')
+# Make scatter plots & legend (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
@@ -189,6 +191,8 @@ scripts/make_scatter_plots.py \
 --prefix NC20C \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
+
+# TODO - Move the legend.CSV from docs/assets/images to the docs/_data directory
 
 # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
