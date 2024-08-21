@@ -102,8 +102,25 @@ class TestFindFrontiers:
                 random.randint(x - d, x + d),
                 random.randint(x - d, x + d),
             ],
+            # Added
+            [
+                10,
+                x + d + random.randint(1, d),
+                y + d - random.randint(1, d),
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+            ],
+            [
+                11,
+                x + d - random.randint(1, d),
+                y + d + random.randint(1, d),
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+                random.randint(x - d, x + d),
+            ],
         ]
-        expected: List[int] = [1]
+        expected: List[int] = [1, 10, 11]
 
         random.shuffle(points)
 

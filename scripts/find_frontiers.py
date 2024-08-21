@@ -74,7 +74,8 @@ def main() -> None:
         print(f"Altogether there are {total_points} plans on frontiers.")
         print()
 
-    write_json(args.frontier, output)
+    if not args.debug:
+        write_json(args.frontier, output)
 
 
 def parse_args():
