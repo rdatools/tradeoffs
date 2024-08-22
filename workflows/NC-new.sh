@@ -196,9 +196,9 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
-# TODO - Move the legend.CSV from docs/assets/images to the docs/_data directory
+# Move the legend.CSV from docs/assets/images to the docs/_data directory
 
-# Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
+# Deploy the results (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC
 
