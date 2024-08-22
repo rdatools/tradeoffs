@@ -87,7 +87,6 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
 --no-debug
 
-# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -108,7 +107,6 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_compactness.json \
 --no-debug
 
-# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -119,8 +117,16 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
 --no-debug
 
-# TODO - Combine the optimized ensembles, e.g., NC20C_plans_optimized.json
-#        For now, just copy the compactness one.
+# Combine the optimized ensembles (from 'rdaensemble')
+
+scripts/combine_ensembles.py \
+--ensembles ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_minority.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_compactness.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
+--output ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized.json \
+--no-debug
 
 # Score the optimized plans (from 'rdaensemble')
 
