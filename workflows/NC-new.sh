@@ -67,7 +67,6 @@ scripts/find_frontiers.py \
 
 # TODO - Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
-# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -78,7 +77,6 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
 --no-debug
 
-# TODO
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
