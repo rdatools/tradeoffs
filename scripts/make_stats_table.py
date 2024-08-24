@@ -29,7 +29,7 @@ from tradeoffs import scores_to_df
 
 
 def main() -> None:
-    """ "Make historgrams for the ratings for the plans in an ensemble."""
+    """Collect statistics for the ratings for the plans in an ensemble."""
 
     args: argparse.Namespace = parse_args()
 

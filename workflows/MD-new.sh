@@ -124,7 +124,7 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_splitting.json \
 --no-debug
 
-# Combine the optimized ensembles (from 'rdaensemble') <= HERE
+# Combine the optimized ensembles (from 'rdaensemble')
 
 scripts/combine_ensembles.py \
 --ensembles ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_proportionality.json \
