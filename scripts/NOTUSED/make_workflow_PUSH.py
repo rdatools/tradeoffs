@@ -21,8 +21,6 @@ For documentation, type:
 
 $ scripts/make_workflow.py -h
 
-TODO - Revise this for the new optimization process.
-
 """
 
 import argparse

@@ -4,7 +4,10 @@
 
 scripts/SETUP.sh NC
 
-# Use the root map in root_maps or
+# Extract the data for the state (from 'rdabase')
+# Re-simplify the shapes, if necessary.
+
+# Use the root map in root_maps -or-
 # Approximate a new root map:
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
@@ -31,7 +34,7 @@ scripts/approx_root_map.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootlog.txt \
 --no-debug
 
-# NOTE - Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
+# Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
@@ -65,7 +68,11 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-# TODO - Create ensembles optimizing each ratings dimension (from 'rdaensemble')
+# Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
+# - These maps must assign all precincts to districts, even water-only ones; and
+# - Must have 'roughly equal' district populations using the base 2020 census.
+
+# Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
 scripts/recom_ensemble_optimized.py \
 --state NC \
