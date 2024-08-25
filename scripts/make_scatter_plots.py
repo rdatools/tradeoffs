@@ -321,9 +321,9 @@ def main() -> None:
         scatter_traces.append(points_trace)
         if args.more:
             scatter_traces.append(more_points_trace)
-        scatter_traces.append(frontier_trace)
         for notable_trace in notable_traces:
             scatter_traces.append(notable_trace)
+        scatter_traces.append(frontier_trace)
         if args.pushed:
             scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
