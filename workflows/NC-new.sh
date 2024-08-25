@@ -210,4 +210,8 @@ scripts/make_scatter_plots.py \
 
 scripts/DEPLOY.sh NC
 
+# Activate the state in the site 
+# - Uncomment out the <div> for the state in docs/_pages/states.markdown
+# - Add the state to the list in docs/index.markdown
+
 # END
