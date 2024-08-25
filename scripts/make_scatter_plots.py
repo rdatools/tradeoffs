@@ -283,19 +283,52 @@ def main() -> None:
                 "showlegend": False,
             }
 
+            assert len(hxvalues) > 0, f"Frontier hull has no points!"
+
+            # Upper left point connected to y-axis
+            toyyvalues: List[int] = [hyvalues[0], hyvalues[0]]
+            toyxvalues: List[int] = [0, hxvalues[0]]
+
+            toy_trace: Dict[str, Any] = {
+                "x": toyxvalues,
+                "y": toyyvalues,
+                "mode": "lines",
+                "line_width": 1,
+                "line_color": "black",
+                "line_dash": "dashdot",
+                "fill": None,
+                "showlegend": False,
+            }
+
+            # Lower right point connected to x-axis
+            toxyvalues: List[int] = [hyvalues[-1], 0]
+            toxxvalues: List[int] = [hxvalues[-1], hxvalues[-1]]
+
+            tox_trace: Dict[str, Any] = {
+                "x": toxxvalues,
+                "y": toxyvalues,
+                "mode": "lines",
+                "line_width": 1,
+                "line_color": "black",
+                "line_dash": "dashdot",
+                "fill": None,
+                "showlegend": False,
+            }
+
         # Add the traces in the desired order
 
         scatter_traces: List[Dict] = []
         scatter_traces.append(points_trace)
-        # scatter_traces.append(official_trace)
+        if args.more:
+            scatter_traces.append(more_points_trace)
         scatter_traces.append(frontier_trace)
+        for notable_trace in notable_traces:
+            scatter_traces.append(notable_trace)
         if args.pushed:
             scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
-        if args.more:
-            scatter_traces.append(more_points_trace)
-        for notable_trace in notable_traces:
-            scatter_traces.append(notable_trace)
+            scatter_traces.append(toy_trace)
+            scatter_traces.append(tox_trace)
         if args.focus:
             for focus_trace in focus_traces:
                 scatter_traces.append(focus_trace)
