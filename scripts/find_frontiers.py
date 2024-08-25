@@ -46,7 +46,7 @@ def main() -> None:
         args.scores,
         fieldnames,
         fieldtypes,
-        filter=False,  # NOTE - Don't filter plans out of the ensembles at this juncture!
+        filter=args.filter,
         verbose=args.verbose,
     )
     metadata: Dict[str, Any] = read_json(args.metadata)
@@ -98,6 +98,9 @@ def parse_args():
         type=str,
         help="Frontier maps JSON file",
     )
+    parser.add_argument(
+        "--filter", dest="filter", action="store_true", help="Filter mode"
+    )
 
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", help="Verbose mode"
@@ -116,6 +119,7 @@ def parse_args():
         "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv",
         "metadata": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json",
         "frontier": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json",
+        "filter": False,
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)

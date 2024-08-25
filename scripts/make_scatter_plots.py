@@ -40,7 +40,7 @@ from tradeoffs import (
 
 
 def main() -> None:
-    """Make a box plot of the ratings for the plans in an ensemble."""
+    """Make scatter plots for pairs of ratings dimensions for the plans in an unbiased ensemble and an optimized one."""
 
     args: argparse.Namespace = parse_args()
 
@@ -49,9 +49,11 @@ def main() -> None:
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
+    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes, filter=True)
     if args.more:
-        more_df: pd.DataFrame = scores_to_df(args.more, fieldnames, fieldtypes)
+        more_df: pd.DataFrame = scores_to_df(
+            args.more, fieldnames, fieldtypes, filter=False
+        )
 
     # Read the frontier from a JSON file
 

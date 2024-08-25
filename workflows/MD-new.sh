@@ -65,6 +65,7 @@ scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json \
+--filter \
 --verbose \
 --no-debug
 

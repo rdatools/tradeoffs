@@ -58,7 +58,7 @@ def scores_to_df(
             else:
                 scores.append(row)
 
-    if verbose:
+    if verbose and filter:
         print()
         print(
             f"Note: Only {filtered} of {total} plans had 'roughly equal' population and were 'realistic'."  # per the DRA Notable Maps criteria.

@@ -43,13 +43,6 @@ def main() -> None:
 
     df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
 
-    # If given, read ratings for a "focus map" from a CSV file
-    # focus_map: List[int] = []
-    # if args.focus:
-    #     focus_df: pd.DataFrame = scores_to_df(args.focus, fieldnames, fieldtypes)
-    #     df = pd.concat([focus_df, df])
-    #     focus_map = [0]
-
     # Configure & show the box plot for the ratings
 
     boxplot_traces: List[Dict] = []
@@ -156,7 +149,6 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "testdata/test_scores.csv",  # Only has map name & ratings
-        # "focus": "testdata/test_focus_scores.csv",
         "image": "output/test_boxplot.svg",
     }
     args = require_args(args, args.debug, debug_defaults)
