@@ -190,12 +190,6 @@ def main() -> None:
                 "showlegend": False,
             }
             notable_traces.append(notable_trace)
-        # official_trace: Dict[str, Any] = {
-        #     "x": [official_points[p][0]],
-        #     "y": [official_points[p][1]],
-        #     "mode": "markers",
-        #     "marker": {"size": 5, "symbol": "star"},
-        # }
 
         focus_traces: List[Dict[str, Any]] = []
         if args.focus:
@@ -210,8 +204,29 @@ def main() -> None:
                 }
                 focus_traces.append(focus_trace)
 
-        fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
-        fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
+        # Make the frontier points unique
+        fpts: List[Tuple[int, int]] = [
+            (f["ratings"][d2], f["ratings"][d1]) for f in frontier
+        ]
+        fpts = list(set(fpts))  # Remove duplicates
+        fpts = sorted(
+            fpts, key=lambda pt: (pt[1], pt[0]), reverse=True
+        )  # Re-sort the remaining points
+
+        fyvalues: List[int] = [pt[1] for pt in fpts]
+        fxvalues: List[int] = [pt[0] for pt in fpts]
+
+        # fyvalues: List[int] = [f["ratings"][d1] for f in frontier]
+        # fxvalues: List[int] = [f["ratings"][d2] for f in frontier]
+
+        assert (
+            len(fpts) > 0
+        ), f"Frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) has no points!"
+        if args.verbose:
+            print(
+                f"Frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) has {len(fpts)} points."
+            )
+
         frontier_trace: Dict[str, Any] = {
             "x": fxvalues,
             "y": fyvalues,
@@ -233,10 +248,15 @@ def main() -> None:
 
             pfyvalues: List[int] = [pt[1] for pt in pfpts]
             pfxvalues: List[int] = [pt[0] for pt in pfpts]
+
+            assert (
+                len(pfpts) > 0
+            ), f"Pushed frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) has no points!"
             if args.verbose:
                 print(
                     f"Pushed frontier ({ratings_dimensions[d1]}, {ratings_dimensions[d2]}) has {len(pfyvalues)} points."
                 )
+
             pushed_frontier_trace: Dict[str, Any] = {
                 "x": pfxvalues,
                 "y": pfyvalues,
@@ -339,7 +359,7 @@ def main() -> None:
 
         fig.update_layout(scatter_layout)
 
-        if False and args.debug:  # Show the plot in a browser window
+        if args.debug:  # Show the plot in a browser window
             fig.show(config=scatter_config)
             continue
         else:  # Save the plot to an SVG file
@@ -437,13 +457,13 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores.csv",
-        "more": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_scores_augmented.csv",
-        "frontier": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_frontiers.json",
-        "pushed": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_frontiers_pushed.json",
-        "notables": "docs/_data/notable_ratings/SC_2022_Congress_ratings.csv",
-        "focus": "../../iCloud/fileout/tradeoffs/SC/ensembles/SC20C_focus_scores.csv",
-        "prefix": "SC20C",
+        "scores": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv",
+        "more": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv",
+        "frontier": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json",
+        "pushed": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_optimized.json",
+        "notables": "docs/_data/notable_ratings/MD_2022_Congress_ratings.csv",
+        "focus": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_focus_scores.csv",
+        "prefix": "MD20C",
         "suffix": "",
         "output": "~/Downloads/",
         "verbose": True,
