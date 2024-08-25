@@ -1,13 +1,17 @@
-# MD workflow -- revised for new strategy for approximating the ratings trade-off frontiers
+# MD workflow:
+# --zone: True
+# --random: False
+# --points: 100
+# --pushes: 3
+# --delta: 5
+# --cores: 28
+# --windfall: False
 
 # Set up the state (from 'tradeoffs')
 
 scripts/SETUP.sh MD
 
-# Extract the data for the state (from 'rdabase')
-# Re-simplify the shapes, if necessary.
-
-# Use the root map in root_maps -or-
+# Use the root map in root_maps or
 # Approximate a new root map:
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
@@ -21,7 +25,7 @@ scripts/rmfrsp_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_RMfRSP_100_log.txt \
 --no-debug
 
-# Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
+# Approximate a root map with them (from 'rdaroot')
 
 scripts/approx_root_map.py \
 --state MD \
@@ -34,7 +38,7 @@ scripts/approx_root_map.py \
 --log ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_rootlog.txt \
 --no-debug
 
-# Copy the result to the tradeoffs/root_maps directory as MD20C_root_map.csv
+# NOTE - Copy the result to the tradeoffs/root_maps directory as MD20C_root_map.csv
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
@@ -44,7 +48,7 @@ scripts/recom_ensemble.py \
 --data ../rdabase/data/MD/MD_2020_data.csv \
 --graph ../rdabase/data/MD/MD_2020_graph.json \
 --root ../tradeoffs/root_maps/MD20C_root_map.csv \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20_plans.json \
+--plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans.json \
 --log ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_log.txt \
 --no-debug
 
@@ -65,99 +69,66 @@ scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json \
---filter \
 --verbose \
 --no-debug
 
-# Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/MD/.
-# - These maps must assign all precincts to districts, even water-only ones; and
-# - Must have 'roughly equal' district populations using the base 2020 census.
+# Generate 'push' jobs (from 'tradeoffs')
 
-# Create ensembles optimizing each ratings dimension (from 'rdaensemble')
-
-scripts/recom_ensemble_optimized.py \
+scripts/make_push_jobs.py \
 --state MD \
---size 10000 \
---optimize proportionality \
+--plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans.json \
+--scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
+--frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json \
+--zone \
+--pin \
+--save-at-limit \
+--points 100 \
+--pushes 3 \
+--delta 5 \
+--cores 28 \
+--batch-size 50 \
 --data ../rdabase/data/MD/MD_2020_data.csv \
 --shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
 --graph ../rdabase/data/MD/MD_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_proportionality.json \
+--output ../../iCloud/fileout/tradeoffs \
+--verbose \
 --no-debug
 
-scripts/recom_ensemble_optimized.py \
---state MD \
---size 10000 \
---optimize competitiveness \
---data ../rdabase/data/MD/MD_2020_data.csv \
---shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
---graph ../rdabase/data/MD/MD_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_competitiveness.json \
+# Push the jobs to the cluster (from 'tradeoffs')
+# Submit the jobs (on the UA cluster)
+# Pull the pushed plans from the cluster (from 'tradeoffs')
+
+scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/MD/pushed/*.log > ../../iCloud/fileout/tradeoffs/MD/jobs_logs.csv
+
+# Collect the pushed plans into an ensemble (from 'rdaensemble')
+
+scripts/ensemble_from_plans.py \
+--base ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans.json \
+--plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_pushed.json \
+--dir ../../iCloud/fileout/tradeoffs/MD/pushed \
 --no-debug
 
-scripts/recom_ensemble_optimized.py \
---state MD \
---size 10000 \
---optimize minority \
---data ../rdabase/data/MD/MD_2020_data.csv \
---shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
---graph ../rdabase/data/MD/MD_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_minority.json \
---no-debug
-
-scripts/recom_ensemble_optimized.py \
---state MD \
---size 10000 \
---optimize compactness \
---data ../rdabase/data/MD/MD_2020_data.csv \
---shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
---graph ../rdabase/data/MD/MD_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_compactness.json \
---no-debug
-
-scripts/recom_ensemble_optimized.py \
---state MD \
---size 10000 \
---optimize splitting \
---data ../rdabase/data/MD/MD_2020_data.csv \
---shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
---graph ../rdabase/data/MD/MD_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_splitting.json \
---no-debug
-
-# Combine the optimized ensembles (from 'rdaensemble')
-
-scripts/combine_ensembles.py \
---ensembles ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_proportionality.json \
-            ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_competitiveness.json \
-            ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_minority.json \
-            ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_compactness.json \
-            ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized_splitting.json \
---output ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized.json \
---no-debug
-
-# Score the optimized plans (from 'rdaensemble')
+# Score the pushed plans (from 'rdaensemble')
 
 scripts/score_ensemble.py \
 --state MD \
---plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_optimized.json \
+--plans ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_plans_pushed.json \
 --data ../rdabase/data/MD/MD_2020_data.csv \
 --shapes ../rdabase/data/MD/MD_2020_shapes_simplified.json \
 --graph ../rdabase/data/MD/MD_2020_graph.json \
---scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_optimized.csv \
+--scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_pushed.csv \
 --no-debug
 
-# Combine the original ensemble & optimized plans scores (from 'tradeoffs')
+# Combine the original ensemble & pushed plans scores (from 'tradeoffs')
 
 scripts/COMBINE_SCORES.sh MD
 
-# Find the optimized frontiers (from 'tradeoffs')
+# Find the pushed frontiers (from 'tradeoffs')
 
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv \
---metadata ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_optimized_metadata.json \
---frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_optimized.json \
---verbose \
+--metadata ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_pushed_metadata.json \
+--frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_pushed.json \
 --no-debug
 
 # ID the notable maps in the augmented ensemble (from 'rdaensemble')
@@ -189,29 +160,28 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/MD/docs/_data/MD20C_notable_maps_ratings.csv \
 --no-debug
 
-# NOTE - Created focus scores by hand
-
-# Make scatter plots & legend (from 'tradeoffs')
+# Make scatter plots (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
 --more ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json \
---pushed ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_optimized.json \
+--pushed ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_pushed.json \
 --notables docs/_data/notable_ratings/MD_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_focus_scores.csv \
 --prefix MD20C \
 --output ../../iCloud/fileout/tradeoffs/MD/docs/assets/images \
 --no-debug
 
-# Move the legend.CSV from docs/assets/images to the docs/_data directory
+# For debugging
+scripts/make_scatter_plots_BASIC.py \
+--scores ../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv \
+--prefix MD20C \
+--output ../../iCloud/fileout/tradeoffs/MD/docs/assets/images \
+--no-debug
 
-# Deploy the results (from 'tradeoffs')
+# Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
 
 scripts/DEPLOY.sh MD
-
-# Activate the state in the site 
-# - Uncomment out the <div> for the state in docs/_pages/states.markdown
-# - Add the state to the list in docs/index.markdown
 
 # END

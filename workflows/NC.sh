@@ -1,17 +1,13 @@
-# NC workflow:
-# --zone: True
-# --random: False
-# --points: 100
-# --pushes: 3
-# --delta: 5
-# --cores: 28
-# --windfall: False
+# NC workflow -- revised for new strategy for approximating the ratings trade-off frontiers
 
 # Set up the state (from 'tradeoffs')
 
 scripts/SETUP.sh NC
 
-# Use the root map in root_maps or
+# Extract the data for the state (from 'rdabase')
+# Re-simplify the shapes, if necessary.
+
+# Use the root map in root_maps -or-
 # Approximate a new root map:
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
@@ -25,7 +21,7 @@ scripts/rmfrsp_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_RMfRSP_100_log.txt \
 --no-debug
 
-# Approximate a root map with them (from 'rdaroot')
+# Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
 
 scripts/approx_root_map.py \
 --state NC \
@@ -38,7 +34,7 @@ scripts/approx_root_map.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootlog.txt \
 --no-debug
 
-# NOTE - Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
+# Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
@@ -69,66 +65,99 @@ scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
+--filter \
 --verbose \
 --no-debug
 
-# Generate 'push' jobs (from 'tradeoffs')
+# Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
+# - These maps must assign all precincts to districts, even water-only ones; and
+# - Must have 'roughly equal' district populations using the base 2020 census.
 
-scripts/make_push_jobs.py \
+# Create ensembles optimizing each ratings dimension (from 'rdaensemble')
+
+scripts/recom_ensemble_optimized.py \
 --state NC \
---plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
---frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
---zone \
---pin \
---save-at-limit \
---points 100 \
---pushes 3 \
---delta 5 \
---cores 28 \
---batch-size 50 \
+--size 10000 \
+--optimize proportionality \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---output ../../iCloud/fileout/tradeoffs \
---verbose \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
 --no-debug
 
-# Push the jobs to the cluster (from 'tradeoffs')
-# Submit the jobs (on the UA cluster)
-# Pull the pushed plans from the cluster (from 'tradeoffs')
-
-scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/NC/pushed/*.log > ../../iCloud/fileout/tradeoffs/NC/jobs_logs.csv
-
-# Collect the pushed plans into an ensemble (from 'rdaensemble')
-
-scripts/ensemble_from_plans.py \
---base ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
---plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
---dir ../../iCloud/fileout/tradeoffs/NC/pushed \
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize competitiveness \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
 --no-debug
 
-# Score the pushed plans (from 'rdaensemble')
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize minority \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_minority.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize compactness \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_compactness.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state NC \
+--size 10000 \
+--optimize splitting \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
+--no-debug
+
+# Combine the optimized ensembles (from 'rdaensemble')
+
+scripts/combine_ensembles.py \
+--ensembles ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_minority.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_compactness.json \
+            ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
+--output ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized.json \
+--no-debug
+
+# Score the optimized plans (from 'rdaensemble')
 
 scripts/score_ensemble.py \
 --state NC \
---plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
+--plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_pushed.csv \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized.csv \
 --no-debug
 
-# Combine the original ensemble & pushed plans scores (from 'tradeoffs')
+# Combine the original ensemble & optimized plans scores (from 'tradeoffs')
 
 scripts/COMBINE_SCORES.sh NC
 
-# Find the pushed frontiers (from 'tradeoffs')
+# Find the optimized frontiers (from 'tradeoffs')
 
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
---metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_pushed_metadata.json \
---frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
+--metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json \
+--frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json \
+--verbose \
 --no-debug
 
 # ID the notable maps in the augmented ensemble (from 'rdaensemble')
@@ -162,28 +191,27 @@ scripts/make_ratings_table.py \
 
 # NOTE - Created focus scores by hand
 
-# Make scatter plots (from 'tradeoffs')
+# Make scatter plots & legend (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
---pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
+--pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv \
 --prefix NC20C \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
-# For debugging
-scripts/make_scatter_plots_BASIC.py \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
---prefix NC20C \
---output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
---no-debug
+# Move the legend.CSV from docs/assets/images to the docs/_data directory
 
-# Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
+# Deploy the results (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC
+
+# Activate the state in the site 
+# - Uncomment out the <div> for the state in docs/_pages/states.markdown
+# - Add the state to the list in docs/index.markdown
 
 # END
