@@ -7,22 +7,11 @@ For example:
 
 $ scripts/make_workflow.py \
 --state NC \
---zone \
---pin \
---save-at-limit \
---points 100 \
---pushes 3 \
---delta 5 \
---cores 28 \
---batch-size 50 \
 > workflows/NC.sh
 
 For documentation, type:
 
 $ scripts/make_workflow.py -h
-
-TODO - Revise this for the new optimization process.
-
 """
 
 import argparse
@@ -48,46 +37,37 @@ def main() -> None:
     xx: str = args.state
     input_dir: str = "../rdabase/data"
     output_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/ensembles"
-    pushed_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/pushed"
     image_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/docs/assets/images"
     data_dir: str = f"../../iCloud/fileout/tradeoffs/{xx}/docs/_data"
 
-    # Push mode -- frontiers only, zone, or random
-
-    assert not (args.zone and args.random), "Cannot use both --zone and --random"
-
     """
     # NC workflow
-
     """
 
-    print(f"# {xx} workflow:")
-    print(f"# --zone: {args.zone}")
-    print(f"# --random: {args.random}")
-    print(f"# --points: {args.points}")
-    print(f"# --pushes: {args.pushes}")
-    print(f"# --delta: {args.delta}")
-    print(f"# --cores: {args.cores}")
-    print(f"# --windfall: {args.windfall}")
-    print()
-
     """
-    # Generate the data (from 'rdabase')
+    # Extract the data for the state (from 'rdabase')
 
     scripts/preprocess_state.py -s NC
-    
+
+    # Re-simplify the shapes, if necessary.
+
+    scripts/extract_shape_data.py -s NC
     """
 
-    print(f"# Generate the data (from 'rdabase')")
+    print(f"# Extract the data for the state (from 'rdabase')")
     print()
     print(f"scripts/preprocess_state.py -s {xx}")
+    print()
+
+    print(f"# Re-simplify the shapes, if necessary.")
+    print()
+    print(f"scripts/extract_shape_data.py -s {xx}")
     print()
 
     """
     # Set up the state (from 'tradeoffs')
 
     scripts/SETUP.sh NC
-
     """
 
     print(f"# Set up the state (from 'tradeoffs')")
@@ -96,7 +76,7 @@ def main() -> None:
     print()
 
     """
-    # Use the root map in root_maps or
+    # Use the root map in root_maps -or-
     # Approximate a new root map:
     # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
@@ -110,7 +90,7 @@ def main() -> None:
     --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_RMfRSP_100_log.txt \
     --no-debug
 
-    # Approximate a root map with them (from 'rdaroot')
+    # Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
 
     scripts/approx_root_map.py \
     --state NC \
@@ -123,11 +103,10 @@ def main() -> None:
     --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_rootlog.txt \
     --no-debug
 
-    # NOTE - Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
-
+    # Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
     """
 
-    print(f"# Use the root map in root_maps or")
+    print(f"# Use the root map in root_maps -or-")
     print(f"# Approximate a new root map:")
     print(f"# Generate an ensemble of 100 random plans (from 'rdaensemble')")
     print()
@@ -141,7 +120,9 @@ def main() -> None:
     print(f"--log {output_dir}/{xx}20C_RMfRSP_100_log.txt \\")
     print(f"--no-debug")
     print()
-    print(f"# Approximate a root map with them (from 'rdaroot')")
+    print(
+        f"# Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble"
+    )
     print()
     print(f"scripts/approx_root_map.py \\")
     print(f"--state {xx} \\")
@@ -158,7 +139,7 @@ def main() -> None:
     print()
 
     """
-    # Generate an ensemble (from 'rdaensemble')
+    # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
     scripts/recom_ensemble.py \
     --state NC \
@@ -169,10 +150,9 @@ def main() -> None:
     --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
     --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_log.txt \
     --no-debug
-
     """
 
-    print(f"# Generate an ensemble (from 'rdaensemble')")
+    print(f"# Generate an ensemble of 10,000 plans (from 'rdaensemble')")
     print()
     print(f"scripts/recom_ensemble.py \\")
     print(f"--state {xx} \\")
@@ -196,7 +176,6 @@ def main() -> None:
     --graph ../rdabase/data/NC/NC_2020_graph.json \
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
     --no-debug
-
     """
 
     print(f"# Score the ensemble (from 'rdaensemble')")
@@ -218,9 +197,9 @@ def main() -> None:
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
     --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_metadata.json \
     --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
+    --filter \
     --verbose \
     --no-debug
-
     """
 
     print(f"# Find the ratings frontiers in the ensemble (from 'tradeoffs')")
@@ -229,157 +208,226 @@ def main() -> None:
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
     print(f"--metadata {output_dir}/{xx}20C_scores_metadata.json \\")
     print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
+    print(f"--filter \\")
     print(f"--verbose \\")
     print(f"--no-debug")
     print()
 
     """
-    # Generate 'push' jobs (from 'tradeoffs')
+    # Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/MD/.
+    # - These maps must assign all precincts to districts, even water-only ones; and
+    # - Must have 'roughly equal' district populations using the base 2020 census.
+    """
 
-    scripts/make_push_jobs.py \
+    """
+    # Create ensembles optimizing each ratings dimension (from 'rdaensemble')
+
+    scripts/recom_ensemble_optimized.py \
     --state NC \
-    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
-    --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
-    --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
-    --zone \
-    --pin \
-    --save-at-limit \
-    --points 100 \
-    --pushes 3 \
-    --delta 5 \
-    --cores 28 \
+    --size 10000 \
+    --optimize proportionality \
     --data ../rdabase/data/NC/NC_2020_data.csv \
     --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
     --graph ../rdabase/data/NC/NC_2020_graph.json \
-    --output ../../iCloud/fileout/tradeoffs \
-    --verbose \
+    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
     --no-debug
 
+    scripts/recom_ensemble_optimized.py \
+    --state NC \
+    --size 10000 \
+    --optimize competitiveness \
+    --data ../rdabase/data/NC/NC_2020_data.csv \
+    --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+    --graph ../rdabase/data/NC/NC_2020_graph.json \
+    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
+    --no-debug
+
+    scripts/recom_ensemble_optimized.py \
+    --state NC \
+    --size 10000 \
+    --optimize minority \
+    --data ../rdabase/data/NC/NC_2020_data.csv \
+    --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+    --graph ../rdabase/data/NC/NC_2020_graph.json \
+    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_minority.json \
+    --no-debug
+
+    scripts/recom_ensemble_optimized.py \
+    --state NC \
+    --size 10000 \
+    --optimize compactness \
+    --data ../rdabase/data/NC/NC_2020_data.csv \
+    --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+    --graph ../rdabase/data/NC/NC_2020_graph.json \
+    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_compactness.json \
+    --no-debug
+
+    scripts/recom_ensemble_optimized.py \
+    --state NC \
+    --size 10000 \
+    --optimize splitting \
+    --data ../rdabase/data/NC/NC_2020_data.csv \
+    --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+    --graph ../rdabase/data/NC/NC_2020_graph.json \
+    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
+    --no-debug
     """
 
-    print(f"# Generate 'push' jobs (from 'tradeoffs')")
     print()
-    print(f"scripts/make_push_jobs.py \\")
+    print(f"# Create ensembles optimizing each ratings dimension (from 'rdaensemble')")
+    print()
+    print(f"scripts/recom_ensemble_optimized.py \\")
     print(f"--state {xx} \\")
-    print(f"--plans {output_dir}/{xx}20C_plans.json \\")
-    print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
-    print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
-    if args.zone:
-        print(f"--zone \\")
-        print(f"--delta 5 \\")
-    if args.random:
-        print(f"--random \\")
-    if args.pin:
-        print(f"--pin \\")
-    if args.save_at_limit:
-        print(f"--save-at-limit \\")
-    print(f"--points {args.points} \\")
-    print(f"--pushes {args.pushes} \\")
-    print(f"--cores {args.cores} \\")
-    print(f"--batch-size {args.batch_size} \\")
-    if args.windfall:
-        print(f"--windfall \\")
+    print(f"--size 10000 \\")
+    print(f"--optimize proportionality \\")
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(f"--output ../../iCloud/fileout/tradeoffs \\")
-    print(f"--verbose \\")
-    print(f"--no-debug")
-    print()
-
-    """
-    # Push the jobs to the cluster (from 'tradeoffs')
-    # Submit the jobs (on the UA cluster)
-    # Pull the pushed plans from the cluster (from 'tradeoffs')
-
-    scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/NC/pushed/*.log > ../../iCloud/fileout/tradeoffs/NC/jobs_logs.csv
-
-    """
-
-    print(f"# Push the jobs to the cluster (from 'tradeoffs')")
-    print(f"# Submit the jobs (on the UA cluster)")
-    print(f"# Pull the pushed plans from the cluster (from 'tradeoffs')")
-    print()
     print(
-        f"scripts/COMBINE_LOGS.sh ../../iCloud/fileout/tradeoffs/{xx}/pushed/*.log > ../../iCloud/fileout/tradeoffs/{xx}/jobs_logs.csv"
+        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_proportionality.json \\"
     )
+    print(f"--no-debug")
     print()
-
-    """
-    # Collect the pushed plans into an ensemble (from 'rdaensemble')
-
-    scripts/ensemble_from_plans.py \
-    --base ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
-    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
-    --dir ../../iCloud/fileout/tradeoffs/NC/pushed \
-    --no-debug
-
-    """
-
-    print(f"# Collect the pushed plans into an ensemble (from 'rdaensemble')")
+    print(f"scripts/recom_ensemble_optimized.py \\")
+    print(f"--state {xx} \\")
+    print(f"--size 10000 \\")
+    print(f"--optimize competitiveness \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(
+        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_competitiveness.json \\"
+    )
+    print(f"--no-debug")
     print()
-    print(f"scripts/ensemble_from_plans.py \\")
-    print(f"--base {output_dir}/{xx}20C_plans.json \\")
-    print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
-    print(f"--dir {pushed_dir} \\")
+    print(f"scripts/recom_ensemble_optimized.py \\")
+    print(f"--state {xx} \\")
+    print(f"--size 10000 \\")
+    print(f"--optimize minority \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(
+        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_minority.json \\"
+    )
+    print(f"--no-debug")
+    print()
+    print(f"scripts/recom_ensemble_optimized.py \\")
+    print(f"--state {xx} \\")
+    print(f"--size 10000 \\")
+    print(f"--optimize compactness \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(
+        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_compactness.json \\"
+    )
+    print(f"--no-debug")
+    print()
+    print(f"scripts/recom_ensemble_optimized.py \\")
+    print(f"--state {xx} \\")
+    print(f"--size 10000 \\")
+    print(f"--optimize splitting \\")
+    print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
+    print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
+    print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
+    print(
+        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_splitting.json \\"
+    )
     print(f"--no-debug")
     print()
 
     """
-    # Score the pushed plans (from 'rdaensemble')
+    # Combine the optimized ensembles (from 'rdaensemble')
+
+    scripts/combine_ensembles.py \
+    --ensembles ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
+                ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
+                ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_minority.json \
+                ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_compactness.json \
+                ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
+    --output ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized.json \
+    --no-debug
+    """
+
+    print(f"# Combine the optimized ensembles (from 'rdaensemble')")
+    print()
+    print(f"scripts/combine_ensembles.py \\")
+    print(
+        f"--ensembles {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_proportionality.json \\"
+    )
+    print(
+        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_competitiveness.json \\"
+    )
+    print(
+        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_minority.json \\"
+    )
+    print(
+        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_compactness.json \\"
+    )
+    print(
+        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_splitting.json \\"
+    )
+    print(f"--output {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized.json \\")
+    print(f"--no-debug")
+    print()
+
+    """
+    # Score the optimized plans (from 'rdaensemble')
     
     scripts/score_ensemble.py \
     --state NC \
-    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_pushed.json \
+    --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized.json \
     --data ../rdabase/data/NC/NC_2020_data.csv \
     --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
     --graph ../rdabase/data/NC/NC_2020_graph.json \
-    --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_pushed.csv \
+    --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized.csv \
     --no-debug
-
     """
 
-    print(f"# Score the pushed plans (from 'rdaensemble')")
+    print(f"# Score the optimized plans (from 'rdaensemble')")
     print()
     print(f"scripts/score_ensemble.py \\")
     print(f"--state {xx} \\")
-    print(f"--plans {output_dir}/{xx}20C_plans_pushed.json \\")
+    print(f"--plans {output_dir}/{xx}20C_plans_optimized.json \\")
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(f"--scores {output_dir}/{xx}20C_scores_pushed.csv \\")
+    print(f"--scores {output_dir}/{xx}20C_scores_optimized.csv \\")
     print(f"--no-debug")
     print()
 
     """
-    # Combine the original ensemble & pushed plans scores (from 'tradeoffs')
+    # Combine the original ensemble & optimized plans scores (from 'tradeoffs')
 
     scripts/COMBINE_SCORES.sh NC
-
     """
 
-    print(f"# Combine the original ensemble & pushed plans scores (from 'tradeoffs')")
+    print(
+        f"# Combine the original ensemble & optimized plans scores (from 'tradeoffs')"
+    )
     print()
     print(f"scripts/COMBINE_SCORES.sh {xx}")
     print()
 
     """
-    # Find the pushed frontiers (from 'tradeoffs')
+    # Find the optimized frontiers (from 'tradeoffs')
 
     scripts/find_frontiers.py \
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
-    --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_pushed_metadata.json \
-    --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
+    --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json \
+    --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json \
+    --verbose \
     --no-debug
-
     """
 
-    print(f"# Find the pushed frontiers (from 'tradeoffs')")
+    print(f"# Find the optimized frontiers (from 'tradeoffs')")
     print()
     print(f"scripts/find_frontiers.py \\")
     print(f"--scores {output_dir}/{xx}20C_scores_augmented.csv \\")
-    print(f"--metadata {output_dir}/{xx}20C_scores_pushed_metadata.json \\")
-    print(f"--frontier {output_dir}/{xx}20C_frontiers_pushed.json \\")
+    print(f"--metadata {output_dir}/{xx}20C_scores_optimized_metadata.json \\")
+    print(f"--frontier {output_dir}/{xx}20C_frontiers_optimized.json \\")
+    print(f"--verbose \\")
     print(f"--no-debug")
     print()
 
@@ -391,7 +439,6 @@ def main() -> None:
     --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_metadata.json \
     --notables ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_notable_maps.json \
     --no-debug
-
     """
 
     print(f"# ID the notable maps in the augmented ensemble (from 'rdaensemble')")
@@ -410,7 +457,6 @@ def main() -> None:
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
     --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20C_boxplot.svg \
     --no-debug
-
     """
 
     print(f"# Make a box plot (from 'tradeoffs')")
@@ -428,7 +474,6 @@ def main() -> None:
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
     --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_statistics.csv \
     --no-debug
-
     """
 
     print(f"# Make a statistics table (from 'tradeoffs')")
@@ -446,7 +491,6 @@ def main() -> None:
     --notables ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_notable_maps.json \
     --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_notable_maps_ratings.csv \
     --no-debug
-
     """
 
     print(f"# Make a notable maps ratings table (from 'tradeoffs')")
@@ -483,7 +527,6 @@ def main() -> None:
 
     # and save it in ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv
     # Use the --focus flag when making the scatter plots.
-
     """
 
     print("# If you want to highlight a map or a few on the scatter plots,")
@@ -529,13 +572,12 @@ def main() -> None:
     --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
     --more ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
     --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers.json \
-    --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_pushed.json \
+    --optimized ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json \
     --notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
     --focus ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_focus_scores.csv \
     --prefix NC20C \
     --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
     --no-debug
-
     """
 
     print(f"# Make scatter plots (from 'tradeoffs')")
@@ -544,7 +586,7 @@ def main() -> None:
     print(f"--scores {output_dir}/{xx}20C_scores.csv \\")
     print(f"--more {output_dir}/{xx}20C_scores_augmented.csv \\")
     print(f"--frontier {output_dir}/{xx}20C_frontiers.json \\")
-    print(f"--pushed {output_dir}/{xx}20C_frontiers_pushed.json \\")
+    print(f"--pushed {output_dir}/{xx}20C_frontiers_optimized.json \\")
     print(f"--notables docs/_data/notable_ratings/{xx}_2022_Congress_ratings.csv \\")
     print(f"--focus {output_dir}/{xx}20C_focus_scores.csv \\")
     print(f"--prefix {xx}20C \\")
@@ -553,30 +595,34 @@ def main() -> None:
     print()
 
     """
-    # Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')
+    # Move the legend.CSV from docs/assets/images to the docs/_data directory, and
+    # Deploy the results (from 'tradeoffs')
 
     scripts/DEPLOY.sh NC
 
     """
 
     print(
-        f"# Copy the artifacts to the fileout & then 'docs' subdirectories (from 'tradeoffs')"
+        f"# Move the legend.CSV from docs/assets/images to the docs/_data directory, and"
     )
+    print(f"# Deploy the results (from 'tradeoffs')")
     print()
     print(f"scripts/DEPLOY.sh {xx}")
     print()
 
     """
     # Finally:
-    # - Add a state page in the docs/_pages/pages directory, and
-    # - Add a link to the state page in docs/_pages/pages/states.markdown.
+    # - Add a state page in the docs/_pages/pages directory,
+    # - Add a link to the state page in docs/_pages/pages/states.markdown, and
+    # - Add the state to the list in docs/index.markdown.
 
     # END
     """
 
-    print(f"# Finally:")
+    print(f"# Finally, activate the state in the site:")
     print(f"# - Add a state page in the docs/_pages/pages directory, and")
-    print(f"# - Add a link to the state page in docs/_pages/pages/states.markdown.")
+    print(f"# - Add a link to the state page in docs/_pages/pages/states.markdown, and")
+    print(f"# - Add the state to the list in docs/index.markdown.")
     print()
     print(f"# END")
 
@@ -590,56 +636,6 @@ def parse_args():
         "--state",
         help="The two-character state code (e.g., NC)",
         type=str,
-    )
-    # --zone and --randome are mutually exclusive options, enforced after parse_args
-    parser.add_argument(
-        "-z",
-        "--zone",
-        dest="zone",
-        action="store_true",
-        help="Push a 'zone' of points near the frontier and the frontier",
-    )
-    parser.add_argument(
-        "-r",
-        "--random",
-        dest="random",
-        action="store_true",
-        help="Push a selection of random plans and the frontier",
-    )
-    parser.add_argument("--pin", dest="pin", action="store_true", help="Pin mode")
-    parser.add_argument(
-        "--save-at-limit",
-        dest="save_at_limit",
-        action="store_true",
-        help="Save the in-progress plan at the limit",
-    )
-    parser.add_argument(
-        "--points",
-        type=int,
-        default=100,
-        help="The *maximum* number of points to push for each frontier.",
-    )
-    parser.add_argument(
-        "--pushes",
-        type=int,
-        default=3,
-        help="How many times to push each point.",
-    )
-    parser.add_argument("--cores", type=int, help="The number of core per node.")
-    parser.add_argument(
-        "--batch-size",
-        dest="batch_size",
-        type=int,
-        help="The number of commands per job.",
-    )
-    parser.add_argument(
-        "--delta",
-        type=int,
-        default=5,
-        help="How much ratings can differ for a point to be considered 'near' a frontier point",
-    )
-    parser.add_argument(
-        "-w", "--windfall", dest="windfall", action="store_true", help="Windfall mode"
     )
 
     args: Namespace = parser.parse_args()
