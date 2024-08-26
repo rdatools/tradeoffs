@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Updated make_workflow.py script & tested it on PA
+- Updated make_workflow.py script
 - Re-ran MD and NC again 
 - Re-ran NC
 - Changed the process for approximating trade-off frontiers to use GerryChain's SingleMetricOptimizer
