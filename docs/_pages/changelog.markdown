@@ -6,13 +6,11 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Activated PA
+- Activated PA; updated NC ensemble stats
 - Tested auto-generated workflow on PA
 - Updated make_workflow.py script
-- Re-ran MD and NC again
-- Re-ran NC
+- Re-ran NC and MD several times tweaking settings
 - Changed the process for approximating trade-off frontiers to use GerryChain's SingleMetricOptimizer
 - Tweaked minority ratings, to remove discontinuity
-- Generating basic scatter plots to visualize alt. minority ratings
 - Bound ag-grid download to v30, to fix ratings tables
 - First snapshot
