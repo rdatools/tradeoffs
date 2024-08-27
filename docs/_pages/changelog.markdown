@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Activated PA
 - Tested auto-generated workflow on PA
 - Updated make_workflow.py script
 - Re-ran MD and NC again

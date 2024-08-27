@@ -122,16 +122,16 @@ permalink: states/
   <div class="tooltip">
     <area shape="circle" coords="154,223,30" alt="Oregon" href="{{ site.baseurl }}/states/OR">
     <span class="tooltiptext">Oregon</span>
-  </div>
+  </div>  -->
   <div class="tooltip">
     <area shape="circle" coords="564,223,30" alt="Pennsylvania" href="{{ site.baseurl }}/states/PA">
     <span class="tooltiptext">Pennsylvania</span>
-  </div> -->
+  </div>
   <!-- <div class="tooltip">
     <area shape="circle" coords="564,330,30" alt="South Carolina" href="{{ site.baseurl }}/states/SC">
     <span class="tooltiptext">South Carolina</span>
-  </div> -->
-  <!-- <div class="tooltip">
+  </div>
+  <div class="tooltip">
     <area shape="circle" coords="444,330,30" alt="Tennessee" href="{{ site.baseurl }}/states/TN">
     <span class="tooltiptext">Tennessee</span>
   </div>
