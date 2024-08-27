@@ -37,7 +37,7 @@ scripts/approx_root_map.py \
 --log ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_rootlog.txt \
 --no-debug
 
-# Copy the result to the root_maps directory as PA20C_root_map.csv
+# Copy the result to the tradeoffs/root_maps directory as PA20C_root_map.csv
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
@@ -51,7 +51,7 @@ scripts/recom_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_log.txt \
 --no-debug
 
-# Score the ensemble (from 'rdaensemble')
+## Score the ensemble (from 'rdaensemble')
 
 scripts/score_ensemble.py \
 --state PA \
@@ -72,7 +72,12 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
+# Hand edit "no splits" versions of the DRA Notable Maps. 
+# - Save them in tradeoffs/notable_maps/MD/.
+# - These maps must assign all precincts to districts, even water-only ones; and
+# - Must have 'roughly equal' district populations using the base 2020 census.
 
+### HERE ###
 # Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
 scripts/recom_ensemble_optimized.py \

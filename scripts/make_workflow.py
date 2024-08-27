@@ -135,7 +135,9 @@ def main() -> None:
     print(f"--log {output_dir}/{xx}20C_rootlog.txt \\")
     print(f"--no-debug")
     print()
-    print(f"# Copy the result to the root_maps directory as {xx}20C_root_map.csv")
+    print(
+        f"# Copy the result to the tradeoffs/root_maps directory as {xx}20C_root_map.csv"
+    )
     print()
 
     """
@@ -214,10 +216,20 @@ def main() -> None:
     print()
 
     """
-    # Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/MD/.
+    # Hand edit "no splits" versions of the DRA Notable Maps. 
+    # - Save them in tradeoffs/notable_maps/MD/.
     # - These maps must assign all precincts to districts, even water-only ones; and
     # - Must have 'roughly equal' district populations using the base 2020 census.
     """
+
+    print(f"# Hand edit 'no splits' versions of the DRA Notable Maps.")
+    print(f"# Save them in tradeoffs/notable_maps/{xx}/.")
+    print(
+        f"# These maps must assign all precincts to districts, even water-only ones; and"
+    )
+    print(
+        f"# Must have 'roughly equal' district populations using the base 2020 census."
+    )
 
     """
     # Create ensembles optimizing each ratings dimension (from 'rdaensemble')
@@ -273,7 +285,6 @@ def main() -> None:
     --no-debug
     """
 
-    print()
     print(f"# Create ensembles optimizing each ratings dimension (from 'rdaensemble')")
     print()
     print(f"scripts/recom_ensemble_optimized.py \\")
