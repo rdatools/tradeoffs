@@ -4,8 +4,8 @@ layout: default
 
 <h2>Trade-offs in Redistricting</h2>
 
-**This is second major iteration of ["Trade-offs in Redistricting"](https://alecramsay.github.io/pg/).
-It's still a work in progress.**
+*This is second major iteration of ["Trade-offs in Redistricting"](https://alecramsay.github.io/pg/).
+It's still a work in progress.*
 
 The purpose of this revised site is to illuminate some quantitative policy trade-offs in congressional redistricting.
 The preliminary results show several things:
