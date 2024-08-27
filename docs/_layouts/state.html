@@ -52,7 +52,7 @@ map-width: 700
 
 <!-- BOX PLOT -->
 
-<p>Box Plot</p>
+<p>Ensemble Box Plot</p>
 
 <table style="border:0px">
     <tr>
@@ -61,6 +61,11 @@ map-width: 700
                 width="{{ page.big-image-width }}" />
         </td>
 </table>
+
+<p>The box plot above and the statistics below both filter out maps that don't qualify as candidates for <a
+        href="https://davesredistricting.org/">Dave's Redistricting</a> (DRA) <a
+        href="https://medium.com/dra-2020/notable-maps-66d744933a48">Notable Maps</a>, i.e., aren't considered
+    reasonable.</p>
 
 <!-- STATISTICS TABLE -->
 
@@ -124,6 +129,8 @@ map-width: 700
 
 <p>Ensemble Notable Maps</p>
 
+<p>This table shows the ratings for the "notable maps" within the ensemble.</p>
+
 {% capture ensemble-ratings-file %}
 {{ xx }}{{ suffix }}_notable_maps_ratings
 {% endcapture %}
@@ -135,6 +142,8 @@ map-width: 700
 </div>
 
 <p>DRA Notable Maps</p>
+
+<p>For comparison, this table shows the ratings for the human-drawn "notable maps" from DRA.</p>
 
 {% capture dra-ratings-file %}
 {{ xx }}_2022_Congress_ratings
@@ -222,6 +231,20 @@ map-width: 700
 <!-- PAIRWISE SCATTERPLOTS -->
 
 <p>Pairwise Scatter Plots</p>
+
+<p>The scatter plots below show the pairwise relationships between the five ratings dimensions. For each plot:</p>
+<ul>
+    <li>Ratings are [0-100], where bigger is better.</li>
+    <li>Each plan in the unbiased ensemble is plotted as a single-pixel black dot.</li>
+    <li>Additional plans from the optimized runs are shown as single-pixel green dots.</li>
+    <li>The notable maps from DRA are shown as five-pixel red diamonds.</li>
+    <li>The frontier for the unbiased ensemble is shown as a single-pixel black line.</li>
+    <li>The "pushed" frontier is shown as a two-pixel black line.</li>
+    <li>The area between the two frontiers is shaded light gray.</li>
+    <li>To help disambiguate degenerate frontiers (only one point), dash-dotted lines connect the end points of the
+        "pushed" frontiers to the x- and y-axes.</li>
+    <li>Special maps of note, like official maps, are described in the legend below the plots.</li>
+</ul>
 
 <table style="border:0px">
     <tr>
