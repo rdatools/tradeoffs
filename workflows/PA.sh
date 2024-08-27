@@ -77,7 +77,6 @@ scripts/find_frontiers.py \
 # - These maps must assign all precincts to districts, even water-only ones; and
 # - Must have 'roughly equal' district populations using the base 2020 census.
 
-### HERE ###
 # Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
 scripts/recom_ensemble_optimized.py \
@@ -87,9 +86,9 @@ scripts/recom_ensemble_optimized.py \
 --data ../rdabase/data/PA/PA_2020_data.csv \
 --shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
 --graph ../rdabase/data/PA/PA_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_proportionality.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_proportionality.json \
 --no-debug
-
+### HERE ###
 scripts/recom_ensemble_optimized.py \
 --state PA \
 --size 10000 \
@@ -97,7 +96,7 @@ scripts/recom_ensemble_optimized.py \
 --data ../rdabase/data/PA/PA_2020_data.csv \
 --shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
 --graph ../rdabase/data/PA/PA_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_competitiveness.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_competitiveness.json \
 --no-debug
 
 scripts/recom_ensemble_optimized.py \
@@ -107,7 +106,7 @@ scripts/recom_ensemble_optimized.py \
 --data ../rdabase/data/PA/PA_2020_data.csv \
 --shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
 --graph ../rdabase/data/PA/PA_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_minority.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_minority.json \
 --no-debug
 
 scripts/recom_ensemble_optimized.py \
@@ -117,7 +116,7 @@ scripts/recom_ensemble_optimized.py \
 --data ../rdabase/data/PA/PA_2020_data.csv \
 --shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
 --graph ../rdabase/data/PA/PA_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_compactness.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_compactness.json \
 --no-debug
 
 scripts/recom_ensemble_optimized.py \
@@ -127,18 +126,18 @@ scripts/recom_ensemble_optimized.py \
 --data ../rdabase/data/PA/PA_2020_data.csv \
 --shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
 --graph ../rdabase/data/PA/PA_2020_graph.json \
---plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_splitting.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_splitting.json \
 --no-debug
 
 # Combine the optimized ensembles (from 'rdaensemble')
 
 scripts/combine_ensembles.py \
---ensembles ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_proportionality.json \
-            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_competitiveness.json \
-            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_minority.json \
-            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_compactness.json \
-            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized_splitting.json \
---output ../../iCloud/fileout/tradeoffs/PA/ensembles/PA/ensembles/PA20C_plans_optimized.json \
+--ensembles ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_proportionality.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_competitiveness.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_minority.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_compactness.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_splitting.json \
+--output ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized.json \
 --no-debug
 
 # Score the optimized plans (from 'rdaensemble')

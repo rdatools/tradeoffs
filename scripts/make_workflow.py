@@ -294,9 +294,7 @@ def main() -> None:
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(
-        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_proportionality.json \\"
-    )
+    print(f"--plans {output_dir}/{xx}20C_plans_optimized_proportionality.json \\")
     print(f"--no-debug")
     print()
     print(f"scripts/recom_ensemble_optimized.py \\")
@@ -306,9 +304,7 @@ def main() -> None:
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(
-        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_competitiveness.json \\"
-    )
+    print(f"--plans {output_dir}/{xx}20C_plans_optimized_competitiveness.json \\")
     print(f"--no-debug")
     print()
     print(f"scripts/recom_ensemble_optimized.py \\")
@@ -318,9 +314,7 @@ def main() -> None:
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(
-        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_minority.json \\"
-    )
+    print(f"--plans {output_dir}/{xx}20C_plans_optimized_minority.json \\")
     print(f"--no-debug")
     print()
     print(f"scripts/recom_ensemble_optimized.py \\")
@@ -330,9 +324,7 @@ def main() -> None:
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(
-        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_compactness.json \\"
-    )
+    print(f"--plans {output_dir}/{xx}20C_plans_optimized_compactness.json \\")
     print(f"--no-debug")
     print()
     print(f"scripts/recom_ensemble_optimized.py \\")
@@ -342,9 +334,7 @@ def main() -> None:
     print(f"--data {input_dir}/{xx}/{xx}_2020_data.csv \\")
     print(f"--shapes {input_dir}/{xx}/{xx}_2020_shapes_simplified.json \\")
     print(f"--graph {input_dir}/{xx}/{xx}_2020_graph.json \\")
-    print(
-        f"--plans {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_splitting.json \\"
-    )
+    print(f"--plans {output_dir}/{xx}20C_plans_optimized_splitting.json \\")
     print(f"--no-debug")
     print()
 
@@ -364,22 +354,12 @@ def main() -> None:
     print(f"# Combine the optimized ensembles (from 'rdaensemble')")
     print()
     print(f"scripts/combine_ensembles.py \\")
-    print(
-        f"--ensembles {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_proportionality.json \\"
-    )
-    print(
-        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_competitiveness.json \\"
-    )
-    print(
-        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_minority.json \\"
-    )
-    print(
-        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_compactness.json \\"
-    )
-    print(
-        f"            {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized_splitting.json \\"
-    )
-    print(f"--output {output_dir}/{xx}/ensembles/{xx}20C_plans_optimized.json \\")
+    print(f"--ensembles {output_dir}/{xx}20C_plans_optimized_proportionality.json \\")
+    print(f"            {output_dir}/{xx}20C_plans_optimized_competitiveness.json \\")
+    print(f"            {output_dir}/{xx}20C_plans_optimized_minority.json \\")
+    print(f"            {output_dir}/{xx}20C_plans_optimized_compactness.json \\")
+    print(f"            {output_dir}/{xx}20C_plans_optimized_splitting.json \\")
+    print(f"--output {output_dir}/{xx}20C_plans_optimized.json \\")
     print(f"--no-debug")
     print()
 
