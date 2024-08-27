@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Started to flesh out basic site
 - Activated PA; updated NC ensemble stats & ratings table; updated MD notable ratings
 - Tested auto-generated workflow on PA
 - Updated make_workflow.py script
