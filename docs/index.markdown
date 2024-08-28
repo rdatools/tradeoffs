@@ -7,6 +7,8 @@ layout: default
 *This is second major iteration of ["Trade-offs in Redistricting"](https://alecramsay.github.io/pg/).
 It's still a work in progress.*
 
+The purpose of this revised site is to illustrate some quantitative policy trade-offs in congressional redistricting.
+
 The [Notable Maps](https://medium.com/dra-2020/notable-maps-66d744933a48) 
 in [Dave\'s Redistricting](https://davesredistricting.org/) (DRA) 
 are the maps that individually maximize five quantifiable policy dimensions:
@@ -15,8 +17,8 @@ representation, compactness, and county-district splitting. For the
 2020 congressional redistricting cycle, these maps demonstrated that
 there were tradeoffs between these objectives. For example, [compact
 districts aren't always fair](https://medium.com/dra-2020/compact-districts-arent-fair-7c17c2ff5d7e), and vice versa.
+In this site, we explore these trade-offs further in several marquee states.
 
-The purpose of this site is to illuminate some of those trade-offs in several marquee states.
 Our preliminary results show several things:
 
 1. Pairs of [Dave's Redistricting (DRA) ratings dimensions](https://medium.com/dra-2020/ratings-cc2188dc7dff) in unbiased ensembles of redistricting plans for a state are not correlated as you might expect them to be.

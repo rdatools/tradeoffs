@@ -25,9 +25,10 @@ In outline:
 3.  Next we found the Pareto frontier of the ensemble.
 4.  Then we exported [the Notable Maps](https://medium.com/dra-2020/notable-maps-66d744933a48) for the state from DRA and pulled their ratings.
     If necessary, we made close-cousin clones of these maps that didn't split any precincts for use below.
-5.  We used those human-drawn plans that each optimize for one of the five rating dimensions as seeds to GerryChain's [SingleMetricOptimizer and Gingelator exploratory (biased) chain algorithms](https://mggg.org/posts/gerrysuite).
-6.  We used each as the starting point for seeking better-rated plans on each of the five dimensions, one at a time.
-    We used 2,000 iterations for each optimization run, so another 10,000 plans for each seed.
+5.  These human-drawn plans each optimize for one of the five rating dimension, and we used them as seeds to GerryChain's [SingleMetricOptimizer and Gingelator exploratory (biased) chain algorithms](https://mggg.org/posts/gerrysuite).
+6.  We used each as the starting point for seeking better-rated plans on each of the five dimensions, one at a time,
+    using proxy metrics for the ratings dimensions as opposed to the actual DRA ratings.
+    We used 2,000 iterations for each optimization run which generated another 10,000 plans for each seed.
     However, we only retained interim plans that improved the metric for which we were optimizing.
 7.  To understand this visually, think of a pair ratings dimensions, say proprtionality and compactness.
     Think of a scatter plot of proportionality (y-axis) vs. compactness (x-axis).
