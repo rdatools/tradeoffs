@@ -25,19 +25,19 @@ In outline:
 3.  Next we found the Pareto frontier of the ensemble.
 4.  Then we exported [the Notable Maps](https://medium.com/dra-2020/notable-maps-66d744933a48) for the state from DRA and pulled their ratings.
     If necessary, we made close-cousin clones of these maps that didn't split any precincts for use below.
-5.  We used those plans as seeds to GerryChain's [SingleMetricOptimizer and Gingelator exploratory (biased) chain algorithms](https://mggg.org/posts/gerrysuite).
-    Specifically, we used the best rated map on each dimension as the starting point for the optimizer optimizing on each of the five dimensions.
-    To understand this visually, think of a pair ratings dimensions, say proprtionality and compactness.
+5.  We used those human-drawn plans that each optimize for one of the five rating dimensions as seeds to GerryChain's [SingleMetricOptimizer and Gingelator exploratory (biased) chain algorithms](https://mggg.org/posts/gerrysuite).
+6.  We used each as the starting point for seeking better-rated plans on each of the five dimensions, one at a time.
+    We used 2,000 iterations for each optimization run, so another 10,000 plans for each seed.
+    However, we only retained interim plans that improved the metric for which we were optimizing.
+7.  To understand this visually, think of a pair ratings dimensions, say proprtionality and compactness.
     Think of a scatter plot of proportionality (y-axis) vs. compactness (x-axis).
     The most proportional map will plot somewhere in the upper left of the plot;
     the most compact map will plot somewhere in the lower right.
     By using those starting points and optimizing *away* from them along the other ratings dimensions,
     we, in essence, searched for conforming plans upper-left to lower-right and vice versa.
-    We used 2,000 iterations for each optimization, so another 10,000 plans for each seed,
-    but we only retained interim plans that improved the metric for which we were optimizing.
-6.  We collected those plans into a new optimized ensemble and scored them.
-7.  We combined the unbiased ensemble and the optimized ensemble into a single ensemble and found the new Pareto frontier.
-8.  Finally, we generated all the artifacts that you see and described on the state pages, e.g., for <a href="{{ site.baseurl }}/states/NC">NC</a>.
+8.  We collected those plans into a new optimized ensemble and scored them.
+9.  We combined the unbiased ensemble and the optimized ensemble into a single ensemble and found the new Pareto frontier.
+10.  Finally, we generated all the artifacts that you see and described on the state pages, e.g., for <a href="{{ site.baseurl }}/states/NC">NC</a>.
 
 Besides the two GitHub repositories mentioned above, the main code and data for this workflow is in three repositories: [rdabase](https://github.com/rdatools/rdabase), [rdaensemble](https://github.com/rdatools/rdaensemble), and [tradeoffs](https://github.com/rdatools/tradeoffs), 
 the last being where this site is hosted.
