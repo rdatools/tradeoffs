@@ -22,6 +22,8 @@ In outline:
 2.  Then we scored each plan in the ensemble on the five ratings dimensions in [Dave's Redistricting's](https://davesredistricting.org/) (DRA), 
     using [a high-volume offline scoring service](https://github.com/rdatools/rdascore)
     which wraps [the Python clone of DRA analytics](https://github.com/dra2020/rdapy).
+    Note: We removed the clipping of minority VAP percentages below 37% that DRA's minority rating does,
+    because this was causing a discontinuity (discernible gaps) in the ratings.
 3.  Next we found the Pareto frontier of the ensemble.
 4.  Then we exported [the Notable Maps](https://medium.com/dra-2020/notable-maps-66d744933a48) for the state from DRA and pulled their ratings.
     If necessary, we made close-cousin clones of these maps that didn't split any precincts for use below.
