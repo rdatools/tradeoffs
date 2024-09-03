@@ -26,6 +26,8 @@ Our preliminary results show several things:
 3. These unbiased frontiers can be automatically "pushed" farther to the north-east, to approximate the trade-offs that people face when drawing maps.
 4. The ratings for most human-drawn maps fall near the edge or outside the range of the ratings for unbiased ensembles. Whether for bad or for good, people are intentionally optimizing for something.
 5. The most compact human-drawn maps are noticeably more compact than the most compact maps in the "pushed" frontier, because they smooth out district boundaries.
+6. The trade-offs vary by state.
+7. The trade-offs are *probably* different for the state legislative maps for the same states, because of the different granularity of the districts and the relative sizes of counties and precincts.
 
 These findings are meant to be directionally illustrative rather than specifically descriptive.
 
