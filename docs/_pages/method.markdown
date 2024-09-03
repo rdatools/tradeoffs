@@ -13,11 +13,11 @@ small changes in the approximation yielded wildly different ratings.
 To use the metaphor of a landscape, rather than getting deeper and deeper into the valley containing the global minimum,
 successive approximations were flipping between different valleys with local minima and very different characteristics.
 
-In this iteration, we've taken a different approach.
-In outline:
+In this iteration, we've take a different approach.
+In summary:
 
 -   We start with the data, shapes, and contiguity graphs in the [RDA Base repository](https://github.com/rdatools/rdabase).
-    The census (total population) and demographic data (voting age populations by race and ethnicity) are from the 2020 Census.
+    The census (total population) and demographic data (voting age populations by race and ethnicity) are from the 2020 Census (unadjusted).
     The election data are the 2016-2020 election composite from [Dave's Redistricting's](https://davesredistricting.org/) (DRA) 
     public [VTD data](https://github.com/dra2020/vtd_data).
 -   We generate an unbiased ensemble of 10,000 congressional plans for a state,
@@ -52,6 +52,6 @@ In outline:
 -   We combine the unbiased ensemble and the optimized ensemble into a single ensemble and find the new Pareto frontier.
 -   Finally, we generate all the artifacts that you see on the state pages, e.g., for <a href="{{ site.baseurl }}/states/NC">NC</a>.
 
-Besides the two GitHub repositories mentioned above, the main code and data for this workflow is in three repositories: [rdabase](https://github.com/rdatools/rdabase), [rdaensemble](https://github.com/rdatools/rdaensemble), and [tradeoffs](https://github.com/rdatools/tradeoffs), 
+Besides the GitHub repositories mentioned above, the main code and data for this workflow is in three repositories: [rdabase](https://github.com/rdatools/rdabase), [rdaensemble](https://github.com/rdatools/rdaensemble), and [tradeoffs](https://github.com/rdatools/tradeoffs), 
 the last being where this site is hosted.
 Two more repositories&#8212;[rdadccvt](https://github.com/rdatools/rdadccvt) and [rdaroot](https://github.com/rdatools/rdaroot)&#8212;package up our work on root maps, which we use as seeds to the unbiased ensembles here.
