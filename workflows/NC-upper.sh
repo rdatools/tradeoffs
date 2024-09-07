@@ -48,9 +48,11 @@ scripts/approx_root_map.py \
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
+#@ Update - roughlyequal
 scripts/recom_ensemble.py \
 --state NC \
 --size 10000 \
+--roughlyequal 0.10 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --root ../tradeoffs/root_maps/NC20U_root_map.csv \
