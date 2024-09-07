@@ -8,7 +8,7 @@ scripts/SETUP.sh NC
 # Extract the data for the state (from 'rdabase')
 # Re-simplify the shapes, if necessary.
 
-#@ Update -
+#@ Update
 # Get a root map:
 # - Use the root map in root_maps -or-
 # - Approximate a new root map (next) -or-
