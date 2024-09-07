@@ -1,6 +1,7 @@
 # NC workflow for the upper state house (50 districts)
 
-# Set up the state (from 'tradeoffs')
+#@ Update
+# Set up the state (from 'tradeoffs'), once per state
 
 #@ Update - alt. ensemble directories
 scripts/SETUP.sh NC

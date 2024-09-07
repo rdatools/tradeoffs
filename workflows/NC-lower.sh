@@ -1,6 +1,6 @@
 # NC workflow for the lower state house (120 districts)
 
-# Set up the state (from 'tradeoffs')
+# Set up the state (from 'tradeoffs'), once per state
 
 #@ Update - alt. ensemble directories
 scripts/SETUP.sh NC
@@ -12,11 +12,11 @@ scripts/SETUP.sh NC
 # Approximate a new root map:
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
-#@ Update - plan_type; roughlyequal; temp directory
+#@ Update - plan_type; roughlyequal; temp directory; different 'roughly equal'
 scripts/rmfrsp_ensemble.py \
 --state NC \
 --plantype lower \
---roughlyequal 0.10 \
+--roughlyequal 0.05 \
 --size 100 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \

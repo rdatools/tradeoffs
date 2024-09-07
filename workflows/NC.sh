@@ -1,6 +1,6 @@
 # NC workflow for Congress (14 districts)
 
-# Set up the state (from 'tradeoffs')
+# Set up the state (from 'tradeoffs'), once per state
 
 scripts/SETUP.sh NC
 
