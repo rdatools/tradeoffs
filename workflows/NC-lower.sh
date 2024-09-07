@@ -31,14 +31,14 @@ scripts/rmfrsp_ensemble.py \
 
 # Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
 
-#@ Update - plans name; temp directory
+#@ Update - plans name; temp directory; root_map
 scripts/approx_root_map.py \
 --state NC \
 --plans ../rdaensemble/temp/NC20L_RMfRSP_100_plans.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---map temp/NC20L_rootmap.csv \
+--map temp/NC20L_root_map.csv \
 --candidates temp/NC20L_rootcandidates.json \
 --log temp/NC20L_rootlog.txt \
 --no-debug
@@ -50,6 +50,7 @@ scripts/approx_root_map.py \
 scripts/recom_ensemble.py \
 --state NC \
 --size 10000 \
+--roughlyequal 0.10 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --root ../tradeoffs/root_maps/NC20L_root_map.csv \
