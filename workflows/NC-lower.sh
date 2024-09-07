@@ -58,10 +58,12 @@ scripts/recom_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_log.txt \
 --no-debug
 
+#@ HERE
 # Score the ensemble (from 'rdaensemble')
 
 scripts/score_ensemble.py \
 --state NC \
+--plantype lower \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_plans.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
