@@ -8,15 +8,19 @@ scripts/SETUP.sh NC
 # Extract the data for the state (from 'rdabase')
 # Re-simplify the shapes, if necessary.
 
-# Use the root map in root_maps -or-
-# Approximate a new root map:
+#@ Update -
+# Get a root map:
+# - Use the root map in root_maps -or-
+# - Approximate a new root map (next) -or-
+# - Construct one by hand, using a map in DRA as a starting point
+
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
-#@ Update - plan_type; roughlyequal; temp directory; different 'roughly equal'
+#@ Update - plan_type; roughlyequal; temp directory
 scripts/rmfrsp_ensemble.py \
 --state NC \
 --plantype lower \
---roughlyequal 0.05 \
+--roughlyequal 0.10 \
 --size 100 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
