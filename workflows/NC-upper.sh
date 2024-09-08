@@ -14,6 +14,7 @@ scripts/SETUP.sh NC
 # - Use the root map in root_maps -or-
 # - Approximate a new root map (next) -or-
 # - Construct one by hand, using a map in DRA as a starting point
+# Note: Districts should be indexed [1, 2, 3, ...]!
 
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 

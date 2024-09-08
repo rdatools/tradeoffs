@@ -13,6 +13,7 @@ scripts/SETUP.sh NC
 # - Use the root map in root_maps -or-
 # - Approximate a new root map (next) -or-
 # - Construct one by hand, using a map in DRA as a starting point
+# Note: Districts should be indexed [1, 2, 3, ...]!
 
 # Generate an ensemble of 100 random plans (from 'rdaensemble')
 
@@ -28,6 +29,21 @@ scripts/rmfrsp_ensemble.py \
 --plans temp/NC20L_RMfRSP_100_plans.json \
 --log temp/NC20L_RMfRSP_100_log.txt \
 --no-debug
+
+#@ HERE
+#@ Update - or different script + plan_type; roughlyequal; temp directory
+scripts/rmfrst_ensemble.py \
+--state NC \
+--plantype lower \
+--roughlyequal 0.10 \
+--size 100 \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans temp/NC20L_RMfRST_100_plans.json \
+--log temp/NC20L_RMfRST_100_log.txt \
+--no-debug \
+-v
 
 # Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
 
