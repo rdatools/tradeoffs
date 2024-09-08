@@ -83,13 +83,13 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-#@ HERE
 # MANUAL - Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
 # - These maps must assign all precincts to districts, even water-only ones; and
 # - Must have 'roughly equal' district populations using the base 2020 census.
 
 # Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
+#@ HERE
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
