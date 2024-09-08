@@ -73,7 +73,6 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
 --no-debug
 
-#@ HERE
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
 
 scripts/find_frontiers.py \
@@ -84,6 +83,7 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
+#@ HERE
 # Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
 # - These maps must assign all precincts to districts, even water-only ones; and
 # - Must have 'roughly equal' district populations using the base 2020 census.
