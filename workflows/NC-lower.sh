@@ -97,7 +97,7 @@ scripts/find_frontiers.py \
 --no-debug
 
 #@ HERE
-# Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
+# MANUAL - Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
 # - These maps must assign all precincts to districts, even water-only ones; and
 # - Must have 'roughly equal' district populations using the base 2020 census.
 
@@ -217,7 +217,7 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20L_notable_maps_ratings.csv \
 --no-debug
 
-# NOTE - Created focus scores by hand
+# MANUAL - Create focus scores by hand.
 
 # Make scatter plots & legend (from 'tradeoffs')
 
@@ -232,13 +232,13 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
-# Move the legend.CSV from docs/assets/images to the docs/_data directory
+# MANUAL - Move the legend.CSV from docs/assets/images to the docs/_data directory.
 
 # Deploy the results (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC
 
-# Activate the state in the site 
+# MANUAL - Activate the state in the site:
 # - Uncomment out the <div> for the state in docs/_pages/states.markdown
 # - Add the state to the list in docs/index.markdown
 
