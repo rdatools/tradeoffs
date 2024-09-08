@@ -74,7 +74,6 @@ scripts/recom_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_log.txt \
 --no-debug
 
-#@ HERE
 # Score the ensemble (from 'rdaensemble')
 
 scripts/score_ensemble.py \
@@ -87,6 +86,7 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
 --no-debug
 
+#@ HERE
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
 
 scripts/find_frontiers.py \
