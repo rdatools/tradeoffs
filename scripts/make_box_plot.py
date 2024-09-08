@@ -41,7 +41,9 @@ def main() -> None:
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes, filter=True)
+    df: pd.DataFrame = scores_to_df(
+        args.scores, fieldnames, fieldtypes
+    )  # was: , filter=True)
 
     # Configure & show the box plot for the ratings
 

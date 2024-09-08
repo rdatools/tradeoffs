@@ -74,7 +74,7 @@ scripts/score_ensemble.py \
 --no-debug
 
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
-
+#@ - HERE - Remove the filter and re-run the script.
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_metadata.json \
@@ -177,6 +177,7 @@ scripts/find_frontiers.py \
 
 # ID the notable maps in the augmented ensemble (from 'rdaensemble')
 
+#@ TODO - What about filtering?
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_metadata.json \
@@ -190,7 +191,6 @@ scripts/make_box_plot.py \
 --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20U_boxplot.svg \
 --no-debug
 
-#@ HERE
 # Make a statistics table (from 'tradeoffs')
 
 scripts/make_stats_table.py \
@@ -207,8 +207,9 @@ scripts/make_ratings_table.py \
 
 # MANUAL - Created focus scores by hand.
 
-#@ TODO - Need to generate the notables CSV.
 # Make scatter plots & legend (from 'tradeoffs')
+#@ TODO - Need to generate the notables CSV.
+#@ TODO - Need to generate the focus scores CSV.
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
@@ -223,6 +224,7 @@ scripts/make_scatter_plots.py \
 
 # MANUAL - Move the legend.CSV from docs/assets/images to the docs/_data directory.
 
+#@ - TODO
 # Deploy the results (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC

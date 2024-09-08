@@ -20,6 +20,7 @@ import warnings
 
 warnings.warn = lambda *args, **kwargs: None
 
+import math
 import pandas as pd
 
 from rdabase import require_args, write_csv
@@ -36,7 +37,9 @@ def main() -> None:
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes, filter=True)
+    df: pd.DataFrame = scores_to_df(
+        args.scores, fieldnames, fieldtypes
+    )  # was: , filter=True)
 
     cols: List[str] = ["count", "mean", "std", "min", "25%", "50%", "75%", "max"]
     rows: List[Dict[str, Any]] = []
@@ -45,7 +48,13 @@ def main() -> None:
         stats: Dict = {}
 
         for k, v in df_stats.items():
-            stats[k.upper()] = int(v) if k != "std" else v
+            # stats[k.upper()] = int(v) if k != "std" else v
+            if v is None or math.isnan(v):
+                stats[k.upper()] = None
+            elif k == "std":
+                stats[k.upper()] = v
+            else:
+                stats[k.upper()] = int(v)
 
         row: Dict[str, Any] = {}
         row["DIMENSION"] = dimension.capitalize()
@@ -85,8 +94,10 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/ensembles/NC20C_scores.csv",
-        "output": "../../iCloud/fileout/_data/NC20C_statistics.csv",
+        # "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv",
+        "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv",
+        # "output": "../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_statistics.csv",
+        "output": "temp/NC20U_statistics.csv",
     }
     args = require_args(args, args.debug, debug_defaults)
 

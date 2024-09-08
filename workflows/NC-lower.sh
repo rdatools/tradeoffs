@@ -219,8 +219,9 @@ scripts/make_ratings_table.py \
 
 # MANUAL - Create focus scores by hand.
 
-#@ TODO - Need to generate the notables CSV.
 # Make scatter plots & legend (from 'tradeoffs')
+#@ TODO - Need to generate the notables CSV.
+#@ TODO - Need to generate the focus scores CSV.
 
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
