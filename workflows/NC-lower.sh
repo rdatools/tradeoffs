@@ -219,6 +219,7 @@ scripts/make_ratings_table.py \
 
 # MANUAL - Create focus scores by hand.
 
+#@ TODO - Need to generate the notables CSV.
 # Make scatter plots & legend (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
@@ -226,7 +227,7 @@ scripts/make_scatter_plots.py \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers_optimized.json \
---notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
+--notables docs/_data/notable_ratings/NC_2022_Lower_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_focus_scores.csv \
 --prefix NC20L_ \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \

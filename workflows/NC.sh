@@ -153,7 +153,7 @@ scripts/score_ensemble.py \
 
 # Combine the original ensemble & optimized plans scores (from 'tradeoffs')
 
-scripts/COMBINE_SCORES.sh NC
+scripts/COMBINE_SCORES.sh NC C
 
 # Find the optimized frontiers (from 'tradeoffs')
 

@@ -89,7 +89,6 @@ scripts/find_frontiers.py \
 
 # Create ensembles optimizing each ratings dimension (from 'rdaensemble')
 
-#@ HERE
 scripts/recom_ensemble_optimized.py \
 --state NC \
 --size 10000 \
@@ -164,7 +163,8 @@ scripts/score_ensemble.py \
 
 # Combine the original ensemble & optimized plans scores (from 'tradeoffs')
 
-scripts/COMBINE_SCORES.sh NC
+#@ Update
+scripts/COMBINE_SCORES.sh NC U -upper
 
 # Find the optimized frontiers (from 'tradeoffs')
 
@@ -190,6 +190,7 @@ scripts/make_box_plot.py \
 --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20U_boxplot.svg \
 --no-debug
 
+#@ HERE
 # Make a statistics table (from 'tradeoffs')
 
 scripts/make_stats_table.py \
@@ -206,6 +207,7 @@ scripts/make_ratings_table.py \
 
 # MANUAL - Created focus scores by hand.
 
+#@ TODO - Need to generate the notables CSV.
 # Make scatter plots & legend (from 'tradeoffs')
 
 scripts/make_scatter_plots.py \
@@ -213,7 +215,7 @@ scripts/make_scatter_plots.py \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_frontiers_optimized.json \
---notables docs/_data/notable_ratings/NC_2022_Congress_ratings.csv \
+--notables docs/_data/notable_ratings/NC_2022_Upper_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_focus_scores.csv \
 --prefix NC20U \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \

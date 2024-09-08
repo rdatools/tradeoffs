@@ -2,6 +2,7 @@ numpy
 pandas
 plotly
 pytest
+tqdm
 rdabase
 rdaensemble
 rdapy
