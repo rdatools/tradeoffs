@@ -217,6 +217,7 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20L_notable_maps_ratings.csv \
 --no-debug
 
+# MANUAL - Collect ratings for DRA Notable Maps by hand and save them in the tradeoffs/docs/_data/notable_ratings directory.
 # MANUAL - Create focus scores by hand.
 
 # Make scatter plots & legend (from 'tradeoffs')
