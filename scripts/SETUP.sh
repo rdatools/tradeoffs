@@ -5,6 +5,8 @@
 # For example:
 #
 # scripts/SETUP.sh NC
+#
+# TODO - Generalize for congress, upper, and lower like COMBINE_SCORES.sh.
 
 XX=$1
 ROOT_DIR=../../iCloud/fileout/tradeoffs

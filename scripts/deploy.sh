@@ -5,6 +5,8 @@
 # For example:
 #
 # scripts/DEPLOY.sh NC
+# 
+# TODO - Generalize for congress, upper, and lower like COMBINE_SCORES.sh.
 
 XX=$1
 FROM_DIR=../../iCloud/fileout/tradeoffs/${XX}
