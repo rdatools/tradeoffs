@@ -165,7 +165,7 @@ scripts/score_ensemble.py \
 # Combine the original ensemble & optimized plans scores (from 'tradeoffs')
 
 #@ Update
-scripts/COMBINE_SCORES.sh NC U -lower
+scripts/COMBINE_SCORES.sh NC L -lower
 
 # Find the optimized frontiers (from 'tradeoffs')
 
@@ -231,7 +231,6 @@ scripts/make_scatter_plots.py \
 
 # MANUAL - Move the legend.CSV from docs/assets/images to the docs/_data directory.
 
-#@ - TODO
 # Deploy the results (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC
