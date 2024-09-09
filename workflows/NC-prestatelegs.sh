@@ -193,7 +193,7 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
-# MANUAL - Create focus scores by hand, and save them in the fileout/tradeoffs/NC/ensembles-upper directory.
+# MANUAL - Created focus scores by hand.
 
 # Make scatter plots & legend (from 'tradeoffs')
 
