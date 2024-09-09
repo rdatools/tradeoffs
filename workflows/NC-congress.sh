@@ -231,7 +231,7 @@ scripts/make_scatter_plots.py \
 
 # MANUAL - Move the legend.CSV from docs/assets/images to the docs/_data directory.
 
-# Deploy the results (from 'tradeoffs')
+# Deploy the results (from 'tradeoffs') -- once per state, after all types of plans are complete.
 
 scripts/DEPLOY.sh NC
 

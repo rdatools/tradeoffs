@@ -1,14 +1,14 @@
 #!/bin/bash
 #
-# Copy the artifacts for a state from fileout to docs
+# Copy the artifacts for a state from fileout to the docs/ subdirectory.
+# Note - This copies *all* the artifacts for a state (congress, upper, & lower).
 #
 # For example:
 #
 # scripts/DEPLOY.sh NC
-# 
-# TODO - Generalize for congress, upper, and lower like COMBINE_SCORES.sh.
 
 XX=$1
+
 FROM_DIR=../../iCloud/fileout/tradeoffs/${XX}
 TO_DIR=docs
 
