@@ -93,6 +93,7 @@ scripts/find_frontiers.py \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers.json \
 --filter \
+--roughlyequal 0.05 \
 --verbose \
 --no-debug
 

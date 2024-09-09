@@ -74,12 +74,13 @@ scripts/score_ensemble.py \
 --no-debug
 
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
-#@ - HERE - Remove the filter and re-run the script.
+
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_frontiers.json \
 --filter \
+--roughlyequal 0.05 \
 --verbose \
 --no-debug
 

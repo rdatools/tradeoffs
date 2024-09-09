@@ -13,16 +13,20 @@ import pandas as pd
 
 from rdaensemble.general import ratings_dimensions
 
-from .constants import *
+# from .constants import *
 from .score import is_realistic
 
 
-def filter_scores(scores: Dict[str, str]) -> bool:
+def filter_scores(
+    scores: Dict[str, str],
+    *,
+    roughly_equal: float = 0.01,
+) -> bool:
     """Filter out maps that don't have 'roughly equal' population or are 'unrealistic'."""
 
     if "population_deviation" in scores:
         population_deviation: float = float(scores["population_deviation"])
-        if population_deviation > (pop_threshold * 2):
+        if population_deviation > (roughly_equal * 2):  # was: (pop_threshold * 2):
             return False
 
     ratings: List[int | float] = [int(scores[d]) for d in ratings_dimensions]
@@ -38,6 +42,7 @@ def scores_to_df(
     fieldtypes: List[Callable],
     *,
     filter=False,
+    roughly_equal: float = 0.01,
     verbose=False,
 ) -> pd.DataFrame:
     """Convert ratings in a scores CSV file into a Pandas dataframe."""
@@ -52,7 +57,7 @@ def scores_to_df(
         for row in reader:
             total += 1
             if filter:
-                if filter_scores(row):
+                if filter_scores(row, roughly_equal=roughly_equal):
                     filtered += 1
                     scores.append(row)
             else:

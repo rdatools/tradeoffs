@@ -47,6 +47,7 @@ def main() -> None:
         fieldnames,
         fieldtypes,
         filter=args.filter,
+        roughly_equal=args.roughlyequal,
         verbose=args.verbose,
     )
     metadata: Dict[str, Any] = read_json(args.metadata)
@@ -89,6 +90,12 @@ def parse_args():
         help="A CSV ensemble of scores including ratings to plot",
     )
     parser.add_argument(
+        "--roughlyequal",
+        type=float,
+        default=0.01,
+        help="'Roughly equal' population threshold",
+    )
+    parser.add_argument(
         "--metadata",
         type=str,
         help="Metadata JSON for the scoring CSV",
@@ -119,7 +126,7 @@ def parse_args():
         "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv",
         "metadata": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json",
         "frontier": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json",
-        "filter": False,
+        "filter": True,
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)
