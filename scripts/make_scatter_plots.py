@@ -43,16 +43,27 @@ def main() -> None:
     """Make scatter plots for pairs of ratings dimensions for the plans in an unbiased ensemble and an optimized one."""
 
     args: argparse.Namespace = parse_args()
+    filter: bool = not args.nofilter
 
     # Transform the ratings from a score CSV into a Pandas DataFrame
 
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes, filter=True)
+    df: pd.DataFrame = scores_to_df(
+        args.scores,
+        fieldnames,
+        fieldtypes,
+        roughly_equal=args.roughlyequal,
+        filter=filter,
+    )
     if args.more:
         more_df: pd.DataFrame = scores_to_df(
-            args.more, fieldnames, fieldtypes, filter=False
+            args.more,
+            fieldnames,
+            fieldtypes,
+            roughly_equal=args.roughlyequal,
+            filter=filter,
         )
 
     # Read the frontier from a JSON file
@@ -467,6 +478,15 @@ def parse_args():
         type=str,
         default="",
         help="The plot filename suffix",
+    )
+    parser.add_argument(
+        "--roughlyequal",
+        type=float,
+        default=0.01,
+        help="'Roughly equal' population threshold",
+    )
+    parser.add_argument(
+        "--nofilter", dest="nofilter", action="store_true", help="Don't filter plans"
     )
     parser.add_argument(
         "-o",

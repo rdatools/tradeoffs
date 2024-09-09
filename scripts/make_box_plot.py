@@ -35,6 +35,7 @@ def main() -> None:
     """Make a box plot of the ratings for the plans in an ensemble."""
 
     args: argparse.Namespace = parse_args()
+    filter: bool = not args.nofilter
 
     # Transform the ratings from a score CSV into a Pandas DataFrame
 
@@ -42,8 +43,12 @@ def main() -> None:
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
     df: pd.DataFrame = scores_to_df(
-        args.scores, fieldnames, fieldtypes
-    )  # was: , filter=True)
+        args.scores,
+        fieldnames,
+        fieldtypes,
+        roughly_equal=args.roughlyequal,
+        filter=filter,
+    )
 
     # Configure & show the box plot for the ratings
 
@@ -122,6 +127,15 @@ def parse_args():
         "--scores",
         type=str,
         help="A CSV ensemble of scores including ratings to plot",
+    )
+    parser.add_argument(
+        "--roughlyequal",
+        type=float,
+        default=0.01,
+        help="'Roughly equal' population threshold",
+    )
+    parser.add_argument(
+        "--nofilter", dest="nofilter", action="store_true", help="Don't filter plans"
     )
     parser.add_argument(
         "--focus",

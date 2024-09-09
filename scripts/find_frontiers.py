@@ -37,6 +37,8 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
 
+    filter: bool = not args.nofilter
+
     # Read the ratings from a score CSV
 
     fieldnames: List[str] = ["map"] + ratings_dimensions
@@ -46,7 +48,7 @@ def main() -> None:
         args.scores,
         fieldnames,
         fieldtypes,
-        filter=args.filter,
+        filter=filter,
         roughly_equal=args.roughlyequal,
         verbose=args.verbose,
     )
@@ -106,7 +108,7 @@ def parse_args():
         help="Frontier maps JSON file",
     )
     parser.add_argument(
-        "--filter", dest="filter", action="store_true", help="Filter mode"
+        "--nofilter", dest="nofilter", action="store_true", help="Don't filter plans"
     )
 
     parser.add_argument(
@@ -126,7 +128,6 @@ def parse_args():
         "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv",
         "metadata": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json",
         "frontier": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_frontiers_optimized.json",
-        "filter": True,
         "verbose": True,
     }
     args = require_args(args, args.debug, debug_defaults)

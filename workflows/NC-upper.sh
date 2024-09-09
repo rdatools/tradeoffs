@@ -75,11 +75,11 @@ scripts/score_ensemble.py \
 
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
 
+#@ Update - filter; roughlyequal
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_frontiers.json \
---filter \
 --roughlyequal 0.05 \
 --verbose \
 --no-debug
@@ -169,16 +169,17 @@ scripts/COMBINE_SCORES.sh NC U -upper
 
 # Find the optimized frontiers (from 'tradeoffs')
 
+#@ Update - filter; roughlyequal
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_optimized_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_frontiers_optimized.json \
+--roughlyequal 0.05 \
 --verbose \
 --no-debug
 
 # ID the notable maps in the augmented ensemble (from 'rdaensemble')
 
-#@ TODO - What about filtering?
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_metadata.json \
@@ -187,15 +188,19 @@ scripts/id_notable_maps.py \
 
 # Make a box plot (from 'tradeoffs')
 
+#@ Update - roughlyequal
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_augmented.csv \
+--roughlyequal 0.05 \
 --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20U_boxplot.svg \
 --no-debug
 
 # Make a statistics table (from 'tradeoffs')
 
+#@ Update - roughlyequal
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
+--roughlyequal 0.05 \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20U_statistics.csv \
 --no-debug
 
@@ -211,6 +216,7 @@ scripts/make_ratings_table.py \
 
 # Make scatter plots & legend (from 'tradeoffs')
 
+#@ Update - roughlyequal
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores_augmented.csv \
@@ -218,6 +224,7 @@ scripts/make_scatter_plots.py \
 --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/NC_2022_Upper_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_focus_scores.csv \
+--roughlyequal 0.05 \
 --prefix NC20U \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug

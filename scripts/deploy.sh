@@ -10,8 +10,5 @@ XX=$1
 FROM_DIR=../../iCloud/fileout/tradeoffs/${XX}
 TO_DIR=docs
 
-# TODO - DELETE
-# mv $FROM_DIR/docs/assets/images/*.csv $FROM_DIR/_data
-
 cp $FROM_DIR/docs/assets/images/*.svg $TO_DIR/assets/images
 cp $FROM_DIR/docs/_data/*.csv $TO_DIR/_data
