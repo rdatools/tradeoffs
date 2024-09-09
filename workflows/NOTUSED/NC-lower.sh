@@ -1,6 +1,5 @@
 # NC workflow for the lower state house (120 districts)
 
-#@ Update
 # Set up the state (from 'tradeoffs'), once per state
 
 #@ Update - alt. ensemble directories
@@ -31,6 +30,21 @@ scripts/rmfrsp_ensemble.py \
 --log temp/NC20L_RMfRSP_100_log.txt \
 --no-debug
 
+#@ HERE
+#@ Update - or different script + plan_type; roughlyequal; temp directory
+scripts/rmfrst_ensemble.py \
+--state NC \
+--plantype lower \
+--roughlyequal 0.10 \
+--size 100 \
+--data ../rdabase/data/NC/NC_2020_data.csv \
+--shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
+--graph ../rdabase/data/NC/NC_2020_graph.json \
+--plans temp/NC20L_RMfRST_100_plans.json \
+--log temp/NC20L_RMfRST_100_log.txt \
+--no-debug \
+-v
+
 # Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
 
 #@ Update - plans name; temp directory; root_map
@@ -49,7 +63,6 @@ scripts/approx_root_map.py \
 
 # Generate an ensemble of 10,000 plans (from 'rdaensemble')
 
-#@ Update - roughlyequal
 scripts/recom_ensemble.py \
 --state NC \
 --size 10000 \
@@ -75,15 +88,16 @@ scripts/score_ensemble.py \
 
 # Find the ratings frontiers in the ensemble (from 'tradeoffs')
 
-#@ Update - filter; roughlyequal
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers.json \
+--filter \
 --roughlyequal 0.05 \
 --verbose \
 --no-debug
 
+#@ HERE
 # MANUAL - Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
 # - These maps must assign all precincts to districts, even water-only ones; and
 # - Must have 'roughly equal' district populations using the base 2020 census.
@@ -164,17 +178,14 @@ scripts/score_ensemble.py \
 
 # Combine the original ensemble & optimized plans scores (from 'tradeoffs')
 
-#@ Update
-scripts/COMBINE_SCORES.sh NC U -lower
+scripts/COMBINE_SCORES.sh NC
 
 # Find the optimized frontiers (from 'tradeoffs')
 
-#@ Update - filter; roughlyequal
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_optimized_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers_optimized.json \
---roughlyequal 0.05 \
 --verbose \
 --no-debug
 
@@ -188,19 +199,15 @@ scripts/id_notable_maps.py \
 
 # Make a box plot (from 'tradeoffs')
 
-#@ Update - roughlyequal
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
---roughlyequal 0.05 \
 --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20L_boxplot.svg \
 --no-debug
 
 # Make a statistics table (from 'tradeoffs')
 
-#@ Update - roughlyequal
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
---roughlyequal 0.05 \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20L_statistics.csv \
 --no-debug
 
@@ -216,22 +223,19 @@ scripts/make_ratings_table.py \
 
 # Make scatter plots & legend (from 'tradeoffs')
 
-#@ Update - roughlyequal
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers_optimized.json \
---notables docs/_data/notable_ratings/NC_2022_Upper_ratings.csv \
+--notables docs/_data/notable_ratings/NC_2022_Lower_ratings.csv \
 --focus ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_focus_scores.csv \
---roughlyequal 0.05 \
---prefix NC20L \
+--prefix NC20L_ \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
 # MANUAL - Move the legend.CSV from docs/assets/images to the docs/_data directory.
 
-#@ - TODO
 # Deploy the results (from 'tradeoffs')
 
 scripts/DEPLOY.sh NC
