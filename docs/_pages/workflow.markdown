@@ -1,4 +1,7 @@
-# Workflow
+layout: page
+title: Workflow
+permalink: workflow/
+---
 
 This page documents the overall workflow for generating the trade-off frontiers for a state.
 Most of the steps are a series of shell scripts noted below.

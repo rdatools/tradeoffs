@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Revised home page to only include NC Congress
+- Revised home page to only include NC Congress ...
 - Generalized workflow for state legislative plans, and refactored it into manual and automated steps.
 - Integrated new ensemble package for processing state legislative plans.
 - Fleshed out the data &amp; proxy metrics info on the methodology page.
