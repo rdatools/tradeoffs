@@ -1,55 +1,8 @@
-# NC workflow for congressional districts (14 districts)
+### NC workflow for congress (14 districts) ###
 
-#@ Update
-# Set up the state (from 'tradeoffs'), once per state
+# From 'rdaensemble'
+# Generate an unbiased ensemble, score it, and find the pairwise ratings frontiers.
 
-#@ Update - alt. ensemble directories
-scripts/SETUP.sh NC
-
-# Extract the data for the state (from 'rdabase')
-# Re-simplify the shapes, if necessary.
-
-#@ Update
-# Get a root map:
-# - Use the root map in root_maps -or-
-# - Approximate a new root map (next) -or-
-# - Construct one by hand, using a map in DRA as a starting point
-# Note: Districts should be indexed [1, 2, 3, ...]!
-
-# Generate an ensemble of 100 random plans (from 'rdaensemble')
-
-#@ Update - plan_type; roughlyequal; temp directory
-scripts/rmfrsp_ensemble.py \
---state NC \
---plantype upper \
---roughlyequal 0.01 \
---size 100 \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---plans temp/NC20C_RMfRSP_100_plans.json \
---log temp/NC20C_RMfRSP_100_log.txt \
---no-debug
-
-# Approximate a root map with them (from 'rdaroot') for use in generating an unbiased ensemble
-
-#@ Update - plans name; temp directory; root_map
-scripts/approx_root_map.py \
---state NC \
---plans ../rdaensemble/temp/NC20C_RMfRSP_100_plans.json \
---data ../rdabase/data/NC/NC_2020_data.csv \
---shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
---graph ../rdabase/data/NC/NC_2020_graph.json \
---map temp/NC20C_root_map.csv \
---candidates temp/NC20C_rootcandidates.json \
---log temp/NC20C_rootlog.txt \
---no-debug
-
-# Copy the result to the tradeoffs/root_maps directory as NC20C_root_map.csv
-
-# Generate an ensemble of 10,000 plans (from 'rdaensemble')
-
-#@ Update - roughlyequal
 scripts/recom_ensemble.py \
 --state NC \
 --size 10000 \
@@ -61,11 +14,9 @@ scripts/recom_ensemble.py \
 --log ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_log.txt \
 --no-debug
 
-# Score the ensemble (from 'rdaensemble')
-
 scripts/score_ensemble.py \
 --state NC \
---plantype upper \
+--plantype congress \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
@@ -73,9 +24,6 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --no-debug
 
-# Find the ratings frontiers in the ensemble (from 'tradeoffs')
-
-#@ Update - filter; roughlyequal
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_metadata.json \
@@ -84,11 +32,10 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-# MANUAL - Hand edit "no splits" versions of the DRA Notable Maps. Save them in tradeoffs/notable_maps/NC/.
-# - These maps must assign all precincts to districts, even water-only ones; and
-# - Must have 'roughly equal' district populations using the base 2020 census.
-
-# Create ensembles optimizing each ratings dimension (from 'rdaensemble')
+# From 'rdaensemble'
+# Optimize along each ratings dimension, combine the better plans into another ensemble, and score it.
+# Combine the unbiased and optimized ratings, and find the new pairwise ratings frontiers.
+# Finally, identify the notable maps in the augmented ensemble.
 
 scripts/recom_ensemble_optimized.py \
 --state NC \
@@ -140,8 +87,6 @@ scripts/recom_ensemble_optimized.py \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
 --no-debug
 
-# Combine the optimized ensembles (from 'rdaensemble')
-
 scripts/combine_ensembles.py \
 --ensembles ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_proportionality.json \
             ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_competitiveness.json \
@@ -150,8 +95,6 @@ scripts/combine_ensembles.py \
             ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized_splitting.json \
 --output ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_optimized.json \
 --no-debug
-
-# Score the optimized plans (from 'rdaensemble')
 
 scripts/score_ensemble.py \
 --state NC \
@@ -162,14 +105,8 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized.csv \
 --no-debug
 
-# Combine the original ensemble & optimized plans scores (from 'tradeoffs')
+scripts/COMBINE_SCORES.sh NC C 
 
-#@ Update
-scripts/COMBINE_SCORES.sh NC C
-
-# Find the optimized frontiers (from 'tradeoffs')
-
-#@ Update - filter; roughlyequal
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_optimized_metadata.json \
@@ -178,45 +115,33 @@ scripts/find_frontiers.py \
 --verbose \
 --no-debug
 
-# ID the notable maps in the augmented ensemble (from 'rdaensemble')
-
 scripts/id_notable_maps.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_metadata.json \
 --notables ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_notable_maps.json \
 --no-debug
 
-# Make a box plot (from 'tradeoffs')
+# From 'tradeoffs'
+# Generate the artifacts for the website: a box plot, a table of statistics,
+# a ratings table for the notable maps, pairwise scatter plots, and a legend.
 
-#@ Update - roughlyequal
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
 --roughlyequal 0.01 \
 --image ../../iCloud/fileout/tradeoffs/NC/docs/assets/images/NC20C_boxplot.svg \
 --no-debug
 
-# Make a statistics table (from 'tradeoffs')
-
-#@ Update - roughlyequal
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --roughlyequal 0.01 \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_statistics.csv \
 --no-debug
 
-# Make a notable maps ratings table (from 'tradeoffs')
-
 scripts/make_ratings_table.py \
 --notables ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_notable_maps.json \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_notable_maps_ratings.csv \
 --no-debug
 
-# MANUAL - Collect ratings for DRA Notable Maps by hand, and save them in the tradeoffs/docs/_data/notable_ratings directory.
-# MANUAL - Create focus scores by hand, and save them in the fileout/tradeoffs/NC/ensembles directory.
-
-# Make scatter plots & legend (from 'tradeoffs')
-
-#@ Update - roughlyequal
 scripts/make_scatter_plots.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
 --more ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_augmented.csv \
@@ -229,14 +154,4 @@ scripts/make_scatter_plots.py \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images \
 --no-debug
 
-# MANUAL - Move the legend.CSV from docs/assets/images to the docs/_data directory.
-
-# Deploy the results (from 'tradeoffs') -- once per state, after all types of plans are complete.
-
-scripts/DEPLOY.sh NC
-
-# MANUAL - Activate the state in the site:
-# - Uncomment out the <div> for the state in docs/_pages/states.markdown
-# - Add the state to the list in docs/index.markdown
-
-# END
+### END ###

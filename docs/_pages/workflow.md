@@ -1,8 +1,8 @@
 # Workflow
 
 This page documents the overall workflow for generating the trade-off frontiers for a state.
-Most of the steps are automated and collected together into the single multi-command script noted below.
-This note describes the manual steps that are required, before and after running that script.
+Most of the steps are a series of shell scripts noted below.
+This note describes the manual steps that are required, before and after running those scripts.
 
 These notes assume that you have these `rdatools` repositories cloned to the same parent directory:
 
@@ -145,8 +145,9 @@ As above, the capital letter after the `20` is the type of plan (C for Congress,
 
 ## Run the command-line script for the state
 
-With all those inputs prepared, run the automatically generated über script for the state and type of plan.
-For example:
+With all those inputs prepared, run each of the automatically generated shell scripts 
+for the state and type of plan, one at a time.
+For example, run the scripts for North Carolina Congress are in this file:
 
 ```bash
 workflows/NC-congress.sh
