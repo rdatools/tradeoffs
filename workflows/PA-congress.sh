@@ -1,0 +1,157 @@
+### PA workflow for congress (17 districts) ###
+
+# From 'rdaensemble'
+# Generate an unbiased ensemble, score it, and find the pairwise ratings frontiers.
+
+scripts/recom_ensemble.py \
+--state PA \
+--size 10000 \
+--roughlyequal 0.01 \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--root ../tradeoffs/root_maps/PA20C_root_map.csv \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans.json \
+--log ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_log.txt \
+--no-debug
+
+scripts/score_ensemble.py \
+--state PA \
+--plantype congress \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans.json \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores.csv \
+--no-debug
+
+scripts/find_frontiers.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores.csv \
+--metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_metadata.json \
+--frontier ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_frontiers.json \
+--roughlyequal 0.01 \
+--verbose \
+--no-debug
+
+# From 'rdaensemble'
+# Optimize along each ratings dimension, combine the better plans into another ensemble, and score it.
+# Combine the unbiased and optimized ratings, and find the new pairwise ratings frontiers.
+# Finally, identify the notable maps in the augmented ensemble.
+
+scripts/recom_ensemble_optimized.py \
+--state PA \
+--size 10000 \
+--optimize proportionality \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_proportionality.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state PA \
+--size 10000 \
+--optimize competitiveness \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_competitiveness.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state PA \
+--size 10000 \
+--optimize minority \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_minority.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state PA \
+--size 10000 \
+--optimize compactness \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_compactness.json \
+--no-debug
+
+scripts/recom_ensemble_optimized.py \
+--state PA \
+--size 10000 \
+--optimize splitting \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_splitting.json \
+--no-debug
+
+scripts/combine_ensembles.py \
+--ensembles ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_proportionality.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_competitiveness.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_minority.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_compactness.json \
+            ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized_splitting.json \
+--output ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized.json \
+--no-debug
+
+scripts/score_ensemble.py \
+--state PA \
+--plans ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_plans_optimized.json \
+--data ../rdabase/data/PA/PA_2020_data.csv \
+--shapes ../rdabase/data/PA/PA_2020_shapes_simplified.json \
+--graph ../rdabase/data/PA/PA_2020_graph.json \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_optimized.csv \
+--no-debug
+
+scripts/COMBINE_SCORES.sh PA C 
+
+scripts/find_frontiers.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
+--metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_optimized_metadata.json \
+--frontier ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_frontiers_optimized.json \
+--roughlyequal 0.01 \
+--verbose \
+--no-debug
+
+scripts/id_notable_maps.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
+--metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_metadata.json \
+--notables ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_notable_maps.json \
+--no-debug
+
+# From 'tradeoffs'
+# Generate the artifacts for the website: a box plot, a table of statistics,
+# a ratings table for the notable maps, pairwise scatter plots, and a legend.
+
+scripts/make_box_plot.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
+--roughlyequal 0.01 \
+--image ../../iCloud/fileout/tradeoffs/PA/docs/assets/images/PA20C_boxplot.svg \
+--no-debug
+
+scripts/make_stats_table.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores.csv \
+--roughlyequal 0.01 \
+--output ../../iCloud/fileout/tradeoffs/PA/docs/_data/PA20C_statistics.csv \
+--no-debug
+
+scripts/make_ratings_table.py \
+--notables ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_notable_maps.json \
+--output ../../iCloud/fileout/tradeoffs/PA/docs/_data/PA20C_notable_maps_ratings.csv \
+--no-debug
+
+scripts/make_scatter_plots.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores.csv \
+--more ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
+--frontier ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_frontiers.json \
+--pushed ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_frontiers_optimized.json \
+--notables docs/_data/notable_ratings/PA_2022_Upper_ratings.csv \
+--focus ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_focus_scores.csv \
+--roughlyequal 0.01 \
+--prefix PA20C \
+--output ../../iCloud/fileout/tradeoffs/PA/docs/assets/images \
+--no-debug
+
+### END ###
