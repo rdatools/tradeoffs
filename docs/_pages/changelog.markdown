@@ -7,6 +7,7 @@ permalink: changelog/
 This page tracks major changes to the site, in reverse chronological order:
 
 - Added upper & lower state houses for NC; updates site to show congress, upper, & lower house trade-offs.
+- Generalized workflow for state legislative plans, and refactored it into manual and automated steps.
 - Integrated new ensemble package for processing state legislative plans.
 - Fleshed out the data &amp; proxy metrics info on the methodology page.
 - Added a note about trade-offs varying by state, etc.
