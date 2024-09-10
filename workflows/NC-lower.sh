@@ -24,6 +24,7 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
 --no-debug
 
+# From 'tradeoffs'
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_metadata.json \
@@ -107,18 +108,19 @@ scripts/score_ensemble.py \
 
 scripts/COMBINE_SCORES.sh NC U -lower
 
+scripts/id_notable_maps.py \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
+--metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_metadata.json \
+--notables ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_notable_maps.json \
+--no-debug
+
+# From 'tradeoffs'
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_optimized_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_frontiers_optimized.json \
 --roughlyequal 0.05 \
 --verbose \
---no-debug
-
-scripts/id_notable_maps.py \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_augmented.csv \
---metadata ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_scores_metadata.json \
---notables ../../iCloud/fileout/tradeoffs/NC/ensembles-lower/NC20L_notable_maps.json \
 --no-debug
 
 # From 'tradeoffs'

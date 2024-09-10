@@ -24,6 +24,7 @@ scripts/score_ensemble.py \
 --scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores.csv \
 --no-debug
 
+# From 'tradeoffs'
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_metadata.json \
@@ -107,18 +108,19 @@ scripts/score_ensemble.py \
 
 scripts/COMBINE_SCORES.sh PA C 
 
+scripts/id_notable_maps.py \
+--scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
+--metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_metadata.json \
+--notables ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_notable_maps.json \
+--no-debug
+
+# From 'tradeoffs'
 scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_optimized_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_frontiers_optimized.json \
 --roughlyequal 0.01 \
 --verbose \
---no-debug
-
-scripts/id_notable_maps.py \
---scores ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_augmented.csv \
---metadata ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_scores_metadata.json \
---notables ../../iCloud/fileout/tradeoffs/PA/ensembles/PA20C_notable_maps.json \
 --no-debug
 
 # From 'tradeoffs'
