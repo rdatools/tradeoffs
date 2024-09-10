@@ -95,9 +95,9 @@ Finally, copy the resulting root map to the `tradeoffs/root_maps` directory,
 with a file name of the form `NC20C_root_map.csv`
 where the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
 
-## Capture the DRA Notable Maps
+## Capture the DRA notable maps
 
-Another input that this workflow needs is the ratings for DRA Notable Maps for the state and type of plan.
+Another input that this workflow needs is the ratings for DRA notable maps for the state and type of plan.
 
 Collect ratings for these maps into a CSV file modeled after `NC_2022_Congress.csv` 
 in the `tradeoffs/docs/_data/notable_ratings` directory.
@@ -109,10 +109,10 @@ Make sure the maps use these datasets:
 * Voting Age: Voting Age Pop 2020, and
 * Election: Composite 2016-2020
 
-Sometimes the map automatically selected by DRA as the "Notable Map" is patently not a "reasonable" map,
+Sometimes the map automatically selected by DRA as the "notable map" is patently not a "reasonable" map,
 in the sense that it is clearly gaming DRA filtering and would never be accepted as a real map.
 When this occurs, find a replacement and use it as a proxy.
-This is the DRA search query for finding alternatives to Notable Maps:
+This is the DRA search query for finding alternatives to notable maps:
 
 ```
 cycle:2020
@@ -125,10 +125,10 @@ and (proportionality: >= 20 and competitiveness: >= 10 and compactness: >= 20 an
 
 Just replace the `state`, `planType`, and number of `districts` as appropriate.
 
-## Create "no splits" versions of the DRA Notable Maps
+## Create "no splits" versions of the DRA notable maps
 
-The workflow also needs is versions of these Notable Maps that do not split any precincts.
-Use DRA to duplicate the Notable Maps, and then manually edit them to remove any splits.
+The workflow also needs is versions of these notable maps that do not split any precincts.
+Use DRA to duplicate the notable maps, and then manually edit them to remove any splits.
 Export the precinct-assignment files from DRA.
 Rename them to be of the form `NC_2022_Congress_Proportional_NOSPLITS.csv`.
 Save them in the `tradeoffs/notable_maps/NC/` directory.
