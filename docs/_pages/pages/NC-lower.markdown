@@ -1,6 +1,6 @@
 ---
 layout: state
-title: North Carolina Lower State House
+title: North Carolina State House
 permalink: states/NC-lower/
 
 small-radar-width: 300

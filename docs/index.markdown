@@ -31,9 +31,11 @@ Our preliminary results show several things:
 
 These findings are meant to be directionally illustrative rather than specifically descriptive.
 
-We've enabled one state so far: 
+We've only enabled a few state &amp; plan types combinations so far: 
 
-* NC <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/NC-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/NC-lower">lower state house</a>.
+* NC -- <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/NC-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/NC-lower">lower state house</a>.
+* MD -- <a href="{{ site.baseurl }}/states/MD-congress">Congress</a>.
+* PA -- <a href="{{ site.baseurl }}/states/PA-congress">Congress</a>.
 
 More will follow.
 
