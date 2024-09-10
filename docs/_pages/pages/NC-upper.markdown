@@ -1,15 +1,15 @@
 ---
 layout: state
-title: North Carolina Congress
-permalink: states/NC-congress/
+title: North Carolina Upper State House
+permalink: states/NC-upper/
 
 small-radar-width: 300
 big-radar-width: 500
 map-width: 700
 
 xx: "NC"
-plan-type: "Congress"
-suffix: "20C"
+plan-type: "Upper"
+suffix: "20U"
 ---
 
 {% assign xx = page.xx %}

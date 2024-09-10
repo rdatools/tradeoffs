@@ -9,7 +9,9 @@ map-width: 700
 {{ content }}
 
 {% assign xx = page.xx %}
-{% assign suffix = "20C" %}
+{% assign plantype = page.plantype %}
+{% assign suffix = page.suffix %}
+<!-- {% assign suffix = "20C" %} -->
 
 <!-- COMMON GRID FUNCTIONALITY & STYLES -->
 
@@ -146,9 +148,13 @@ map-width: 700
 <p>For comparison, this table shows the ratings for the human-drawn "notable maps" in DRA.</p>
 
 {% capture dra-ratings-file %}
-{{ xx }}_2022_Congress_ratings
+{{ xx }}_2022_{{ plantype }}_ratings
 {% endcapture %}
 {% assign dra-ratings-file = dra-ratings-file | strip_newlines %}
+<!-- {% capture dra-ratings-file %}
+{{ xx }}_2022_Congress_ratings
+{% endcapture %}
+{% assign dra-ratings-file = dra-ratings-file | strip_newlines %} -->
 
 <!-- {% assign dra-ratings = site.data[dra-ratings-file] %} -->
 

@@ -31,7 +31,10 @@ Our preliminary results show several things:
 
 These findings are meant to be directionally illustrative rather than specifically descriptive.
 
-We've enabled one state so far: NC <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>.
+We've enabled one state so far: 
+
+* NC <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/NC-upper">Upper state house</a>, <a href="{{ site.baseurl }}/states/NC-lower">Lower state house</a>.
+
 More will follow.
 
 What we do here is different from the first iteration of the site, 
