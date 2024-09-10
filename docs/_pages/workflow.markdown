@@ -18,7 +18,7 @@ These notes assume that you have these `rdatools` repositories cloned to the sam
 These notes also assume a working directory outside the above repositories not under source control.
 I use `fileout/tradeoffs`, for example, and have a subdirectory for each state, such as `fileout/tradeoffs/NC`.
 
-## Extract the data, shapes, and graph for the state
+## Step 1 - Extract the data, shapes, and graph for the state
 
 If they are not already extracted into the `rdabase/data/` directory,
 preprocess the data, shapes, and contiguity graph for a state using the `rdabase/scripts/preprocess_state.py` script.
@@ -32,7 +32,7 @@ Note: For states where the shapes aren't properly connected,
 you need to use the `-a` flag and a file of graph modifications.
 An example of the graph modifications can be found in the `rdabase/data/NY/NY_2020_vtd_contiguity_mods.csv`.
 
-## Set up the state for trade-off analysis
+## Step 2 - Set up the state for trade-off analysis
 
 To start on the trade-off analysis proper, first set up the state,
 by running the `SETUP.sh` script from the root of this project.
@@ -42,7 +42,7 @@ For example, to set up North Carolina, run:
 scripts/SETUP.sh NC
 ```
 
-## Create an approximate 'root map'
+## Step 3 - Create an approximate 'root map'
 
 In addition to the various input "data" files noted above, this workflow needs 
 a 'root map' as the starting point for generating an ensemble of plans.
@@ -95,9 +95,13 @@ Finally, copy the resulting root map to the `tradeoffs/root_maps` directory,
 with a file name of the form `NC20C_root_map.csv`
 where the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
 
-## Capture the DRA notable maps
+## Step 4 - Gather additional data points manually
 
-Another input that this workflow needs is the ratings for DRA notable maps for the state and type of plan.
+The workflow needs three additional data points that must be gathered manually.
+
+### Capture the DRA notable maps
+
+The first are the ratings for DRA notable maps for the state and type of plan.
 
 Collect ratings for these maps into a CSV file modeled after `NC_2022_Congress.csv` 
 in the `tradeoffs/docs/_data/notable_ratings` directory.
@@ -125,9 +129,9 @@ and (proportionality: >= 20 and competitiveness: >= 10 and compactness: >= 20 an
 
 Just replace the `state`, `planType`, and number of `districts` as appropriate.
 
-## Create "no splits" versions of the DRA notable maps
+### Create "no splits" versions of the DRA notable maps
 
-The workflow also needs is versions of these notable maps that do not split any precincts.
+The second are versions of these notable maps that do not split any precincts.
 Use DRA to duplicate the notable maps, and then manually edit them to remove any splits.
 Export the precinct-assignment files from DRA.
 Rename them to be of the form `NC_2022_Congress_Proportional_NOSPLITS.csv`.
@@ -137,9 +141,9 @@ Note: These maps must assign all precincts to districts, even water-only ones, a
 they must have 'roughly equal' district populations using the base 2020 census
 that are appropriate for the type of plan (< 1% for congressional, < 10% for upper and lower state houses).
 
-## Capture ratings for "focus" plans
+### Capture ratings for "focus" plans
 
-The last input required for this workflow is a set of ratings for plans that you want to highlight on the scatter plots.
+The last are the ratings for any plans that you want to highlight on the scatter plots.
 These are called "focus" plans.
 We highlighting the most recent one or two official plans.
 Similar to the process for notable maps above, collect the ratings for these maps into a CSV file modeled after `NC20C_focus_scores.csv`
@@ -147,21 +151,21 @@ in the `fileout/tradeoffs/NC/ensembles` directory.
 As above, the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
 (Note: That location is specific to my personal setup; you should adjust as needed.)
 
-## Run the command-line scripts for the state
+## Steps 5, 6, and 7 - Run the command-line scripts for the state
 
 With all those inputs prepared, run each of the automatically generated shell scripts 
 for the state and type of plan, one at a time.
-For example, run the scripts for North Carolina Congress are in this file:
+For example, the scripts for North Carolina are in this file:
 
 ```bash
-workflows/NC-congress.sh
+workflows/NC.sh
 ```
 
-For each state, there are three such workflows: one for Congress, one for the Upper House, and one for the Lower House.
+The workflow for each state contains three sets of commands: one for Congress, one for the Upper House, and one for the Lower House.
 
 Move the resulting legend CSV from `fileout/tradeoffs/NC/docs/assets/images` to the `docs/_data` directory.
 
-## Deploy the artifacts
+## Step 8 - Deploy the artifacts
 
 Deploy the resulting artifacts from the working directory to the site,
 by running the `DEPLOY.sh` script from the root of this project.
@@ -173,11 +177,11 @@ scripts/DEPLOY.sh NC
 
 Do this once per state, after all types of plans are complete.
 
-## Activate the state in the site
+## Step 9 - Activate the state in the site
 
-To make the artifacts visible on the site, you need to:
+Finally, to make the artifacts visible on the site, you need to:
 
-* Create state and plan type pages in the `tradeoffs/docs/_pages` directory, modeled after the existing ones.
+* Create a state and plan type page in the `tradeoffs/docs/_pages` directory, modeled after the existing ones.
 * Add a link to state and plan type on the `tradeoffs/docs/index.markdown` page.
 
 That's it!
