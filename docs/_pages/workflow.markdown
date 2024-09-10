@@ -147,7 +147,7 @@ in the `fileout/tradeoffs/NC/ensembles` directory.
 As above, the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
 (Note: That location is specific to my personal setup; you should adjust as needed.)
 
-## Run the command-line script for the state
+## Run the command-line scripts for the state
 
 With all those inputs prepared, run each of the automatically generated shell scripts 
 for the state and type of plan, one at a time.
