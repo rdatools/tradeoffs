@@ -31,7 +31,7 @@ Our preliminary results show several things:
 
 These findings are meant to be directionally illustrative rather than specifically descriptive.
 
-We've enabled three states so far: <a href="{{ site.baseurl }}/states/NC">NC</a>, <a href="{{ site.baseurl }}/states/MD">MD</a>, and <a href="{{ site.baseurl }}/states/PA">PA</a>.
+We've enabled one state so far: NC <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>.
 More will follow.
 
 What we do here is different from the first iteration of the site, 
