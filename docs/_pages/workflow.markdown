@@ -101,21 +101,27 @@ The workflow needs three additional data points that must be gathered manually.
 
 ### Capture the DRA notable maps
 
-The first are the ratings for DRA notable maps for the state and type of plan.
+The first data are the ratings for DRA notable maps for the state and type of plan.
 
-Collect ratings for these maps into a CSV file modeled after `NC_2022_Congress.csv` 
-in the `tradeoffs/docs/_data/notable_ratings` directory.
-The files should have the suffix `_Congress.csv`, `_Upper.csv`, or `_Lower.csv` as appropriate.
-Make sure the maps use these datasets:
+For each notable map for the state and type of plan:
 
-* Shapes: 2020 Precincts
-* Census: Total Population 2020
-* Voting Age: Voting Age Pop 2020, and
-* Election: Composite 2016-2020
+*   Open it
+*   Verify that it looks realistic -- more on this below
+*   Duplicate it 
+*   Rename the copy using the form `{xx} 2022 {plan_type} - {dimension}` -- 
+    where `{xx}` is the state abbreviation, `{plan_type}` is `Congress`, `Upper`, or `Lower`, 
+    and `{dimension}` is the notable dimension, `Proportional`, `Competitive`, `Minority`, `Compact`, or `Splitting`
+*   Tag it with the `PG-NOTABLE` label, and add it to the `Trade-offs` group
+*   Collect the ratings into a CSV file modeled after `NC_2022_Congress.csv`
+    in the `tradeoffs/docs/_data/notable_ratings` directory.
+    The files should have the suffix `_Congress.csv`, `_Upper.csv`, or `_Lower.csv` as appropriate.
 
-Sometimes the map automatically selected by DRA as the "notable map" is patently not a "reasonable" map,
-in the sense that it is clearly gaming DRA filtering and would never be accepted as a real map.
-When this occurs, find a replacement and use it as a proxy.
+Verifying that a map looks realistic means making sure that it is not obviously gaming the DRA notable map filtering
+would never be accepted as a real map.
+One way people do this is by using long, thin, water-only river precincts to connect disparate parts of a state.
+Another is by splitting precincts and constructing a similar "bridge" with a thin line of blocks.
+When this occurs, find a replacement map and use it as a proxy for the notable map.
+
 This is the DRA search query for finding alternatives to notable maps:
 
 ```
@@ -127,33 +133,45 @@ and (complete: true and contiguous: true and freeofholes: true and equalpopulati
 and (proportionality: >= 20 and competitiveness: >= 10 and compactness: >= 20 and splitting: >= 20)
 ```
 
-Just replace the `state`, `planType`, and number of `districts` as appropriate.
+Just replace the `state`, `planType`, and number of `districts` as appropriate, and
+try to find the next highest rated realistic map.
+
+Before opening the notable map (or proxy) in the *Analyze* tab to get the ratings, 
+make sure it uses these datasets:
+
+* Shapes: 2020 Precincts
+* Census: Total Population 2020
+* Voting Age: Voting Age Pop 2020, and
+* Election: Composite 2016-2020
+
+Capture those ratings into the CSV file.
 
 ### Create "no splits" versions of the DRA notable maps
 
-The second are versions of these notable maps that do not split any precincts.
+The second input are versions of the notable maps above *that do not split any precincts*.
 Use DRA to duplicate the notable maps, and then manually edit them to remove any splits.
 Export the precinct-assignment files from DRA.
-Rename them to be of the form `NC_2022_Congress_Proportional_NOSPLITS.csv`.
-Save them in the `tradeoffs/notable_maps/NC/` directory.
+Rename them to be of the form `{xx}_2022_{plan_type}_{dimension}_NOSPLITS.csv`, 
+where those variables are the same as above.
+Save these CSVs in the `tradeoffs/notable_maps/{xx}/` directory.
 
 Note: These maps must assign all precincts to districts, even water-only ones, and
 they must have 'roughly equal' district populations using the base 2020 census
-that are appropriate for the type of plan (< 1% for congressional, < 10% for upper and lower state houses).
+that are appropriate for the type of plan (i.e., < 1% for congressional, < 10% for upper and lower state houses).
 
 ### Capture ratings for "focus" plans
 
-The last are the ratings for any plans that you want to highlight on the scatter plots.
+The last data to gather are the ratings for any plans that you want to highlight on the scatter plots.
 These are called "focus" plans.
-We highlighting the most recent one or two official plans.
-Similar to the process for notable maps above, collect the ratings for these maps into a CSV file modeled after `NC20C_focus_scores.csv`
-in the `fileout/tradeoffs/NC/ensembles` directory.
-As above, the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
-(Note: That location is specific to my personal setup; you should adjust as needed.)
+We highlight the most recent one or two official plans.
+Similar to the process for notable maps above, collect the ratings for these maps into a CSV file modeled after 
+`{xx}20{T}_focus_scores.csv` in the output directory, `fileout/tradeoffs/{xx}/ensembles`,
+where `{T}` indicates the type of plan (C for Congress, U for Upper, L for Lower).
+(Note: That output directory is specific to my personal setup. You should adjust as needed.)
 
 ## Steps 5, 6, and 7 - Run the command-line scripts for the state
 
-With all those inputs prepared, run each of the three automatically generated shell scripts 
+With all those inputs in hand, run each of the three automatically generated shell scripts 
 for the state and type of plan, one at a time.
 For example, the scripts for North Carolina are in these files:
 
@@ -163,9 +181,7 @@ workflows/NC-upper.txt
 workflows/NC-lower.txt
 ```
 
-The workflow for each state contains three sets of commands: one for Congress, one for the Upper House, and one for the Lower House.
-
-Move the resulting legend CSV from `fileout/tradeoffs/NC/docs/assets/images` to the `docs/_data` directory.
+Move the resulting legend CSVs from `fileout/tradeoffs/NC/docs/assets/images` to the `docs/_data` directory.
 
 ## Step 8 - Deploy the artifacts
 
