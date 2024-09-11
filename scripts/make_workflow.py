@@ -5,7 +5,9 @@ GENERATE THE WORKFLOW FOR A STATE
 
 For example:
 
-$ scripts/make_workflow.py --state NC > workflows/NC.sh
+$ scripts/make_workflow.py --state NC --type congress > workflows/NC-congress.txt
+$ scripts/make_workflow.py --state NC --type upper > workflows/NC-upper.txt
+$ scripts/make_workflow.py --state NC --type lower > workflows/NC-lower.txt
 
 For documentation, type:
 
@@ -26,32 +28,43 @@ def main() -> None:
     args: argparse.Namespace = parse_args()
 
     xx: str = args.state
+    plan_type: str = args.type
+    assert plan_type in ["congress", "upper", "lower"]
 
-    print(f"### Workflows for {xx} ###")
+    print(f"### Workflow for {xx}-{plan_type} ###")
     print()
     print(
-        f"# Make sure you have done Steps 1-3 in the overall [workflow description](https://rdatools.github.io/tradeoffs/workflow)"
+        f"A detailed description of each step is in https://rdatools.github.io/tradeoffs/workflow."
     )
     print()
+    print(f"( ) Step 1 - Extract the data, shapes, and graph for the state")
     print()
-
-    for i, plan_type in enumerate(["congress", "upper", "lower"]):
-        print(f"## Commands for '{plan_type}'")
-        print()
-        print(f"# From 'rdaensemble'")
-        print(f"scripts/STEP_5.sh --state {xx} --plan-type {plan_type}")
-        print()
-        print(f"# From 'rdaensemble'")
-        print(f"scripts/STEP_6.sh --state {xx} --plan-type {plan_type}")
-        print()
-        print(f"# From 'tradeoffs'")
-        print(f"scripts/STEP_7.sh --state {xx} --plan-type {plan_type}")
-        print()
-        print()
-
+    print(f"( ) Step 2 - Set up the state for trade-off analysis")
+    print()
+    print(f"( ) Step 3 - Create an approximate 'root map'")
+    print()
+    print(f"( ) Step 4 - Gather additional data points manually")
+    print()
+    print(f"( ) Step 5 - Generate & score an unbiased ensemble")
+    print(f"    From 'rdaensemble' run:")
+    print()
+    print(f"    scripts/STEP_5.sh --state {xx} --plan-type {plan_type}")
+    print()
+    print(f"( ) Step 6 - Generate & score an optimized ensemble")
+    print(f"    From 'rdaensemble' run:")
+    print()
+    print(f"    scripts/STEP_6.sh --state {xx} --plan-type {plan_type}")
+    print()
     print(
-        f"# Make sure you do Steps 8 & 9 in the overall [workflow description](https://rdatools.github.io/tradeoffs/workflow)"
+        f"( ) Step 7 - Find the trade-off frontiers & generate the analysis artifacts"
     )
+    print(f"    From 'tradeoffs' run:")
+    print()
+    print(f"    scripts/STEP_7.sh --state {xx} --plan-type {plan_type}")
+    print()
+    print(f"( ) Step 8 - Deploy the artifacts")
+    print()
+    print(f"( ) Step 9 - Activate the state in the site")
     print()
     print(f"### END ###")
 
@@ -64,6 +77,11 @@ def parse_args():
     parser.add_argument(
         "--state",
         help="The two-character state code (e.g., NC)",
+        type=str,
+    )
+    parser.add_argument(
+        "--type",
+        help="The type of plan (e.g., congress, upper, lower)",
         type=str,
     )
 

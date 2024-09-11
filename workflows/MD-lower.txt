@@ -1,0 +1,5 @@
+### Workflow for MD-lower ###
+
+Note: The lower state house in MD uses multi-member districts and can't be processed by this workflow.
+
+### END ###

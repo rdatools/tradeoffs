@@ -153,12 +153,14 @@ As above, the capital letter after the `20` is the type of plan (C for Congress,
 
 ## Steps 5, 6, and 7 - Run the command-line scripts for the state
 
-With all those inputs prepared, run each of the automatically generated shell scripts 
+With all those inputs prepared, run each of the three automatically generated shell scripts 
 for the state and type of plan, one at a time.
-For example, the scripts for North Carolina are in this file:
+For example, the scripts for North Carolina are in these files:
 
-```bash
-workflows/NC.sh
+```
+workflows/NC-congress.txt
+workflows/NC-upper.txt
+workflows/NC-lower.txt
 ```
 
 The workflow for each state contains three sets of commands: one for Congress, one for the Upper House, and one for the Lower House.
