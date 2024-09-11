@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Updated MD- and PA-congress.
+- Updated MD- and PA-congress & revised workflow documentation.
 - Updated site to show congress, upper, & lower house trade-offs, but only for NC.
 - Generalized workflow for state legislative plans, and refactored it into manual and automated steps.
 - Integrated new ensemble package for processing state legislative plans.
