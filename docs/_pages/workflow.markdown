@@ -87,7 +87,7 @@ scripts/approx_root_map.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --map temp/NC20U_root_map.csv \
---candidates temp/NC20U_rootcandidates.json \
+--candidates temp/NC20U_root_candidates.json \
 --log temp/NC20U_root_log.txt \
 --no-debug
 ```
