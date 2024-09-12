@@ -54,16 +54,16 @@ You can take one of three approaches to get a root map:
 
 Note: The map must not split any precincts, and districts should be indexed 1, 2, 3, ... (i.e., not zero-based).
 
-These are the steps to automatically generate an approximate root map, 
-using North Carolina, as an example.
+These are the steps to automatically generate an approximate root map for a state upper house 
+using North Carolina as an example.
 
 First, generate an ensemble of 100 random plans (from the `rdaensemble` root directory).
 
 ```bash
-scripts/rmfrsp_ensemble.py \
+scripts/rmfrst_ensemble.py \
 --state NC \
---plantype congress \
---roughlyequal 0.01 \
+--plantype upper \
+--roughlyequal 0.10 \
 --size 100 \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
@@ -74,7 +74,7 @@ scripts/rmfrsp_ensemble.py \
 ```
 
 For the `plantype` argument, use `congress`, `upper`, or `lower` as appropriate.
-For the `roughlyequal` argument, use `0.01` for Congress and `0.05` for the Upper and Lower Houses.
+For the `roughlyequal` argument, use `0.01` for Congress and `0.10` for the Upper and Lower Houses.
 
 Then (from `rdaroot` root directory) use that ensemble to approximate a root map.
 
@@ -86,13 +86,13 @@ scripts/approx_root_map.py \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --map temp/root_map.csv \
---candidates temp/NC20C_rootcandidates.json \
---log temp/NC20C_rootlog.txt \
+--candidates temp/NC20U_rootcandidates.json \
+--log temp/NC20U_rootlog.txt \
 --no-debug
 ```
 
 Finally, copy the resulting root map to the `tradeoffs/root_maps` directory,
-with a file name of the form `NC20C_root_map.csv`
+with a file name of the form `NC20U_root_map.csv`
 where the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
 
 ## Step 4 - Gather additional data points manually
