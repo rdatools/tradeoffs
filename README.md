@@ -2,8 +2,7 @@
 
 Trade-offs in redistricting (V2)
 
-See the website at [https://rdatools.github.io/tradeoffs/](https://rdatools.github.io/tradeoffs/)
-for more information.
+See [the website](https://rdatools.github.io/tradeoffs/) for more information.
 
 ## Installation
 
