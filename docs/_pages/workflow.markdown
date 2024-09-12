@@ -92,9 +92,11 @@ scripts/approx_root_map.py \
 --no-debug
 ```
 
-Finally, copy the resulting root map to the `tradeoffs/root_maps` directory,
+Copy the resulting root map to the `tradeoffs/root_maps` directory,
 with a file name of the form `NC20U_root_map.csv`
 where the capital letter after the `20` is the type of plan (C for Congress, U for Upper, L for Lower).
+Finally, import it into DRA. 
+Give it a name of the form `NC 2022 Upper - Root`, and tag it with the `PG-ROOT` label.
 
 ## Step 4 - Gather additional data points manually
 
