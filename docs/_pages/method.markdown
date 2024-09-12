@@ -28,8 +28,9 @@ In summary:
     which wraps [the Python clone of DRA analytics](https://github.com/dra2020/rdapy).
     Note: We removed the clipping of minority VAP percentages below 37% that DRA's minority rating does,
     because this was causing a discontinuity (discernible gaps) in the ratings.
--   Next we find the Pareto frontier of the ensemble.
--   Then we export [the Notable Maps](https://medium.com/dra-2020/notable-maps-66d744933a48) for the state from DRA and pull their ratings.
+-   Next we find the Pareto frontier of the plans in the ensemble that satisfy the "realistic" constraints
+    of DRA's [the Notable Maps](https://medium.com/dra-2020/notable-maps-66d744933a48).
+-   Then we export notable maps for the state from DRA and pull their ratings.
     If necessary, we make close-cousin clones of these maps that don't split any precincts for use below.
 -   These human-drawn plans each optimize for one of the five rating dimension, and 
     we use them as seeds to GerryChain's [SingleMetricOptimizer and Gingelator exploratory (biased) chain algorithms](https://mggg.org/posts/gerrysuite).
@@ -49,7 +50,8 @@ In summary:
     for minority opportunity, we use Gerrychain's Gingelator feature; and
     for competitiveness, we use the raw metric that DRA uses before normalizing it to [0-100].
 -   We collect those plans into a new optimized ensemble and score them.
--   We combine the unbiased ensemble and the optimized ensemble into a single ensemble and find the new Pareto frontier.
+-   We combine the unbiased ensemble and the optimized ensemble into a single ensemble and find the new Pareto frontier,
+    again filtering for realistic plans.
 -   Finally, we generate all the artifacts that you see on the state pages, e.g., for <a href="{{ site.baseurl }}/states/NC">NC</a>.
 
 Besides the GitHub repositories mentioned above, the main code and data for this workflow is in three repositories: [rdabase](https://github.com/rdatools/rdabase), [rdaensemble](https://github.com/rdatools/rdaensemble), and [tradeoffs](https://github.com/rdatools/tradeoffs), 

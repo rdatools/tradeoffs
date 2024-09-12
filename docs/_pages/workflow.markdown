@@ -68,8 +68,8 @@ scripts/rmfrst_ensemble.py \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---plans temp/NC20_100_plans.json \
---log temp/NC20_100_log.txt \
+--plans temp/NC20U_100_plans.json \
+--log temp/NC20U_100_log.txt \
 --no-debug
 ```
 
@@ -81,11 +81,11 @@ Then (from `rdaroot` root directory) use that ensemble to approximate a root map
 ```bash
 scripts/approx_root_map.py \
 --state NC \
---plans ../rdaensemble/temp/NC20_100_plans.json \
+--plans ../rdaensemble/temp/NC20U_100_plans.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
---map temp/root_map.csv \
+--map temp/NC20U_root_map.csv \
 --candidates temp/NC20U_rootcandidates.json \
 --log temp/NC20U_rootlog.txt \
 --no-debug
