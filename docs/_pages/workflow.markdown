@@ -70,6 +70,7 @@ scripts/rmfrst_ensemble.py \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --plans temp/NC20U_100_plans.json \
 --log temp/NC20U_100_log.txt \
+--verbose \
 --no-debug
 ```
 
@@ -87,7 +88,7 @@ scripts/approx_root_map.py \
 --graph ../rdabase/data/NC/NC_2020_graph.json \
 --map temp/NC20U_root_map.csv \
 --candidates temp/NC20U_rootcandidates.json \
---log temp/NC20U_rootlog.txt \
+--log temp/NC20U_root_log.txt \
 --no-debug
 ```
 
