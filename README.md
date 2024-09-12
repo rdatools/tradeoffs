@@ -1,9 +1,27 @@
 # tradeoffs
+
 Trade-offs in redistricting (V2)
 
-*Note: This is still under development. We're not ready for feedback yet.*
+See the website at [https://rdatools.github.io/tradeoffs/](https://rdatools.github.io/tradeoffs/)
+for more information.
+
+## Installation
+
+To clone the repository:
+
+```bash
+$ git clone https://github.com/rdatools/tradeoffs
+$ cd tradeoffs
+```
+
+To run the scripts, install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Testing
 
 ```bash
-$ pytest --disable-warnings
+$ pytest
+```
