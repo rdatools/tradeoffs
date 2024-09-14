@@ -46,7 +46,7 @@ scripts/recom_ensemble.py \
 
 scripts/score_ensemble.py \
 --state NC \
---plantype upper \
+--plantype congress \
 --plans ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_plans_alt.json \
 --data ../rdabase/data/NC/NC_2020_data.csv \
 --shapes ../rdabase/data/NC/NC_2020_shapes_simplified.json \
