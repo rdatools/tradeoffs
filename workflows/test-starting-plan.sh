@@ -63,7 +63,7 @@ scripts/find_frontiers.py \
 --no-debug
 
 scripts/make_scatter_plots_BASIC.py \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_alt.csv \
 --prefix NC20C \
 --output ../../iCloud/fileout/tradeoffs/NC/docs/assets/images-alt \
 --no-debug
