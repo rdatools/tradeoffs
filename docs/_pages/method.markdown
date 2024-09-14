@@ -7,7 +7,7 @@ permalink: method/
 In the [first iteration of this analysis](https://alecramsay.github.io/pg/),
 we introduced the notion of a "root map"&#8212;the 
 most [population compact](https://alecramsay.github.io/pg/glossary/) map for a state.
-Unforunately, we found that the root map was not a good reference point for comparing human-drawn maps,
+Unfortunately, we found that the root map was not a good reference point for comparing human-drawn maps,
 because it can't be computed definitively (only approximated) and
 small changes in the approximation yielded wildly different ratings.
 To use the metaphor of a landscape, rather than getting deeper and deeper into the valley containing the global minimum,
