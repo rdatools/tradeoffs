@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """
-MAKE SCATTER PLOTS OF ENSEMBLE RATINGS FOR PAIRS OF RATINGS ALONG WITH FRONTIERS
-- A basic version for testing new opportunity-district-only minority ratings
+MAKE SCATTER PLOTS OF ENSEMBLE RATINGS FOR PAIRS OF RATINGS
+- A basic version for testing alternative ensemble ratings
 
 For example, see the workflows directory.
 
@@ -44,13 +44,20 @@ def main() -> None:
     """Make a box plot of the ratings for the plans in an ensemble."""
 
     args: argparse.Namespace = parse_args()
+    filter: bool = not args.nofilter
 
     # Transform the ratings from a score CSV into a Pandas DataFrame
 
     fieldnames: List[str] = ["map"] + ratings_dimensions
     fieldtypes: List[Callable] = [str, int, int, int, int, int]
 
-    df: pd.DataFrame = scores_to_df(args.scores, fieldnames, fieldtypes)
+    df: pd.DataFrame = scores_to_df(
+        args.scores,
+        fieldnames,
+        fieldtypes,
+        roughly_equal=args.roughlyequal,
+        filter=filter,
+    )
 
     pairs: List = list(itertools.combinations(ratings_dimensions, 2))
 
@@ -185,6 +192,15 @@ def parse_args():
         "--scores",
         type=str,
         help="A CSV of scores including ratings to plot",
+    )
+    parser.add_argument(
+        "--roughlyequal",
+        type=float,
+        default=0.01,
+        help="'Roughly equal' population threshold",
+    )
+    parser.add_argument(
+        "--nofilter", dest="nofilter", action="store_true", help="Don't filter plans"
     )
     parser.add_argument(
         "--prefix",
