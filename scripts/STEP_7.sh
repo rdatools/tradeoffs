@@ -3,7 +3,6 @@
 # Default values
 STATE=""
 PLAN_TYPE=""
-ROUGHLY_EQUAL=""
 
 # Function to print usage
 usage() {
@@ -41,10 +40,8 @@ SUFFIX=`echo "${LETTER}" | tr '[a-z]' '[A-Z]'`
 PREFIX="${STATE}20${SUFFIX}"
 
 ROUGHLY_EQUAL=0.01
-ROUGHLY_EQUAL_HALF=0.01
 if [ "$PLAN_TYPE" = "upper" ] || [ "$PLAN_TYPE" = "lower" ]; then
     ROUGHLY_EQUAL=0.10
-    ROUGHLY_EQUAL_HALF=0.05
 fi
 
 # From 'tradeoffs'
@@ -56,7 +53,7 @@ scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
 --metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
---roughlyequal $ROUGHLY_EQUAL_HALF \
+--roughlyequal $ROUGHLY_EQUAL \
 --verbose \
 --no-debug
 
@@ -65,21 +62,21 @@ scripts/find_frontiers.py \
 --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
 --metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_optimized_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
---roughlyequal $ROUGHLY_EQUAL_HALF \
+--roughlyequal $ROUGHLY_EQUAL \
 --verbose \
 --no-debug
 
 echo "Making box plot ..."
 scripts/make_box_plot.py \
 --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
---roughlyequal $ROUGHLY_EQUAL_HALF \
+--roughlyequal $ROUGHLY_EQUAL \
 --image ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
 --no-debug
 
 echo "Making statistics table ..."
 scripts/make_stats_table.py \
 --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
---roughlyequal $ROUGHLY_EQUAL_HALF \
+--roughlyequal $ROUGHLY_EQUAL \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/_data/${PREFIX}_statistics.csv \
 --no-debug
 
@@ -97,7 +94,7 @@ scripts/make_scatter_plots.py \
 --pushed ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \
 --focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
---roughlyequal $ROUGHLY_EQUAL_HALF \
+--roughlyequal $ROUGHLY_EQUAL \
 --prefix $PREFIX \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
 --no-debug

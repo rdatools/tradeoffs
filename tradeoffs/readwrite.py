@@ -26,7 +26,7 @@ def filter_scores(
 
     if "population_deviation" in scores:
         population_deviation: float = float(scores["population_deviation"])
-        if population_deviation > (roughly_equal * 2):  # was: (pop_threshold * 2):
+        if population_deviation > roughly_equal:  # was (roughly_equal * 2):
             return False
 
     ratings: List[int | float] = [int(scores[d]) for d in ratings_dimensions]
@@ -84,7 +84,10 @@ def read_ratings(
     *,
     verbose=False,
 ) -> List[Dict]:
-    """Read a scores CSV file & filter out the unrealistic plans."""
+    """Read a scores CSV file & filter out the unrealistic plans.
+
+    NOTE - No longer used. Was part of the original 'push' process.
+    """
 
     ratings: List[Dict] = []
     total: int = 0
