@@ -96,7 +96,7 @@ scripts/make_scatter_plots.py \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \
---focus ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_focus_scores.csv \
+--focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL_HALF \
 --prefix $PREFIX \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
