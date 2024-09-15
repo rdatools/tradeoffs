@@ -2,13 +2,13 @@
 
 A detailed description of each step is in https://rdatools.github.io/tradeoffs/workflow.
 
-( ) Step 1 - Extract the data, shapes, and graph for the state
+(x) Step 1 - Extract the data, shapes, and graph for the state
 
-( ) Step 2 - Set up the state for trade-off analysis
+(x) Step 2 - Set up the state for trade-off analysis
 
-( ) Step 3 - Create an approximate 'root map'
+(x) Step 3 - N/A
 
-( ) Step 4 - Gather additional data points manually
+(x) Step 4 - Gather additional data points manually
 
 ( ) Step 5 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:

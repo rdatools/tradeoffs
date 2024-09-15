@@ -15,7 +15,7 @@ A detailed description of each step is in https://rdatools.github.io/tradeoffs/w
 
     scripts/STEP_5.sh --state NC --plan-type congress
 
-( ) Step 6 - Generate & score an optimized ensemble
+(x) Step 6 - Generate & score an optimized ensemble
     From 'rdaensemble' run:
 
     scripts/STEP_6.sh --state NC --plan-type congress
