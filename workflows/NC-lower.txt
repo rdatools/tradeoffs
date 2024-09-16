@@ -13,7 +13,9 @@ A detailed description of each step is in https://rdatools.github.io/tradeoffs/w
 (x) Step 5 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
-    scripts/STEP_5.sh --state NC --plan-type lower <= Modified to use a random map!
+    scripts/STEP_5.sh --state NC --plan-type lower 
+    
+    NOTE - Using a random map to start ReCom.
 
 (x) Step 6 - Generate & score an optimized ensemble
     From 'rdaensemble' run:
@@ -25,8 +27,8 @@ A detailed description of each step is in https://rdatools.github.io/tradeoffs/w
 
     scripts/STEP_7.sh --state NC --plan-type lower
 
-( ) Step 8 - Deploy the artifacts
+(x) Step 8 - Deploy the artifacts
 
-( ) Step 9 - Activate the state in the site
+(x) Step 9 - Activate the state in the site
 
 ### END ###
