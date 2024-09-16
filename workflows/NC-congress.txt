@@ -20,7 +20,7 @@ A detailed description of each step is in https://rdatools.github.io/tradeoffs/w
 
     scripts/STEP_6.sh --state NC --plan-type congress
 
-( ) Step 7 - Find the trade-off frontiers & generate the analysis artifacts
+(x) Step 7 - Find the trade-off frontiers & generate the analysis artifacts
     From 'tradeoffs' run:
 
     scripts/STEP_7.sh --state NC --plan-type congress
