@@ -1,5 +1,7 @@
 """
 PUSH A FRONTIER POINT
+
+TODO - Obsolete.
 """
 
 import traceback
