@@ -33,9 +33,8 @@ These findings are meant to be directionally illustrative rather than specifical
 
 We've only enabled a few state &amp; plan types combinations so far: 
 
-* Stand by -- Updating ...
-
-<!-- * NC -- <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/NC-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/NC-lower">lower state house</a>. <a href="{{ site.baseurl }}/states/XX-congress">Congress (random start)</a>
+* NC -- <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/NC-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/NC-lower">lower state house</a>. <a href="{{ site.baseurl }}/states/XX-congress">Congress (random start)</a>
+<!-- 
 * MD -- <a href="{{ site.baseurl }}/states/MD-congress">Congress</a>.
 * PA -- <a href="{{ site.baseurl }}/states/PA-congress">Congress</a>. -->
 

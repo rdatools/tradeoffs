@@ -6,7 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Added NC/congress using random start.
+- Re-deploying NC congress (root map) / upper (random assignments) / lower (random map).
 - More tweaking of the workflow documentation.
 - Updated MD- and PA-congress & revised workflow documentation.
 - Updated site to show congress, upper, & lower house trade-offs, but only for NC.
