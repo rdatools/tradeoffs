@@ -50,7 +50,7 @@ No longer needed
 
 The workflow needs three additional data points that must be gathered manually.
 
-### Capture the DRA notable maps
+### Capture the notable maps and ratings from DRA
 
 The first data are the ratings for DRA notable maps for the state and type of plan.
 
@@ -100,25 +100,31 @@ Capture those ratings into the CSV file.
 ### Create "no splits" versions of the DRA notable maps
 
 The second input are versions of the notable maps above *that do not split any precincts*.
-Use DRA to duplicate the notable maps, and then manually edit them to remove any splits.
-Export the precinct-assignment files from DRA.
-Rename them to be of the form `{xx}_2022_{plan_type}_{dimension}_NOSPLITS.csv`, 
-where those variables are the same as above.
-Save these CSVs in the `tradeoffs/notable_maps/{xx}/` directory.
+Use DRA to:
 
-Note: These maps must assign all precincts to districts, even water-only ones, and
+* Duplicate the notable map.
+* Then manually edit it to remove any splits -- The "Combine Split Precincts" tool is handy.
+* Export the precinct-assignment file.
+* Rename it to be of the form `{xx}_2022_{plan_type}_{dimension}_NOSPLITS.csv`, where those variables are the same as above.
+* Save these CSVs in the `tradeoffs/notable_maps/{xx}/` directory.
+
+These "no split" maps must assign all precincts to districts, even water-only ones, and
 they must have 'roughly equal' district populations using the base 2020 census
 that are appropriate for the type of plan (i.e., < 1% for congressional, < 10% for upper and lower state houses).
 
-### Capture ratings for "focus" plans
+### Capture the official map(s) and ratings from DRA
 
-The last data to gather are the ratings for any plans that you want to highlight on the scatter plots.
-These are called "focus" plans.
-We highlight the most recent one or two official plans.
+The last data to gather are the ratings for the most recent one or two official plans.
+Similar to the notable maps, for each official map:
+
+*   Duplicate it 
+*   Rename the copy using the form `{xx} 2022 {plan_type} - Official` -- 
+    where `{xx}` is the state abbreviation and `{plan_type}` is `Congress`, `Upper`, or `Lower`
+*   Tag it with the `PG-OFFICIAL` label, and add it to the `Trade-offs` group
+
 Similar to the process for notable maps above, collect the ratings for these maps into a CSV file modeled after 
-`{xx}20{T}_focus_scores.csv` in the output directory, `fileout/tradeoffs/{xx}/ensembles`,
+`{xx}20{T}_focus_scores.csv` in the output directory, `tradeoffs/docs/_data/focus_ratings`,
 where `{T}` indicates the type of plan (C for Congress, U for Upper, L for Lower).
-(Note: That output directory is specific to my personal setup. You should adjust as needed.)
 
 ## Steps 5, 6, and 7 - Run the command-line scripts for the state
 
