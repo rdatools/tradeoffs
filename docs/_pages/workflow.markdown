@@ -48,11 +48,11 @@ No longer needed
 
 ## Step 4 - Gather additional data points manually
 
-The workflow needs three additional data points that must be gathered manually.
+The workflow needs two additional data points that must be gathered manually.
 
 ### Capture the notable maps and ratings from DRA
 
-The first data are the ratings for DRA notable maps for the state and type of plan.
+The first is ratings for DRA notable maps for the state and type of plan.
 
 For each notable map for the state and type of plan:
 
@@ -97,24 +97,9 @@ make sure it uses these datasets:
 
 Capture those ratings into the CSV file.
 
-### Create "no splits" versions of the DRA notable maps
-
-The second input are versions of the notable maps above *that do not split any precincts*.
-Use DRA to:
-
-* Duplicate the notable map.
-* Then manually edit it to remove any splits -- The "Combine Split Precincts" tool is handy.
-* Export the precinct-assignment file.
-* Rename it to be of the form `{xx}_2022_{plan_type}_{dimension}_NOSPLITS.csv`, where those variables are the same as above.
-* Save these CSVs in the `tradeoffs/notable_maps/{xx}/` directory.
-
-These "no split" maps must assign all precincts to districts, even water-only ones, and
-they must have 'roughly equal' district populations using the base 2020 census
-that are appropriate for the type of plan (i.e., < 1% for congressional, < 10% for upper and lower state houses).
-
 ### Capture the official map(s) and ratings from DRA
 
-The last data to gather are the ratings for the most recent one or two official plans.
+The second are the ratings for the most recent one or two official plans.
 Similar to the notable maps, for each official map:
 
 *   Duplicate it 
