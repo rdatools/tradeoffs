@@ -48,14 +48,14 @@ fi
 # Generate the artifacts for the website: a box plot, a table of statistics,
 # a ratings table for the notable maps, pairwise scatter plots, and a legend.
 
-echo "Finding unbiased frontiers ..."
-scripts/find_frontiers.py \
---scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
---metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_metadata.json \
---frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
---roughlyequal $ROUGHLY_EQUAL \
---verbose \
---no-debug
+# echo "Finding unbiased frontiers ..."
+# scripts/find_frontiers.py \
+# --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
+# --metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_metadata.json \
+# --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
+# --roughlyequal $ROUGHLY_EQUAL \
+# --verbose \
+# --no-debug
 
 echo "Finding optimized frontiers ..."
 scripts/find_frontiers.py \
