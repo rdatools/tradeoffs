@@ -339,8 +339,9 @@ def main() -> None:
             if plot_hull:
                 scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
-            scatter_traces.append(toy_trace)
-            scatter_traces.append(tox_trace)
+            if plot_hull:
+                scatter_traces.append(toy_trace)
+                scatter_traces.append(tox_trace)
         if plot_notables:
             for notable_trace in notable_traces:
                 scatter_traces.append(notable_trace)
