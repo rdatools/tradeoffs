@@ -44,6 +44,8 @@ def main() -> None:
 
     args: argparse.Namespace = parse_args()
     filter: bool = not args.nofilter
+    plot_hull: bool = not args.nohull
+    plot_notables: bool = not args.nonotables
 
     # Transform the ratings from a score CSV into a Pandas DataFrame
 
@@ -334,12 +336,14 @@ def main() -> None:
             scatter_traces.append(more_points_trace)
         scatter_traces.append(frontier_trace)
         if args.pushed:
-            scatter_traces.append(hull_trace)
+            if plot_hull:
+                scatter_traces.append(hull_trace)
             scatter_traces.append(pushed_frontier_trace)
             scatter_traces.append(toy_trace)
             scatter_traces.append(tox_trace)
-        for notable_trace in notable_traces:
-            scatter_traces.append(notable_trace)
+        if plot_notables:
+            for notable_trace in notable_traces:
+                scatter_traces.append(notable_trace)
         if args.focus:
             for focus_trace in focus_traces:
                 scatter_traces.append(focus_trace)
@@ -460,6 +464,18 @@ def parse_args():
         type=str,
         default="",
         help="Pushed frontier maps JSON file",
+    )
+    parser.add_argument(
+        "--nohull",
+        dest="nohull",
+        action="store_true",
+        help="Don't plot the convex hull",
+    )
+    parser.add_argument(
+        "--nonotables",
+        dest="nonotables",
+        action="store_true",
+        help="Don't plot the notable points",
     )
     parser.add_argument(
         "--focus",
