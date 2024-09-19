@@ -2,9 +2,9 @@
 
 For details on the manual data gather https://rdatools.github.io/tradeoffs/workflow.
 
-( ) Step 1 - Extract the data, shapes, and graph for the state
+(x) Step 1 - Extract the data, shapes, and graph for the state
 
-( ) Step 2 - Set up the state for trade-off analysis (once per state)
+(x) Step 2 - Set up the state for trade-off analysis (once per state)
     From 'tradeoffs' run:
 
     scripts/setup_state IL

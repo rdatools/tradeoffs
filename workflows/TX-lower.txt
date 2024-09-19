@@ -1,40 +1,40 @@
-### Workflow for IL-lower ###
+### Workflow for TX-lower ###
 
 For details on the manual data gather https://rdatools.github.io/tradeoffs/workflow.
 
-(x) Step 1 - Extract the data, shapes, and graph for the state
+( ) Step 1 - Extract the data, shapes, and graph for the state
 
-(x) Step 2 - Set up the state for trade-off analysis (once per state)
+( ) Step 2 - Set up the state for trade-off analysis (once per state)
     From 'tradeoffs' run:
 
-    scripts/setup_state IL
+    scripts/setup_state TX
 
 ( ) Step 3 - Gather additional data points manually
 
 ( ) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
-    scripts/make_and_score_ensemble.sh --state IL --plan-type lower
+    scripts/make_and_score_ensemble.sh --state TX --plan-type lower
 
 ( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
-    scripts/find_frontiers.sh --state IL --plan-type lower > ../tradeoffs-dropbox/scores/IL20L_scores_notes.txt
+    scripts/find_frontiers.sh --state TX --plan-type lower > ../tradeoffs-dropbox/scores/TX20L_scores_notes.txt
 
 ( ) Step 6 - 'Push' the frontiers of the unbiased ensemble
     From 'rdaensemble' run:
 
-    scripts/push_frontiers.sh --state IL --plan-type lower
+    scripts/push_frontiers.sh --state TX --plan-type lower
 
 ( ) Step 7 - Make the analysis artifacts
     From 'tradeoffs' run:
 
-    scripts/make_artifacts.sh --state IL --plan-type lower
+    scripts/make_artifacts.sh --state TX --plan-type lower
 
 ( ) Step 8 - Deploy the state (once per state)
     From 'tradeoffs' run:
 
-    scripts/deploy_state.sh IL
+    scripts/deploy_state.sh TX
 
 ( ) Step 9 - Activate the state in the site
 
