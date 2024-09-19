@@ -1,0 +1,41 @@
+### Workflow for IL-upper ###
+
+For details on the manual data gather https://rdatools.github.io/tradeoffs/workflow.
+
+( ) Step 1 - Extract the data, shapes, and graph for the state
+
+( ) Step 2 - Set up the state for trade-off analysis (once per state)
+    From 'tradeoffs' run:
+
+    scripts/setup_state IL
+
+( ) Step 3 - Gather additional data points manually
+
+( ) Step 4 - Generate & score an unbiased ensemble
+    From 'rdaensemble' run:
+
+    scripts/make_and_score_ensemble.sh --state IL --plan-type upper
+
+( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
+    From 'tradeoffs' run:
+
+    scripts/find_frontiers.sh --state IL --plan-type upper > ../tradeoffs-dropbox/scores/IL20U_scores_notes.txt
+
+( ) Step 6 - 'Push' the frontiers of the unbiased ensemble
+    From 'rdaensemble' run:
+
+    scripts/push_frontiers.sh --state IL --plan-type upper
+
+( ) Step 7 - Make the analysis artifacts
+    From 'tradeoffs' run:
+
+    scripts/make_artifacts.sh --state IL --plan-type upper
+
+( ) Step 8 - Deploy the state (once per state)
+    From 'tradeoffs' run:
+
+    scripts/deploy_state.sh IL
+
+( ) Step 9 - Activate the state in the site
+
+### END ###

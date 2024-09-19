@@ -19,7 +19,7 @@ from argparse import ArgumentParser, Namespace
 
 from typing import Dict, Any
 
-from rdabase import require_args
+from rdabase import require_args, cycle
 
 
 def main() -> None:
@@ -30,6 +30,10 @@ def main() -> None:
     xx: str = args.state
     plan_type: str = args.type
     assert plan_type in ["congress", "upper", "lower"]
+
+    prefix: str = f"{args.state}{cycle[2:]}{plan_type[0].capitalize()}"
+
+    #
 
     print(f"### Workflow for {xx}-{plan_type} ###")
     print()
@@ -56,7 +60,9 @@ def main() -> None:
     print(f"( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble")
     print(f"    From 'tradeoffs' run:")
     print()
-    print(f"    scripts/find_frontiers.sh.sh --state {xx} --plan-type {plan_type}")
+    print(
+        f"    scripts/find_frontiers.sh --state {xx} --plan-type {plan_type} > ../tradeoffs-dropbox/scores/{prefix}_scores_notes.txt"
+    )
     print()
     print(f"( ) Step 6 - 'Push' the frontiers of the unbiased ensemble")
     print(f"    From 'rdaensemble' run:")

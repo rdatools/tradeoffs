@@ -2,24 +2,24 @@
 
 For details on the manual data gather https://rdatools.github.io/tradeoffs/workflow.
 
-( ) Step 1 - Extract the data, shapes, and graph for the state
+(x) Step 1 - Extract the data, shapes, and graph for the state
 
-( ) Step 2 - Set up the state for trade-off analysis
+(x) Step 2 - Set up the state for trade-off analysis
     From 'tradeoffs' run:
 
     scripts/setup_state MD
 
-( ) Step 3 - Gather additional data points manually
+(x) Step 3 - Gather additional data points manually
 
-( ) Step 4 - Generate & score an unbiased ensemble
+(x) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
     scripts/make_and_score_ensemble.sh --state MD --plan-type upper
 
-( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
+(x) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
-    scripts/find_frontiers.sh.sh --state MD --plan-type upper
+    scripts/find_frontiers.sh --state MD --plan-type upper > ../tradeoffs-dropbox/scores/MD20U_scores_notes.txt
 
 ( ) Step 6 - 'Push' the frontiers of the unbiased ensemble
     From 'rdaensemble' run:

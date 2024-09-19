@@ -16,10 +16,10 @@ For details on the manual data gather https://rdatools.github.io/tradeoffs/workf
 
     scripts/make_and_score_ensemble.sh --state NC --plan-type upper
 
-( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
+(x) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
-    scripts/find_frontiers.sh.sh --state NC --plan-type upper
+    scripts/find_frontiers.sh --state NC --plan-type upper > ../tradeoffs-dropbox/scores/NC20U_scores_notes.txt
 
 ( ) Step 6 - 'Push' the frontiers of the unbiased ensemble
     From 'rdaensemble' run:

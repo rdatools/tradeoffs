@@ -50,8 +50,8 @@ fi
 
 echo "Finding unbiased frontiers ..."
 scripts/find_frontiers.py \
---scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
---metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_metadata.json \
+--scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
+--metadata ../tradeoffs-dropbox/scores/${PREFIX}_scores_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
 --roughlyequal $ROUGHLY_EQUAL \
 --verbose \
