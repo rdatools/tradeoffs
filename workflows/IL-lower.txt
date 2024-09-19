@@ -11,7 +11,7 @@ For details on the manual data gather https://rdatools.github.io/tradeoffs/workf
 
 ( ) Step 3 - Gather additional data points manually
 
-( ) Step 4 - Generate & score an unbiased ensemble
+(x) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
     scripts/make_and_score_ensemble.sh --state IL --plan-type lower
