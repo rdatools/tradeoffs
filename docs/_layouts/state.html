@@ -8,12 +8,12 @@ map-width: 700
 
 {{ content }}
 
-<!-- {% assign xx = page.xx %}
-{% assign plantype = page.plantype %}
-{% assign suffix = page.suffix %} -->
+{% assign xx = page.xx %}
+{% assign plan-type = page.plan-type %}
+{% assign suffix = page.suffix %}
 <!-- {% assign suffix = "20C" %} -->
 
-<p>In state template: {{ xx }}{{ plantype }}{{ suffix }}</p>
+<p>In state template: {{ xx }} / {{ plan-type }} / {{ suffix }}</p>
 
 <!-- COMMON GRID FUNCTIONALITY & STYLES -->
 
@@ -150,7 +150,7 @@ map-width: 700
 <p>For comparison, this table shows the ratings for the human-drawn "notable maps" in DRA.</p>
 
 {% capture dra-ratings-file %}
-{{ xx }}_2022_{{ plantype }}_ratings
+{{ xx }}_2022_{{ plan-type }}_ratings
 {% endcapture %}
 {% assign dra-ratings-file = dra-ratings-file | strip_newlines %}
 <!-- {% capture dra-ratings-file %}

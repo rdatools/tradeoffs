@@ -11,9 +11,11 @@ xx: "IL"
 plan-type: "Upper"
 suffix: "20U"
 ---
- 
-{% assign xx = page.xx %}
-{% assign plantype = page.plantype %}
-{% assign suffix = page.suffix %}
 
-<p>On state page: {{ xx }}{{ plantype }}{{ suffix }}</p>
+TODO - Add a static one-liner here at the beginning of the state page.
+ 
+<!-- {% assign xx = page.xx %}
+{% assign plan-type = page.plan-type %}
+{% assign suffix = page.suffix %} -->
+
+<!-- <p>On state page: {{ xx }} / {{ plan-type }} / {{ suffix }}</p> -->
