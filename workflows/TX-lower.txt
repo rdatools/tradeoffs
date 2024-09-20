@@ -11,12 +11,12 @@ For details on the manual data gather https://rdatools.github.io/tradeoffs/workf
 
 ( ) Step 3 - Gather additional data points manually
 
-( ) Step 4 - Generate & score an unbiased ensemble
+(x) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
     scripts/make_and_score_ensemble.sh --state TX --plan-type lower
 
-( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
+(x) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
     scripts/find_frontiers.sh --state TX --plan-type lower > ../tradeoffs-dropbox/scores/TX20L_scores_notes.txt
