@@ -91,7 +91,7 @@ Before opening the notable map (or proxy) in the *Analyze* tab to get the rating
 make sure it uses these datasets:
 
 * Shapes: 2020 Precincts
-* Census: Total Population 2020
+* Census: Total Population 2020 (or adjusted)
 * Voting Age: Voting Age Pop 2020, and
 * Election: Composite 2016-2020
 
