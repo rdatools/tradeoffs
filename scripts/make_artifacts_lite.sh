@@ -97,7 +97,6 @@ echo "Making scatter plots ..."
 scripts/make_scatter_plots.py \
 --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
---notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \
 --focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
 --prefix $PREFIX \
