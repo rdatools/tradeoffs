@@ -11,7 +11,6 @@ map-width: 700
 {% assign xx = page.xx %}
 {% assign plan-type = page.plan-type %}
 {% assign suffix = page.suffix %}
-<!-- {% assign suffix = "20C" %} -->
 
 <p>In state template: {{ xx }} / {{ plan-type }} / {{ suffix }}</p>
 
@@ -81,7 +80,6 @@ map-width: 700
 {% assign statistics-file = statistics-file | strip_newlines %}
 
 {% assign statistics = site.data[statistics-file] %}
-<!-- {% assign statistics = site.data[statistics-file] %} -->
 
 <div id="statistics-table" class="ag-theme-alpine">
 </div>
@@ -140,8 +138,6 @@ map-width: 700
 {% endcapture %}
 {% assign ensemble-ratings-file = ensemble-ratings-file | strip_newlines %}
 
-<!-- {% assign ensemble-ratings = site.data[ensemble-ratings-file] %} -->
-
 <div id="ensemble-ratings-table" class="ag-theme-alpine">
 </div>
 
@@ -153,12 +149,6 @@ map-width: 700
 {{ xx }}_2022_{{ plan-type }}_ratings
 {% endcapture %}
 {% assign dra-ratings-file = dra-ratings-file | strip_newlines %}
-<!-- {% capture dra-ratings-file %}
-{{ xx }}_2022_Congress_ratings
-{% endcapture %}
-{% assign dra-ratings-file = dra-ratings-file | strip_newlines %} -->
-
-<!-- {% assign dra-ratings = site.data[dra-ratings-file] %} -->
 
 <div id="dra-ratings-table" class="ag-theme-alpine">
 </div>
