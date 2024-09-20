@@ -1,7 +1,7 @@
 ---
 layout: state
 title: South Carolina State Senate
-permalink: states/NC-upper/
+permalink: states/SC-upper/
 
 small-radar-width: 300
 big-radar-width: 500

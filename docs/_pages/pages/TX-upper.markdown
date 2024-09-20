@@ -1,7 +1,7 @@
 ---
 layout: state
 title: Texas State Senate
-permalink: states/NC-upper/
+permalink: states/TX-upper/
 
 small-radar-width: 300
 big-radar-width: 500

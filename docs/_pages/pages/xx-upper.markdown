@@ -1,7 +1,7 @@
 ---
 layout: state
 title: XX State Senate
-permalink: states/NC-upper/
+permalink: states/XX-upper/
 
 small-radar-width: 300
 big-radar-width: 500
