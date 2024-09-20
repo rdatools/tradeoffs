@@ -34,8 +34,8 @@ These findings are meant to be directionally illustrative rather than specifical
 We've only enabled a few state &amp; plan types combinations so far: 
 
 * NC -- <a href="{{ site.baseurl }}/states/NC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/NC-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/NC-lower">lower state house</a>. 
-* PA -- <a href="{{ site.baseurl }}/states/PA-congress">Congress</a>, <a href="{{ site.baseurl }}/statesPA-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/PA-lower">lower state house</a>. 
-* MD -- <a href="{{ site.baseurl }}/states/MD-congress">Congress</a>, <a href="{{ site.baseurl }}/statesMD-upper">upper state house</a>, N/A. 
+* PA -- <a href="{{ site.baseurl }}/states/PA-congress">Congress</a>, <a href="{{ site.baseurl }}/states/PA-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/PA-lower">lower state house</a>. 
+* MD -- <a href="{{ site.baseurl }}/states/MD-congress">Congress</a>, <a href="{{ site.baseurl }}/states/MD-upper">upper state house</a>, N/A. 
 * IL -- <a href="{{ site.baseurl }}/states/IL-congress">Congress</a>, <a href="{{ site.baseurl }}/states/IL-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/IL-lower">lower state house</a>. 
 * SC -- <a href="{{ site.baseurl }}/states/SC-congress">Congress</a>, <a href="{{ site.baseurl }}/states/SC-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/SC-lower">lower state house</a>. 
 * TX -- <a href="{{ site.baseurl }}/states/TX-congress">Congress</a>, <a href="{{ site.baseurl }}/states/TX-upper">upper state house</a>, <a href="{{ site.baseurl }}/states/TX-lower">lower state house</a>. 
