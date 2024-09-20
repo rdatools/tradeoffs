@@ -13,3 +13,5 @@ suffix: "20C"
 ---
  
 {% assign xx = page.xx %}
+{% assign plantype = page.plantype %}
+{% assign suffix = page.suffix %}
