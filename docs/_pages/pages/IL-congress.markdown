@@ -1,13 +1,13 @@
 ---
 layout: state
-title: XX Congress
-permalink: states/XX-congress/
+title: Illinois Congress
+permalink: states/IL-congress/
 
 small-radar-width: 300
 big-radar-width: 500
 map-width: 700
 
-xx: "XX"
+xx: "IL"
 plan-type: "Congress"
 suffix: "20C"
 ---

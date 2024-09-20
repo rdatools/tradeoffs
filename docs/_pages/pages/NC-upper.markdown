@@ -1,6 +1,6 @@
 ---
 layout: state
-title: North Carolina Upper State Senate
+title: North Carolina State Senate
 permalink: states/NC-upper/
 
 small-radar-width: 300

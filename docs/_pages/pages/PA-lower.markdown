@@ -1,15 +1,15 @@
 ---
 layout: state
-title: XX Congress
-permalink: states/XX-congress/
+title: Pennsylvania State House
+permalink: states/PA-lower/
 
 small-radar-width: 300
 big-radar-width: 500
 map-width: 700
 
-xx: "XX"
-plan-type: "Congress"
-suffix: "20C"
+xx: "PA"
+plan-type: "Lower"
+suffix: "20L"
 ---
 
 {% assign xx = page.xx %}
