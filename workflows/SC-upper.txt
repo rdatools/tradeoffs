@@ -9,14 +9,14 @@ For details on the manual data gather https://rdatools.github.io/tradeoffs/workf
 
     scripts/setup_state SC
 
-( ) Step 3 - Gather additional data points manually
+(?) Step 3 - Gather additional data points manually
 
-( ) Step 4 - Generate & score an unbiased ensemble
+(x) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
     scripts/make_and_score_ensemble.sh --state SC --plan-type upper
 
-( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
+(x) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
     scripts/find_frontiers.sh --state SC --plan-type upper > ../tradeoffs-dropbox/scores/SC20U_scores_notes.txt
