@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TODO - Should there be one version of this for most states & another for deep-dive states?
+# AN ALTERNATE VERSION OF make_artifacts.sh THAT DOES NOT SHOW THE FRONTIERS
 
 # Default values
 STATE=""
@@ -59,21 +59,26 @@ fi
 # --verbose \
 # --no-debug
 
-echo "Finding optimized frontiers ..."
-scripts/find_frontiers.py \
---scores ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
---metadata ../tradeoffs-dropbox/scores/${PREFIX}_scores_optimized_metadata.json \
---frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
---roughlyequal $ROUGHLY_EQUAL \
---verbose \
---no-debug
+# echo "Finding optimized frontiers ..."
+# scripts/find_frontiers.py \
+# --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
+# --metadata ../tradeoffs-dropbox/scores/${PREFIX}_scores_optimized_metadata.json \
+# --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
+# --roughlyequal $ROUGHLY_EQUAL \
+# --verbose \
+# --no-debug
 
 echo "Making box plot ..."
 scripts/make_box_plot.py \
---scores ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
+--scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
 --image ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
 --no-debug
+# scripts/make_box_plot.py \
+# --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
+# --roughlyequal $ROUGHLY_EQUAL \
+# --image ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
+# --no-debug
 
 echo "Making statistics table ..."
 scripts/make_stats_table.py \
@@ -91,15 +96,24 @@ scripts/make_ratings_table.py \
 echo "Making scatter plots ..."
 scripts/make_scatter_plots.py \
 --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
---more ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
---pushed ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \
 --focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
 --prefix $PREFIX \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
 --no-debug
+# scripts/make_scatter_plots.py \
+# --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
+# --more ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
+# --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
+# --pushed ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
+# --notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \
+# --focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
+# --roughlyequal $ROUGHLY_EQUAL \
+# --prefix $PREFIX \
+# --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
+# --no-debug
 
 echo "Done!"
 echo "Now move the resulting legend the docs/_data directory."

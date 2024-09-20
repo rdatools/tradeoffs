@@ -120,9 +120,6 @@ def main() -> None:
 
     # Read the notable map ratings & convert them to scatter plot points
 
-    ratings_table: List[Dict[str, str | int]] = read_csv(
-        args.notables, [str, int, int, int, int, int]
-    )
     map_to_dimension: Dict[str, str] = {
         "Official": "official",
         "Most Proportional": "proportionality",
@@ -131,28 +128,37 @@ def main() -> None:
         "Most Compact": "compactness",
         "Least Splitting": "splitting",
     }
-    notable_ratings: Dict[str, List[int]] = {}
-    for m in ratings_table:
-        name: str = map_to_dimension[str(m["MAP"])]
-        ratings: List[int] = [int(v) for k, v in m.items() if k != "MAP"]
-        notable_ratings[name] = ratings
-
     notable_points: Dict[Tuple, List[Tuple[int, int]]] = {}
     official_points: Dict[Tuple, Tuple[int, int]] = {}
-    for p in pairs:
-        ydim: str = p[0]
-        xdim: str = p[1]
-        d1: int = ratings_dimensions.index(ydim)
-        d2: int = ratings_dimensions.index(xdim)
 
-        notable_points[p] = []
-        notable_points[p].append((notable_ratings[ydim][d2], notable_ratings[ydim][d1]))
-        notable_points[p].append((notable_ratings[xdim][d2], notable_ratings[xdim][d1]))
-
-        official_points[p] = (
-            notable_ratings["official"][d2],
-            notable_ratings["official"][d1],
+    if args.notables:
+        ratings_table: List[Dict[str, str | int]] = read_csv(
+            args.notables, [str, int, int, int, int, int]
         )
+        notable_ratings: Dict[str, List[int]] = {}
+        for m in ratings_table:
+            name: str = map_to_dimension[str(m["MAP"])]
+            ratings: List[int] = [int(v) for k, v in m.items() if k != "MAP"]
+            notable_ratings[name] = ratings
+
+        for p in pairs:
+            ydim: str = p[0]
+            xdim: str = p[1]
+            d1: int = ratings_dimensions.index(ydim)
+            d2: int = ratings_dimensions.index(xdim)
+
+            notable_points[p] = []
+            notable_points[p].append(
+                (notable_ratings[ydim][d2], notable_ratings[ydim][d1])
+            )
+            notable_points[p].append(
+                (notable_ratings[xdim][d2], notable_ratings[xdim][d1])
+            )
+
+            official_points[p] = (
+                notable_ratings["official"][d2],
+                notable_ratings["official"][d1],
+            )
 
     # For each pair of ratings dimensions, make a scatter plot of the ratings
 
@@ -193,16 +199,17 @@ def main() -> None:
                 "showlegend": False,
             }
 
-        notable_traces: List[Dict[str, Any]] = []
-        for pt in notable_points[p]:
-            notable_trace: Dict[str, Any] = {
-                "x": [pt[0]],
-                "y": [pt[1]],
-                "mode": "markers",
-                "marker": {"size": 5, "color": "red", "symbol": "diamond"},
-                "showlegend": False,
-            }
-            notable_traces.append(notable_trace)
+        if args.notables:
+            notable_traces: List[Dict[str, Any]] = []
+            for pt in notable_points[p]:
+                notable_trace: Dict[str, Any] = {
+                    "x": [pt[0]],
+                    "y": [pt[1]],
+                    "mode": "markers",
+                    "marker": {"size": 5, "color": "red", "symbol": "diamond"},
+                    "showlegend": False,
+                }
+                notable_traces.append(notable_trace)
 
         focus_traces: List[Dict[str, Any]] = []
         if args.focus:
@@ -342,7 +349,7 @@ def main() -> None:
             if plot_hull:
                 scatter_traces.append(toy_trace)
                 scatter_traces.append(tox_trace)
-        if plot_notables:
+        if args.notables and plot_notables:
             for notable_trace in notable_traces:
                 scatter_traces.append(notable_trace)
         if args.focus:
@@ -451,7 +458,9 @@ def parse_args():
     )
     parser.add_argument(
         "--notables",
+        nargs="?",
         type=str,
+        default="",
         help="A CSV file of notable maps ratings",
     )
     parser.add_argument(
