@@ -12,4 +12,7 @@ plan-type: "Congress"
 suffix: "20C"
 ---
 
-[TODO - Add a static one-liner here at the beginning of the state page.]
+{% assign state = site.data.states | where:"xx", xx | first %}
+{% assign plan-lower = plan-type | downcase %}
+
+<p>{{ state["name"] }} has {{ state["counties"] counties }}, TBD {{ plan-lower }} state house districts, and a total population of {{ state["population"] }}. </p>

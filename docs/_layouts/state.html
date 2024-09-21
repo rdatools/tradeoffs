@@ -6,11 +6,11 @@ big-image-width: 500
 map-width: 700
 ---
 
-{{ content }}
-
 {% assign xx = page.xx %}
 {% assign plan-type = page.plan-type %}
 {% assign suffix = page.suffix %}
+
+{{ content }}
 
 <!-- COMMON GRID FUNCTIONALITY & STYLES -->
 
@@ -232,13 +232,13 @@ map-width: 700
 <ul>
     <li>Ratings are [0-100], where bigger is better.</li>
     <li>Each plan in the unbiased ensemble is plotted as a single-pixel black dot.</li>
-    <li>Additional plans from the optimized runs are shown as single-pixel green dots.</li>
-    <li>The notable maps from DRA are shown as five-pixel red diamonds.</li>
+    <!-- <li>Additional plans from the optimized runs are shown as single-pixel green dots.</li> -->
+    <li>Human-drawn notable maps from DRA are shown as five-pixel red diamonds.</li>
     <li>The frontier for the unbiased ensemble is shown as a single-pixel black line.</li>
-    <li>The "pushed" frontier is shown as a two-pixel black line.</li>
+    <!-- <li>The "pushed" frontier is shown as a two-pixel black line.</li>
     <li>The area between the two frontiers is shaded light gray.</li>
     <li>To help disambiguate degenerate frontiers (only one point), dash-dotted lines connect the end points of the
-        "pushed" frontiers to the x- and y-axes.</li>
+        "pushed" frontiers to the x- and y-axes.</li> -->
     <li>Special maps of note, like official maps, are described in the legend below the plots.</li>
 </ul>
 
