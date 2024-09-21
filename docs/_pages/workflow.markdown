@@ -39,7 +39,7 @@ by running the `SETUP.sh` script from the root of this project.
 For example, to set up North Carolina, run:
 
 ```bash
-scripts/SETUP.sh NC
+scripts/setup_state.sh NC
 ```
 
 ## Step 3 - N/A
@@ -132,7 +132,7 @@ by running the `DEPLOY.sh` script from the root of this project.
 For example, to deploy North Carolina, run:
 
 ```bash
-scripts/DEPLOY.sh NC
+scripts/deploy_state.sh NC
 ```
 
 Do this once per state, after all types of plans are complete.

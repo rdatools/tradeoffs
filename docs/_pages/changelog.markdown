@@ -6,8 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
-- Fiddling with one-liner formatting ...
-- Activated six sample states.
+- Activated six sample states: NC, PA, MD, IL, SC, and TX.
 - Re-deployed NC congress (root map) / upper (random assignments) / lower (random map).
 - More tweaking of the workflow documentation.
 - Updated MD- and PA-congress & revised workflow documentation.
