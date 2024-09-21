@@ -12,4 +12,3 @@ plan-type: "Lower"
 suffix: "20L"
 ---
 
-[TODO - Add a static one-liner here at the beginning of the state page.]
