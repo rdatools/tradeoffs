@@ -14,7 +14,7 @@ map-width: 700
 {% assign plan-lower = plan-type | downcase %}
 {% assign ndistricts = state[plan-lower] %}
 {% assign totpop = state["population"]| intcomma %}
-{% assign plan-descriptor = "congressional"}
+{% assign plan-descriptor = "congressional" %}
 
 <p>{{ state["name"] }} has {{ state["counties"] }} counties and a total population of {{ totpop }}. They
     have {{ ndistricts }} {{ plan-descriptor }} districts</p>
