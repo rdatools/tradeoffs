@@ -10,6 +10,15 @@ map-width: 700
 {% assign plan-type = page.plan-type %}
 {% assign suffix = page.suffix %}
 
+{% assign state = site.data.states | where:"xx", xx | first %}
+{% assign plan-lower = plan-type | downcase %}
+{% capture ndistricts %}
+{{ state[plan-lower] }}
+{% endcapture %}
+
+<p>{{ state["name"] }} has {{ state["counties"] }} counties and a total population of {{ state["population"] }}. They
+    have {{ ndistricts }} TBD districts</p>
+
 {{ content }}
 
 <!-- COMMON GRID FUNCTIONALITY & STYLES -->
