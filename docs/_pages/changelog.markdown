@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Fiddling with one-liner formatting.
 - Activated six sample states.
 - Re-deployed NC congress (root map) / upper (random assignments) / lower (random map).
 - More tweaking of the workflow documentation.
