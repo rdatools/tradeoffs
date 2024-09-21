@@ -23,8 +23,18 @@ map-width: 700
 {% assign plan-descriptor = "congressional" %}
 {% endif %}
 
-<p>{{ state["name"] }} has {{ state["counties"] }} counties and a total population of {{ totpop | intcomma }}. They
+<p>{{ state["name"] }} has {{ state["counties"] }} counties and a total population of <span id="popid"></span>. They
     have {{ ndistricts }} {{ plan-descriptor }} districts.</p>
+
+<script type="text/javascript" charset="utf-8">
+    function numberWithCommas(x)
+    {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    let element = document.getElementById('popid');
+    element.textContent = numberWithCommas("{{ totpop }}");;
+</script>
 
 {{ content }}
 
