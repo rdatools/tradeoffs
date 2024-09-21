@@ -11,5 +11,3 @@ xx: "IL"
 plan-type: "Congress"
 suffix: "20C"
 ---
- 
-<p>{{ xx }} / {{ plan-type }} / {{ suffix }}</p>

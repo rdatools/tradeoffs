@@ -11,5 +11,3 @@ xx: "IL"
 plan-type: "Upper"
 suffix: "20U"
 ---
-
-[TODO - Add a static one-liner here at the beginning of the state page.]

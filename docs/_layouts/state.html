@@ -12,12 +12,12 @@ map-width: 700
 
 {% assign state = site.data.states | where:"xx", xx | first %}
 {% assign plan-lower = plan-type | downcase %}
-{% capture ndistricts %}
-{{ state[plan-lower] }}
-{% endcapture %}
+{% assign ndistricts = state[plan-lower] %}
+{% assign totpop = state["population"]| intcomma %}
+{% assign plan-descriptor = "congressional"}
 
-<p>{{ state["name"] }} has {{ state["counties"] }} counties and a total population of {{ state["population"] }}. They
-    have {{ ndistricts }} TBD districts</p>
+<p>{{ state["name"] }} has {{ state["counties"] }} counties and a total population of {{ totpop }}. They
+    have {{ ndistricts }} {{ plan-descriptor }} districts</p>
 
 {{ content }}
 
