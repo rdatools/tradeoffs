@@ -12,4 +12,4 @@ plan-type: "Lower"
 suffix: "20L"
 ---
 
-{% assign xx = page.xx %}
+[TODO - Add a static one-liner here at the beginning of the state page.]

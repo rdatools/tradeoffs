@@ -12,6 +12,4 @@ plan-type: "Upper"
 suffix: "20U"
 ---
 
-{% assign xx = page.xx %}
-{% assign plantype = page.plantype %}
-{% assign suffix = page.suffix %}
+[TODO - Add a static one-liner here at the beginning of the state page.]

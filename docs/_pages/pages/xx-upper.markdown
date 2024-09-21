@@ -12,4 +12,4 @@ plan-type: "Upper"
 suffix: "20U"
 ---
 
-{% assign xx = page.xx %}
+[TODO - Add a static one-liner here at the beginning of the state page.]
