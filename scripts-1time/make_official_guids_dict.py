@@ -17,15 +17,13 @@ def main() -> None:
         if xx not in data:
             continue
 
-        print(f'"{xx}": [')
+        print(f'"{xx}": {{')
         plans: List[Dict[str, Any]] = data[xx]["plans"]
         latest: List[Dict[str, Any]] = [p for p in plans if p["year"] == 2022]
         for i, plan in enumerate(latest):
             trailing_comma = "," if i < len(latest) - 1 else ""
-            print(
-                f'{{ "type": "{plan["planType"]}", "name": "{plan["title"]}", "guid": "{plan["id"]}" }}{trailing_comma}'
-            )
-        print("],")
+            print(f'"{plan["planType"]}": "{plan["id"]}"{trailing_comma}')
+        print(f"}},")
 
     pass
 

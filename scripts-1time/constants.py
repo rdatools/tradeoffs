@@ -36,686 +36,208 @@ TRADEOFFS_STATES: list[str] = [
 
 SAMPLE_STATES: List[str] = ["NC", "PA", "MD", "IL", "SC", "TX"]
 
-OFFICIAL_MAPS: Dict[str, List[Dict[str, str]]] = {
-    "AL": [
-        {
-            "type": "congress",
-            "name": "AL 2022 Congressional",
-            "guid": "b1cfc3f6-27df-498d-a147-0664d75fea88",
-        },
-        {
-            "type": "lower",
-            "name": "AL 2022 State House",
-            "guid": "642e8d2a-248c-4191-a88a-a6cdad508cdb",
-        },
-        {
-            "type": "upper",
-            "name": "AL 2022 State Senate",
-            "guid": "b694ea80-20d6-45fb-a0e2-09ddaa2880d5",
-        },
-    ],
-    "AZ": [
-        {
-            "type": "congress",
-            "name": "AZ 2022 Congressional",
-            "guid": "4ee8ecf2-14b7-4a8d-99bc-82fa633a9305",
-        },
-        {
-            "type": "upper",
-            "name": "AZ 2022 State Legislature",
-            "guid": "72e34ca5-9ae1-4ddd-96f0-697bd261294e",
-        },
-    ],
-    "AR": [
-        {
-            "type": "congress",
-            "name": "AR 2022 Congressional",
-            "guid": "fa3434ec-4f52-48de-947b-5998b6937bf0",
-        },
-        {
-            "type": "lower",
-            "name": "AR 2022 State House",
-            "guid": "583730d5-1254-4dca-8f73-850940804307",
-        },
-        {
-            "type": "upper",
-            "name": "AR 2022 State Senate",
-            "guid": "083cee53-0d0c-43af-ace1-863ccd3a2fe5",
-        },
-    ],
-    "CA": [
-        {
-            "type": "congress",
-            "name": "CA 2022 Congressional",
-            "guid": "fc9d2d06-7c7f-451c-92cb-122127a79c29",
-        },
-        {
-            "type": "lower",
-            "name": "CA 2022 State House",
-            "guid": "43cea5ab-ef0a-4946-b3e2-c3f2aaf73cf1",
-        },
-        {
-            "type": "upper",
-            "name": "CA 2022 State Senate",
-            "guid": "f0a4ed9d-205f-4122-abab-fa3c75b6b050",
-        },
-    ],
-    "CO": [
-        {
-            "type": "congress",
-            "name": "CO 2022 Congressional",
-            "guid": "39f44408-23f7-439d-b7eb-923da58b63df",
-        },
-        {
-            "type": "lower",
-            "name": "CO 2022 State House",
-            "guid": "dee1f8ad-23c1-497b-859c-6d1a9293bbd5",
-        },
-        {
-            "type": "upper",
-            "name": "CO 2022 State Senate",
-            "guid": "9b5ec272-1fba-4a7a-ac6c-f2dcb4c6d0ae",
-        },
-    ],
-    "CT": [
-        {
-            "type": "congress",
-            "name": "CT 2022 Congressional",
-            "guid": "707f203c-ce98-4de8-b150-a2605136e015",
-        },
-        {
-            "type": "lower",
-            "name": "CT 2022 State House",
-            "guid": "2e38109d-9987-46e3-9ff0-dd6c3caa59e8",
-        },
-        {
-            "type": "upper",
-            "name": "CT 2022 State Senate",
-            "guid": "fc9e83c0-59e2-4dea-b0cf-d2fff1c0b8a3",
-        },
-    ],
-    "FL": [
-        {
-            "type": "congress",
-            "name": "FL 2022 Congressional",
-            "guid": "3a6791b9-a186-4691-a95c-5d51dbb3be1c",
-        },
-        {
-            "type": "lower",
-            "name": "FL 2022 State House",
-            "guid": "488c9284-a2c4-4846-9d7d-08af9d98a6c5",
-        },
-        {
-            "type": "upper",
-            "name": "FL 2022 State Senate",
-            "guid": "91f2ce50-b3c1-4d74-87f2-d3a9fa078129",
-        },
-    ],
-    "GA": [
-        {
-            "type": "congress",
-            "name": "GA 2022 Congressional",
-            "guid": "3a370cc7-f820-4af4-8fca-a27ec52502b7",
-        },
-        {
-            "type": "lower",
-            "name": "GA 2022 State House",
-            "guid": "041f73c7-8f4f-48c5-a5ff-cb059e692827",
-        },
-        {
-            "type": "upper",
-            "name": "GA 2022 State Senate",
-            "guid": "f1249844-4b84-45e6-9ca6-e13f6ddddb0d",
-        },
-    ],
-    "ID": [
-        {
-            "type": "congress",
-            "name": "ID 2022 Congressional",
-            "guid": "ebc8cec8-b919-4a66-9b42-9cf5bf7e02a1",
-        },
-        {
-            "type": "upper",
-            "name": "ID 2022 State Legislature",
-            "guid": "a56da372-79a4-48e7-9fd5-b689d0ccb602",
-        },
-    ],
-    "IL": [
-        {
-            "type": "congress",
-            "name": "IL 2022 Congressional",
-            "guid": "8a4586ad-4c58-489b-828c-4477cfd0ce88",
-        },
-        {
-            "type": "lower",
-            "name": "IL 2022 State House",
-            "guid": "19bc2a13-2ad1-455a-a7cb-4182ff7c6f6f",
-        },
-        {
-            "type": "upper",
-            "name": "IL 2022 State Senate",
-            "guid": "8cd5c7ba-6e69-42a7-89e1-3806a2a05e64",
-        },
-    ],
-    "IN": [
-        {
-            "type": "congress",
-            "name": "IN 2022 Congressional",
-            "guid": "c08c9df0-9756-4c5a-a7e7-01ff03bbb170",
-        },
-        {
-            "type": "lower",
-            "name": "IN 2022 State House",
-            "guid": "db849782-86e9-4293-a492-3e17d7cfceab",
-        },
-        {
-            "type": "upper",
-            "name": "IN 2022 State Senate",
-            "guid": "f2d2e4a3-f50d-4f77-bc5d-027ba0e2717e",
-        },
-    ],
-    "IA": [
-        {
-            "type": "congress",
-            "name": "IA 2022 Congressional",
-            "guid": "628d5e9a-bd35-4248-aa8c-73af095e0135",
-        },
-        {
-            "type": "lower",
-            "name": "IA 2022 State House",
-            "guid": "3bba1647-f4a4-4374-8021-a8e4aeb6f15a",
-        },
-        {
-            "type": "upper",
-            "name": "IA 2022 State Senate",
-            "guid": "0e81cf3d-648d-4851-b14b-0ee893f92610",
-        },
-    ],
-    "KS": [
-        {
-            "type": "congress",
-            "name": "KS 2022 Congressional",
-            "guid": "2ea884cd-5687-48b4-879a-4f780d3de1cf",
-        },
-        {
-            "type": "lower",
-            "name": "KS 2022 State House",
-            "guid": "781f29f1-259e-4235-8b14-85137bc38893",
-        },
-        {
-            "type": "upper",
-            "name": "KS 2022 State Senate",
-            "guid": "2bc2f97f-a285-4596-9fcd-6108056b229f",
-        },
-    ],
-    "KY": [
-        {
-            "type": "congress",
-            "name": "KY 2022 Congressional",
-            "guid": "0ec1616e-7ed6-4f84-b20d-dcc51221b2bf",
-        },
-        {
-            "type": "lower",
-            "name": "KY 2022 State House",
-            "guid": "8eed4db7-46cd-4e09-a179-c0a7e821a963",
-        },
-        {
-            "type": "upper",
-            "name": "KY 2022 State Senate",
-            "guid": "8ef6d39b-ae52-4587-8ed1-88b781dd4300",
-        },
-    ],
-    "LA": [
-        {
-            "type": "congress",
-            "name": "LA 2022 Congressional",
-            "guid": "42873bd9-ce68-4ee1-878e-be420dbf0ee3",
-        },
-        {
-            "type": "lower",
-            "name": "LA 2022 State House",
-            "guid": "d63b737c-a8b3-46e9-8855-aa20a728c2b5",
-        },
-        {
-            "type": "upper",
-            "name": "LA 2022 State Senate",
-            "guid": "12eedba5-68de-4ab4-a3bb-7f59d9268041",
-        },
-    ],
-    "MA": [
-        {
-            "type": "congress",
-            "name": "MA 2022 Congressional",
-            "guid": "791f8174-e00d-4baf-9b0a-206a298eb28b",
-        },
-        {
-            "type": "lower",
-            "name": "MA 2022 State House",
-            "guid": "f4bfa2f3-1e73-4e0b-a237-cc2aa2e611b8",
-        },
-        {
-            "type": "upper",
-            "name": "MA 2022 State Senate",
-            "guid": "b32decd8-3ed9-4ab2-876b-c92cfa798e33",
-        },
-    ],
-    "MD": [
-        {
-            "type": "congress",
-            "name": "MD 2022 Congressional",
-            "guid": "a365ecbd-db5f-4c84-a77f-90310c6a6c1a",
-        },
-        {
-            "type": "lower",
-            "name": "MD 2022 State House",
-            "guid": "4cf1f21b-2347-457a-bbca-f299c7a8cb2b",
-        },
-        {
-            "type": "upper",
-            "name": "MD 2022 State Senate",
-            "guid": "92ad6e43-2394-4957-b30a-828ca424a034",
-        },
-    ],
-    "MI": [
-        {
-            "type": "congress",
-            "name": "MI 2022 Congressional",
-            "guid": "287ace43-1a66-4686-b596-949f578971a8",
-        },
-        {
-            "type": "lower",
-            "name": "MI 2022 State House",
-            "guid": "8f2d562d-9d7f-4d3b-992e-5c52debd8f08",
-        },
-        {
-            "type": "upper",
-            "name": "MI 2022 State Senate",
-            "guid": "7563fcf7-de01-411a-aa51-c56cf76340b0",
-        },
-    ],
-    "MN": [
-        {
-            "type": "congress",
-            "name": "MN 2022 Congressional",
-            "guid": "4b212b88-2b8b-48aa-b2d2-e2f9980ac884",
-        },
-        {
-            "type": "lower",
-            "name": "MN 2022 State House",
-            "guid": "0e589052-0df8-4b8a-bede-c8e9fcc8814c",
-        },
-        {
-            "type": "upper",
-            "name": "MN 2022 State Senate",
-            "guid": "8d55ed9f-d825-4a8a-95e4-864cbeede612",
-        },
-    ],
-    "MS": [
-        {
-            "type": "congress",
-            "name": "MS 2022 Congressional",
-            "guid": "2a63d0b3-58db-4e59-9b3b-436b221e078a",
-        },
-        {
-            "type": "lower",
-            "name": "MS 2022 State House",
-            "guid": "f8554517-7286-461a-9cfa-892b3d4731f7",
-        },
-        {
-            "type": "upper",
-            "name": "MS 2022 State Senate",
-            "guid": "f3908ec6-949f-444b-9fd5-7b2173abcb6e",
-        },
-    ],
-    "MO": [
-        {
-            "type": "congress",
-            "name": "MO 2022 Congressional",
-            "guid": "68b2b598-69cd-430e-bee2-1dc4b76705f6",
-        },
-        {
-            "type": "lower",
-            "name": "MO 2022 State House",
-            "guid": "ebb632d0-2569-4a2a-81f6-1d8d6adc0d5e",
-        },
-        {
-            "type": "upper",
-            "name": "MO 2022 State Senate",
-            "guid": "8d25c96a-2a78-40b2-b2f0-c504ecaa6762",
-        },
-    ],
-    "MT": [
-        {
-            "type": "congress",
-            "name": "MT 2022 Congressional",
-            "guid": "66ff2b64-826d-48a9-bbe4-08afa4c10873",
-        }
-    ],
-    "NE": [
-        {
-            "type": "congress",
-            "name": "NE 2022 Congressional",
-            "guid": "9de1188c-2169-4c5a-a4f3-76179d22b279",
-        },
-        {
-            "type": "upper",
-            "name": "NE 2022 State Senate",
-            "guid": "ab1f2fef-b979-4431-844a-98d93a4d6730",
-        },
-    ],
-    "NH": [
-        {
-            "type": "congress",
-            "name": "NH 2022 Congressional",
-            "guid": "a1a2b285-f862-402c-9e89-b45791a46473",
-        },
-        {
-            "type": "lower",
-            "name": "NH 2022 State House",
-            "guid": "dfddaed1-5a76-4ca7-8a11-ddc533ea9f6e",
-        },
-        {
-            "type": "upper",
-            "name": "NH 2022 State Senate",
-            "guid": "15bf8903-0c56-4536-9265-7b7177726a73",
-        },
-    ],
-    "NV": [
-        {
-            "type": "congress",
-            "name": "NV 2022 Congressional",
-            "guid": "eb89e40d-595f-485f-9a43-d1bbdd6d0cb4",
-        },
-        {
-            "type": "lower",
-            "name": "NV 2022 State House",
-            "guid": "2a33203f-8725-48dc-ba1b-478bd6012a58",
-        },
-        {
-            "type": "upper",
-            "name": "NV 2022 State Senate",
-            "guid": "99808524-5012-4119-91ce-973ba647806b",
-        },
-    ],
-    "NJ": [
-        {
-            "type": "congress",
-            "name": "NJ 2022 Congressional",
-            "guid": "6ff0b024-2e5d-4e9b-ba0e-56f6de17ea80",
-        },
-        {
-            "type": "upper",
-            "name": "NJ 2022 State Legislatures",
-            "guid": "61388384-5d1f-4f3b-9669-31e485b781f1",
-        },
-    ],
-    "NM": [
-        {
-            "type": "congress",
-            "name": "NM 2022 Congressional",
-            "guid": "ec1c76cd-f59f-445b-8f24-fbffb0e8bdf5",
-        },
-        {
-            "type": "lower",
-            "name": "NM 2022 State House",
-            "guid": "5e00bd63-7008-4b5e-b570-db5ba1d36785",
-        },
-        {
-            "type": "upper",
-            "name": "NM 2022 State Senate",
-            "guid": "11c9cc63-8521-4785-89f3-58b5e4359507",
-        },
-    ],
-    "NY": [
-        {
-            "type": "congress",
-            "name": "NY 2022 Congressional",
-            "guid": "395a7fbe-fa32-47fc-993d-e07d36baff72",
-        },
-        {
-            "type": "lower",
-            "name": "NY 2022 State House",
-            "guid": "1933abca-db19-40f9-808d-17dd90642cdc",
-        },
-        {
-            "type": "upper",
-            "name": "NY 2022 State Senate",
-            "guid": "bb78268d-ea3c-46a1-a484-c192a6c0e15d",
-        },
-    ],
-    "NC": [
-        {
-            "type": "congress",
-            "name": "NC 2022 Congressional",
-            "guid": "6e8268a4-3b9b-4140-8f99-e3544a2f0816",
-        },
-        {
-            "type": "lower",
-            "name": "NC 2022 State House",
-            "guid": "e4b677ba-541f-40bd-ad9f-ba8707515f7d",
-        },
-        {
-            "type": "upper",
-            "name": "NC 2022 State Senate",
-            "guid": "8288b613-df48-45a7-9bd1-5d9f9ca3d685",
-        },
-    ],
-    "OH": [
-        {
-            "type": "congress",
-            "name": "OH 2022 Congressional",
-            "guid": "64d56870-70ea-4f4d-b667-9a4fd60ac511",
-        },
-        {
-            "type": "lower",
-            "name": "OH 2022 State House",
-            "guid": "90de759b-f81d-44c0-a019-d2714a38cc3a",
-        },
-        {
-            "type": "upper",
-            "name": "OH 2022 State Senate",
-            "guid": "6eba71b1-18a1-48d1-99c9-62afba432253",
-        },
-    ],
-    "OK": [
-        {
-            "type": "congress",
-            "name": "OK 2022 Congressional",
-            "guid": "f726bcb3-b750-44b2-9d0b-e2df90fe6fa5",
-        },
-        {
-            "type": "lower",
-            "name": "OK 2022 State House",
-            "guid": "a4a178b9-581b-4591-bcf9-13e18bd850ea",
-        },
-        {
-            "type": "upper",
-            "name": "OK 2022 State Senate",
-            "guid": "0fa6fe25-9db7-4777-a150-d2309188823f",
-        },
-    ],
-    "OR": [
-        {
-            "type": "congress",
-            "name": "OR 2022 Congressional",
-            "guid": "9b2b545f-5cd2-4e0d-a9b9-cc3915a4750f",
-        },
-        {
-            "type": "lower",
-            "name": "OR 2022 State House",
-            "guid": "c572dfa0-276b-4a76-8531-06669d885f27",
-        },
-        {
-            "type": "upper",
-            "name": "OR 2022 State Senate",
-            "guid": "a5aadfab-0234-489a-a4df-cc008a844926",
-        },
-    ],
-    "PA": [
-        {
-            "type": "congress",
-            "name": "PA 2022 Congressional",
-            "guid": "b0a94d77-5d99-41c5-bc01-5859a6e1f3e6",
-        },
-        {
-            "type": "lower",
-            "name": "PA 2022 State House",
-            "guid": "12a18072-adf1-48ac-a9d1-12280567b824",
-        },
-        {
-            "type": "upper",
-            "name": "PA 2022 State Senate",
-            "guid": "317011f0-6bcd-4df6-a1ee-435a92640426",
-        },
-    ],
-    "RI": [
-        {
-            "type": "congress",
-            "name": "RI 2022 Congressional",
-            "guid": "cffbb279-824c-47b8-90c7-3070378e37ae",
-        },
-        {
-            "type": "lower",
-            "name": "RI 2022 State House",
-            "guid": "90ec6599-f715-4a3a-b50b-5858788046ac",
-        },
-        {
-            "type": "upper",
-            "name": "RI 2022 State Senate",
-            "guid": "2aab93a2-7e15-4047-87a8-02b0deb3eb4e",
-        },
-    ],
-    "SC": [
-        {
-            "type": "congress",
-            "name": "SC 2022 Congressional",
-            "guid": "839561a1-8c15-4c4b-ab56-3275d68092f9",
-        },
-        {
-            "type": "upper",
-            "name": "SC 2022 State Senate",
-            "guid": "7c9df455-6865-4f9e-8172-7c1a26ab28b9",
-        },
-        {
-            "type": "lower",
-            "name": "SC 2022 State House",
-            "guid": "f886f454-bdf5-463e-823e-7dfe56c8bbdd",
-        },
-    ],
-    "TN": [
-        {
-            "type": "congress",
-            "name": "TN 2022 Congressional",
-            "guid": "445d4976-c994-473f-b14c-4b87464b07ee",
-        },
-        {
-            "type": "lower",
-            "name": "TN 2022 State House",
-            "guid": "c0ed8258-ce44-4eec-9736-2cc3b86a9d16",
-        },
-        {
-            "type": "upper",
-            "name": "TN 2022 State Senate",
-            "guid": "62c62bed-a104-4afc-9286-9b3915b45f58",
-        },
-    ],
-    "TX": [
-        {
-            "type": "congress",
-            "name": "TX 2022 Congressional",
-            "guid": "1c2c1e0d-2fd1-43a8-a039-73e7023124d1",
-        },
-        {
-            "type": "lower",
-            "name": "TX 2022 State House",
-            "guid": "e74af879-6ba8-4a5c-b946-0b9364aae40b",
-        },
-        {
-            "type": "upper",
-            "name": "TX 2022 State Senate",
-            "guid": "94b33bee-887d-4170-b154-80aa55c8fe5b",
-        },
-    ],
-    "UT": [
-        {
-            "type": "congress",
-            "name": "UT 2022 Congressional",
-            "guid": "b4d46a7e-4366-4f6c-ac54-ff6640d4e13f",
-        },
-        {
-            "type": "lower",
-            "name": "UT 2022 State House",
-            "guid": "927e8547-08f9-43e3-8abc-68a7faf89d71",
-        },
-        {
-            "type": "upper",
-            "name": "UT 2022 State Senate",
-            "guid": "cfd457c9-6d3e-496d-9377-4b68de384a57",
-        },
-    ],
-    "VA": [
-        {
-            "type": "congress",
-            "name": "VA 2022 Congressional",
-            "guid": "bc930c25-236f-46a7-bbe9-d8d77e21d011",
-        },
-        {
-            "type": "lower",
-            "name": "VA 2022 State House",
-            "guid": "fa427b6b-e057-43e9-8000-9d1ae319870e",
-        },
-        {
-            "type": "upper",
-            "name": "VA 2022 State Senate",
-            "guid": "1b489a5a-f457-428d-b552-9ede8ceb9b99",
-        },
-    ],
-    "WA": [
-        {
-            "type": "congress",
-            "name": "WA 2022 Congressional",
-            "guid": "3dd8f07d-8f9b-4905-a155-573bdc084b06",
-        },
-        {
-            "type": "upper",
-            "name": "WA 2022 State Legislatures",
-            "guid": "3e3c5f5c-3a83-4847-b1d8-5328fb3b9e31",
-        },
-    ],
-    "WI": [
-        {
-            "type": "congress",
-            "name": "WI 2022 Congressional",
-            "guid": "aa64c8f5-837c-474f-819f-6eaa1094d776",
-        },
-        {
-            "type": "lower",
-            "name": "WI 2022 State House",
-            "guid": "6a8a362d-0c59-4d81-aea3-28cba004b502",
-        },
-        {
-            "type": "upper",
-            "name": "WI 2022 State Senate",
-            "guid": "cb8ed0b5-013f-4b1a-ba49-1b03445416c9",
-        },
-    ],
-    "WV": [
-        {
-            "type": "congress",
-            "name": "WV 2022 Congressional",
-            "guid": "aaaa571f-f204-4cbe-bcf1-404db0519d36",
-        },
-        {
-            "type": "lower",
-            "name": "WV 2022 State House",
-            "guid": "bd6eb9ac-ac94-465f-82d6-4e086307d5e5",
-        },
-        {
-            "type": "upper",
-            "name": "WV 2022 State Senate",
-            "guid": "c3ca956f-0b1d-4750-894d-b2e9dadc642c",
-        },
-    ],
+OFFICIAL_MAPS: Dict[str, Dict[str, str]] = {
+    "AL": {
+        "congress": "b1cfc3f6-27df-498d-a147-0664d75fea88",
+        "lower": "642e8d2a-248c-4191-a88a-a6cdad508cdb",
+        "upper": "b694ea80-20d6-45fb-a0e2-09ddaa2880d5",
+    },
+    "AZ": {
+        "congress": "4ee8ecf2-14b7-4a8d-99bc-82fa633a9305",
+        "upper": "72e34ca5-9ae1-4ddd-96f0-697bd261294e",
+    },
+    "AR": {
+        "congress": "fa3434ec-4f52-48de-947b-5998b6937bf0",
+        "lower": "583730d5-1254-4dca-8f73-850940804307",
+        "upper": "083cee53-0d0c-43af-ace1-863ccd3a2fe5",
+    },
+    "CA": {
+        "congress": "fc9d2d06-7c7f-451c-92cb-122127a79c29",
+        "lower": "43cea5ab-ef0a-4946-b3e2-c3f2aaf73cf1",
+        "upper": "f0a4ed9d-205f-4122-abab-fa3c75b6b050",
+    },
+    "CO": {
+        "congress": "39f44408-23f7-439d-b7eb-923da58b63df",
+        "lower": "dee1f8ad-23c1-497b-859c-6d1a9293bbd5",
+        "upper": "9b5ec272-1fba-4a7a-ac6c-f2dcb4c6d0ae",
+    },
+    "CT": {
+        "congress": "707f203c-ce98-4de8-b150-a2605136e015",
+        "lower": "2e38109d-9987-46e3-9ff0-dd6c3caa59e8",
+        "upper": "fc9e83c0-59e2-4dea-b0cf-d2fff1c0b8a3",
+    },
+    "FL": {
+        "congress": "3a6791b9-a186-4691-a95c-5d51dbb3be1c",
+        "lower": "488c9284-a2c4-4846-9d7d-08af9d98a6c5",
+        "upper": "91f2ce50-b3c1-4d74-87f2-d3a9fa078129",
+    },
+    "GA": {
+        "congress": "3a370cc7-f820-4af4-8fca-a27ec52502b7",
+        "lower": "041f73c7-8f4f-48c5-a5ff-cb059e692827",
+        "upper": "f1249844-4b84-45e6-9ca6-e13f6ddddb0d",
+    },
+    "ID": {
+        "congress": "ebc8cec8-b919-4a66-9b42-9cf5bf7e02a1",
+        "upper": "a56da372-79a4-48e7-9fd5-b689d0ccb602",
+    },
+    "IL": {
+        "congress": "8a4586ad-4c58-489b-828c-4477cfd0ce88",
+        "lower": "19bc2a13-2ad1-455a-a7cb-4182ff7c6f6f",
+        "upper": "8cd5c7ba-6e69-42a7-89e1-3806a2a05e64",
+    },
+    "IN": {
+        "congress": "c08c9df0-9756-4c5a-a7e7-01ff03bbb170",
+        "lower": "db849782-86e9-4293-a492-3e17d7cfceab",
+        "upper": "f2d2e4a3-f50d-4f77-bc5d-027ba0e2717e",
+    },
+    "IA": {
+        "congress": "628d5e9a-bd35-4248-aa8c-73af095e0135",
+        "lower": "3bba1647-f4a4-4374-8021-a8e4aeb6f15a",
+        "upper": "0e81cf3d-648d-4851-b14b-0ee893f92610",
+    },
+    "KS": {
+        "congress": "2ea884cd-5687-48b4-879a-4f780d3de1cf",
+        "lower": "781f29f1-259e-4235-8b14-85137bc38893",
+        "upper": "2bc2f97f-a285-4596-9fcd-6108056b229f",
+    },
+    "KY": {
+        "congress": "0ec1616e-7ed6-4f84-b20d-dcc51221b2bf",
+        "lower": "8eed4db7-46cd-4e09-a179-c0a7e821a963",
+        "upper": "8ef6d39b-ae52-4587-8ed1-88b781dd4300",
+    },
+    "LA": {
+        "congress": "42873bd9-ce68-4ee1-878e-be420dbf0ee3",
+        "lower": "d63b737c-a8b3-46e9-8855-aa20a728c2b5",
+        "upper": "12eedba5-68de-4ab4-a3bb-7f59d9268041",
+    },
+    "MA": {
+        "congress": "791f8174-e00d-4baf-9b0a-206a298eb28b",
+        "lower": "f4bfa2f3-1e73-4e0b-a237-cc2aa2e611b8",
+        "upper": "b32decd8-3ed9-4ab2-876b-c92cfa798e33",
+    },
+    "MD": {
+        "congress": "a365ecbd-db5f-4c84-a77f-90310c6a6c1a",
+        "lower": "4cf1f21b-2347-457a-bbca-f299c7a8cb2b",
+        "upper": "92ad6e43-2394-4957-b30a-828ca424a034",
+    },
+    "MI": {
+        "congress": "287ace43-1a66-4686-b596-949f578971a8",
+        "lower": "8f2d562d-9d7f-4d3b-992e-5c52debd8f08",
+        "upper": "7563fcf7-de01-411a-aa51-c56cf76340b0",
+    },
+    "MN": {
+        "congress": "4b212b88-2b8b-48aa-b2d2-e2f9980ac884",
+        "lower": "0e589052-0df8-4b8a-bede-c8e9fcc8814c",
+        "upper": "8d55ed9f-d825-4a8a-95e4-864cbeede612",
+    },
+    "MS": {
+        "congress": "2a63d0b3-58db-4e59-9b3b-436b221e078a",
+        "lower": "f8554517-7286-461a-9cfa-892b3d4731f7",
+        "upper": "f3908ec6-949f-444b-9fd5-7b2173abcb6e",
+    },
+    "MO": {
+        "congress": "68b2b598-69cd-430e-bee2-1dc4b76705f6",
+        "lower": "ebb632d0-2569-4a2a-81f6-1d8d6adc0d5e",
+        "upper": "8d25c96a-2a78-40b2-b2f0-c504ecaa6762",
+    },
+    "MT": {"congress": "66ff2b64-826d-48a9-bbe4-08afa4c10873"},
+    "NE": {
+        "congress": "9de1188c-2169-4c5a-a4f3-76179d22b279",
+        "upper": "ab1f2fef-b979-4431-844a-98d93a4d6730",
+    },
+    "NH": {
+        "congress": "a1a2b285-f862-402c-9e89-b45791a46473",
+        "lower": "dfddaed1-5a76-4ca7-8a11-ddc533ea9f6e",
+        "upper": "15bf8903-0c56-4536-9265-7b7177726a73",
+    },
+    "NV": {
+        "congress": "eb89e40d-595f-485f-9a43-d1bbdd6d0cb4",
+        "lower": "2a33203f-8725-48dc-ba1b-478bd6012a58",
+        "upper": "99808524-5012-4119-91ce-973ba647806b",
+    },
+    "NJ": {
+        "congress": "6ff0b024-2e5d-4e9b-ba0e-56f6de17ea80",
+        "upper": "61388384-5d1f-4f3b-9669-31e485b781f1",
+    },
+    "NM": {
+        "congress": "ec1c76cd-f59f-445b-8f24-fbffb0e8bdf5",
+        "lower": "5e00bd63-7008-4b5e-b570-db5ba1d36785",
+        "upper": "11c9cc63-8521-4785-89f3-58b5e4359507",
+    },
+    "NY": {
+        "congress": "395a7fbe-fa32-47fc-993d-e07d36baff72",
+        "lower": "1933abca-db19-40f9-808d-17dd90642cdc",
+        "upper": "bb78268d-ea3c-46a1-a484-c192a6c0e15d",
+    },
+    "NC": {
+        "congress": "6e8268a4-3b9b-4140-8f99-e3544a2f0816",
+        "lower": "e4b677ba-541f-40bd-ad9f-ba8707515f7d",
+        "upper": "8288b613-df48-45a7-9bd1-5d9f9ca3d685",
+    },
+    "OH": {
+        "congress": "64d56870-70ea-4f4d-b667-9a4fd60ac511",
+        "lower": "90de759b-f81d-44c0-a019-d2714a38cc3a",
+        "upper": "6eba71b1-18a1-48d1-99c9-62afba432253",
+    },
+    "OK": {
+        "congress": "f726bcb3-b750-44b2-9d0b-e2df90fe6fa5",
+        "lower": "a4a178b9-581b-4591-bcf9-13e18bd850ea",
+        "upper": "0fa6fe25-9db7-4777-a150-d2309188823f",
+    },
+    "OR": {
+        "congress": "9b2b545f-5cd2-4e0d-a9b9-cc3915a4750f",
+        "lower": "c572dfa0-276b-4a76-8531-06669d885f27",
+        "upper": "a5aadfab-0234-489a-a4df-cc008a844926",
+    },
+    "PA": {
+        "congress": "b0a94d77-5d99-41c5-bc01-5859a6e1f3e6",
+        "lower": "12a18072-adf1-48ac-a9d1-12280567b824",
+        "upper": "317011f0-6bcd-4df6-a1ee-435a92640426",
+    },
+    "RI": {
+        "congress": "cffbb279-824c-47b8-90c7-3070378e37ae",
+        "lower": "90ec6599-f715-4a3a-b50b-5858788046ac",
+        "upper": "2aab93a2-7e15-4047-87a8-02b0deb3eb4e",
+    },
+    "SC": {
+        "congress": "839561a1-8c15-4c4b-ab56-3275d68092f9",
+        "upper": "7c9df455-6865-4f9e-8172-7c1a26ab28b9",
+        "lower": "f886f454-bdf5-463e-823e-7dfe56c8bbdd",
+    },
+    "TN": {
+        "congress": "445d4976-c994-473f-b14c-4b87464b07ee",
+        "lower": "c0ed8258-ce44-4eec-9736-2cc3b86a9d16",
+        "upper": "62c62bed-a104-4afc-9286-9b3915b45f58",
+    },
+    "TX": {
+        "congress": "1c2c1e0d-2fd1-43a8-a039-73e7023124d1",
+        "lower": "e74af879-6ba8-4a5c-b946-0b9364aae40b",
+        "upper": "94b33bee-887d-4170-b154-80aa55c8fe5b",
+    },
+    "UT": {
+        "congress": "b4d46a7e-4366-4f6c-ac54-ff6640d4e13f",
+        "lower": "927e8547-08f9-43e3-8abc-68a7faf89d71",
+        "upper": "cfd457c9-6d3e-496d-9377-4b68de384a57",
+    },
+    "VA": {
+        "congress": "bc930c25-236f-46a7-bbe9-d8d77e21d011",
+        "lower": "fa427b6b-e057-43e9-8000-9d1ae319870e",
+        "upper": "1b489a5a-f457-428d-b552-9ede8ceb9b99",
+    },
+    "WA": {
+        "congress": "3dd8f07d-8f9b-4905-a155-573bdc084b06",
+        "upper": "3e3c5f5c-3a83-4847-b1d8-5328fb3b9e31",
+    },
+    "WI": {
+        "congress": "aa64c8f5-837c-474f-819f-6eaa1094d776",
+        "lower": "6a8a362d-0c59-4d81-aea3-28cba004b502",
+        "upper": "cb8ed0b5-013f-4b1a-ba49-1b03445416c9",
+    },
+    "WV": {
+        "congress": "aaaa571f-f204-4cbe-bcf1-404db0519d36",
+        "lower": "bd6eb9ac-ac94-465f-82d6-4e086307d5e5",
+        "upper": "c3ca956f-0b1d-4750-894d-b2e9dadc642c",
+    },
 }  # This was autogenerated from state_plans.json using the make_official_guids_dict.py script
 
 # TODO - Update this
@@ -1794,7 +1316,7 @@ NOTABLE_MAPS: Dict[str, Dict[str, Dict[str, str]]] = {
             "splitting": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         },
     },
-}
+}  # This structure was autogenerated using the make_notables_guids_dict.py script. It was populated by hand on TODO: mm-dd-yy.
 
 # TODO: Update this
 # These are the guids for the duplicates of the published maps in DRA,
