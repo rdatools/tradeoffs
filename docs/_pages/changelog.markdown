@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Added notable maps to IL, SC, and TX congress scatter plots.
 - Activated six sample states: NC, PA, MD, IL, SC, and TX.
 - Re-deployed NC congress (root map) / upper (random assignments) / lower (random map).
 - More tweaking of the workflow documentation.

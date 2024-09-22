@@ -93,6 +93,7 @@ scripts/make_ratings_table.py \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/_data/${PREFIX}_notable_maps_ratings.csv \
 --no-debug
 
+# TODO: Add the notable maps to the scatter plots.
 echo "Making scatter plots ..."
 scripts/make_scatter_plots.py \
 --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
@@ -102,16 +103,15 @@ scripts/make_scatter_plots.py \
 --prefix $PREFIX \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
 --no-debug
+# TODO: Regenerate the scatter plots with notable maps.
 # scripts/make_scatter_plots.py \
-# --scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
-# --more ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
-# --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
-# --pushed ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
-# --notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \
-# --focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
-# --roughlyequal $ROUGHLY_EQUAL \
-# --prefix $PREFIX \
-# --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
+# --scores ../tradeoffs-dropbox/scores/XX20C_scores.csv \
+# --frontier ../../iCloud/fileout/tradeoffs/XX/ensembles/XX20C_frontiers.json \
+# --focus docs/_data/focus_ratings/XX20C_focus_scores.csv \
+# --notables docs/_data/notable_ratings/XX_2022_Congress_ratings.csv \
+# --roughlyequal 0.01 \
+# --prefix XX20C \
+# --output ../../iCloud/fileout/tradeoffs/XX/docs/assets/images \
 # --no-debug
 
 echo "Done!"
