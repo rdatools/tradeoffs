@@ -5,11 +5,11 @@ GENERATE THE WORKFLOW FOR A STATE
 
 For example:
 
-$ scripts/make_states_yml.py 
+$ scripts-1time/make_states_yml.py 
 
 For documentation, type:
 
-$ scripts/make_states_yml.py -h
+$ scripts-1time/make_states_yml.py -h
 """
 
 from typing import Dict, List

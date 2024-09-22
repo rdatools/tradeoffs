@@ -8,18 +8,28 @@ This page describes the DRA capabilities that I (Alec) took advantage of in deve
 
 ### Metadata
 
-- Enumerate GUIDs for official maps by state and type of map &#8212; from data/state_plans.json; I copied this structure.
-- Enumerate GUIDs for notable maps by state and type of map &#8212; ditto
-- Enumerate # of districts by state and type of map &#8212; from dra-types/lib/stateinfo.ts; I copied this structure.
+-   I extracted the GUIDs for official maps by state and type of map &#8212; from data/state_plans.json 
+    which I copied from DRA. 
+-   I collected GUIDs for notable maps by state and type of map &#8212; by hand.
+    I collected the GUIDs for congressional maps for the first version of the site some time ago.
+    I collected the GUIDs for state legislative maps for the current version of the site on TODO: mm-dd-yy.
+-   I copied the # of districts by state and type of map &#8212; from dra-types/lib/stateinfo.ts.
 
 ### CLI Commands
 
-- Duplicate a map by GUID &#8212; I duplicated all of the official & notable maps *en masse* [(1 + 5) x 42 => 252].
-- Export the block-assignment file for a map by GUID &#8212; after inspecting each notable map and confirming that it didn't have any problems, I exported a block-assignment file for it in the UI; we could have generated these at the command-line using a little known feature [(1 + 5 + 1) x 42 => 294].
-- Import a CSV, setting many map properties, getting the resulting map & access GUIDs &#8212; I generated baseline maps for 42 states and imported them at the CLI.
-- Edit map settings by GUID &#8212; I set core display properties for each map at the CLI [(7 + 6) x 42 => 546].
-- Save a map image &#8212; this is the right-click Chrome hack. This capability is *not* currently exposed at the DRA CLI, but we figured out how to replicate the feature at the command line.
-- Pull ratings for a map by GUID &#8212; I pulled ratings for each map at the CLI [(7 + 6) x 42 => 546].
+I used these CLI capabilities in the workflow for the current verison of this site:
 
-Altogether, I generate 85 artifacts per state or 3,570 in total, 
-of which 1,092 are visible (the rest intermediate/restart files).
+-   I duplicated maps by GUID &#8212; I duplicated all of the official & notable maps *en masse* [(1 + 5) x 42 => 252],
+    for congressional plans.
+    TODO: upper and lower state legislative plans.
+-   Pull ratings for a map by GUID &#8212; I pulled ratings for each map at the CLI [(7 + 6) x 42 => 546].
+    TODO: upper and lower state legislative plans.
+
+I used these capabilities in the workflow for the first version of this site:
+
+-   Export a block-assignment file for a map at the CLI, using a little known feature. 
+    TODO: What is the feature?!?
+-   Import a CSV, setting many map properties, and getting the resulting map & access GUIDs.
+-   Edit map settings by GUID.
+-   Save a map image &#8212; this is the right-click Chrome hack. 
+    This capability is *not* currently exposed at the DRA CLI, but we figured out how to replicate the feature at the command line.
