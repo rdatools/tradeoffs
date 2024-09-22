@@ -1321,6 +1321,7 @@ NOTABLE_MAPS: Dict[str, Dict[str, Dict[str, str]]] = {
 # TODO: Update this
 # These are the guids for the duplicates of the published maps in DRA,
 # as well as any changes if the notable map was bad for some reason.
+# For congressional plans, see the legacy comments below.
 NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
     "AL": {
         "congress": {
@@ -2398,12 +2399,12 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
 }
 
 
-### IGNORE BELOW HERE ###
+### LEGACY - IGNORE BELOW HERE ###
 
 # - This is copied from constants.py in the original PG repo.
 # - Why did I comment this stuff out? Did it become inactive somehow?!?
 
-# - Legacy metadata, before retooling the workflow at the command line.
+# - This is legacy metadata, before retooling the workflow at the command line.
 # - The guids tell you what notable maps I cloned.
 
 # # Official congressional maps on 11/07/2022
