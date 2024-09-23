@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
 """
-MAKE A RATINGS TABLE (CSV) FOR DRA NOTABLE MAPS
+MAKE A RATINGS TABLE (CSV) FOR DRA OFFICIAL MAPS
 
 For example:
 
-$ scripts-1time/make_notable_ratings_table.py --state AL --plantype Lower
+$ scripts-1time/make_focus_ratings_table.py --state AL --plantype Lower
 
 For documentation, type:
 
-$ scripts/make_notable_ratings_table.py -h
+$ scripts/make_focus_ratings_table.py -h
 
 """
 
@@ -22,23 +22,19 @@ from rdabase import cycle, yyyy, require_args, read_json, write_csv
 
 
 def main() -> None:
-    """Make a ratings table (CSV) for the notable maps copied from DRA."""
+    """Make a ratings table (CSV) for the official maps copied from DRA."""
 
     args: argparse.Namespace = parse_args()
 
     xx: str = args.state
     plan_type: str = args.plantype
-    # prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
-    output: str = f"{args.output}/{xx}_{yyyy}_{plan_type.capitalize()}_ratings.csv"
+    prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
+    output: str = f"{args.output}/{prefix}_focus_scores.csv"
 
     #
 
     file_names: List[str] = [
-        "proportional",
-        "competitive",
-        "minority",
-        "compact",
-        "splitting",
+        "official",
     ]
 
     dims_to_dims: Dict[str, str] = {

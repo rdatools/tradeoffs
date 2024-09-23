@@ -19,7 +19,7 @@ ROOT=~/dev/
 SCRIPT_DIR=$ROOT\dra-cli
 
 USER=alec@davesredistricting.org
-PW=Front.Seat # TODO: Remove this! - This doesn't seem to work anymore - 07/04/23.
+PW=mumble # TODO: Remove this! - This doesn't seem to work anymore - 07/04/23.
 
 NAME="$XX $YYYY $PLAN_TYPE - $GROUP"
 DESC="Copy of $XX $GROUP"
