@@ -2,24 +2,23 @@
 #
 
 """
-Pull the ratings for a DRA map.
+Generate a shell script to pull the ratings for DRA maps.
 
 For example:
 
-$ scripts/pull_map_ratings -s NC -l Official -i 6e8268a4-3b9b-4140-8f99-e3544a2f0816 -o ~/Downloads/NC/
+$ scripts-1time/pull_map_ratings -s NC -l Official -i 6e8268a4-3b9b-4140-8f99-e3544a2f0816 -o ~/Downloads/NC/
 
 For documentation, type:
 
-$ scripts/pull_map_ratings.py -h
+$ scripts-1time/pull_map_ratings.py -h
 
 """
 
 import argparse
 from argparse import ArgumentParser, Namespace
 
-import os
-
-from pg import *
+from rdabase import plan_type, yyyy
+from constants import OFFICIAL_MAPS
 
 
 def parse_args() -> Namespace:
@@ -80,10 +79,12 @@ def main() -> None:
 
     year: str = cycle if label == "Baseline" else yyyy
 
-    command: str = f"scripts/pull_map_ratings.sh {xx} {year} {plan_type} {label} {guid} {output_dir}"
-    if verbose:
-        print(command)
-    os.system(command)
+    command: str = (
+        f"scripts/pull_map_ratings.sh {xx} {year} {plan_type} {label} {guid} {output_dir}"
+    )
+
+    print(command)
+    # os.system(command)
 
     pass
 
