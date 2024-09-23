@@ -33,6 +33,8 @@ for xx, plan_types in NOTABLE_MAPS.items():
     for plan_type, notable_maps in plan_types.items():
         if plan_type == "congress":
             continue  # already duplicated
+        if xx in ["NC", "MD"]:
+            continue  # already duplicated
         for dim, guid in notable_maps.items():
             print(make_command(dim.capitalize(), label, xx, guid))
             #  os.system(make_command(dim.capitalize(), label, xx, id))

@@ -14,7 +14,7 @@ $ scripts-1time/duplicate_official_maps.py -h
 """
 
 from rdabase import plan_type, yyyy
-from constants import OFFICIAL_MAPS
+from constants import SAMPLE_STATES, OFFICIAL_MAPS
 
 group: str = "Official"
 label: str = "PG-" + group.upper()
@@ -32,6 +32,8 @@ print("# Duplicate Official maps in DRA.")
 for xx, guids in OFFICIAL_MAPS.items():
     for plan_type, guid in guids.items():
         if plan_type == "congress":
+            continue  # already duplicated
+        if xx in SAMPLE_STATES:
             continue  # already duplicated
         print(make_command(group, label, xx, guid))
         # os.system(make_command(group, label, xx, id))
