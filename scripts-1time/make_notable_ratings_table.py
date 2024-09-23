@@ -3,6 +3,12 @@
 """
 MAKE RATINGS TABLE (CSV) FOR DRA NOTABLE MAPS
 
+For example:
+
+$ scripts-1time/make_notable_ratings_table.py \
+    --state AL \
+    --plantype Lower
+
 For documentation, type:
 
 $ scripts/make_notable_ratings_table.py -h
