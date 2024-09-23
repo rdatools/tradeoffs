@@ -5,15 +5,13 @@ Create a shell script to uplicate Official maps in DRA.
 
 For example:
 
-$ scripts/duplicate_official_maps.py
+$ scripts-1time/duplicate_official_maps.py
 
 For documentation, type:
 
-$ scripts/duplicate_official_maps.py -h
+$ scripts-1time/duplicate_official_maps.py -h
 
 """
-
-import os
 
 from rdabase import plan_type, yyyy
 from constants import OFFICIAL_MAPS
@@ -23,7 +21,7 @@ label: str = "PG-" + group.upper()
 
 
 def make_command(group: str, label: str, xx: str, id: str) -> str:
-    # scripts/duplicate_map.sh NC Congress 2022 Official PG-OFFICIAL c62fa27b-1f4b-40ba-bcd7-9e2ca6f9df87
+    # scripts-1time/duplicate_map.sh NC Congress 2022 Official PG-OFFICIAL c62fa27b-1f4b-40ba-bcd7-9e2ca6f9df87
     return (
         f"scripts-1time/duplicate_map.sh {xx} {plan_type} {yyyy} {group} {label} {id}"
     )
