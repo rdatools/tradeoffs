@@ -17,7 +17,6 @@ $ scripts-1time/pull_notable_ratings.py -h
 from rdabase import plan_type, yyyy
 from constants import NOTABLE_MAPS  # TODO - NOTABLE_MAPS_COPY
 
-label: str = "PG-NOTABLE"
 output_dir: str = "intermediate"
 
 print("#!/bin/bash")
@@ -29,7 +28,7 @@ for xx, guids in NOTABLE_MAPS.items():
 
         for dim, guid in notable_maps.items():
             command: str = (
-                f"scripts/pull_map_ratings.sh {xx} {yyyy} {dim.capitalize()} {label} {guid} {output_dir}"
+                f"scripts-1time/pull_map_ratings.sh {xx} {yyyy} {plan_type.capitalize()} {dim.capitalize()} {guid} {output_dir}"
             )
             print(command)
             # os.system(command)

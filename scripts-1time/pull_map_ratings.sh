@@ -16,6 +16,7 @@ OUTPUT_DIR=$6
 
 SCRIPT_DIR=~/dev/dra-cli
 OUT_FILE=$OUTPUT_DIR/$XX\_$YYYY\_$TYPE\_$LABEL\_ratings.json
+# OUT_FILE=$OUTPUT_DIR/$XX\_$YYYY\_$TYPE\_$LABEL\_ratings.json
 
 echo "{" > $OUT_FILE
 $SCRIPT_DIR/getmap.js -m -i $GUID | grep score_ >> $OUT_FILE
