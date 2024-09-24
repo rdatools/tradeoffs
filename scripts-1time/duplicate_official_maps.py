@@ -44,7 +44,9 @@ for xx, guids in OFFICIAL_MAPS.items():
         if xx in SAMPLE_STATES:
             continue  # already duplicated
 
-        log_file: str = f"intermediate/{xx}_{yyyy}_{plan_type}_duplicate.log"
+        log_file: str = (
+            f"intermediate/{xx}_{yyyy}_{plan_type.capitalize()}_duplicate.log"
+        )
         command: str = (
             make_command(xx, plan_type, group, label, guid) + f" > {log_file}"
         )
