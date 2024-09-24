@@ -11,7 +11,7 @@
 XX=$1
 PLAN_TYPE=$2
 YYYY=$3
-GROUP=$4
+DIM=$4
 LABEL=$5
 ID=$6
 
@@ -21,9 +21,9 @@ SCRIPT_DIR=$ROOT\dra-cli
 USER=alec@davesredistricting.org
 PW=Front.Seat # TODO: Remove this! - This doesn't seem to work anymore - 07/04/23.
 
-NAME="$XX $YYYY $PLAN_TYPE - $GROUP"
-DESC="Copy of $XX $GROUP"
+NAME="$XX $YYYY $PLAN_TYPE - $DIM"
+DESC="Copy of $XX $DIM"
 
-echo $SCRIPT_DIR/draclient.js -u $USER -x $PW -i $ID -d -N "$NAME" -D "$DESC" -L $LABEL
-$SCRIPT_DIR/draclient.js  -u $USER -x $PW -i $ID -d -N "$NAME" -D "$DESC" -L $LABEL
+echo $SCRIPT_DIR/draclient.js -u $USER -x $PW -i $ID -d -N "$NAME" -D "$DESC" -L $LABEL TRADEOFFS
+$SCRIPT_DIR/draclient.js  -u $USER -x $PW -i $ID -d -N "$NAME" -D "$DESC" -L $LABEL TRADEOFFS
 

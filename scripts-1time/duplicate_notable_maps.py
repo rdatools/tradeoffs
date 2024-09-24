@@ -39,7 +39,8 @@ for xx, plan_types in NOTABLE_MAPS.items():
                 f"intermediate/{xx}_{yyyy}_{plan_type.capitalize()}_{dim.capitalize()}_duplicate.log"
             )
             command: str = (
-                make_command(xx, plan_type, dim, label, guid) + f" > {log_file}"
+                make_command(xx, plan_type.capitalize(), dim, label, guid)
+                + f" > {log_file}"
             )
             print(command)
 
