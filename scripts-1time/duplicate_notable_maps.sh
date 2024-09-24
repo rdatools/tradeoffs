@@ -1,457 +1,458 @@
 #!/bin/bash
 # Duplicate notable maps in DRA.
-scripts-1time/duplicate_map.sh AL upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AL lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AK lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AZ upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AZ upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AZ upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AZ upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AZ upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh AR lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CO lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh CT lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh DE lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh FL lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh GA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh HI lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ID upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ID upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ID upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ID upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ID upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IL lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IN lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh IA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KS lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh KY lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh LA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ME lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MI lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MN lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MS lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MO lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh MT lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NE upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NE upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NE upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NE upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NE upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NV lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NH lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NJ upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NJ upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NJ upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NJ upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NJ upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NM lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh NY lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh ND lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OH lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OK lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh OR lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh PA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh RI lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SC lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh SD lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TN lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh TX lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh UT lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VT lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh VA lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WA upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WA upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WA upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WA upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WA upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WV lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WI lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY upper 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY upper 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY upper 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY upper 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY upper 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY lower 2022 Proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY lower 2022 Competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY lower 2022 Minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY lower 2022 Compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-scripts-1time/duplicate_map.sh WY lower 2022 Splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+# Remember to start the DRA server before running these commands!
+scripts-1time/duplicate_map.sh AL upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AL upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AL upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AL upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AL upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh AL lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AL lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AL lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AL lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AL lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AL_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh AK upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AK upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AK upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AK upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AK upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh AK lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AK lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AK lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AK lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AK lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AK_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh AZ upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AZ_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AZ upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AZ_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AZ upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AZ_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AZ upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AZ_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AZ upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AZ_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh AR upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AR upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AR upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AR upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AR upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh AR lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh AR lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh AR lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh AR lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh AR lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/AR_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh CA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh CA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh CA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh CA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh CA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh CA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh CA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh CA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh CA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh CA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh CO upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh CO upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh CO upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh CO upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh CO upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh CO lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh CO lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh CO lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh CO lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh CO lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CO_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh CT upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh CT upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh CT upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh CT upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh CT upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh CT lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh CT lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh CT lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh CT lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh CT lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/CT_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh DE upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh DE upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh DE upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh DE upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh DE upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh DE lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh DE lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh DE lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh DE lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh DE lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/DE_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh FL upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh FL upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh FL upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh FL upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh FL upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh FL lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh FL lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh FL lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh FL lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh FL lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/FL_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh GA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh GA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh GA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh GA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh GA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh GA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh GA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh GA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh GA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh GA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/GA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh HI upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh HI upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh HI upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh HI upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh HI upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh HI lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh HI lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh HI lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh HI lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh HI lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/HI_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh ID upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ID_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh ID upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ID_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh ID upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ID_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh ID upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ID_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh ID upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ID_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh IL upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh IL upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh IL upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh IL upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh IL upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh IL lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh IL lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh IL lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh IL lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh IL lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IL_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh IN upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh IN upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh IN upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh IN upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh IN upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh IN lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh IN lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh IN lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh IN lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh IN lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IN_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh IA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh IA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh IA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh IA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh IA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh IA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh IA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh IA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh IA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh IA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/IA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh KS upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh KS upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh KS upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh KS upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh KS upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh KS lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh KS lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh KS lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh KS lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh KS lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KS_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh KY upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh KY upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh KY upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh KY upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh KY upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh KY lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh KY lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh KY lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh KY lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh KY lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/KY_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh LA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh LA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh LA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh LA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh LA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh LA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh LA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh LA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh LA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh LA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/LA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh ME upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh ME upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh ME upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh ME upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh ME upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh ME lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh ME lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh ME lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh ME lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh ME lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ME_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MI upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MI upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MI upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MI upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MI upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MI lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MI lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MI lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MI lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MI lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MI_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MN upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MN upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MN upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MN upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MN upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MN lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MN lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MN lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MN lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MN lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MN_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MS upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MS upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MS upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MS upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MS upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MS lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MS lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MS lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MS lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MS lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MS_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MO upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MO upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MO upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MO upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MO upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MO lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MO lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MO lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MO lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MO lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MO_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MT upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MT upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MT upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MT upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MT upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh MT lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh MT lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh MT lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh MT lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh MT lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/MT_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NE upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NE_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NE upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NE_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NE upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NE_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NE upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NE_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NE upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NE_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NV upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NV upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NV upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NV upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NV upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NV lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NV lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NV lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NV lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NV lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NV_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NH upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NH upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NH upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NH upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NH upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NH lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NH lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NH lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NH lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NH lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NH_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NJ upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NJ_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NJ upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NJ_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NJ upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NJ_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NJ upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NJ_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NJ upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NJ_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NM upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NM upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NM upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NM upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NM upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NM lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NM lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NM lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NM lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NM lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NM_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NY upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NY upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NY upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NY upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NY upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh NY lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh NY lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh NY lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh NY lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh NY lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/NY_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh ND upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh ND upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh ND upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh ND upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh ND upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh ND lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh ND lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh ND lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh ND lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh ND lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/ND_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh OH upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh OH upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh OH upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh OH upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh OH upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh OH lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh OH lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh OH lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh OH lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh OH lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OH_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh OK upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh OK upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh OK upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh OK upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh OK upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh OK lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh OK lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh OK lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh OK lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh OK lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OK_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh OR upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh OR upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh OR upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh OR upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh OR upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh OR lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh OR lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh OR lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh OR lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh OR lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/OR_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh PA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh PA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh PA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh PA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh PA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh PA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh PA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh PA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh PA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh PA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/PA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh RI upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh RI upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh RI upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh RI upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh RI upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh RI lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh RI lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh RI lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh RI lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh RI lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/RI_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh SC upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh SC upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh SC upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh SC upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh SC upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh SC lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh SC lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh SC lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh SC lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh SC lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SC_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh SD upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh SD upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh SD upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh SD upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh SD upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh SD lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh SD lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh SD lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh SD lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh SD lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/SD_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh TN upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh TN upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh TN upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh TN upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh TN upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh TN lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh TN lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh TN lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh TN lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh TN lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TN_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh TX upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh TX upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh TX upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh TX upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh TX upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh TX lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh TX lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh TX lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh TX lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh TX lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/TX_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh UT upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh UT upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh UT upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh UT upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh UT upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh UT lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh UT lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh UT lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh UT lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh UT lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/UT_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh VT upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh VT upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh VT upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh VT upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh VT upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh VT lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh VT lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh VT lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh VT lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh VT lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VT_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh VA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh VA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh VA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh VA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh VA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh VA lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh VA lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh VA lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh VA lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh VA lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/VA_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WA upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WA_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WA upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WA_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WA upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WA_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WA upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WA_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WA upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WA_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WV upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WV upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WV upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WV upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WV upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WV lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WV lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WV lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WV lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WV lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WV_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WI upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WI upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WI upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WI upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WI upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WI lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WI lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WI lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WI lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WI lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WI_2022_Lower_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WY upper 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Upper_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WY upper 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Upper_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WY upper 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Upper_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WY upper 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Upper_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WY upper 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Upper_Splitting_duplicate.log
+scripts-1time/duplicate_map.sh WY lower 2022 proportional PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Lower_Proportional_duplicate.log
+scripts-1time/duplicate_map.sh WY lower 2022 competitive PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Lower_Competitive_duplicate.log
+scripts-1time/duplicate_map.sh WY lower 2022 minority PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Lower_Minority_duplicate.log
+scripts-1time/duplicate_map.sh WY lower 2022 compact PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Lower_Compact_duplicate.log
+scripts-1time/duplicate_map.sh WY lower 2022 splitting PG-NOTABLE xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > intermediate/WY_2022_Lower_Splitting_duplicate.log

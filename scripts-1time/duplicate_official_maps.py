@@ -23,20 +23,18 @@ $ scripts-1time/duplicate_official_maps.py -h
 from rdabase import yyyy
 from constants import SAMPLE_STATES, OFFICIAL_MAPS
 
-group: str = "Official"
-label: str = "PG-" + group.upper()
+dim: str = "Official"
+label: str = "PG-" + dim.upper()
 
 
-def make_command(xx: str, plan_type: str, group: str, label: str, id: str) -> str:
+def make_command(xx: str, plan_type: str, dim: str, label: str, id: str) -> str:
     # scripts-1time/duplicate_map.sh NC Congress 2022 Official PG-OFFICIAL c62fa27b-1f4b-40ba-bcd7-9e2ca6f9df87
-    return (
-        f"scripts-1time/duplicate_map.sh {xx} {plan_type} {yyyy} {group} {label} {id}"
-    )
+    return f"scripts-1time/duplicate_map.sh {xx} {plan_type} {yyyy} {dim} {label} {id}"
 
 
 print("#!/bin/bash")
 print("# Duplicate Official maps in DRA.")
-print("# Remember to start the DRA server before running these commands.")
+print("# Remember to start the DRA server before running these commands!")
 for xx, guids in OFFICIAL_MAPS.items():
     for plan_type, guid in guids.items():
         if plan_type == "congress":
@@ -47,9 +45,7 @@ for xx, guids in OFFICIAL_MAPS.items():
         log_file: str = (
             f"intermediate/{xx}_{yyyy}_{plan_type.capitalize()}_duplicate.log"
         )
-        command: str = (
-            make_command(xx, plan_type, group, label, guid) + f" > {log_file}"
-        )
+        command: str = make_command(xx, plan_type, dim, label, guid) + f" > {log_file}"
         print(command)
 
 pass
