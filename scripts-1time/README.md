@@ -1,10 +1,6 @@
----
-layout: page
-title: DRA CLI
-permalink: dra-cli/
----
+These are the DRA capabilities that I (Alec) took advantage of in developing the content for this site.
 
-This page describes the DRA capabilities that I (Alec) took advantage of in developing the content for this site.
+TODO: Update
 
 ### Metadata
 
