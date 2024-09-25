@@ -56,6 +56,8 @@ scripts-1time/make_focus_ratings_table.py --state MO --plantype Congress
 scripts-1time/make_focus_ratings_table.py --state MO --plantype Lower
 scripts-1time/make_focus_ratings_table.py --state MO --plantype Upper
 scripts-1time/make_focus_ratings_table.py --state MT --plantype Congress
+scripts-1time/make_focus_ratings_table.py --state MT --plantype Lower
+scripts-1time/make_focus_ratings_table.py --state MT --plantype Upper
 scripts-1time/make_focus_ratings_table.py --state NE --plantype Congress
 scripts-1time/make_focus_ratings_table.py --state NE --plantype Upper
 scripts-1time/make_focus_ratings_table.py --state NH --plantype Congress

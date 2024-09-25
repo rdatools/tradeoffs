@@ -53,14 +53,9 @@ def main() -> None:
         "splitting",
     ]
     labels: List[str] = [
-        "Most Proportional",
-        "Most Competitive",
-        "Best Minority",
-        "Most Compact",
-        "Least Splitting",
+        f"Official {yyyy}",
     ]
     name_to_label: Dict[str, str] = dict(zip(file_names, labels))
-    # name_to_label: Dict[str, str] = dict(zip(cols, labels))
 
     #
 
@@ -82,7 +77,7 @@ def main() -> None:
 
         rows.append(row)
 
-    write_csv(output, rows, ["MAP", "ID"] + [c.upper() for c in cols])
+    write_csv(output, rows, ["MAP"] + [c.upper() for c in cols])
 
     pass
 

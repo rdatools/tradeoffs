@@ -3,12 +3,9 @@
 """
 GET IDS FOR EACH NOTABLE MAP FOR EACH STATE & PLAN TYPE
 
-First, dump the published maps:
+First, dump the published maps, using the following command:
 
-$ dumpdb.js -t state -x id accessMap xprops.state xprops.planType xprops.nDistricts xprops.score_complete xprops.score_contiguous xprops.score_freeofholes xprops.score_equalpopulation xprops.score_proportionality xprops.score_competitiveness xprops.score_minorityRights xprops.score_compactness xprops.score_splitting \
-    -f published:true deleted:false \
-    -p \
-    > temp/published_maps.json
+$ scripts-1time/dump_db.sh
 
 """
 

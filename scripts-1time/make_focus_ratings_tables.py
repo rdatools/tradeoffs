@@ -15,13 +15,13 @@ $ scripts-1time/make_focus_ratings_tables.py -h
 """
 
 from rdabase import plan_type, yyyy
-from constants import SAMPLE_STATES, OFFICIAL_MAPS  # OFFICIAL_MAPS_COPY
+from constants import SAMPLE_STATES, OFFICIAL_MAPS_COPY
 
 output_dir: str = "intermediate"
 
 print("#!/bin/bash")
 print("# Make focus ratings tables for the copies of official maps in DRA.")
-for xx, guids in OFFICIAL_MAPS.items():
+for xx, guids in OFFICIAL_MAPS_COPY.items():
     if xx in SAMPLE_STATES:
         continue  # Already done
 
