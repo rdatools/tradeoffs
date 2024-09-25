@@ -48,16 +48,16 @@ def id_from_duplicate_log(log_path: str) -> str:
     with open(log_path, "r") as f:
         lines: List[str] = f.readlines()
         # The 6th token in line number 3.
-        id: str = lines[4].split(" ")[5]
+        id: str = lines[4].split(" ")[5].rstrip()
 
         return id
 
 
 print()
 print(f"OFFICIAL_MAPS: Dict[str, Dict[str, str]] = {{")
-for xx, guids in OFFICIAL_MAPS.items():
+for xx, plan_type_ids in OFFICIAL_MAPS.items():
     print(f'    "{xx}": {{')
-    for plan_type, guid in guids.items():
+    for plan_type, id in plan_type_ids.items():
         id = unknown_id
         if plan_type == "congress":
             print(f'        "{plan_type}": "{unknown_id}",')
