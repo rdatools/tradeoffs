@@ -21,8 +21,8 @@ output_dir: str = "intermediate"
 
 print("#!/bin/bash")
 print("# Pull ratings for copies of notable maps in DRA.")
-for xx, guids in NOTABLE_MAPS.items():
-    for plan_type, notable_maps in guids.items():
+for xx, plan_type_ids in NOTABLE_MAPS.items():
+    for plan_type, notable_maps in plan_type_ids.items():
         if plan_type == "congress":
             continue  # already duplicated
 

@@ -35,8 +35,8 @@ def make_command(xx: str, plan_type: str, dim: str, label: str, id: str) -> str:
 print("#!/bin/bash")
 print("# Duplicate Official maps in DRA.")
 print("# Remember to start the DRA server before running these commands!")
-for xx, guids in OFFICIAL_MAPS.items():
-    for plan_type, guid in guids.items():
+for xx, plan_type_ids in OFFICIAL_MAPS.items():
+    for plan_type, guid in plan_type_ids.items():
         if plan_type == "congress":
             continue  # already duplicated
         if xx in SAMPLE_STATES:

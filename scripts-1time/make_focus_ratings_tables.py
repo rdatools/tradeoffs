@@ -21,11 +21,13 @@ output_dir: str = "intermediate"
 
 print("#!/bin/bash")
 print("# Make focus ratings tables for the copies of official maps in DRA.")
-for xx, guids in OFFICIAL_MAPS_COPY.items():
+for xx, plan_type_ids in OFFICIAL_MAPS_COPY.items():
     if xx in SAMPLE_STATES:
         continue  # Already done
 
-    for plan_type, _ in guids.items():
+    for plan_type, _ in plan_type_ids.items():
+        if plan_type == "congress":
+            continue  # do these manually
         command: str = (
             f"scripts-1time/make_focus_ratings_table.py --state {xx} --plantype {plan_type.capitalize()} --no-debug -v"
         )
