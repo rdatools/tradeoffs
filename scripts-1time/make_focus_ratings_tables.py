@@ -27,7 +27,7 @@ for xx, guids in OFFICIAL_MAPS_COPY.items():
 
     for plan_type, _ in guids.items():
         command: str = (
-            f"scripts-1time/make_focus_ratings_table.py --state {xx} --plantype {plan_type.capitalize()}"
+            f"scripts-1time/make_focus_ratings_table.py --state {xx} --plantype {plan_type.capitalize()} -v"
         )
         print(command)
         # os.system(command)

@@ -31,6 +31,9 @@ def main() -> None:
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0]}"
     output: str = f"{args.output}/{prefix}_focus_scores.csv"
 
+    if args.verbose:
+        print(f"Making {xx}/{plan_type} ratings table in {output} ...")
+
     #
 
     file_names: List[str] = [
@@ -59,25 +62,30 @@ def main() -> None:
 
     #
 
-    rows: List[Dict[str, Any]] = []
+    try:
+        rows: List[Dict[str, Any]] = []
 
-    for notable_dim in file_names:
-        pulled_ratings: str = (
-            f"{args.input}/{xx}_{yyyy}_{plan_type.capitalize()}_{notable_dim.capitalize()}_ratings.json"
-        )
-        data: Dict[str, Any] = read_json(pulled_ratings)
+        for notable_dim in file_names:
+            pulled_ratings: str = (
+                f"{args.input}/{xx}_{yyyy}_{plan_type.capitalize()}_{notable_dim.capitalize()}_ratings.json"
+            )
+            data: Dict[str, Any] = read_json(pulled_ratings)
 
-        row: Dict[str, Any] = {}
-        row["MAP"] = name_to_label[notable_dim]
+            row: Dict[str, Any] = {}
+            row["MAP"] = name_to_label[notable_dim]
 
-        ratings: Dict[str, Any] = {
-            to_dim.upper(): data[from_key] for to_dim, from_key in dims_to_dims.items()
-        }
-        row.update(ratings)
+            ratings: Dict[str, Any] = {
+                to_dim.upper(): data[from_key]
+                for to_dim, from_key in dims_to_dims.items()
+            }
+            row.update(ratings)
 
-        rows.append(row)
+            rows.append(row)
 
-    write_csv(output, rows, ["MAP"] + [c.upper() for c in cols])
+        write_csv(output, rows, ["MAP"] + [c.upper() for c in cols])
+
+    except Exception as e:
+        print(f"Error: {e}")
 
     pass
 
