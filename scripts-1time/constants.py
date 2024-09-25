@@ -293,8 +293,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "IL": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "22ab887c-ad8d-4605-8979-37640135bb7b",
+        "upper": "123fc62b-531a-42ce-8ac3-8b5dc689f45c",
     },
     "IN": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -328,8 +328,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "MD": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        # "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", N/A - uses MMD
+        "upper": "3343ba77-9704-4433-84b2-e01b8f7bfeed",
     },
     "MI": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -386,8 +386,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "NC": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "474791f9-6452-4be3-8dcd-a45d104dbbee",
+        "upper": "bf272ccb-7218-4517-ab04-c7fafcfc0504",
     },
     "OH": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -406,8 +406,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "PA": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "6be1787a-5229-4f2f-af06-9f808027126d",
+        "upper": "69db0612-e79b-4772-a2b8-ee7f67b9437d",
     },
     "RI": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -416,8 +416,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "SC": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "3bcc81b5-c145-4783-8de4-dee5af5bb5fc",
+        "upper": "9b61d588-fda5-4973-bb90-a535a7067173",
     },
     "TN": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -426,8 +426,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "TX": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "6d85995d-d5cd-48d5-96a4-ea0ac3cf554d",
+        "upper": "933b0acb-bba6-4c3c-9652-a5f70631d999",
     },
     "UT": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
