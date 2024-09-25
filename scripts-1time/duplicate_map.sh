@@ -22,7 +22,7 @@ ROOT=~/dev/
 SCRIPT_DIR=$ROOT\dra-cli
 
 USER=alec@davesredistricting.org
-PW=mumble # TODO - change this to the real password
+PW=mumble # TODO - Don't push the real password!
 
 NAME="$XX $YYYY $PLAN_TYPE - $DIM"
 DESC="Copy of $XX $DIM"

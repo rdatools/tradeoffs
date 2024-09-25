@@ -353,8 +353,8 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
     "MT": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "3f1ed6e0-14c7-4cdf-9f7b-bd6f4e2c7498",
+        "upper": "cf72bdfa-6e0f-4dc7-b386-4b3097c76584",
     },
     "NE": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",

@@ -37,6 +37,8 @@ scripts-1time/duplicate_map.sh MS Lower 2022 Official PG-OFFICIAL f8554517-7286-
 scripts-1time/duplicate_map.sh MS Upper 2022 Official PG-OFFICIAL f3908ec6-949f-444b-9fd5-7b2173abcb6e > intermediate/MS_2022_Upper_duplicate.log
 scripts-1time/duplicate_map.sh MO Lower 2022 Official PG-OFFICIAL ebb632d0-2569-4a2a-81f6-1d8d6adc0d5e > intermediate/MO_2022_Lower_duplicate.log
 scripts-1time/duplicate_map.sh MO Upper 2022 Official PG-OFFICIAL 8d25c96a-2a78-40b2-b2f0-c504ecaa6762 > intermediate/MO_2022_Upper_duplicate.log
+scripts-1time/duplicate_map.sh MT Lower 2022 Official PG-OFFICIAL fe2f2ff5-f70e-459d-8a1f-48b3786c8e64 > intermediate/MT_2022_Lower_duplicate.log
+scripts-1time/duplicate_map.sh MT Upper 2022 Official PG-OFFICIAL 0312ecba-7989-480c-bed4-777e2e06c178 > intermediate/MT_2022_Upper_duplicate.log
 scripts-1time/duplicate_map.sh NE Upper 2022 Official PG-OFFICIAL ab1f2fef-b979-4431-844a-98d93a4d6730 > intermediate/NE_2022_Upper_duplicate.log
 scripts-1time/duplicate_map.sh NH Lower 2022 Official PG-OFFICIAL dfddaed1-5a76-4ca7-8a11-ddc533ea9f6e > intermediate/NH_2022_Lower_duplicate.log
 scripts-1time/duplicate_map.sh NH Upper 2022 Official PG-OFFICIAL 15bf8903-0c56-4536-9265-7b7177726a73 > intermediate/NH_2022_Upper_duplicate.log
