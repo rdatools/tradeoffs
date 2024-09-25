@@ -2,7 +2,9 @@
 #
 
 """
-Generate a shell script to make focus ratings tables for the copies of official maps in DRA.
+Generate a shell script to make focus ratings tables for the copies of official maps in DRA,
+for the upper & lower state houses. Do the congressional, non-sample states manually from
+the previously-generate ratings tables that include the official maps.
 
 For example:
 
