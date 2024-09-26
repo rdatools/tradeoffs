@@ -20,6 +20,7 @@ In summary:
     The census (total population) and demographic data (voting age populations by race and ethnicity) are from the 2020 Census (unadjusted).
     The election data are the 2016-2020 election composite from [Dave's Redistricting's](https://davesredistricting.org/) (DRA) 
     public [VTD data](https://github.com/dra2020/vtd_data).
+    DRA got most of the election data from data partners, especially [Voting and Election Science Team (VEST)](https://election.lab.ufl.edu/precinct-data/).
 -   We generate an unbiased ensemble of 10,000 congressional plans for a state,
     using the ReCom algorithm implemented in [GerryChain](https://gerrychain.readthedocs.io/en/latest/).
     These plans all use whole precincts, i.e., don't split precincts with subsets of blocks in different districts.
