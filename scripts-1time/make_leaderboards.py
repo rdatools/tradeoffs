@@ -10,19 +10,162 @@ $ scripts-1time/dump_db.sh
 
 """
 
-from typing import List, Dict, Optional
+from typing import List, Dict, NamedTuple
 
 import json
 
-from rdabase import read_json, STATES, DISTRICTS_BY_STATE
+from rdabase import DISTRICTS_BY_STATE
 
 from constants import NOTABLE_MAPS
+
+
+class MapAbstract(NamedTuple):
+    id: str
+    url_fragment: str
+    cycle: str
+    xx: str
+    plan_type: str
+    nDistricts: int
+    constraints: List[bool]
+    ratings: List[int]
+
+    # def __repr__(self) -> str:
+    #     return f"Features {self.features} {self.from_district} -> {self.to_district}"
+
+
+def map_abstract(json_data: Dict) -> MapAbstract:
+    """
+    Convert the JSON object to a flat dict format.
+
+    {
+    "id": "9f9604cc-b74b-44d2-84d0-6838192820f9",
+    "accessMap": {
+    "a33097f7-7457-4a5c-ada8-7b1722fc5acf": {
+    "perm": 3,
+    "userIDs": []
+    },
+    "e0788f78-67e1-4918-bcf3-e3e51e32354b": {
+    "perm": 1,
+    "userIDs": []
+    }
+    },
+    "datasource": "2010_VD",
+    "state": "NE",
+    "nDistricts": "3",
+    "score_complete": "0",
+    "score_contiguous": "0",
+    "score_freeofholes": "0",
+    "score_equalpopulation": "0",
+    "score_proportionality": "66",
+    "score_competitiveness": "51",
+    "score_minorityRights": "0",
+    "score_compactness": "71",
+    "score_splitting": "95"
+    }
+    """
+
+    required_keys = [
+        "id",
+        "accessMap",
+        "datasource",
+        "state",
+        "planType",
+        "nDistricts",
+        "score_complete",
+        "score_contiguous",
+        "score_freeofholes",
+        "score_equalpopulation",
+        "score_proportionality",
+        "score_competitiveness",
+        "score_minorityRights",
+        "score_compactness",
+        "score_splitting",
+    ]
+
+    if not all(k in json_data for k in required_keys):
+        raise ValueError(f"{json_data}")
+
+    cycle: str = "2020" if json_data["datasource"] == "2020_VD" else "2010"
+    id: str = json_data["id"]
+    url_fragment: str = json_data["id"]  # TODO
+
+    xx: str = json_data["state"]
+    plan_type: str = json_data["planType"]
+    ndistricts: int = int(json_data["nDistricts"])
+
+    is_complete: bool = True if int(json_data["score_complete"]) == 0 else False
+    is_contiguous: bool = True if int(json_data["score_contiguous"]) == 0 else False
+    is_free_of_holes: bool = True if int(json_data["score_freeofholes"]) == 0 else False
+    is_roughly_equal: bool = (
+        True if int(json_data["score_equalpopulation"]) == 0 else False
+    )
+    constraints: List[bool] = [
+        is_complete,
+        is_contiguous,
+        is_free_of_holes,
+        is_roughly_equal,
+    ]
+    ratings: List[int] = [int(json_data[k]) for k in required_keys[-5:]]
+
+    abstract = MapAbstract(
+        id=id,
+        url_fragment=url_fragment,
+        cycle=cycle,
+        xx=xx,
+        plan_type=plan_type,
+        nDistricts=ndistricts,
+        constraints=constraints,
+        ratings=ratings,
+    )
+
+    return abstract
+
+
+def is_realistic(ratings: List[int]) -> bool:
+    """
+    Do a set of ratings meet DRA's 'realistic' thresholds?
+
+    See 'Realistic' @ https://medium.com/dra-2020/notable-maps-66d744933a48
+    """
+
+    thresholds: List[int] = [20, 10, 0, 20, 20]
+
+    return all(r >= t for r, t in zip(ratings, thresholds))
+
+
+def is_conforming_map(ma: MapAbstract) -> bool:
+    """Does a map abstract conform to the DRA notable maps 'realistic' criteria?"""
+
+    if ma.cycle != "2020":
+        return False
+
+    if ma.xx not in DISTRICTS_BY_STATE:
+        return False
+
+    if ma.plan_type not in ["congress", "upper", "lower"]:
+        return False
+
+    if (
+        ma.nDistricts not in DISTRICTS_BY_STATE[ma.xx][ma.plan_type]
+        or ma.nDistricts <= 1
+    ):
+        return False
+
+    if not all(ma.constraints):
+        return False
+
+    if not is_realistic(ma.ratings):
+        return False
+
+    return True
 
 
 def main() -> None:
 
     input_dir: str = "temp"
     output_dir: str = "temp"
+
+    verbose: bool = False
 
     #
 
@@ -46,139 +189,46 @@ def main() -> None:
 
     with open(dump_path, "r") as f:
         lines: List[str] = f.readlines()
-        print(f"# of input lines: {len(lines)}")
 
         record: str = ""
         total_maps: int = 0
+        cycle_2020_maps: int = 0
         conforming_maps: int = 0
 
         for i, l in enumerate(lines):
             line: str = l.rstrip()
-            # print(f"line {i}: {line}")
 
             if line == "":  # blank line between records
                 json_data = json.loads(record)
                 total_maps += 1
 
-                """
-                Convert the JSON object to a flat dict format.
+                try:
+                    ma: MapAbstract = map_abstract(json_data)
 
-                {
-                    "id": "c491cfd1-e14c-4a7b-9d49-0238528a596a",
-                    "accessMap": {
-                    "a980332d-bd33-42ed-a5dd-7ec88d7907e8": {
-                    "perm": 3,
-                    "userIDs": []
-                    },
-                    "6539f6ad-5ea1-4a50-846b-27a1f1201f83": {
-                    "perm": 1,
-                    "userIDs": []
-                    }
-                    },
-                    "state": "PA",
-                    "planType": "congress",
-                    "nDistricts": "17",
-                    "score_complete": "0",
-                    "score_contiguous": "0",
-                    "score_freeofholes": "0",
-                    "score_equalpopulation": "1",
-                    "score_proportionality": "0",
-                    "score_competitiveness": "40",
-                    "score_minorityRights": "49",
-                    "score_compactness": "65",
-                    "score_splitting": "63"
-                    }
-             
-                """
-                required_keys = [
-                    "state",
-                    "planType",
-                    "nDistricts",
-                    "score_complete",
-                    "score_contiguous",
-                    "score_freeofholes",
-                    "score_equalpopulation",
-                ]
-                if not all(k in json_data for k in required_keys):
-                    print(f"Skipping incomplete record #{total_maps}.")
-                    record = ""
-                    continue
+                    if not ma.cycle == "2020":
+                        record = ""
+                        continue
 
-                xx: str = json_data["state"]
-                plan_type: str = json_data["planType"]
-                ndistricts: int = int(json_data["nDistricts"])
-                is_complete: bool = (
-                    True if int(json_data["score_complete"]) == 0 else False
-                )
-                is_contiguous: bool = (
-                    True if int(json_data["score_contiguous"]) == 0 else False
-                )
-                is_free_of_holes: bool = (
-                    True if int(json_data["score_freeofholes"]) == 0 else False
-                )
-                is_roughly_equal: bool = (
-                    True if int(json_data["score_equalpopulation"]) == 0 else False
-                )
-                # TODO - More ...
+                    cycle_2020_maps += 1
 
-                if (
-                    (xx is None)
-                    or (xx not in DISTRICTS_BY_STATE)
-                    or (
-                        plan_type is None
-                        or plan_type not in ["congress", "upper", "lower"]
-                    )
-                    or (
-                        ndistricts is None
-                        or ndistricts != DISTRICTS_BY_STATE[xx][plan_type]
-                        or ndistricts <= 1
-                    )
-                    or (
-                        not is_complete
-                        or not is_contiguous
-                        or not is_free_of_holes
-                        or not is_roughly_equal
-                    )
-                ):
-                    print("Skipping 'unrealistic' record #{total_maps}.")
-                    record = ""
-                    continue  # Skip this record
+                    if not is_conforming_map(ma):
+                        record = ""
+                        continue
 
-                conforming_maps += 1
-                print("Keeping record {total_maps}.")
-                print(
-                    f"Record #{total_maps}: {xx}/{plan_type} n: {ndistricts}, complete: {is_complete}, contiguous: {is_contiguous}, free of holes: {is_free_of_holes}, roughly equal: {is_roughly_equal}"
-                )
+                    conforming_maps += 1
 
-                # TODO - Finish building the abstract
+                    # TODO - Process the abstract
+
+                except Exception as e:
+                    if verbose:
+                        print(f"Error processing map record: {e}")
 
                 record = ""  # Start a new record
             record += line
 
     print(f"# total maps: {total_maps}")
+    print(f"# 2020 maps: {cycle_2020_maps}")
     print(f"# conforming maps: {conforming_maps}")
-
-    pass
-
-    # for xx in DISTRICTS_BY_STATE:
-    #     print(f'"{xx}": {{')
-
-    #     for plan_type, ndistricts in DISTRICTS_BY_STATE[xx].items():
-    #         if ndistricts is not None and ndistricts > 1:
-    #             print(f'"{plan_type}": {{')
-
-    #             for dimension in [
-    #                 "proportional",
-    #                 "competitive",
-    #                 "minority",
-    #                 "compact",
-    #                 "splitting",
-    #             ]:
-    #                 print(f'"{dimension}": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",')
-
-    #             print(f"}},")
-
-    #     print(f"}},")
 
     pass
 
