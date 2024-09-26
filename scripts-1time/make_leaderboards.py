@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 """
-GET NOTABLE MAP CANDIDATES FOR EACH STATE & PLAN TYPE
-AS WELL AS THE CURRENT BEST MAPS
+GET THE CURRENT BEST MAPS FOR EACH STATE & PLAN TYPE
+
+For example:
+
+$ scripts-1time/make_leaderboards.py > temp/leaderboards.json 
 
 First, dump the published maps, using the following command:
 
@@ -14,7 +17,12 @@ from typing import List, Dict, NamedTuple
 
 import json
 
+import warnings
+
+warnings.warn = lambda *args, **kwargs: None
+
 from rdabase import DISTRICTS_BY_STATE
+from rdaensemble import ratings_dimensions
 
 from constants import NOTABLE_MAPS
 
@@ -28,9 +36,15 @@ class MapAbstract(NamedTuple):
     nDistricts: int
     constraints: List[bool]
     ratings: List[int]
+    total: int
 
-    # def __repr__(self) -> str:
-    #     return f"Features {self.features} {self.from_district} -> {self.to_district}"
+
+class MapHandles(NamedTuple):
+    id: str
+    url_fragment: str
+
+    def __repr__(self) -> str:
+        return f'{{ "id": "{self.id}", "url": "https://davesredistricting.org/join/{self.url_fragment}" }}'
 
 
 def map_abstract(json_data: Dict) -> MapAbstract:
@@ -116,6 +130,7 @@ def map_abstract(json_data: Dict) -> MapAbstract:
         nDistricts=ndistricts,
         constraints=constraints,
         ratings=ratings,
+        total=sum(ratings),
     )
 
     return abstract
@@ -157,6 +172,30 @@ def is_conforming_map(ma: MapAbstract) -> bool:
     return True
 
 
+def report_leaders(
+    leaderboards: Dict[str, Dict[str, Dict[str, List[MapHandles]]]]
+) -> None:
+    """Print the leaderboards in JSON format."""
+
+    print(f"{{")
+    for xx, plan_types_notables in leaderboards.items():
+        print(f'"{xx}": {{')
+        for plan_type, dimensions in plan_types_notables.items():
+            print(f'"{plan_type}": {{')
+            for dim, leaders in dimensions.items():
+                print(f'"{dim}": [')
+
+                for i, leader in enumerate(leaders):
+                    print(f"{leader}")
+                    if i < len(leaders) - 1:
+                        print(f",")
+
+                print(f"],")
+            print(f"}},")
+        print(f"}},")
+    print(f"}}")
+
+
 def main() -> None:
 
     input_dir: str = "temp"
@@ -165,24 +204,25 @@ def main() -> None:
     verbose: bool = False
 
     #
+    maps_by_xx: Dict[str, Dict[str, List[MapAbstract]]] = {}
+    for xx, plan_types_notables in NOTABLE_MAPS.items():
+        maps_by_xx[xx] = {}
 
-    leaderboards: Dict[str, Dict[str, Dict[str, List[Dict]]]] = {}
-    unknowns: Dict[str, List] = {
-        "proportional": [],
-        "competitive": [],
-        "minority": [],
-        "compact": [],
-        "splitting": [],
-    }
+        for plan_type, _ in plan_types_notables.items():
+            maps_by_xx[xx][plan_type] = []
+
+    leaderboards: Dict[str, Dict[str, Dict[str, List[MapHandles]]]] = {}
+    leaders_by_dim: Dict[str, List[MapHandles]] = {k: [] for k in ratings_dimensions}
 
     for xx, plan_types_notables in NOTABLE_MAPS.items():
         leaderboards[xx] = {}
 
-        for plan_type, dim_id in plan_types_notables.items():
-            for dim, _ in dim_id.items():
-                leaderboards[xx][plan_type] = dict(unknowns)
+        for plan_type, _ in plan_types_notables.items():
+            leaderboards[xx][plan_type] = dict(leaders_by_dim)
 
     dump_path: str = f"{input_dir}/published_maps.json"
+
+    # Find the conforming candidate maps
 
     with open(dump_path, "r") as f:
         lines: List[str] = f.readlines()
@@ -214,7 +254,7 @@ def main() -> None:
 
                     conforming_maps += 1
 
-                    # TODO - Process the abstract
+                    maps_by_xx[ma.xx][ma.plan_type].append(ma)
 
                 except Exception as e:
                     if verbose:
@@ -223,9 +263,29 @@ def main() -> None:
                 record = ""  # Start a new record
             record += line
 
-    print(f"# total maps: {total_maps}")
-    print(f"# 2020 maps: {cycle_2020_maps}")
-    print(f"# conforming maps: {conforming_maps}")
+    # print(f"# total maps: {total_maps}")
+    # print(f"# 2020 maps: {cycle_2020_maps}")
+    # print(f"# conforming maps: {conforming_maps}")
+
+    # For each state, plan type, and ratings dimension, sort the maps by ratings and select the top 10
+
+    for xx, plan_types in maps_by_xx.items():
+        for plan_type, maps in plan_types.items():
+            for i, dim in enumerate(ratings_dimensions):
+
+                # Sort the map by highest to lowest ratings, breaking ties by the total ratings
+                maps.sort(
+                    key=lambda ma: (ma.ratings[i] + (ma.total / 1000)), reverse=True
+                )
+
+                leaders: List[MapHandles] = [
+                    MapHandles(ma.id, ma.url_fragment) for ma in maps[:10]
+                ]
+                leaderboards[xx][plan_type][dim] = leaders
+
+    # Print the leaderboards
+
+    report_leaders(leaderboards)
 
     pass
 
