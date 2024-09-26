@@ -145,10 +145,7 @@ def is_conforming_map(ma: MapAbstract) -> bool:
     if ma.plan_type not in ["congress", "upper", "lower"]:
         return False
 
-    if (
-        ma.nDistricts not in DISTRICTS_BY_STATE[ma.xx][ma.plan_type]
-        or ma.nDistricts <= 1
-    ):
+    if ma.nDistricts != DISTRICTS_BY_STATE[ma.xx][ma.plan_type] or ma.nDistricts <= 1:
         return False
 
     if not all(ma.constraints):
