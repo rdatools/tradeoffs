@@ -172,30 +172,6 @@ def is_conforming_map(ma: MapAbstract) -> bool:
     return True
 
 
-def report_leaders(
-    leaderboards: Dict[str, Dict[str, Dict[str, List[MapHandles]]]]
-) -> None:
-    """Print the leaderboards in JSON format."""
-
-    print(f"{{")
-    for xx, plan_types_notables in leaderboards.items():
-        print(f'"{xx}": {{')
-        for plan_type, dimensions in plan_types_notables.items():
-            print(f'"{plan_type}": {{')
-            for dim, leaders in dimensions.items():
-                print(f'"{dim}": [')
-
-                for i, leader in enumerate(leaders):
-                    print(f"{leader}")
-                    if i < len(leaders) - 1:
-                        print(f",")
-
-                print(f"],")
-            print(f"}},")
-        print(f"}},")
-    print(f"}}")
-
-
 def main() -> None:
 
     input_dir: str = "temp"
@@ -283,9 +259,10 @@ def main() -> None:
                 ]
                 leaderboards[xx][plan_type][dim] = leaders
 
-    # Print the leaderboards
+    # Convert the leaderboard to JSON and print it
 
-    report_leaders(leaderboards)
+    json_string = json.dumps(leaderboards, indent=2)
+    print(json_string)
 
     pass
 
