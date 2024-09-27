@@ -61,8 +61,8 @@ fi
 
 echo "Finding optimized frontiers ..."
 scripts/find_frontiers.py \
---scores ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
---metadata ../tradeoffs-dropbox/scores/${PREFIX}_scores_optimized_metadata.json \
+--scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
+--metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_optimized_metadata.json \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
 --roughlyequal $ROUGHLY_EQUAL \
 --verbose \
@@ -70,14 +70,14 @@ scripts/find_frontiers.py \
 
 echo "Making box plot ..."
 scripts/make_box_plot.py \
---scores ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
+--scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
 --roughlyequal $ROUGHLY_EQUAL \
 --image ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
 --no-debug
 
 echo "Making statistics table ..."
 scripts/make_stats_table.py \
---scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
+--scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
 --output ../../iCloud/fileout/tradeoffs/${STATE}/docs/_data/${PREFIX}_statistics.csv \
 --no-debug
@@ -90,8 +90,8 @@ scripts/make_ratings_table.py \
 
 echo "Making scatter plots ..."
 scripts/make_scatter_plots.py \
---scores ../tradeoffs-dropbox/scores/${PREFIX}_scores.csv \
---more ../tradeoffs-dropbox/scores/${PREFIX}_scores_augmented.csv \
+--scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
+--more ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
 --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
 --pushed ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
 --notables docs/_data/notable_ratings/${STATE}_2022_${PLAN_TYPE}_ratings.csv \

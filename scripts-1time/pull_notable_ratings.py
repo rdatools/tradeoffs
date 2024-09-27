@@ -15,7 +15,7 @@ $ scripts-1time/pull_notable_ratings.py -h
 """
 
 from rdabase import plan_type, yyyy
-from constants import NOTABLE_MAPS  # TODO - NOTABLE_MAPS_COPY
+from constants import NOTABLE_MAPS_COPY
 
 output_dir: str = "intermediate"
 

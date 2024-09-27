@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
 """
-Gather the ids of duplicated official maps and create a dict structure for downstream use.
+Gather the URL fragments of duplicated notable maps and create a dict structure for downstream use.
+Paste the results into the NOTABLE_MAPS_COPY constant in constants.py.
 
 For example:
 
-$ scripts-1time/get_duplicated_official_map_ids.py
+$ scripts-1time/get_duplicated_notable_map_urls.py
 
 For documentation, type:
 
-$ scripts-1time/get_duplicated_official_map_ids.py -h
+$ scripts-1time/get_duplicated_notable_map_urls.py -h
 
 """
 
@@ -18,14 +19,14 @@ from typing import List
 import os
 
 from rdabase import yyyy
-from constants import OFFICIAL_MAPS
+from constants import NOTABLE_MAPS
 
 input_dir: str = "intermediate"
-unknown_id: str = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+unknown_url: str = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 
-def id_from_duplicate_log(log_path: str) -> str:
-    """Extract the id from the 'duplicate' command log output.
+def url_from_duplicate_log(log_path: str) -> str:
+    """Extract the url from the 'duplicate' command log output.
 
     Example log output:
 
@@ -48,27 +49,32 @@ def id_from_duplicate_log(log_path: str) -> str:
     with open(log_path, "r") as f:
         lines: List[str] = f.readlines()
         # The 6th token in line number 3.
-        id: str = lines[4].split(" ")[5].rstrip()
+        url: str = lines[4].split(" ")[5].rstrip()
 
-        return id
+        return url
 
 
 print()
-print(f"OFFICIAL_MAPS: Dict[str, Dict[str, str]] = {{")
-for xx, plan_type_ids in OFFICIAL_MAPS.items():
-    print(f'    "{xx}": {{')
-    for plan_type, id in plan_type_ids.items():
-        id = unknown_id
-        if plan_type == "congress":
-            print(f'        "{plan_type}": "{unknown_id}",')
-        else:
-            log_path: str = (
-                f"{input_dir}/{xx}_{yyyy}_{plan_type.capitalize()}_duplicate.log"
-            )
-            if os.path.exists(log_path):
-                id: str = id_from_duplicate_log(log_path)
-            print(f'        "{plan_type}": "{id}",')
-    print(f"    }},")
+print(f"NOTABLE_MAPS_COPY: Dict[str, Dict[str, str]] = {{")
+for xx, plan_type_dim_urls in NOTABLE_MAPS.items():
+    print(f'"{xx}": {{')
+
+    for plan_type, plan_dim_urls in plan_type_dim_urls.items():
+        print(f'"{plan_type}": {{')
+
+        for dim, url in plan_dim_urls.items():
+            url = unknown_url
+            if plan_type == "congress":
+                print(f'"{dim}": "{unknown_url}",')
+            else:
+                log_path: str = (
+                    f"{input_dir}/{xx}_{yyyy}_{plan_type.capitalize()}_{dim.capitalize()}_duplicate.log"
+                )
+                if os.path.exists(log_path):
+                    url: str = url_from_duplicate_log(log_path)
+                print(f'"{dim}": "{url}",')
+            print(f"}},")
+    print(f"}},")
 print(f"}}")
 
 pass

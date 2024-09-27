@@ -31,6 +31,10 @@ def main() -> None:
     plan_type: str = args.type
     assert plan_type in ["congress", "upper", "lower"]
 
+    ensembles_dir: str = "ensembles"
+    if plan_type in ["upper", "lower"]:
+        ensembles_dir = f"{ensembles_dir}-{plan_type}"
+
     prefix: str = f"{args.state}{cycle[2:]}{plan_type[0].capitalize()}"
 
     #
@@ -61,7 +65,7 @@ def main() -> None:
     print(f"    From 'tradeoffs' run:")
     print()
     print(
-        f"    scripts/find_frontiers.sh --state {xx} --plan-type {plan_type} > ../tradeoffs-dropbox/scores/{prefix}_scores_notes.txt"
+        f"    scripts/find_frontiers.sh --state {xx} --plan-type {plan_type} > ../../iCloud/fileout/tradeoffs/{xx}/{ensembles_dir}/{prefix}_scores_notes.txt"
     )
     print()
     print(f"( ) Step 6 - 'Push' the frontiers of the unbiased ensemble")

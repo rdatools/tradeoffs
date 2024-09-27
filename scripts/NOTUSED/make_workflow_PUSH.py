@@ -352,13 +352,13 @@ def main() -> None:
     """
     # Combine the original ensemble & pushed plans scores (from 'tradeoffs')
 
-    scripts/COMBINE_SCORES.sh NC
+    scripts/combine_scores.sh NC
 
     """
 
     print(f"# Combine the original ensemble & pushed plans scores (from 'tradeoffs')")
     print()
-    print(f"scripts/COMBINE_SCORES.sh {xx}")
+    print(f"scripts/combine_scores.sh {xx}")
     print()
 
     """

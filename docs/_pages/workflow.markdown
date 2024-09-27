@@ -50,28 +50,27 @@ No longer needed
 
 The workflow needs two additional data points that must be gathered manually.
 
-### Capture the notable maps and ratings from DRA
+### Verify the notable maps and ratings from DRA
 
-The first is ratings for DRA notable maps for the state and type of plan.
+Notable maps and their ratings have been pull from DRA automatically.
 
-For each notable map for the state and type of plan:
+For each notable map for the state and type of plan, verify that the a map looks realistic.
+This means making sure that it is not obviously gaming the DRA notable map filtering
+would never be accepted as a real map.
+One way people do this is by using long, thin, water-only river precincts to connect disparate parts of a state.
+Another is by splitting precincts and constructing a similar "bridge" with a thin line of blocks.
 
-*   Open it
-*   Verify that it looks realistic -- more on this below
+When this occurs, find a replacement map and use it as a proxy for the notable map:
+
+*   Find an alternative map that meets the criteria
 *   Duplicate it 
 *   Rename the copy using the form `{xx} 2022 {plan_type} - {dimension}` -- 
     where `{xx}` is the state abbreviation, `{plan_type}` is `Congress`, `Upper`, or `Lower`, 
     and `{dimension}` is the notable dimension, `Proportional`, `Competitive`, `Minority`, `Compact`, or `Splitting`
 *   Tag it with the `PG-NOTABLE` label, and add it to the `Trade-offs` group
-*   Collect the ratings into a CSV file modeled after `NC_2022_Congress.csv`
+*   Update the ratings in the CSV file named like `NC_2022_Congress.csv`
     in the `tradeoffs/docs/_data/notable_ratings` directory.
-    The files should have the suffix `_Congress.csv`, `_Upper.csv`, or `_Lower.csv` as appropriate.
-
-Verifying that a map looks realistic means making sure that it is not obviously gaming the DRA notable map filtering
-would never be accepted as a real map.
-One way people do this is by using long, thin, water-only river precincts to connect disparate parts of a state.
-Another is by splitting precincts and constructing a similar "bridge" with a thin line of blocks.
-When this occurs, find a replacement map and use it as a proxy for the notable map.
+    The files have the suffix `_Congress.csv`, `_Upper.csv`, or `_Lower.csv` as appropriate.
 
 This is the DRA search query for finding alternatives to notable maps:
 
@@ -99,15 +98,8 @@ Capture those ratings into the CSV file.
 
 ### Capture the official map(s) and ratings from DRA
 
-The second are the ratings for the most recent one or two official plans.
-Similar to the notable maps, for each official map:
-
-*   Duplicate it 
-*   Rename the copy using the form `{xx} 2022 {plan_type} - Official` -- 
-    where `{xx}` is the state abbreviation and `{plan_type}` is `Congress`, `Upper`, or `Lower`
-*   Tag it with the `PG-OFFICIAL` label, and add it to the `Trade-offs` group
-
-Similar to the process for notable maps above, collect the ratings for these maps into a CSV file modeled after 
+The official maps and their ratings have also been pulled from DRA automatically.
+The ratings for these maps are in CSV files of the form 
 `{xx}20{T}_focus_scores.csv` in the output directory, `tradeoffs/docs/_data/focus_ratings`,
 where `{T}` indicates the type of plan (C for Congress, U for Upper, L for Lower).
 

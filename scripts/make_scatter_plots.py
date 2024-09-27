@@ -19,6 +19,7 @@ import warnings
 
 warnings.warn = lambda *args, **kwargs: None
 
+import os
 import pandas as pd
 import itertools
 import numpy as np
@@ -37,6 +38,12 @@ from tradeoffs import (
     buttons,
     line_segment_hull,
 )
+
+
+def remove_last_two_dirs(path):
+    for _ in range(2):
+        path = os.path.dirname(path)
+    return path + os.path.sep
 
 
 def main() -> None:
@@ -433,7 +440,9 @@ def main() -> None:
             fig.write_image(plot_path)
 
             if args.focus:
-                legend_path: str = f"{args.output}/{args.prefix}_legend.csv"
+                legend_path: str = (
+                    f"{remove_last_two_dirs(args.output)}/{args.prefix}_legend.csv"
+                )
                 write_csv(legend_path, legend, ["MARKER", "PLAN"])
 
         continue
