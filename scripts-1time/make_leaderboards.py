@@ -39,14 +39,6 @@ class MapAbstract(NamedTuple):
     total: int
 
 
-class MapHandles(NamedTuple):
-    id: str
-    url_fragment: str
-
-    def __repr__(self) -> str:
-        return f'{{ "id": "{self.id}", "url": "https://davesredistricting.org/join/{self.url_fragment}" }}'
-
-
 def map_abstract(json_data: Dict) -> MapAbstract:
     """
     Convert the JSON object to a flat dict format.
@@ -192,8 +184,10 @@ def main() -> None:
         for plan_type, _ in plan_types_notables.items():
             maps_by_xx[xx][plan_type] = []
 
-    leaderboards: Dict[str, Dict[str, Dict[str, List[MapHandles]]]] = {}
-    leaders_by_dim: Dict[str, List[MapHandles]] = {k: [] for k in ratings_dimensions}
+    leaderboards: Dict[str, Dict[str, Dict[str, List[Dict[str, str]]]]] = {}
+    leaders_by_dim: Dict[str, List[Dict[str, str]]] = {
+        k: [] for k in ratings_dimensions
+    }
 
     for xx, plan_types_notables in NOTABLE_MAPS.items():
         leaderboards[xx] = {}
@@ -259,9 +253,10 @@ def main() -> None:
                     key=lambda ma: (ma.ratings[i] + (ma.total / 1000)), reverse=True
                 )
 
-                leaders: List[MapHandles] = [
-                    MapHandles(ma.id, ma.url_fragment) for ma in maps[:10]
+                leaders: List[Dict[str, str]] = [
+                    {"id": ma.id, "url": ma.url_fragment} for ma in maps[:10]
                 ]
+
                 leaderboards[xx][plan_type][dim] = leaders
 
     # Convert the leaderboard to JSON and print it

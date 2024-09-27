@@ -4,32 +4,27 @@
 MAKE A DICTIONARY OF NOTABLE GUID TEMPLATES FOR EACH STATE & PLAN TYPE
 """
 
-from rdabase import DISTRICTS_BY_STATE
+from typing import Dict, Any
+
+from rdabase import read_json
+from constants import NOTABLE_MAPS
 
 
 def main() -> None:
 
-    # TODO
+    data: Dict[str, Any] = read_json("docs/leaderboards.json")
 
-    for xx in DISTRICTS_BY_STATE:
-        print(f'"{xx}": {{')
+    for xx, plan_types_dimensions in data.items():
+        print(f"{xx}")
 
-        for plan_type, ndistricts in DISTRICTS_BY_STATE[xx].items():
-            if ndistricts is not None and ndistricts > 1:
-                print(f'"{plan_type}": {{')
+        for plan_type, dimension_leaders in plan_types_dimensions.items():
+            print(f"  {plan_type}")
 
-                for dimension in [
-                    "proportional",
-                    "competitive",
-                    "minority",
-                    "compact",
-                    "splitting",
-                ]:
-                    print(f'"{dimension}": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",')
+            for dimension, leaders in dimension_leaders.items():
+                print(f"    {dimension}")
 
-                print(f"}},")
-
-        print(f"}},")
+                best_map = leaders[0].
+                print(f"    {best_map}")
 
     pass
 
