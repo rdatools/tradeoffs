@@ -101,7 +101,12 @@ def map_abstract(json_data: Dict) -> MapAbstract:
 
     cycle: str = "2020" if json_data["datasource"] == "2020_VD" else "2010"
     id: str = json_data["id"]
-    url_fragment: str = json_data["id"]
+    access_map: Dict = json_data["accessMap"]
+    url_fragment: str = "N/A"
+    for k, v in access_map.items():
+        if v["perm"] == 1:
+            url_fragment = k
+            break
 
     xx: str = json_data["state"]
     plan_type: str = json_data["planType"]
