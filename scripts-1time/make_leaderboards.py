@@ -101,7 +101,7 @@ def map_abstract(json_data: Dict) -> MapAbstract:
 
     cycle: str = "2020" if json_data["datasource"] == "2020_VD" else "2010"
     id: str = json_data["id"]
-    url_fragment: str = json_data["id"]  # TODO
+    url_fragment: str = json_data["id"]
 
     xx: str = json_data["state"]
     plan_type: str = json_data["planType"]
