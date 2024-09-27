@@ -73,7 +73,7 @@ for xx, plan_type_dim_urls in NOTABLE_MAPS.items():
                 if os.path.exists(log_path):
                     url: str = url_from_duplicate_log(log_path)
                 print(f'"{dim}": "{url}",')
-            print(f"}},")
+        print(f"}},")
     print(f"}},")
 print(f"}}")
 
