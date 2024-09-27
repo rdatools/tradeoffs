@@ -25,6 +25,8 @@ def make_command(xx: str, plan_type: str, dim: str, label: str, id: str) -> str:
     return f"scripts-1time/duplicate_map.sh {xx} {plan_type} {yyyy} {dim} {label} {id}"
 
 
+unknown: str = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
 print("#!/bin/bash")
 print("# Duplicate notable maps in DRA.")
 print("# Remember to start the DRA server before running these commands!")
@@ -34,12 +36,15 @@ for xx, plan_types in NOTABLE_MAPS.items():
             continue  # already duplicated
         if xx in ["NC", "MD"]:
             continue  # already duplicated
-        for dim, guid in notable_maps.items():
+        for dim, url_frag in notable_maps.items():
+            if url_frag == unknown:
+                continue
+
             log_file: str = (
                 f"intermediate/{xx}_{yyyy}_{plan_type.capitalize()}_{dim.capitalize()}_duplicate.log"
             )
             command: str = (
-                make_command(xx, plan_type.capitalize(), dim, label, guid)
+                make_command(xx, plan_type.capitalize(), dim, label, url_frag)
                 + f" > {log_file}"
             )
             print(command)
