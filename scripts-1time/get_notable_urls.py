@@ -2,12 +2,17 @@
 
 """
 MAKE A DICTIONARY OF NOTABLE GUID TEMPLATES FOR EACH STATE & PLAN TYPE
+
+For example:
+
+$ scripts-1time/get_notable_urls.py > temp/notable_maps.json
+
 """
 
 from typing import Dict, Any
 
 from rdabase import read_json
-from constants import NOTABLE_MAPS
+from constants import NOTABLE_MAPS  # TODO
 
 
 def main() -> None:
@@ -21,10 +26,16 @@ def main() -> None:
             print(f"  {plan_type}")
 
             for dimension, leaders in dimension_leaders.items():
+                if len(leaders) == 0:
+                    print(
+                        f"    Warning: {xx}/{plan_type}/{dimension} has no candidate notable maps!"
+                    )
+                    continue
+
                 print(f"    {dimension}")
 
-                best_map = leaders[0].
-                print(f"    {best_map}")
+                best_map = leaders[0]["url"]
+                print(f"      {best_map}")
 
     pass
 
