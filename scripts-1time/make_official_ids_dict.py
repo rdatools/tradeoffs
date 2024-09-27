@@ -6,7 +6,7 @@ MAKE A DICTIONARY OF OFFICIAL GUIDS FOR EACH STATE & PLAN TYPE
 
 from typing import Any, List, Dict
 
-from rdabase import DISTRICTS_BY_STATE, STUDY_STATES, read_json
+from rdabase import STUDY_STATES, read_json
 
 
 def main() -> None:
