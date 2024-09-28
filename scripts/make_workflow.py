@@ -52,7 +52,7 @@ def main() -> None:
     print()
     print(f"    scripts/setup_state {xx}")
     print()
-    print(f"( ) Step 3 - Gather additional data points manually")
+    print(f"( ) Step 3 - Verify the notable maps from DRA")
     print()
     print(f"( ) Step 4 - Generate & score an unbiased ensemble")
     print(f"    From 'rdaensemble' run:")

@@ -42,19 +42,11 @@ For example, to set up North Carolina, run:
 scripts/setup_state.sh NC
 ```
 
-## Step 3 - N/A
+## Step 3 - Verify the notable maps from DRA
 
-No longer needed
+Notable and official maps and their ratings have been pull from DRA automatically.
 
-## Step 4 - Gather additional data points manually
-
-The workflow needs two additional data points that must be gathered manually.
-
-### Verify the notable maps and ratings from DRA
-
-Notable maps and their ratings have been pull from DRA automatically.
-
-For each notable map for the state and type of plan, verify that the a map looks realistic.
+But for each notable map for the state and type of plan, verify that the a map looks realistic.
 This means making sure that it is not obviously gaming the DRA notable map filtering
 would never be accepted as a real map.
 One way people do this is by using long, thin, water-only river precincts to connect disparate parts of a state.
@@ -96,14 +88,7 @@ make sure it uses these datasets:
 
 Capture those ratings into the CSV file.
 
-### Capture the official map(s) and ratings from DRA
-
-The official maps and their ratings have also been pulled from DRA automatically.
-The ratings for these maps are in CSV files of the form 
-`{xx}20{T}_focus_scores.csv` in the output directory, `tradeoffs/docs/_data/focus_ratings`,
-where `{T}` indicates the type of plan (C for Congress, U for Upper, L for Lower).
-
-## Steps 5, 6, and 7 - Run the command-line scripts for the state
+## Steps 4, 5, 6, and 7 - Run the command-line scripts for the state
 
 With all those inputs in hand, run each of the three automatically generated shell scripts 
 for the state and type of plan, one at a time.
