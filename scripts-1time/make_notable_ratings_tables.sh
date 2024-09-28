@@ -1,97 +1,97 @@
 #!/bin/bash
 # Make notable ratings tables for the copies of notable maps in DRA.
-scripts-1time/make_notable_ratings_table.py --state AL --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state AL --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state AK --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state AK --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state AZ --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state AR --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state AR --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state CA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state CA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state CO --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state CO --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state CT --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state CT --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state DE --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state DE --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state FL --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state FL --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state GA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state GA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state HI --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state HI --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state ID --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state IL --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state IL --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state IN --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state IN --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state IA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state IA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state KS --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state KS --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state KY --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state KY --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state LA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state LA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state ME --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state ME --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MD --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MD --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MI --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MI --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MN --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MN --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MS --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MS --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MO --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MO --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state MT --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state MT --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state NE --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NV --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NV --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state NH --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NH --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state NJ --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NM --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NM --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state NY --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NY --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state NC --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state NC --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state ND --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state ND --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state OH --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state OH --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state OK --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state OK --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state OR --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state OR --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state PA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state PA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state RI --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state RI --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state SC --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state SC --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state SD --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state SD --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state TN --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state TN --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state TX --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state TX --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state UT --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state UT --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state VT --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state VT --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state VA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state VA --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state WA --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state WV --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state WV --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state WI --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state WI --plantype Lower
-scripts-1time/make_notable_ratings_table.py --state WY --plantype Upper
-scripts-1time/make_notable_ratings_table.py --state WY --plantype Lower
+scripts-1time/make_notable_ratings_table.py --state AL --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state AL --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state AK --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state AK --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state AZ --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state AR --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state AR --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state CA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state CA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state CO --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state CO --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state CT --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state CT --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state DE --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state DE --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state FL --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state FL --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state GA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state GA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state HI --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state HI --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state ID --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state IL --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state IL --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state IN --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state IN --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state IA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state IA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state KS --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state KS --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state KY --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state KY --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state LA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state LA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state ME --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state ME --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MD --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MD --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MI --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MI --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MN --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MN --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MS --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MS --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MO --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MO --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MT --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state MT --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NE --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NV --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NV --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NH --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NH --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NJ --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NM --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NM --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NY --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NY --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NC --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state NC --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state ND --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state ND --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state OH --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state OH --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state OK --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state OK --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state OR --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state OR --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state PA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state PA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state RI --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state RI --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state SC --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state SC --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state SD --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state SD --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state TN --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state TN --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state TX --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state TX --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state UT --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state UT --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state VT --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state VT --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state VA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state VA --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WA --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WV --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WV --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WI --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WI --plantype Lower --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WY --plantype Upper --no-debug -v
+scripts-1time/make_notable_ratings_table.py --state WY --plantype Lower --no-debug -v

@@ -34,10 +34,10 @@ def main() -> None:
     #
 
     file_names: List[str] = [
-        "proportional",
-        "competitive",
+        "proportionality",
+        "competitiveness",
         "minority",
-        "compact",
+        "compactness",
         "splitting",
     ]
 
@@ -86,7 +86,7 @@ def main() -> None:
 
         rows.append(row)
 
-    write_csv(output, rows, ["MAP", "ID"] + [c.upper() for c in cols])
+    write_csv(output, rows, ["MAP"] + [c.upper() for c in cols])
 
     pass
 
