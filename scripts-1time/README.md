@@ -1,31 +1,33 @@
-These are the DRA capabilities that I (Alec) took advantage of in developing the content for this site.
+# One-Time Scripts
 
-TODO: Update
+I (Alec) made extensive use of command-line scripts and my role as a
+[Dave\'s Redistricting](https://davesredistricting.org/) (DRA) insider
+to automate what would otherwise have been a tedious and error-prone process 
+of creating the content for this site &#8212; all with permission.
 
 ### Metadata
 
--   I extracted the GUIDs for official maps by state and type of map &#8212; from data/state_plans.json 
+-   I extracted the ids for official maps by state and type of map from state_plans.json 
     which I copied from DRA. 
--   I collected GUIDs for notable maps by state and type of map &#8212; by hand.
-    I collected the GUIDs for congressional maps for the first version of the site some time ago.
-    I collected the GUIDs for state legislative maps for the current version of the site on TODO: mm-dd-yy.
+-   While I collected the ids for congressional notable maps from DRA for the first version of the site some time ago,
+    I inferred notable maps for state upper &amp; lower houses &#8212; analogous to how DRA does it &#8212;
+    by processing a dump of the DRA map database.
 -   I copied the # of districts by state and type of map &#8212; from dra-types/lib/stateinfo.ts.
 
 ### CLI Commands
 
-I used these CLI capabilities in the workflow for the current verison of this site:
+For the first &amp; current versions of this site, I used several CLI capabilities:
 
--   I duplicated maps by GUID &#8212; I duplicated all of the official & notable maps *en masse* [(1 + 5) x 42 => 252],
-    for congressional plans.
-    TODO: upper and lower state legislative plans.
--   Pull ratings for a map by GUID &#8212; I pulled ratings for each map at the CLI [(7 + 6) x 42 => 546].
-    TODO: upper and lower state legislative plans.
+-   I duplicated the official &amp; notable maps by id &#8212; 800 maps &cong; (42 congressional maps + 100
+    state legislative maps) x 5 ratings dimensions for each.
+    In addition, I (re)named, described, labelled, and grouped everyone automatically.
+-   I also pulled the ratings for each copy by id.
 
-I used these capabilities in the workflow for the first version of this site:
+In the first version of this site, I also used a few other CLI capabilities:
 
--   Export a block-assignment file for a map at the CLI, using a little known feature. 
-    TODO: What is the feature?!?
--   Import a CSV, setting many map properties, and getting the resulting map & access GUIDs.
--   Edit map settings by GUID.
--   Save a map image &#8212; this is the right-click Chrome hack. 
-    This capability is *not* currently exposed at the DRA CLI, but we figured out how to replicate the feature at the command line.
+-   I exported a block-assignment file for a map.
+-   I imported a CSV, set many map properties, and got the resulting map & access ids.
+-   I edited many map settings by id.
+-   I saved a map image. In DRA, this is the right-click Chrome hack. 
+    This capability is *not* currently exposed at the DRA CLI, but Todd &amp; figured out how to replicate 
+    the feature at the command line.
