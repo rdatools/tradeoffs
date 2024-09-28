@@ -1952,7 +1952,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
         },
         "upper": {
             "proportionality": "4e18e417-c9fb-4d26-8f2f-4fa3e117114d",
-            "competitiveness": "for",
+            "competitiveness": "4e7964ad-927b-4060-9845-f29a8048ee96",
             "minority": "bbd3b1d2-c5a1-4efe-998e-e537fba75bab",
             "compactness": "d5d5d092-e79f-44d5-a2b3-6f005cc905e2",
             "splitting": "48627639-de1a-408d-bcf0-ec5afd900e48",
@@ -1983,7 +1983,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
         "lower": {
             "proportionality": "daea2942-c68d-4f22-af96-e2ccda0665b5",
             "competitiveness": "a3dc75ba-4dac-458a-ac5f-92db809e0bf6",
-            "minority": "for",
+            "minority": "133dfe57-381e-4200-8f9e-a4998c3b6632",
             "compactness": "2497e1aa-023c-4e70-a86f-0eca84451bff",
             "splitting": "e23ed24d-aeab-4cfb-b3aa-b52cf065a0fa",
         },
@@ -2123,7 +2123,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
             "competitiveness": "b6226e81-68ab-4f22-bcb2-c764764eade5",
             "minority": "5f7f0ead-d010-4260-b135-6d0fcfa312a5",
             "compactness": "fdf07861-e148-4d13-ac6c-ed866535dbfa",
-            "splitting": "for",
+            "splitting": "2949b0f5-375a-4af4-b831-3a52dd2a2e61",
         },
     },
     "MT": {
@@ -2205,7 +2205,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
         },
         "lower": {
             "proportionality": "cc723922-aa8d-442a-adab-23e9023dc33c",
-            "competitiveness": "for",
+            "competitiveness": "b20f0257-5cc1-4733-aca8-1fb9e412cbd7",
             "minority": "095b541c-0464-4371-a0bd-f0ad29602d39",
             "compactness": "adde331b-1ae5-4d66-be97-ffba003ee355",
             "splitting": "623484b0-54b3-4203-978d-fd978e56d4f8",
@@ -2238,7 +2238,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
         "upper": {
             "proportionality": "9982f116-0ac8-4e75-8c12-f20afd0e23d1",
             "competitiveness": "694410a1-a50c-4b5e-97fb-1e0f8d3681bc",
-            "minority": "for",
+            "minority": "94ccc634-e4d7-414c-bc6e-a849e4fe5245",
             "compactness": "4f7bf7db-f490-47f4-b6dd-21f56db01ecd",
             "splitting": "0f1d6b6f-6bb4-4dd4-b341-128f979d2f28",
         },
@@ -2332,7 +2332,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
             "competitiveness": "dcc40206-262e-4316-ba18-c28d67318e04",
             "minority": "d4adff92-7763-49d5-a4d9-e23e8c3ee582",
             "compactness": "fda46263-c9f8-4624-bbd2-326a06061b5d",
-            "splitting": "for",
+            "splitting": "df74d344-6293-4ced-ae21-2e755768089d",
         },
     },
     "OK": {
@@ -2415,16 +2415,16 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
         "upper": {
             "proportionality": "d2caf6fb-d03e-4d46-a725-af27c8dee8b8",
             "competitiveness": "fff35232-b3a4-4716-8b44-685856a8294e",
-            "minority": "for",
+            "minority": "c067a443-87ba-488f-8017-ced48d9bff29",
             "compactness": "dc4160d4-0108-4be0-86a8-01e2d699df7b",
-            "splitting": "for",
+            "splitting": "c067a443-87ba-488f-8017-ced48d9bff29",
         },
         "lower": {
             "proportionality": "98471896-8153-4f1a-b948-8691c86f9e0f",
-            "competitiveness": "for",
+            "competitiveness": "58f9c5c7-4356-4cd9-a006-b6a66568c049",
             "minority": "b8534d93-50f7-4d9a-a70f-f4228f82aff9",
             "compactness": "ba78ed41-c399-48eb-8ed3-d11a11c7f668",
-            "splitting": "for",
+            "splitting": "58f9c5c7-4356-4cd9-a006-b6a66568c049",
         },
     },
     "SC": {
@@ -2532,7 +2532,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
             "competitiveness": "fbaf445f-62af-417a-9ce5-2de7753ac59c",
             "minority": "0c2608a8-c9ef-4c29-bd56-855eed8ddd7d",
             "compactness": "41d66d80-42a2-4143-b0e2-a5e24a406989",
-            "splitting": "for",
+            "splitting": "32dd49b0-3c49-4abe-8cc1-de9741838d7c",
         },
     },
     "VT": {
@@ -2649,7 +2649,7 @@ NOTABLE_MAPS_COPY: Dict[str, Dict[str, Dict[str, str]]] = {
             "competitiveness": "174f6617-1a97-4863-a1b2-69812d97d62e",
             "minority": "03ed47dc-2ad4-4efe-8738-8dea68a67325",
             "compactness": "9a572c8f-256e-4cbe-901a-e2322b6b7031",
-            "splitting": "for",
+            "splitting": "76f6fcc4-4bcb-4b27-9062-723777e63586",
         },
     },
 }

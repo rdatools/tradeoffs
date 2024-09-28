@@ -21,14 +21,16 @@ output_dir: str = "intermediate"
 
 print("#!/bin/bash")
 print("# Pull ratings for copies of notable maps in DRA.")
-for xx, plan_type_ids in NOTABLE_MAPS.items():
-    for plan_type, notable_maps in plan_type_ids.items():
+for xx, plan_type_url_frags in NOTABLE_MAPS_COPY.items():
+    for plan_type, notable_maps in plan_type_url_frags.items():
         if plan_type == "congress":
             continue  # already duplicated
 
-        for dim, guid in notable_maps.items():
+        for dim, url_frag in notable_maps.items():
+            if url_frag == "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx":
+                continue
             command: str = (
-                f"scripts-1time/pull_map_ratings.sh {xx} {yyyy} {plan_type.capitalize()} {dim.capitalize()} {guid} {output_dir}"
+                f"scripts-1time/pull_map_ratings.sh {xx} {yyyy} {plan_type.capitalize()} {dim.capitalize()} {url_frag} {output_dir}"
             )
             print(command)
             # os.system(command)
