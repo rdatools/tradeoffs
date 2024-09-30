@@ -32,14 +32,14 @@
   upper: 40
   lower: 80
   counties: 58
-  population: 0
+  population: 39538223
 - xx: CO
   name: Colorado
   congress: 8
   upper: 35
   lower: 65
   counties: 64
-  population: 0
+  population: 5773714
 - xx: CT
   name: Connecticut
   congress: 5
@@ -144,7 +144,7 @@
   upper: 40
   lower: 160
   counties: 14
-  population: 0
+  population: 7029917
 - xx: MI
   name: Michigan
   congress: 13
@@ -158,7 +158,7 @@
   upper: 67
   lower: 134
   counties: 87
-  population: 0
+  population: 5706494
 - xx: MS
   name: Mississippi
   congress: 4
@@ -172,7 +172,7 @@
   upper: 34
   lower: 163
   counties: 115
-  population: 0
+  population: 6154913
 - xx: MT
   name: Montana
   congress: 2
@@ -221,7 +221,7 @@
   upper: 63
   lower: 150
   counties: 62
-  population: 0
+  population: 20201249
 - xx: NC
   name: North Carolina
   congress: 14
@@ -291,7 +291,7 @@
   upper: 33
   lower: 99
   counties: 95
-  population: 0
+  population: 6910840
 - xx: TX
   name: Texas
   congress: 38
@@ -326,7 +326,7 @@
   upper: 49
   lower: None
   counties: 39
-  population: 0
+  population: 7705281
 - xx: WV
   name: West Virginia
   congress: 2

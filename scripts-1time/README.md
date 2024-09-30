@@ -31,3 +31,5 @@ In the first version of this site, I also used a few other CLI capabilities:
 -   I saved a map image. In DRA, this is the right-click Chrome hack. 
     This capability is *not* currently exposed at the DRA CLI, but Todd &amp; figured out how to replicate 
     the feature at the command line.
+
+Practically speaking, what we did would not have been possible without the CLI.
