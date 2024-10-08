@@ -5,11 +5,11 @@ Duplicate Notable maps.
 
 For example:
 
-$ scripts-1time/duplicate_notable_maps.py
+$ scripts-1time/make_dup_notables_script.py
 
 For documentation, type:
 
-$ scripts-1time/duplicate_notable_maps.py -h
+$ scripts-1time/make_dup_notables_script.py -h
 
 """
 

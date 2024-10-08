@@ -455,6 +455,126 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
     },
 }
 
+# These are the ids of *proxies* of official maps that don't have any split precincts.
+OFFICIAL_MAPS_NOSPLITS: Dict[str, Dict[str, str]] = {
+    "AL": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "AZ": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "CA": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "CO": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "FL": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "GA": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "IL": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "IN": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "MA": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "MD": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "MI": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "MN": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "MO": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "NJ": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "NY": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "NC": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "OH": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "PA": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "SC": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "TN": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "TX": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "VA": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "WA": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    "WI": {
+        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+}
+
 """
 These are the ids for representative notable maps in DRA on 09-26-24.
 NOTE - They may not be the *actual* notable maps, we they were derived by analyzing
