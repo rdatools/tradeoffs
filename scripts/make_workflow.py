@@ -42,7 +42,7 @@ def main() -> None:
     print(f"### Workflow for {xx}-{plan_type} ###")
     print()
     print(
-        f"For details on the manual data gather https://rdatools.github.io/tradeoffs/workflow."
+        f"For details on the manual Step 3, see https://rdatools.github.io/tradeoffs/workflow."
     )
     print()
     print(f"( ) Step 1 - Extract the data, shapes, and graph for the state")
@@ -52,7 +52,11 @@ def main() -> None:
     print()
     print(f"    scripts/setup_state {xx}")
     print()
-    print(f"( ) Step 3 - Verify the notable maps from DRA")
+    print(f"( ) Step 3 - Manual steps")
+    print(f"    * First, verify the notable maps copied from DRA.")
+    print(
+        f"    * Then, in DRA create a proxy of the official map that doesn't any split precincts."
+    )
     print()
     print(f"( ) Step 4 - Generate & score an unbiased ensemble")
     print(f"    From 'rdaensemble' run:")

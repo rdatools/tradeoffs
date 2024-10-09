@@ -456,7 +456,7 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
 }
 
 # These are the ids of *proxies* of official maps that don't have any split precincts.
-OFFICIAL_MAPS_NOSPLITS: Dict[str, Dict[str, str]] = {
+OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
     "AL": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",

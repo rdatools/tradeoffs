@@ -42,7 +42,11 @@ For example, to set up North Carolina, run:
 scripts/setup_state.sh NC
 ```
 
-## Step 3 - Verify the notable maps from DRA
+## Step 3 - Manual Steps
+
+There are two manual steps.
+
+### Verify the notable maps from DRA
 
 Notable and official maps and their ratings have been pull from DRA automatically.
 
@@ -87,6 +91,15 @@ make sure it uses these datasets:
 * Election: Composite 2016-2020
 
 Capture those ratings into the CSV file.
+
+### TODO
+
+    print(f"      - copy the id of the official proxy map,")
+    print(f"      - add it to the OFFICIAL_MAP_PROXIES constant,")
+    print(f"      - combine split precincts,")
+    print(f"      - export the precinct-assignment file,")
+    print(f"      - rename it to '{xx}_2022_{plan_type}_Official_Proxy.csv', and")
+    print(f"      - move it to tradeoffs/official_maps.")
 
 ## Steps 4, 5, 6, and 7 - Run the command-line scripts for the state
 

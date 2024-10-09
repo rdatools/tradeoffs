@@ -24,7 +24,7 @@ from selenium.webdriver.chrome.options import Options
 
 from rdabase import require_args
 
-from constants import OFFICIAL_MAPS_NOSPLITS
+from constants import OFFICIAL_MAP_PROXIES
 
 
 def submit_url_to_headless_browser(url: str, sleep: int = 10) -> None:
@@ -67,7 +67,7 @@ def main() -> None:
     # Parse the command-line arguments
     args: argparse.Namespace = parse_args()
 
-    guid: str = OFFICIAL_MAPS_NOSPLITS[args.state][args.plantype.lower()]
+    guid: str = OFFICIAL_MAP_PROXIES[args.state][args.plantype.lower()]
 
     export_url: str = f"https://davesredistricting.org/export/{guid}.csv"
     # Submit the URL to the headless browser
