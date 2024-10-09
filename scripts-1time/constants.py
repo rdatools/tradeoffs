@@ -530,7 +530,7 @@ OFFICIAL_MAPS_NOSPLITS: Dict[str, Dict[str, str]] = {
         "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     },
     "NC": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "a457887e-f932-4186-a14c-0d94f781e575",
         "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     },
