@@ -5,14 +5,14 @@ EXPORT THE *BLOCK-ASSIGNMENT FILE* FOR A DRA MAP BY ID
 
 For example:
 
-$ scripts-1time/export_map.py \
+$ scripts-1time/export_official_proxy.py \
 --state NC \
 --plantype congress \
 --no-debug
 
 For documentation, type:
 
-$ scripts-1time/export_map.py -h
+$ scripts-1time/export_official_proxy.py -h
 
 """
 
@@ -65,15 +65,29 @@ def submit_url_to_headless_browser(url: str, sleep: int = 10) -> None:
 
 
 def main() -> None:
-    """Export the block-assignment file for a DRA map by ID."""
+    """Export the block-assignment file for a DRA map by ID.
+
+    To export a map from DRA programmatically:
+
+    https://davesredistricting.org/export/[GUID].[EXT]
+
+    where EXT is:
+    csv: block assignment
+    vtd: precinct assignment
+    geojson: district shapes
+    png: map thumbnail
+    json: map archive format
+
+    """
 
     # Parse the command-line arguments
     args: argparse.Namespace = parse_args()
 
     guid: str = OFFICIAL_MAP_PROXIES[args.state][args.plantype.lower()]
+    ext: str = "vtd"
 
-    # TODO - Modify this to export the precinct-assignment file
-    export_url: str = f"https://davesredistricting.org/export/{guid}.csv"
+    # Export a precinct-assignment file (not block-assignment)
+    export_url: str = f"https://davesredistricting.org/export/{guid}.{ext}"
     # Submit the URL to the headless browser
     # submit_url_to_headless_browser(args.url)
     submit_url_to_headless_browser(export_url, args.sleep)
