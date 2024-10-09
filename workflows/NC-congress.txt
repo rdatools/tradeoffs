@@ -1,15 +1,17 @@
 ### Workflow for NC-congress ###
 
-For details on the manual data gather https://rdatools.github.io/tradeoffs/workflow.
+For details on the manual Step 3, see https://rdatools.github.io/tradeoffs/workflow.
 
 (x) Step 1 - Extract the data, shapes, and graph for the state
 
-(x) Step 2 - Set up the state for trade-off analysis
+(x) Step 2 - Set up the state for trade-off analysis (once per state)
     From 'tradeoffs' run:
 
     scripts/setup_state NC
 
-(x) Step 3 - Gather additional data points manually
+(x) Step 3 - Manual steps
+    * First, verify the notable maps copied from DRA.
+    * Then, in DRA create a proxy of the official map that doesn't any split precincts.
 
 (x) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
@@ -19,7 +21,7 @@ For details on the manual data gather https://rdatools.github.io/tradeoffs/workf
 ( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
-    scripts/find_frontiers.sh --state NC --plan-type congress > ../tradeoffs-dropbox/scores/NC20C_scores_notes.txt
+    scripts/find_frontiers.sh --state NC --plan-type congress > ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_notes.txt
 
 ( ) Step 6 - 'Push' the frontiers of the unbiased ensemble
     From 'rdaensemble' run:
@@ -31,7 +33,7 @@ For details on the manual data gather https://rdatools.github.io/tradeoffs/workf
 
     scripts/make_artifacts.sh --state NC --plan-type congress
 
-( ) Step 8 - Deploy the state
+( ) Step 8 - Deploy the state (once per state)
     From 'tradeoffs' run:
 
     scripts/deploy_state.sh NC

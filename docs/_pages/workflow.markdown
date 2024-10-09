@@ -92,14 +92,16 @@ make sure it uses these datasets:
 
 Capture those ratings into the CSV file.
 
-### TODO
+### Create a no-split-precincts proxy of the official map
 
-    print(f"      - copy the id of the official proxy map,")
-    print(f"      - add it to the OFFICIAL_MAP_PROXIES constant,")
-    print(f"      - combine split precincts,")
-    print(f"      - export the precinct-assignment file,")
-    print(f"      - rename it to '{xx}_2022_{plan_type}_Official_Proxy.csv', and")
-    print(f"      - move it to tradeoffs/official_maps.")
+In DRA create a proxy of the official map that doesn't any split precincts.
+
+*   Copy the id of the official proxy map
+*   Add it to the OFFICIAL_MAP_PROXIES constant
+*   Combine split precincts
+*   Export the precinct-assignment file
+*   Rename it to have a name of the form `{xx}_2022_{plan_type}_Official_Proxy.csv`, and
+*   Finally, move it to the tradeoffs/official_maps directory.
 
 ## Steps 4, 5, 6, and 7 - Run the command-line scripts for the state
 

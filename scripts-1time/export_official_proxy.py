@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 """
-EXPORT THE BLOCK-ASSIGNMENT FILE FOR A DRA MAP BY ID
+EXPORT THE *BLOCK-ASSIGNMENT FILE* FOR A DRA MAP BY ID
 
 For example:
 
-$ scripts-1time/export_map.py TODO
+$ scripts-1time/export_map.py \
+--state NC \
+--plantype congress \
+--no-debug
 
 For documentation, type:
 
@@ -69,6 +72,7 @@ def main() -> None:
 
     guid: str = OFFICIAL_MAP_PROXIES[args.state][args.plantype.lower()]
 
+    # TODO - Modify this to export the precinct-assignment file
     export_url: str = f"https://davesredistricting.org/export/{guid}.csv"
     # Submit the URL to the headless browser
     # submit_url_to_headless_browser(args.url)
@@ -92,11 +96,11 @@ def parse_args():
         help="The type of plan (congress, upper, lower)",
         type=str,
     )
-    parser.add_argument(
-        "--name",
-        type=str,
-        help="The name for the block-assignment file",
-    )
+    # parser.add_argument(
+    #     "--name",
+    #     type=str,
+    #     help="The name for the block-assignment file",
+    # )
     parser.add_argument(
         "--sleep",
         type=int,
@@ -120,8 +124,7 @@ def parse_args():
     debug_defaults: Dict[str, Any] = {
         "state": "NC",
         "plantype": "Congress",
-        "name": "NC_2022_Congress_Official_Proxy.csv",
-        "output": "temp",
+        # "name": "NC_2022_Congress_Official_Proxy.csv",
     }
     args = require_args(args, args.debug, debug_defaults)
 
