@@ -9,7 +9,6 @@ from .frontiers import (
     is_near,
     is_near_any,
 )
-from .notable_maps import id_most_notable_maps
 from .plots import bgcolor, plot_width, plot_height, buttons
 
 name: str = "tradeoffs"

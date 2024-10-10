@@ -28,7 +28,6 @@ from tradeoffs import (
     scores_to_df,
     find_frontiers,
     is_pareto_efficient_value,
-    id_most_notable_maps,
 )
 
 
@@ -57,11 +56,9 @@ def main() -> None:
     frontiers: Dict[str, Any] = find_frontiers(
         ratings, is_pareto_efficient_value, verbose=args.verbose
     )
-    # indices: List[Dict[str, Dict[str, str | int]]] = id_most_notable_maps(frontiers)
 
     output: Dict[str, Any] = metadata
     output["frontiers"] = frontiers
-    # output["notable_maps"] = indices
 
     if args.verbose:
         ratings_pairs: List = list(itertools.combinations(ratings_dimensions, 2))

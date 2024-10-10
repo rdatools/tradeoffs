@@ -1,7 +1,5 @@
 """
 SCORING
-
-TODO - Obsolete.
 """
 
 from typing import Any, Dict, List, Tuple, Optional
