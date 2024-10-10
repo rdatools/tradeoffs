@@ -61,26 +61,25 @@ def main() -> None:
     print(f"( ) Step 4 - Generate & score an unbiased ensemble")
     print(f"    From 'rdaensemble' run:")
     print()
-    print(
-        f"    scripts/make_and_score_ensemble.sh --state {xx} --plan-type {plan_type}"
-    )
+    print(f"    scripts/make_and_score_ensemble.sh --state {xx} --plantype {plan_type}")
+    print(f"    scripts/pack-zip_ensemble.sh --state {xx} --plantype {plan_type}")
     print()
     print(f"( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble")
     print(f"    From 'tradeoffs' run:")
     print()
     print(
-        f"    scripts/find_frontiers.sh --state {xx} --plan-type {plan_type} > ../../iCloud/fileout/tradeoffs/{xx}/{ensembles_dir}/{prefix}_scores_notes.txt"
+        f"    scripts/find_frontiers.sh --state {xx} --plantype {plan_type} > ../../iCloud/fileout/tradeoffs/{xx}/{ensembles_dir}/{prefix}_scores_notes.txt"
     )
     print()
     print(f"( ) Step 6 - 'Push' the frontiers of the unbiased ensemble")
     print(f"    From 'rdaensemble' run:")
     print()
-    print(f"    scripts/push_frontiers.sh --state {xx} --plan-type {plan_type}")
+    print(f"    scripts/push_frontiers.sh --state {xx} --plantype {plan_type}")
     print()
     print(f"( ) Step 7 - Make the analysis artifacts")
     print(f"    From 'tradeoffs' run:")
     print()
-    print(f"    scripts/make_artifacts.sh --state {xx} --plan-type {plan_type}")
+    print(f"    scripts/make_artifacts.sh --state {xx} --plantype {plan_type}")
     print()
     print(f"( ) Step 8 - Deploy the state (once per state)")
     print(f"    From 'tradeoffs' run:")

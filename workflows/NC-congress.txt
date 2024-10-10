@@ -16,22 +16,23 @@ For details on the manual Step 3, see https://rdatools.github.io/tradeoffs/workf
 (x) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
-    scripts/make_and_score_ensemble.sh --state NC --plan-type congress
+    scripts/make_and_score_ensemble.sh --state NC --plantype congress
+    scripts/pack-zip_ensemble.sh --state NC --plantype congress
 
 ( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble
     From 'tradeoffs' run:
 
-    scripts/find_frontiers.sh --state NC --plan-type congress > ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_notes.txt
+    scripts/find_frontiers.sh --state NC --plantype congress > ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_notes.txt
 
 ( ) Step 6 - 'Push' the frontiers of the unbiased ensemble
     From 'rdaensemble' run:
 
-    scripts/push_frontiers.sh --state NC --plan-type congress
+    scripts/push_frontiers.sh --state NC --plantype congress
 
 ( ) Step 7 - Make the analysis artifacts
     From 'tradeoffs' run:
 
-    scripts/make_artifacts.sh --state NC --plan-type congress
+    scripts/make_artifacts.sh --state NC --plantype congress
 
 ( ) Step 8 - Deploy the state (once per state)
     From 'tradeoffs' run:
