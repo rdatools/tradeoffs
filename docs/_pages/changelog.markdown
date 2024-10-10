@@ -6,6 +6,7 @@ permalink: changelog/
 
 This page tracks major changes to the site, in reverse chronological order:
 
+- Removed legacy code.
 - Added focus ratings tables for all states and plan types.
 - Added notable maps to IL, SC, and TX congress scatter plots.
 - Activated six sample states: NC, PA, MD, IL, SC, and TX.
