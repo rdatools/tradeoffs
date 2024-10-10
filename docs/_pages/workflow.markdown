@@ -99,6 +99,7 @@ In DRA create a proxy of the official map that doesn't any split precincts.
 *   Copy the id of the official proxy map
 *   Add it to the OFFICIAL_MAP_PROXIES constant
 *   Combine split precincts
+*   Make sure all precincts are assigned to districts, even if they are water only / zero population
 *   Export the precinct-assignment file
 *   Rename it to have a name of the form `{xx}_2022_{plan_type}_Official_Proxy.csv`, and
 *   Finally, move it to the tradeoffs/official_maps directory.
