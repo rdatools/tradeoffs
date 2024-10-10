@@ -19,7 +19,7 @@ $ scripts/pack_ensemble.py -h
 import argparse
 from argparse import ArgumentParser, Namespace
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, TypeAlias
 
 
 from rdabase import (
@@ -27,7 +27,15 @@ from rdabase import (
     read_json,
     write_json,
 )
-from tradeoffs import GeoID, DistrictID, Name, Weight
+
+GeoID: TypeAlias = str
+DistrictID: TypeAlias = int | str
+
+FeatureOffset: TypeAlias = int
+DistrictOffset: TypeAlias = int
+
+Name: TypeAlias = str
+Weight: TypeAlias = float
 
 
 def main() -> None:
