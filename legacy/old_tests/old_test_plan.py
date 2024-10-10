@@ -2,6 +2,8 @@
 
 """
 TEST PLAN CLASS
+
+NOTE - LEGACY
 """
 
 import random
