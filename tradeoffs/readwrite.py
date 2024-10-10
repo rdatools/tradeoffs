@@ -14,7 +14,19 @@ import pandas as pd
 from rdaensemble.general import ratings_dimensions
 
 # from .constants import *
-from .score import is_realistic
+# from .score import is_realistic
+
+
+def is_realistic(ratings: List[int | float]) -> bool:
+    """
+    Do a set of ratings meet DRA's 'realistic' thresholds?
+
+    See 'Realistic' @ https://medium.com/dra-2020/notable-maps-66d744933a48
+    """
+
+    thresholds: List[int] = [20, 10, 0, 20, 20]
+
+    return all(r >= t for r, t in zip(ratings, thresholds))
 
 
 def filter_scores(
