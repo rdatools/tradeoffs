@@ -3,6 +3,10 @@
 # Export a precinct-assignment file for a no-splits official proxy map from DRA, and
 # rename it.
 #
+# For example:
+#
+# scripts-1time/export_official_proxy.sh --state NC --plantype upper --name NC_2022_Upper_Official_Proxy.csv
+#
 
 # Initialize variables
 state=""
