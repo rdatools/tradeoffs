@@ -41,6 +41,7 @@ def main() -> None:
         "alt_opportunity_districts",
         "defined_opportunity_districts",
         "polsby_popper",
+        "county_splitting",
         "counties_split",
         "county_splits",
     ]
@@ -52,6 +53,7 @@ def main() -> None:
         int,
         float,
         int,
+        float,
         float,
         int,
         int,
