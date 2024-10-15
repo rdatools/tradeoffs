@@ -6,23 +6,23 @@ permalink: scores/
 
 TODO - Add a description of the scores and metrics used in the analysis.
 
-*   map
-*   energy
-*   cut_edges
-*   boundary_nodes
-*   D
-*   C
-*   population_deviation
-*   estimated_vote_pct
-*   pr_deviation
-*   pr_seats
-*   pr_pct
-*   estimated_seats
-*   estimated_seat_pct
-*   fptp_seats
-*   disproportionality
-*   efficiency_gap
-*   gamma
+*   map &ndash; The plan (map) name.
+*   energy &ndash; The energy of the map. Lower is more *population* compact.
+*   cut_edges &ndash; TODO.
+*   boundary_nodes &ndash; TODO.
+*   D &ndash; The number of districts.
+*   C &ndash; The number of counties.
+*   population_deviation &ndash; The population deviation of the plan.
+*   estimated_vote_pct &ndash; The Democratic two-party vote share.
+*   pr_deviation &ndash; The deviation from pr_seats.
+*   pr_seats &ndash; The integral number of seats closest to proportional representation.
+*   pr_pct &ndash; pr_seats as a percentage of the number of districts.
+*   estimated_seats &ndash; The estimated number of fractional seats.
+*   estimated_seat_pct &ndash; estimated_seats as a percentage of the number of districts.
+*   fptp_seats &ndash; The estimated number of Democratics seats using "first past the post" (FPTP), all-or-nothing accounting.
+*   disproportionality &ndash; estimated_vote_pct minus estimated_seat_pct.
+*   efficiency_gap &ndash; The efficiency gap. Positive values favor Republicans; negative values favor Democrats.
+*   gamma &ndash; TODO.
 *   seats_bias
 *   votes_bias
 *   geometric_seats_bias
