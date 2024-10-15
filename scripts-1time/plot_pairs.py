@@ -2,12 +2,20 @@
 
 """
 PLOT PAIRS OF METRICS for quick sanity checks
+
+For example:
+
+$ scripts-1time/plot_pairs.py --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv --no-debug
+
+For documentation, type:
+
+$ scripts-1time/plot_pairs.py -h
 """
 
 import argparse
 from argparse import ArgumentParser, Namespace
 
-from typing import List, Dict, Callable
+from typing import Any, List, Dict, Callable
 
 import itertools
 import matplotlib.pyplot as plt
@@ -109,6 +117,12 @@ def parse_args():
         "--scores",
         type=str,
         help="A CSV ensemble of scores including ratings to plot",
+    )
+
+    # Enable debug/explicit mode
+    parser.add_argument("--debug", default=True, action="store_true", help="Debug mode")
+    parser.add_argument(
+        "--no-debug", dest="debug", action="store_false", help="Explicit mode"
     )
 
     args: Namespace = parser.parse_args()
