@@ -4,92 +4,125 @@
 PLOT PAIRS OF METRICS for quick sanity checks
 """
 
-from typing import List, Callable
+import argparse
+from argparse import ArgumentParser, Namespace
+
+from typing import List, Dict, Callable
 
 import itertools
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from rdabase import require_args
 from tradeoffs.readwrite import scores_to_df
 
 
-# Setup
+def main() -> None:
+    """Make pairwise plots of metrics in a score CSV."""
 
-scores_csv = "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_100.csv"
+    args: argparse.Namespace = parse_args()
 
-x_inputs: List[str] = [
-    "D",
-    "C",
-    "efficiency_gap",
-    "average_margin",
-    "proportional_opportunities",
-    "alt_opportunity_districts",
-    "defined_opportunity_districts",
-    "polsby_popper",
-    "counties_split",
-    "county_splits",
-]
-x_inputs_types: List[type] = [
-    int,
-    int,
-    float,
-    float,
-    int,
-    float,
-    int,
-    float,
-    int,
-    int,
-]
-x_metrics: List[str] = [
-    "efficiency_gap",
-    "average_margin",
-    "defined_opportunity_pct",
-    "polsby_popper",
-    "county_splitting",
-]
+    #
 
-# Read the scores from a CSV file into a Pandas dataframe
+    x_inputs: List[str] = [
+        "D",
+        "C",
+        "efficiency_gap",
+        "average_margin",
+        "proportional_opportunities",
+        "alt_opportunity_districts",
+        "defined_opportunity_districts",
+        "polsby_popper",
+        "counties_split",
+        "county_splits",
+    ]
+    x_inputs_types: List[type] = [
+        int,
+        int,
+        float,
+        float,
+        int,
+        float,
+        int,
+        float,
+        int,
+        int,
+    ]
+    x_metrics: List[str] = [
+        "efficiency_gap",
+        "average_margin",
+        "defined_opportunity_pct",
+        "polsby_popper",
+        "county_splitting",
+    ]
 
-fieldnames: List[str] = x_inputs
-fieldtypes: List[Callable] = x_inputs_types
+    # Read the scores from a CSV file into a Pandas dataframe
 
-scores: pd.DataFrame = scores_to_df(
-    scores_csv,
-    fieldnames,
-    fieldtypes,
-)
+    fieldnames: List[str] = x_inputs
+    fieldtypes: List[Callable] = x_inputs_types
 
-# Compute derived metrics
+    scores: pd.DataFrame = scores_to_df(
+        args.scores,
+        fieldnames,
+        fieldtypes,
+    )
 
-scores["defined_opportunity_pct"] = (
-    scores["defined_opportunity_districts"] / scores["proportional_opportunities"]
-)
-scores["county_splits_ratio"] = scores["county_splits"] / scores["D"]
+    # Compute derived metrics
 
-# Plot each pair of metrics
+    scores["defined_opportunity_pct"] = (
+        scores["defined_opportunity_districts"] / scores["proportional_opportunities"]
+    )
+    scores["county_splits_ratio"] = scores["county_splits"] / scores["D"]
 
-pairs: List = list(itertools.combinations(x_metrics, 2))
+    # Plot each pair of metrics
 
-for pair in pairs:
-    y_metric: str = pair[0]
-    x_metric: str = pair[1]
+    pairs: List = list(itertools.combinations(x_metrics, 2))
 
-    y = scores[y_metric]
-    x = scores[x_metric]
+    for pair in pairs:
+        y_metric: str = pair[0]
+        x_metric: str = pair[1]
 
-    plt.figure(figsize=(10, 6))
-    plt.scatter(x, y, color="blue", alpha=0.6)
+        y = scores[y_metric]
+        x = scores[x_metric]
 
-    plt.xlabel(x_metric)
-    plt.ylabel(y_metric)
+        plt.figure(figsize=(10, 6))
+        plt.scatter(x, y, color="blue", alpha=0.6)
 
-    plt.grid(True, linestyle="--", alpha=0.7)
+        plt.xlabel(x_metric)
+        plt.ylabel(y_metric)
 
-    plt.show()
+        plt.grid(True, linestyle="--", alpha=0.7)
+
+        plt.show()
+
+        pass
 
     pass
 
-pass
+
+def parse_args():
+    parser: ArgumentParser = argparse.ArgumentParser(
+        description="Make pairwise plots of metrics in a score CSV."
+    )
+
+    parser.add_argument(
+        "--scores",
+        type=str,
+        help="A CSV ensemble of scores including ratings to plot",
+    )
+
+    args: Namespace = parser.parse_args()
+
+    # Default values for args in debug mode
+    debug_defaults: Dict[str, Any] = {
+        "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv",
+    }
+    args = require_args(args, args.debug, debug_defaults)
+
+    return args
+
+
+if __name__ == "__main__":
+    main()
 
 ### END ###
