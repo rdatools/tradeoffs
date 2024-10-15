@@ -15,7 +15,7 @@ from tradeoffs.readwrite import scores_to_df
 
 # Setup
 
-scores_csv = "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores_100.csv"
+scores_csv = "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv"
 
 y_metrics: List[str] = [
     "proportionality",
