@@ -16,7 +16,7 @@ The county and district splitting measures are described in
 *   **map** &ndash; The plan (map) name.
 *   **energy** &ndash; The energy of the map. Lower is more *population* compact.
 *   **cut_edges** &ndash; The percentage of edges between precincts that cross district boundaries.
-*   boundary_nodes &ndash; The percentage of nodes that are on the boundaries of districts.
+*   **boundary_nodes** &ndash; The percentage of nodes that are on the boundaries of districts.
 *   **D** &ndash; The number of districts.
 *   **C** &ndash; The number of counties.
 *   **population_deviation** &ndash; The population deviation of the plan.
