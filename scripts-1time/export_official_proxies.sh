@@ -25,9 +25,9 @@ scripts-1time/export_official_proxy.sh --state GA --plantype lower --name GA_202
 scripts-1time/export_official_proxy.sh --state GA --plantype upper --name GA_2022_Upper_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state ID --plantype congress --name ID_2022_Congress_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state ID --plantype upper --name ID_2022_Upper_Official_Proxy.csv
-scripts-1time/export_official_proxy.sh --state IL --plantype congress --name IL_2022_Congress_Official_Proxy.csv
-scripts-1time/export_official_proxy.sh --state IL --plantype lower --name IL_2022_Lower_Official_Proxy.csv
-scripts-1time/export_official_proxy.sh --state IL --plantype upper --name IL_2022_Upper_Official_Proxy.csv
+# scripts-1time/export_official_proxy.sh --state IL --plantype congress --name IL_2022_Congress_Official_Proxy.csv
+# scripts-1time/export_official_proxy.sh --state IL --plantype lower --name IL_2022_Lower_Official_Proxy.csv
+# scripts-1time/export_official_proxy.sh --state IL --plantype upper --name IL_2022_Upper_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state IN --plantype congress --name IN_2022_Congress_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state IN --plantype lower --name IN_2022_Lower_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state IN --plantype upper --name IN_2022_Upper_Official_Proxy.csv
@@ -81,8 +81,8 @@ scripts-1time/export_official_proxy.sh --state NY --plantype congress --name NY_
 scripts-1time/export_official_proxy.sh --state NY --plantype lower --name NY_2022_Lower_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state NY --plantype upper --name NY_2022_Upper_Official_Proxy.csv
 # scripts-1time/export_official_proxy.sh --state NC --plantype congress --name NC_2022_Congress_Official_Proxy.csv
-scripts-1time/export_official_proxy.sh --state NC --plantype lower --name NC_2022_Lower_Official_Proxy.csv
-scripts-1time/export_official_proxy.sh --state NC --plantype upper --name NC_2022_Upper_Official_Proxy.csv
+# scripts-1time/export_official_proxy.sh --state NC --plantype lower --name NC_2022_Lower_Official_Proxy.csv
+# scripts-1time/export_official_proxy.sh --state NC --plantype upper --name NC_2022_Upper_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state OH --plantype congress --name OH_2022_Congress_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state OH --plantype lower --name OH_2022_Lower_Official_Proxy.csv
 scripts-1time/export_official_proxy.sh --state OH --plantype upper --name OH_2022_Upper_Official_Proxy.csv
