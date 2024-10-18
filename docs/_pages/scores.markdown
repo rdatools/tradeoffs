@@ -4,6 +4,8 @@ title: Scores (Metrics)
 permalink: scores/
 ---
 
+TODO - Update this.
+
 These are the metrics ("scores") used in this analysis, in the order that they appear in the scores CSV.
 
 The measures of partisan bias and responsiveness are described in some detail in

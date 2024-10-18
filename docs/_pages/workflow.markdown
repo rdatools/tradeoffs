@@ -94,7 +94,8 @@ Capture those ratings into the CSV file.
 
 ### Create a no-split-precincts proxy of the official map
 
-In DRA create a proxy of the official map that doesn't any split precincts.
+In DRA create a proxy of the official map that doesn't any split precincts. 
+Then:
 
 *   Copy the id of the official proxy map
 *   Add it to the OFFICIAL_MAP_PROXIES constant
