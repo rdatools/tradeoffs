@@ -7,6 +7,11 @@ For example:
 
 $ scripts-1time/plot_pairs.py --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv --no-debug
 
+$ scripts-1time/plot_pairs.py \
+    --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
+    --more ../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
+    --no-debug
+
 For documentation, type:
 
 $ scripts-1time/plot_pairs.py -h
@@ -15,7 +20,7 @@ $ scripts-1time/plot_pairs.py -h
 import argparse
 from argparse import ArgumentParser, Namespace
 
-from typing import Any, List, Dict, Callable
+from typing import Any, List, Dict, Callable, Optional
 
 import itertools
 import matplotlib.pyplot as plt
@@ -77,12 +82,24 @@ def main() -> None:
         fieldtypes,
     )
 
+    more: Optional[pd.DataFrame] = (
+        scores_to_df(
+            args.more,
+            fieldnames,
+            fieldtypes,
+        )
+        if args.more
+        else None
+    )
+
     # Compute derived metrics
 
-    scores["defined_opportunity_pct"] = (
-        scores["defined_opportunity_districts"] / scores["proportional_opportunities"]
-    )
-    scores["county_splits_ratio"] = scores["county_splits"] / scores["D"]
+    for df in [scores, more]:
+        if df is not None:
+            df["defined_opportunity_pct"] = (
+                df["defined_opportunity_districts"] / df["proportional_opportunities"]
+            )
+            df["county_splits_ratio"] = df["county_splits"] / df["D"]
 
     # Plot each pair of metrics
 
@@ -92,16 +109,34 @@ def main() -> None:
         y_metric: str = pair[0]
         x_metric: str = pair[1]
 
-        y = scores[y_metric]
-        x = scores[x_metric]
-
         plt.figure(figsize=(10, 6))
-        plt.scatter(x, y, color="blue", alpha=0.6)
+
+        # y = scores[y_metric]
+        # x = scores[x_metric]
+
+        # plt.scatter(x, y, color="blue", alpha=0.6)
+
+        plt.scatter(
+            scores[x_metric],
+            scores[y_metric],
+            color="blue",
+            alpha=0.6,
+            label="Ensemble points",
+        )
+        if more is not None:
+            plt.scatter(
+                more[x_metric],
+                more[y_metric],
+                color="red",
+                alpha=0.6,
+                label="Extra points",
+            )
 
         plt.xlabel(x_metric)
         plt.ylabel(y_metric)
 
         plt.grid(True, linestyle="--", alpha=0.7)
+        plt.legend()
 
         plt.show()
 
@@ -120,6 +155,11 @@ def parse_args():
         type=str,
         help="A CSV ensemble of scores including ratings to plot",
     )
+    parser.add_argument(
+        "--more",
+        type=str,
+        help="An optional second CSV ensemble of scores to plot",
+    )
 
     # Enable debug/explicit mode
     parser.add_argument("--debug", default=True, action="store_true", help="Debug mode")
@@ -132,6 +172,7 @@ def parse_args():
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
         "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv",
+        "more": "../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv",  # None,
     }
     args = require_args(args, args.debug, debug_defaults)
 
