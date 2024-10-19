@@ -8,9 +8,14 @@ For example:
 $ scripts-1time/plot_pairs.py --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv --no-debug
 
 $ scripts-1time/plot_pairs.py \
-    --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
-    --more ../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
-    --no-debug
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
+--more ../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
+--no-debug
+
+$ scripts-1time/plot_pairs.py \
+--scores ../../iCloud/fileout/tradeoffs/NC/ensembles/spanning-tree/NC20C_scores_WILSON.csv \
+--more ../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
+--no-debug
 
 For documentation, type:
 
