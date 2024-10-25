@@ -13,10 +13,10 @@ For details on the manual Step 3, see https://rdatools.github.io/tradeoffs/workf
     * First, verify the notable maps copied from DRA.
     * Then, in DRA create a proxy of the official map that doesn't any split precincts.
 
-(x) Step 4 - Generate & score an unbiased ensemble
+( ) Step 4 - Generate & score an unbiased ensemble
     From 'rdaensemble' run:
 
-    scripts/make_and_score_ensemble.sh --state NC --plantype congress --size 10
+    scripts/make_and_score_ensemble.sh --state NC --plantype congress --size 10000
     scripts/pack-zip_ensemble.sh --state NC --plantype congress
 
 ( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble

@@ -61,7 +61,9 @@ def main() -> None:
     print(f"( ) Step 4 - Generate & score an unbiased ensemble")
     print(f"    From 'rdaensemble' run:")
     print()
-    print(f"    scripts/make_and_score_ensemble.sh --state {xx} --plantype {plan_type}")
+    print(
+        f"    scripts/make_and_score_ensemble.sh --state {xx} --plantype {plan_type} --size {args.size}"
+    )
     print(f"    scripts/pack-zip_ensemble.sh --state {xx} --plantype {plan_type}")
     print()
     print(f"( ) Step 5 - Find the trade-off frontiers for the unbiased ensemble")
@@ -105,6 +107,12 @@ def parse_args():
         "--type",
         help="The type of plan (e.g., congress, upper, lower)",
         type=str,
+    )
+    parser.add_argument(
+        "--size",
+        type=int,
+        default=10000,
+        help="The number of plans to keep in the ensemble",
     )
 
     args: Namespace = parser.parse_args()
