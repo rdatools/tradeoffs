@@ -458,23 +458,23 @@ OFFICIAL_MAPS_COPY: Dict[str, Dict[str, str]] = {
 # These are the ids of *proxies* of official maps that don't have any split precincts.
 OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
     "AL": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "6da372e6-935f-4987-808c-9f579fc2d5bf",
+        "lower": "8ef3fd05-cf99-4114-857c-9ee5a0c8769c",
+        "upper": "fc5aaa21-77da-49d0-b0a3-4d7880e56271",
     },
     "AZ": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "bae93808-d49f-4de4-9755-2ba601b73ded",
+        "upper": "c30df04a-5244-49f2-b04e-5fefb9730c66",
     },
     "CA": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "0b2510eb-4d8c-4e2b-b5a1-884a2d78b38f",
+        "lower": "e75c5c0a-d88b-4508-9c12-b79f391b7404",
+        "upper": "689a4240-c777-45c0-9d2d-c9dc93b2fb3c",
     },
     "CO": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "98106bcf-2768-44c0-88dc-47c556f48d80",
+        "lower": "b50ba19a-65c4-4df1-9dbd-e797449a186a",
+        "upper": "1243770d-cf9b-410c-abf8-6c654be11579",
     },
     "FL": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
