@@ -502,8 +502,8 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     },
     "MD": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "fd468fcc-8497-4d3e-8aff-ec7be88bcfe0",
+        "upper": "d65dced8-7d2a-4bea-9303-ec4a542e2be8",
     },
     "MI": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -530,9 +530,9 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     },
     "NC": {
-        "congress": "a457887e-f932-4186-a14c-0d94f781e575",  # DONE
-        "lower": "4a753203-fec6-4311-b535-467617a4d30a",  # DONE
-        "upper": "842956c1-a4d4-47d3-bcab-40aa00b36d18",  # DONE
+        "congress": "a457887e-f932-4186-a14c-0d94f781e575",
+        "lower": "4a753203-fec6-4311-b535-467617a4d30a",
+        "upper": "842956c1-a4d4-47d3-bcab-40aa00b36d18",
     },
     "OH": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -540,14 +540,14 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     },
     "PA": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "0da209e5-f68c-4ba2-97bc-a7985ed517d3",
+        "lower": "9fe9a38b-96f4-4792-ab6c-b75bc304e0b6",
+        "upper": "dbb4ed8e-4092-45c3-a97b-6fca74dd46f6",
     },
     "SC": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "a39497e2-57cd-4e2e-8d58-4597932d3f33",
+        "lower": "3a957d93-491f-4318-a751-aab3fbe94413",
+        "upper": "e858dc30-5b5a-4b11-a633-f840d57628e3",
     },
     "TN": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -555,9 +555,9 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     },
     "TX": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "7bf62d8f-06f3-447d-bcde-9cfc4a4dec15",
+        "lower": "84ce723f-98fb-4ab0-9809-85b0a3b573a5",
+        "upper": "711e33e5-9059-41f0-af77-a27dd7368496",
     },
     "VA": {
         "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
