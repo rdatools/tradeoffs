@@ -506,28 +506,28 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "d65dced8-7d2a-4bea-9303-ec4a542e2be8",
     },
     "MI": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "4d194aca-dee1-424d-836d-ddb83fd2b265",
+        "lower": "6599e028-6f10-4eca-8f04-12086b32cffe",
+        "upper": "77a683eb-6461-456b-8b84-61b88e9a48b5",
     },
     "MN": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "97d5fc0e-9329-4990-a65f-1c99d98cb485",
+        "lower": "e52ddf80-aa68-4d3d-8c6c-1ac92f817304",
+        "upper": "f2c21663-b9f9-43b7-817e-c3bf598d6461",
     },
     "MO": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "377a4463-c290-4702-ac59-1f91110e1804",
+        "lower": "64d44dd6-8809-49ba-abb5-0301d9a768a2",
+        "upper": "1d99ab11-e4da-4e3a-a6fd-8a539bb895dc",
     },
     "NJ": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "857d2726-7e37-4511-930f-b79d01225147",
+        "upper": "83a2070e-f7fd-4387-a7e4-9900a0fc48e4",
     },
     "NY": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "4a7de626-e817-4363-8533-d9be5a785c0a",
+        "lower": "20ade70d-b92f-46c7-8fc3-ec3356612f68",
+        "upper": "f0ed4178-794f-4a87-91a0-bde32ccc6af4",
     },
     "NC": {
         "congress": "a457887e-f932-4186-a14c-0d94f781e575",
@@ -535,9 +535,9 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "842956c1-a4d4-47d3-bcab-40aa00b36d18",
     },
     "OH": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "bfc6a39d-2a94-46b5-9cac-072df610b91e",
+        "lower": "f34cee16-4e8c-475d-9a6a-59d5b913f2b2",
+        "upper": "aebf66cd-8c35-4337-a3e5-a667af18f211",
     },
     "PA": {
         "congress": "0da209e5-f68c-4ba2-97bc-a7985ed517d3",
@@ -550,9 +550,9 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "e858dc30-5b5a-4b11-a633-f840d57628e3",
     },
     "TN": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "bd744f97-e9c4-48c5-ab91-4986717a814d",
+        "lower": "6c74ddaa-1c7d-429e-ae77-cf8c14552878",
+        "upper": "144e86d7-66b5-4037-81c6-7fd8153d67ff",
     },
     "TX": {
         "congress": "7bf62d8f-06f3-447d-bcde-9cfc4a4dec15",
@@ -560,18 +560,18 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "711e33e5-9059-41f0-af77-a27dd7368496",
     },
     "VA": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "3ec0e580-156b-4d1f-b53e-0a499d76da9c",
+        "lower": "a710671d-fe7d-4ff4-9eb9-c7f4afea9660",
+        "upper": "cc2be414-8442-4d53-bd1c-224b746dfac7",
     },
     "WA": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "a4ec15de-9282-419e-bec2-c92cde6f5cfc",
+        "upper": "28e88c03-830c-4361-81a1-15b831c6209e",
     },
     "WI": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "3c4d5300-b6dc-42c2-b2d3-960077629467",
+        "lower": "1b1cb3ce-f59b-4871-bcf9-b28ba39a3208",
+        "upper": "f691a5b4-ca48-4e39-bfa5-7b22f47ee31b",
     },
 }
 
