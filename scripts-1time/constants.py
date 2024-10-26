@@ -477,14 +477,14 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "1243770d-cf9b-410c-abf8-6c654be11579",
     },
     "FL": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "01d8a206-ee62-4258-b18d-6f87cad1d1e9",
+        "lower": "0b1e4d54-62c9-4e30-9901-bf16eea04c80",
+        "upper": "35086a1b-437a-4480-b92d-0cff2f2ffc07",
     },
     "GA": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "e254cb23-04b6-41ad-984f-175942b7cc49",
+        "lower": "4f2a9a87-07ab-4cef-a0d1-f623179137eb",
+        "upper": "e6e0452b-783a-48ec-a7eb-025db3bfcb50",
     },
     "IL": {
         "congress": "5cee0494-eab1-4483-af96-67d9cbb37477",
@@ -492,14 +492,14 @@ OFFICIAL_MAP_PROXIES: Dict[str, Dict[str, str]] = {
         "upper": "e74f3fff-7992-4fc4-be94-8774537ef7b9",
     },
     "IN": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "f0ad95eb-1308-4936-9595-ff9f966f59ff",
+        "lower": "0754280e-8eb0-4844-a0cb-9c8bcac003c7",
+        "upper": "75ac0068-8744-405f-ab44-6a94a082d4b8",
     },
     "MA": {
-        "congress": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "lower": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "upper": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "congress": "f29b5138-7d5b-418b-bccd-597829b0ef2f",
+        "lower": "f2649a08-a1b6-4209-b5fd-0e81e62f8caa",
+        "upper": "3002a893-a262-4c61-b8bc-2528c80b9e50",
     },
     "MD": {
         "congress": "fd468fcc-8497-4d3e-8aff-ec7be88bcfe0",
