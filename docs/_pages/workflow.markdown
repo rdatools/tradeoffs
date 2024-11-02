@@ -101,7 +101,7 @@ Then:
 *   Add it to the OFFICIAL_MAP_PROXIES constant
 *   Combine split precincts
 *   Make sure all precincts are assigned to districts, even if they are water only / zero population
-*   Export the precinct-assignment file & move it to the tradeoffs/official_maps directory with
+*   Export the precinct-assignment file & move it to the rdaensemble/official_maps directory with
 
 ```bash
 scripts-1time/export_official_proxy.sh --state {xx} --plantype {plan_type} --name {xx}_2022_{plan_type}_Official_Proxy.csv
