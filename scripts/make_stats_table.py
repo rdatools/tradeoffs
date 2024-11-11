@@ -108,9 +108,9 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        # "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv",
-        "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles-upper/NC20U_scores.csv",
-        # "output": "../../iCloud/fileout/tradeoffs/NC/docs/_data/NC20C_statistics.csv",
+        # "scores": "../../temp/tradeoffs/NC/ensembles/NC20C_scores.csv",
+        "scores": "../../temp/tradeoffs/NC/ensembles-upper/NC20U_scores.csv",
+        # "output": "../../temp/tradeoffs/NC/docs/_data/NC20C_statistics.csv",
         "output": "temp/NC20U_statistics.csv",
     }
     args = require_args(args, args.debug, debug_defaults)

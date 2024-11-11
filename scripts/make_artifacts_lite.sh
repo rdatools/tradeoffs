@@ -52,66 +52,66 @@ fi
 
 # echo "Finding unbiased frontiers ..."
 # scripts/find_frontiers.py \
-# --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
-# --metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_metadata.json \
-# --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
+# --scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
+# --metadata ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_metadata.json \
+# --frontier ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
 # --roughlyequal $ROUGHLY_EQUAL \
 # --verbose \
 # --no-debug
 
 # echo "Finding optimized frontiers ..."
 # scripts/find_frontiers.py \
-# --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
-# --metadata ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_optimized_metadata.json \
-# --frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
+# --scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
+# --metadata ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_optimized_metadata.json \
+# --frontier ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers_optimized.json \
 # --roughlyequal $ROUGHLY_EQUAL \
 # --verbose \
 # --no-debug
 
 echo "Making box plot ..."
 scripts/make_box_plot.py \
---scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
+--scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
---image ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
+--image ../../temp/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
 --no-debug
 # scripts/make_box_plot.py \
-# --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
+# --scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores_augmented.csv \
 # --roughlyequal $ROUGHLY_EQUAL \
-# --image ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
+# --image ../../temp/tradeoffs/${STATE}/docs/assets/images/${PREFIX}_boxplot.svg \
 # --no-debug
 
 echo "Making statistics table ..."
 scripts/make_stats_table.py \
---scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
+--scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
---output ../../iCloud/fileout/tradeoffs/${STATE}/docs/_data/${PREFIX}_statistics.csv \
+--output ../../temp/tradeoffs/${STATE}/docs/_data/${PREFIX}_statistics.csv \
 --no-debug
 
 echo "Making notable maps ratings table ..."
 scripts/make_ratings_table.py \
---notables ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_notable_maps.json \
---output ../../iCloud/fileout/tradeoffs/${STATE}/docs/_data/${PREFIX}_notable_maps_ratings.csv \
+--notables ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_notable_maps.json \
+--output ../../temp/tradeoffs/${STATE}/docs/_data/${PREFIX}_notable_maps_ratings.csv \
 --no-debug
 
 # TODO: Add the notable maps to the scatter plots.
 echo "Making scatter plots ..."
 scripts/make_scatter_plots.py \
---scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
---frontier ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
+--scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_scores.csv \
+--frontier ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/${PREFIX}_frontiers.json \
 --focus docs/_data/focus_ratings/${PREFIX}_focus_scores.csv \
 --roughlyequal $ROUGHLY_EQUAL \
 --prefix $PREFIX \
---output ../../iCloud/fileout/tradeoffs/${STATE}/docs/assets/images \
+--output ../../temp/tradeoffs/${STATE}/docs/assets/images \
 --no-debug
 # TODO: Regenerate the scatter plots with notable maps.
 # scripts/make_scatter_plots.py \
-# --scores ../../iCloud/fileout/tradeoffs/${STATE}/$ENSEMBLES_DIR/XX20C_scores.csv \
-# --frontier ../../iCloud/fileout/tradeoffs/XX/ensembles/XX20C_frontiers.json \
+# --scores ../../temp/tradeoffs/${STATE}/$ENSEMBLES_DIR/XX20C_scores.csv \
+# --frontier ../../temp/tradeoffs/XX/ensembles/XX20C_frontiers.json \
 # --focus docs/_data/focus_ratings/XX20C_focus_scores.csv \
 # --notables docs/_data/notable_ratings/XX_2022_Congress_ratings.csv \
 # --roughlyequal 0.01 \
 # --prefix XX20C \
-# --output ../../iCloud/fileout/tradeoffs/XX/docs/assets/images \
+# --output ../../temp/tradeoffs/XX/docs/assets/images \
 # --no-debug
 
 echo "Done!"

@@ -8,7 +8,7 @@
 #
 
 XX=$1
-ROOT_DIR=../../iCloud/fileout/tradeoffs
+ROOT_DIR=../../temp/tradeoffs
 
 mkdir $ROOT_DIR/$XX
 mkdir $ROOT_DIR/$XX/data

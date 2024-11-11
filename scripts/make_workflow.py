@@ -70,7 +70,7 @@ def main() -> None:
     print(f"    From 'tradeoffs' run:")
     print()
     print(
-        f"    scripts/find_frontiers.sh --state {xx} --plantype {plan_type} > ../../iCloud/fileout/tradeoffs/{xx}/{ensembles_dir}/{prefix}_scores_notes.txt"
+        f"    scripts/find_frontiers.sh --state {xx} --plantype {plan_type} > ../../temp/tradeoffs/{xx}/{ensembles_dir}/{prefix}_scores_notes.txt"
     )
     print()
     print(f"( ) Step 6 - 'Push' the frontiers of the unbiased ensemble")

@@ -5,16 +5,16 @@ PLOT PAIRS OF METRICS for quick sanity checks
 
 For example:
 
-$ scripts-1time/plot_pairs.py --scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv --no-debug
+$ scripts-1time/plot_pairs.py --scores ../../temp/tradeoffs/NC/ensembles/NC20C_scores.csv --no-debug
 
 $ scripts-1time/plot_pairs.py \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv \
---more ../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
+--scores ../../temp/tradeoffs/NC/ensembles/NC20C_scores.csv \
+--more ../../temp/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
 --no-debug
 
 $ scripts-1time/plot_pairs.py \
---scores ../../iCloud/fileout/tradeoffs/NC/ensembles/spanning-tree/NC20C_scores_WILSON.csv \
---more ../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
+--scores ../../temp/tradeoffs/NC/ensembles/spanning-tree/NC20C_scores_WILSON.csv \
+--more ../../temp/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv \
 --no-debug
 
 For documentation, type:
@@ -176,8 +176,8 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/tradeoffs/NC/ensembles/NC20C_scores.csv",
-        "more": "../../iCloud/fileout/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv",  # None,
+        "scores": "../../temp/tradeoffs/NC/ensembles/NC20C_scores.csv",
+        "more": "../../temp/tradeoffs/NC/ensembles/multiple-starts/NC20C_scores_RANDOM.csv",  # None,
     }
     args = require_args(args, args.debug, debug_defaults)
 

@@ -545,12 +545,12 @@ def parse_args():
 
     # Default values for args in debug mode
     debug_defaults: Dict[str, Any] = {
-        "scores": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores.csv",
-        "more": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv",
-        "frontier": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers.json",
-        "pushed": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_frontiers_optimized.json",
+        "scores": "../../temp/tradeoffs/MD/ensembles/MD20C_scores.csv",
+        "more": "../../temp/tradeoffs/MD/ensembles/MD20C_scores_augmented.csv",
+        "frontier": "../../temp/tradeoffs/MD/ensembles/MD20C_frontiers.json",
+        "pushed": "../../temp/tradeoffs/MD/ensembles/MD20C_frontiers_optimized.json",
         "notables": "docs/_data/notable_ratings/MD_2022_Congress_ratings.csv",
-        "focus": "../../iCloud/fileout/tradeoffs/MD/ensembles/MD20C_focus_scores.csv",
+        "focus": "../../temp/tradeoffs/MD/ensembles/MD20C_focus_scores.csv",
         "prefix": "MD20C",
         "suffix": "",
         "output": "~/Downloads/",

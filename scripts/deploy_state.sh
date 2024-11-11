@@ -9,7 +9,7 @@
 
 XX=$1
 
-FROM_DIR=../../iCloud/fileout/tradeoffs/${XX}
+FROM_DIR=../../temp/tradeoffs/${XX}
 TO_DIR=docs
 
 cp $FROM_DIR/docs/assets/images/*.svg $TO_DIR/assets/images

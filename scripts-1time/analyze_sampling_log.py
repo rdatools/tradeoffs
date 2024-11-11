@@ -41,7 +41,7 @@ def read_file(filename):
 
 def main():
     """
-    log_file = "../../iCloud/fileout/tradeoffs/NC/analysis/unique_plans_log.txt"
+    log_file = "../../temp/tradeoffs/NC/analysis/unique_plans_log.txt"
 
     # Read the file
     input_text = read_file(log_file)
@@ -57,7 +57,7 @@ def main():
     """
 
     # Read the CSV file
-    df = pd.read_csv("../../iCloud/fileout/tradeoffs/NC/analysis/kept_plans.csv")
+    df = pd.read_csv("../../temp/tradeoffs/NC/analysis/kept_plans.csv")
 
     # Convert IDs to integers and calculate the differences
     df["ID"] = df["ID"].astype(int)
