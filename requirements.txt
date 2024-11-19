@@ -7,3 +7,4 @@ rdabase
 rdaensemble
 rdapy
 rdascore
+selenium

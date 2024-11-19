@@ -45,5 +45,5 @@ fi
 echo scripts-1time/export_official_proxy.py --state $state --plantype $plantype --no-debug
 scripts-1time/export_official_proxy.py --state $state --plantype $plantype --no-debug
 
-echo mv ~/Downloads/precinct-assignments.csv ~/dev/rdaensemble/official_maps/$name
-mv ~/Downloads/precinct-assignments.csv ~/dev/rdaensemble/official_maps/$name
+echo mv ~/Downloads/precinct-assignments.csv ~/dev/vtd_data/2020_VTD/{$state}/$name
+mv ~/Downloads/precinct-assignments.csv ~/dev/vtd_data/2020_VTD/{$state}/$name
