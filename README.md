@@ -4,6 +4,8 @@ Trade-offs in redistricting (V2)
 
 See [the website](https://rdatools.github.io/tradeoffs/) for more information.
 
+This project is no longer active.
+
 ## Installation
 
 To clone the repository:
